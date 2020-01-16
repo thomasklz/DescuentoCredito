@@ -18,13 +18,11 @@ namespace Creditos.Clases{
         public void ingresarMes(mMes datos){
             db.spInsertarMes(datos.descripcion, datos.est_delete);
         }
-        public void eliminar(mMes datos)
-        {
+        public void eliminar(mMes datos){
             db.spEliminarMes(datos.id_mes);
 
         }
-        public void modificar(mMes datos)
-        {
+        public void modificar(mMes datos){
             db.spModificarMes(datos.id_mes, datos.descripcion);
         }
 
