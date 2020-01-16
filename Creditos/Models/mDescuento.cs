@@ -12,6 +12,7 @@ namespace Creditos.Models
         public int cab_desc_id { get; set; }
         public int mes_id { get; set; }
         public DateTime fecha { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mDescuento() { }
         public mDescuento(int id_descuento, float valor, int empleado_id, int cab_desc_id, int mes_id, DateTime fecha)

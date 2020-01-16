@@ -11,6 +11,7 @@ namespace Creditos.Models
         public int aso_id { get; set; }
         public int empleado_id { get; set; }
         public float monto_aprobado { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mValorAsignado() { }
         public mValorAsignado(int id_valor_asig, int proveedor_id, int aso_id, int empleado_id, float monto_aprobado)

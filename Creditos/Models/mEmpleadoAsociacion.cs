@@ -10,6 +10,7 @@ namespace Creditos.Models
         public int empleado_id { get; set; }
         public int asociacion_id { get; set; }
         public DateTime fecha_ingreso { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mEmpleadoAsociacion() { }
         public mEmpleadoAsociacion(int id_empl_aso, int empleado_id, int asociacion_id, DateTime fecha_ingreso)

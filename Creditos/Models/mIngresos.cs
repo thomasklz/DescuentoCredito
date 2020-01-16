@@ -11,6 +11,7 @@ namespace Creditos.Models
         public int asociacion_id { get; set; }
         public int tipo_egreso_id { get; set; }
         public int mes_id { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mIngresos() { }
         public mIngresos(int id_ingresos, float valor, int asociacion_id, int tipo_egreso_id, int mes_id)

@@ -9,6 +9,7 @@ namespace Creditos.Models
         public int id_cabecera_descuento { get; set; }
         public string descripcion { get; set; }
         public int subdescuento_id { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mCabeceraDescuento() { }
         public mCabeceraDescuento(int id_cabecera_descuento, string descripcion, int subdescuento_id)

@@ -1,0 +1,2496 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Roles_Creditos_BDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Asociacion">
+          <Key>
+            <PropertyRef Name="id_asociacion" />
+          </Key>
+          <Property Name="id_asociacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Asociacion_Proveedor">
+          <Key>
+            <PropertyRef Name="id_asoc_prov" />
+          </Key>
+          <Property Name="id_asoc_prov" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proveedor_id" Type="int" />
+          <Property Name="asociacion_id" Type="int" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cabecera_Descuento">
+          <Key>
+            <PropertyRef Name="id_cabecera_descuento" />
+          </Key>
+          <Property Name="id_cabecera_descuento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="subdescuento_id" Type="int" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="id_credito" />
+          </Key>
+          <Property Name="id_credito" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="cantidad" Type="float" />
+          <Property Name="fecha_solicitud" Type="date" />
+          <Property Name="fecha_aprobacion" Type="date" />
+          <Property Name="desc_mensual" Type="float" />
+          <Property Name="emp_aso_id" Type="int" />
+          <Property Name="numero_cuota" Type="int" />
+          <Property Name="estado_activacion" Type="bit" />
+          <Property Name="estado_aprobacion" Type="bit" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Descuento">
+          <Key>
+            <PropertyRef Name="id_descuento" />
+          </Key>
+          <Property Name="id_descuento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor" Type="float" />
+          <Property Name="empleado_id" Type="int" />
+          <Property Name="cab_desc_id" Type="int" />
+          <Property Name="mes_id" Type="int" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Egresos">
+          <Key>
+            <PropertyRef Name="id_egresos" />
+          </Key>
+          <Property Name="id_egresos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor" Type="float" />
+          <Property Name="asociacion_id" Type="int" />
+          <Property Name="tipo_egreso_id" Type="int" />
+          <Property Name="mes_id" Type="int" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="usuario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="empleado_asociacion">
+          <Key>
+            <PropertyRef Name="id_empl_aso" />
+          </Key>
+          <Property Name="id_empl_aso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empleado_id" Type="int" />
+          <Property Name="asociacion_id" Type="int" />
+          <Property Name="fecha_ingreso" Type="date" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="info_financiera">
+          <Key>
+            <PropertyRef Name="id_financiero" />
+          </Key>
+          <Property Name="id_financiero" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empleado_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Ingresos">
+          <Key>
+            <PropertyRef Name="id_ingresos" />
+          </Key>
+          <Property Name="id_ingresos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor" Type="float" Nullable="false" />
+          <Property Name="asociacion_id" Type="int" />
+          <Property Name="tipo_ingreso_id" Type="int" />
+          <Property Name="mes_id" Type="int" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Mes">
+          <Key>
+            <PropertyRef Name="id_mes" />
+          </Key>
+          <Property Name="id_mes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="15" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="persona_juridica" Type="varchar" MaxLength="20" />
+          <Property Name="RUC" Type="varchar" MaxLength="13" />
+          <Property Name="nombre" Type="varchar" MaxLength="20" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="20" />
+          <Property Name="direccion" Type="varchar" MaxLength="50" />
+          <Property Name="telefono" Type="varchar" MaxLength="10" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Sobrante">
+          <Key>
+            <PropertyRef Name="id_sobrante" />
+          </Key>
+          <Property Name="id_sobrante" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descuento_id" Type="int" />
+          <Property Name="valor" Type="float" />
+          <Property Name="estado" Type="bit" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="SubDescuento">
+          <Key>
+            <PropertyRef Name="id_subdescuento" />
+          </Key>
+          <Property Name="id_subdescuento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tipo_egreso">
+          <Key>
+            <PropertyRef Name="id_tipo_egreso" />
+          </Key>
+          <Property Name="id_tipo_egreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Tipo_ingreso">
+          <Key>
+            <PropertyRef Name="id_tipo_ingreso" />
+          </Key>
+          <Property Name="id_tipo_ingreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="20" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="id_t_usuario" />
+          </Key>
+          <Property Name="id_t_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="t_usuario_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Valor_Asignado">
+          <Key>
+            <PropertyRef Name="id_valor_asig" />
+          </Key>
+          <Property Name="id_valor_asig" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="proveedor_id" Type="int" />
+          <Property Name="aso_id" Type="int" />
+          <Property Name="empleado_id" Type="int" />
+          <Property Name="monto_aprobado" Type="float" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Valor_Utilizado">
+          <Key>
+            <PropertyRef Name="id_valor_usad" />
+          </Key>
+          <Property Name="id_valor_usad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="valor_asig_id" Type="int" />
+          <Property Name="mes_id" Type="int" />
+          <Property Name="cantidad_usada" Type="float" />
+          <Property Name="est_delete" Type="bit" />
+        </EntityType>
+        <Association Name="FK_Asociacion_Proveedor_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Asociacion_Proveedor" Type="Self.Asociacion_Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Asociacion_Proveedor">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asociacion_Proveedor_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Asociacion_Proveedor" Type="Self.Asociacion_Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="Asociacion_Proveedor">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cabecera_Descuento_SubDescuento">
+          <End Role="SubDescuento" Type="Self.SubDescuento" Multiplicity="0..1" />
+          <End Role="Cabecera_Descuento" Type="Self.Cabecera_Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDescuento">
+              <PropertyRef Name="id_subdescuento" />
+            </Principal>
+            <Dependent Role="Cabecera_Descuento">
+              <PropertyRef Name="subdescuento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Convenio_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Credito_empleado_asociacion">
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="0..1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado_asociacion">
+              <PropertyRef Name="id_empl_aso" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="emp_aso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Cabecera_Descuento">
+          <End Role="Cabecera_Descuento" Type="Self.Cabecera_Descuento" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabecera_Descuento">
+              <PropertyRef Name="id_cabecera_descuento" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="cab_desc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Tipo_egreso">
+          <End Role="Tipo_egreso" Type="Self.Tipo_egreso" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_egreso">
+              <PropertyRef Name="id_tipo_egreso" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="tipo_egreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_asociacion_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="empleado_asociacion">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_asociacion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_asociacion">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Financiero_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="info_financiera" Type="Self.info_financiera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="info_financiera">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Tipo_ingreso">
+          <End Role="Tipo_ingreso" Type="Self.Tipo_ingreso" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_ingreso">
+              <PropertyRef Name="id_tipo_ingreso" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="tipo_ingreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sobrante_Descuento">
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="0..1" />
+          <End Role="Sobrante" Type="Self.Sobrante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descuento">
+              <PropertyRef Name="id_descuento" />
+            </Principal>
+            <Dependent Role="Sobrante">
+              <PropertyRef Name="descuento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_tipo_usuario">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="id_t_usuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="t_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Asignado_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="aso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Asignado_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Utilizado_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Valor_Utilizado" Type="Self.Valor_Utilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Valor_Utilizado">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Utilizado_Valor_Asignado">
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="0..1" />
+          <End Role="Valor_Utilizado" Type="Self.Valor_Utilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valor_Asignado">
+              <PropertyRef Name="id_valor_asig" />
+            </Principal>
+            <Dependent Role="Valor_Utilizado">
+              <PropertyRef Name="valor_asig_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarSubDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarTipoEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarTipoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarValorAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarValorUtilizado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spEliminarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_asociacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_asoc_prov" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cabecera_descuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_credito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_egresos" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_empl_aso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ingresos" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_mes" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_proveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_sobrante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarSubDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_subdescuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarTipoEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_egreso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarTipoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_ingreso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarValorAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_valor_asig" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spEliminarValorUtilizado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_valor_usad" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spInsertarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="proveedor_id" Type="int" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="subdescuento_id" Type="int" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="cantidad" Type="float" Mode="In" />
+          <Parameter Name="fecha_solicitud" Type="date" Mode="In" />
+          <Parameter Name="fecha_aprobacion" Type="date" Mode="In" />
+          <Parameter Name="desc_mensual" Type="float" Mode="In" />
+          <Parameter Name="emp_aso_id" Type="int" Mode="In" />
+          <Parameter Name="numero_cuota" Type="int" Mode="In" />
+          <Parameter Name="estado_activacion" Type="bit" Mode="In" />
+          <Parameter Name="estado_aprobacion" Type="bit" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="cab_desc_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_egreso_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha_ingreso" Type="date" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_ingreso_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="persona_juridica" Type="varchar" Mode="In" />
+          <Parameter Name="RUC" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descuento_id" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarSubDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarTipoEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarTipoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarValorAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="proveedor_id" Type="int" Mode="In" />
+          <Parameter Name="aso_id" Type="int" Mode="In" />
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="monto_aprobado" Type="float" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spInsertarValorUtilizado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="valor_asig_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad_usada" Type="float" Mode="In" />
+          <Parameter Name="est_delete" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spModificarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_asociacion" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_asoc_prov" Type="int" Mode="In" />
+          <Parameter Name="proveedor_id" Type="int" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spModificarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_cabecera_descuento" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="subdescuento_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spModificarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_credito" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="cantidad" Type="float" Mode="In" />
+          <Parameter Name="fecha_solicitud" Type="date" Mode="In" />
+          <Parameter Name="fecha_aprobacion" Type="date" Mode="In" />
+          <Parameter Name="desc_mensual" Type="float" Mode="In" />
+          <Parameter Name="emp_aso_id" Type="int" Mode="In" />
+          <Parameter Name="numero_cuota" Type="int" Mode="In" />
+          <Parameter Name="estado_activacion" Type="bit" Mode="In" />
+          <Parameter Name="estado_aprobacion" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spModificarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_descuento" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="cab_desc_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="fecha" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spModificarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_egresos" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_egreso_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spModificarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_empl_aso" Type="int" Mode="In" />
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="fecha_ingreso" Type="date" Mode="In" />
+        </Function>
+        <Function Name="spModificarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_ingresos" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+          <Parameter Name="tipo_ingreso_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spModificarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_mes" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_proveedor" Type="int" Mode="In" />
+          <Parameter Name="persona_juridica" Type="varchar" Mode="In" />
+          <Parameter Name="RUC" Type="varchar" Mode="In" />
+          <Parameter Name="nombre" Type="varchar" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+          <Parameter Name="email" Type="varchar" Mode="In" />
+          <Parameter Name="direccion" Type="varchar" Mode="In" />
+          <Parameter Name="telefono" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_sobrante" Type="int" Mode="In" />
+          <Parameter Name="descuento_id" Type="int" Mode="In" />
+          <Parameter Name="valor" Type="float" Mode="In" />
+          <Parameter Name="estado" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="spModificarSubDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_subdescuento" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarTipoEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_egreso" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarTipoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tipo_ingreso" Type="int" Mode="In" />
+          <Parameter Name="descripcion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spModificarValorAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_valor_asig" Type="int" Mode="In" />
+          <Parameter Name="proveedor_id" Type="int" Mode="In" />
+          <Parameter Name="aso_id" Type="int" Mode="In" />
+          <Parameter Name="empleado_id" Type="int" Mode="In" />
+          <Parameter Name="monto_aprobado" Type="float" Mode="In" />
+        </Function>
+        <Function Name="spModificarValorUtilizado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_valor_usad" Type="int" Mode="In" />
+          <Parameter Name="valor_asig_id" Type="int" Mode="In" />
+          <Parameter Name="mes_id" Type="int" Mode="In" />
+          <Parameter Name="cantidad_usada" Type="float" Mode="In" />
+        </Function>
+        <EntityContainer Name="Roles_Creditos_BDModelStoreContainer">
+          <EntitySet Name="Asociacion" EntityType="Self.Asociacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Asociacion_Proveedor" EntityType="Self.Asociacion_Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cabecera_Descuento" EntityType="Self.Cabecera_Descuento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credito" EntityType="Self.Credito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Descuento" EntityType="Self.Descuento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Egresos" EntityType="Self.Egresos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleado_asociacion" EntityType="Self.empleado_asociacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="info_financiera" EntityType="Self.info_financiera" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ingresos" EntityType="Self.Ingresos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mes" EntityType="Self.Mes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sobrante" EntityType="Self.Sobrante" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubDescuento" EntityType="Self.SubDescuento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_egreso" EntityType="Self.Tipo_egreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_ingreso" EntityType="Self.Tipo_ingreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Valor_Asignado" EntityType="Self.Valor_Asignado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Valor_Utilizado" EntityType="Self.Valor_Utilizado" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Asociacion_Proveedor_Asociacion" Association="Self.FK_Asociacion_Proveedor_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Asociacion_Proveedor" EntitySet="Asociacion_Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asociacion_Proveedor_Proveedor" Association="Self.FK_Asociacion_Proveedor_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Asociacion_Proveedor" EntitySet="Asociacion_Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cabecera_Descuento_SubDescuento" Association="Self.FK_Cabecera_Descuento_SubDescuento">
+            <End Role="SubDescuento" EntitySet="SubDescuento" />
+            <End Role="Cabecera_Descuento" EntitySet="Cabecera_Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Convenio_Proveedor" Association="Self.FK_Convenio_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Credito_empleado_asociacion" Association="Self.FK_Credito_empleado_asociacion">
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Cabecera_Descuento" Association="Self.FK_Descuento_Cabecera_Descuento">
+            <End Role="Cabecera_Descuento" EntitySet="Cabecera_Descuento" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Empleado" Association="Self.FK_Descuento_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Mes" Association="Self.FK_Descuento_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Asociacion" Association="Self.FK_Egresos_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Mes" Association="Self.FK_Egresos_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Tipo_egreso" Association="Self.FK_Egresos_Tipo_egreso">
+            <End Role="Tipo_egreso" EntitySet="Tipo_egreso" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_asociacion_Asociacion" Association="Self.FK_empleado_asociacion_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_asociacion_Empleado" Association="Self.FK_empleado_asociacion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Usuario" Association="Self.FK_Empleado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Financiero_Empleado" Association="Self.FK_Financiero_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="info_financiera" EntitySet="info_financiera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Asociacion" Association="Self.FK_Ingresos_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Mes" Association="Self.FK_Ingresos_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Tipo_ingreso" Association="Self.FK_Ingresos_Tipo_ingreso">
+            <End Role="Tipo_ingreso" EntitySet="Tipo_ingreso" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sobrante_Descuento" Association="Self.FK_Sobrante_Descuento">
+            <End Role="Descuento" EntitySet="Descuento" />
+            <End Role="Sobrante" EntitySet="Sobrante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_tipo_usuario" Association="Self.FK_Usuario_tipo_usuario">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Asignado_Asociacion" Association="Self.FK_Valor_Asignado_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Asignado_Empleado" Association="Self.FK_Valor_Asignado_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Utilizado_Mes" Association="Self.FK_Valor_Utilizado_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Utilizado_Valor_Asignado" Association="Self.FK_Valor_Utilizado_Valor_Asignado">
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+            <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Roles_Creditos_BDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Asociacion">
+          <Key>
+            <PropertyRef Name="id_asociacion" />
+          </Key>
+          <Property Name="id_asociacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion_Proveedor" Relationship="Self.FK_Asociacion_Proveedor_Asociacion" FromRole="Asociacion" ToRole="Asociacion_Proveedor" />
+          <NavigationProperty Name="Egresos" Relationship="Self.FK_Egresos_Asociacion" FromRole="Asociacion" ToRole="Egresos" />
+          <NavigationProperty Name="empleado_asociacion" Relationship="Self.FK_empleado_asociacion_Asociacion" FromRole="Asociacion" ToRole="empleado_asociacion" />
+          <NavigationProperty Name="Ingresos" Relationship="Self.FK_Ingresos_Asociacion" FromRole="Asociacion" ToRole="Ingresos" />
+          <NavigationProperty Name="Valor_Asignado" Relationship="Self.FK_Valor_Asignado_Asociacion" FromRole="Asociacion" ToRole="Valor_Asignado" />
+        </EntityType>
+        <EntityType Name="Asociacion_Proveedor">
+          <Key>
+            <PropertyRef Name="id_asoc_prov" />
+          </Key>
+          <Property Name="id_asoc_prov" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proveedor_id" Type="Int32" />
+          <Property Name="asociacion_id" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion" Relationship="Self.FK_Asociacion_Proveedor_Asociacion" FromRole="Asociacion_Proveedor" ToRole="Asociacion" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Asociacion_Proveedor_Proveedor" FromRole="Asociacion_Proveedor" ToRole="Proveedor" />
+        </EntityType>
+        <EntityType Name="Cabecera_Descuento">
+          <Key>
+            <PropertyRef Name="id_cabecera_descuento" />
+          </Key>
+          <Property Name="id_cabecera_descuento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="subdescuento_id" Type="Int32" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="SubDescuento" Relationship="Self.FK_Cabecera_Descuento_SubDescuento" FromRole="Cabecera_Descuento" ToRole="SubDescuento" />
+          <NavigationProperty Name="Descuento" Relationship="Self.FK_Descuento_Cabecera_Descuento" FromRole="Cabecera_Descuento" ToRole="Descuento" />
+        </EntityType>
+        <EntityType Name="Credito">
+          <Key>
+            <PropertyRef Name="id_credito" />
+          </Key>
+          <Property Name="id_credito" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cantidad" Type="Double" />
+          <Property Name="fecha_solicitud" Type="DateTime" Precision="0" />
+          <Property Name="fecha_aprobacion" Type="DateTime" Precision="0" />
+          <Property Name="desc_mensual" Type="Double" />
+          <Property Name="emp_aso_id" Type="Int32" />
+          <Property Name="numero_cuota" Type="Int32" />
+          <Property Name="estado_activacion" Type="Boolean" />
+          <Property Name="estado_aprobacion" Type="Boolean" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="empleado_asociacion" Relationship="Self.FK_Credito_empleado_asociacion" FromRole="Credito" ToRole="empleado_asociacion" />
+        </EntityType>
+        <EntityType Name="Descuento">
+          <Key>
+            <PropertyRef Name="id_descuento" />
+          </Key>
+          <Property Name="id_descuento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor" Type="Double" />
+          <Property Name="empleado_id" Type="Int32" />
+          <Property Name="cab_desc_id" Type="Int32" />
+          <Property Name="mes_id" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Cabecera_Descuento" Relationship="Self.FK_Descuento_Cabecera_Descuento" FromRole="Descuento" ToRole="Cabecera_Descuento" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Descuento_Empleado" FromRole="Descuento" ToRole="Empleado" />
+          <NavigationProperty Name="Mes" Relationship="Self.FK_Descuento_Mes" FromRole="Descuento" ToRole="Mes" />
+          <NavigationProperty Name="Sobrante" Relationship="Self.FK_Sobrante_Descuento" FromRole="Descuento" ToRole="Sobrante" />
+        </EntityType>
+        <EntityType Name="Egresos">
+          <Key>
+            <PropertyRef Name="id_egresos" />
+          </Key>
+          <Property Name="id_egresos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor" Type="Double" />
+          <Property Name="asociacion_id" Type="Int32" />
+          <Property Name="tipo_egreso_id" Type="Int32" />
+          <Property Name="mes_id" Type="Int32" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion" Relationship="Self.FK_Egresos_Asociacion" FromRole="Egresos" ToRole="Asociacion" />
+          <NavigationProperty Name="Mes" Relationship="Self.FK_Egresos_Mes" FromRole="Egresos" ToRole="Mes" />
+          <NavigationProperty Name="Tipo_egreso" Relationship="Self.FK_Egresos_Tipo_egreso" FromRole="Egresos" ToRole="Tipo_egreso" />
+        </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="usuario_id" Type="Int32" />
+          <NavigationProperty Name="Descuento" Relationship="Self.FK_Descuento_Empleado" FromRole="Empleado" ToRole="Descuento" />
+          <NavigationProperty Name="empleado_asociacion" Relationship="Self.FK_empleado_asociacion_Empleado" FromRole="Empleado" ToRole="empleado_asociacion" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Empleado_Usuario" FromRole="Empleado" ToRole="Usuario" />
+          <NavigationProperty Name="info_financiera" Relationship="Self.FK_Financiero_Empleado" FromRole="Empleado" ToRole="info_financiera" />
+          <NavigationProperty Name="Valor_Asignado" Relationship="Self.FK_Valor_Asignado_Empleado" FromRole="Empleado" ToRole="Valor_Asignado" />
+        </EntityType>
+        <EntityType Name="empleado_asociacion">
+          <Key>
+            <PropertyRef Name="id_empl_aso" />
+          </Key>
+          <Property Name="id_empl_aso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empleado_id" Type="Int32" />
+          <Property Name="asociacion_id" Type="Int32" />
+          <Property Name="fecha_ingreso" Type="DateTime" Precision="0" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion" Relationship="Self.FK_empleado_asociacion_Asociacion" FromRole="empleado_asociacion" ToRole="Asociacion" />
+          <NavigationProperty Name="Credito" Relationship="Self.FK_Credito_empleado_asociacion" FromRole="empleado_asociacion" ToRole="Credito" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_empleado_asociacion_Empleado" FromRole="empleado_asociacion" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="info_financiera">
+          <Key>
+            <PropertyRef Name="id_financiero" />
+          </Key>
+          <Property Name="id_financiero" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empleado_id" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Financiero_Empleado" FromRole="info_financiera" ToRole="Empleado" />
+        </EntityType>
+        <EntityType Name="Ingresos">
+          <Key>
+            <PropertyRef Name="id_ingresos" />
+          </Key>
+          <Property Name="id_ingresos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor" Type="Double" Nullable="false" />
+          <Property Name="asociacion_id" Type="Int32" />
+          <Property Name="tipo_ingreso_id" Type="Int32" />
+          <Property Name="mes_id" Type="Int32" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion" Relationship="Self.FK_Ingresos_Asociacion" FromRole="Ingresos" ToRole="Asociacion" />
+          <NavigationProperty Name="Mes" Relationship="Self.FK_Ingresos_Mes" FromRole="Ingresos" ToRole="Mes" />
+          <NavigationProperty Name="Tipo_ingreso" Relationship="Self.FK_Ingresos_Tipo_ingreso" FromRole="Ingresos" ToRole="Tipo_ingreso" />
+        </EntityType>
+        <EntityType Name="Mes">
+          <Key>
+            <PropertyRef Name="id_mes" />
+          </Key>
+          <Property Name="id_mes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Descuento" Relationship="Self.FK_Descuento_Mes" FromRole="Mes" ToRole="Descuento" />
+          <NavigationProperty Name="Egresos" Relationship="Self.FK_Egresos_Mes" FromRole="Mes" ToRole="Egresos" />
+          <NavigationProperty Name="Ingresos" Relationship="Self.FK_Ingresos_Mes" FromRole="Mes" ToRole="Ingresos" />
+          <NavigationProperty Name="Valor_Utilizado" Relationship="Self.FK_Valor_Utilizado_Mes" FromRole="Mes" ToRole="Valor_Utilizado" />
+        </EntityType>
+        <EntityType Name="Proveedor">
+          <Key>
+            <PropertyRef Name="id_proveedor" />
+          </Key>
+          <Property Name="id_proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="persona_juridica" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RUC" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telefono" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion_Proveedor" Relationship="Self.FK_Asociacion_Proveedor_Proveedor" FromRole="Proveedor" ToRole="Asociacion_Proveedor" />
+          <NavigationProperty Name="Valor_Asignado" Relationship="Self.FK_Convenio_Proveedor" FromRole="Proveedor" ToRole="Valor_Asignado" />
+        </EntityType>
+        <EntityType Name="Sobrante">
+          <Key>
+            <PropertyRef Name="id_sobrante" />
+          </Key>
+          <Property Name="id_sobrante" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descuento_id" Type="Int32" />
+          <Property Name="valor" Type="Double" />
+          <Property Name="estado" Type="Boolean" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Descuento" Relationship="Self.FK_Sobrante_Descuento" FromRole="Sobrante" ToRole="Descuento" />
+        </EntityType>
+        <EntityType Name="SubDescuento">
+          <Key>
+            <PropertyRef Name="id_subdescuento" />
+          </Key>
+          <Property Name="id_subdescuento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Cabecera_Descuento" Relationship="Self.FK_Cabecera_Descuento_SubDescuento" FromRole="SubDescuento" ToRole="Cabecera_Descuento" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tipo_egreso">
+          <Key>
+            <PropertyRef Name="id_tipo_egreso" />
+          </Key>
+          <Property Name="id_tipo_egreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Egresos" Relationship="Self.FK_Egresos_Tipo_egreso" FromRole="Tipo_egreso" ToRole="Egresos" />
+        </EntityType>
+        <EntityType Name="Tipo_ingreso">
+          <Key>
+            <PropertyRef Name="id_tipo_ingreso" />
+          </Key>
+          <Property Name="id_tipo_ingreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="descripcion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Ingresos" Relationship="Self.FK_Ingresos_Tipo_ingreso" FromRole="Tipo_ingreso" ToRole="Ingresos" />
+        </EntityType>
+        <EntityType Name="tipo_usuario">
+          <Key>
+            <PropertyRef Name="id_t_usuario" />
+          </Key>
+          <Property Name="id_t_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Usuario" Relationship="Self.FK_Usuario_tipo_usuario" FromRole="tipo_usuario" ToRole="Usuario" />
+        </EntityType>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="t_usuario_id" Type="Int32" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
+          <NavigationProperty Name="tipo_usuario" Relationship="Self.FK_Usuario_tipo_usuario" FromRole="Usuario" ToRole="tipo_usuario" />
+        </EntityType>
+        <EntityType Name="Valor_Asignado">
+          <Key>
+            <PropertyRef Name="id_valor_asig" />
+          </Key>
+          <Property Name="id_valor_asig" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="proveedor_id" Type="Int32" />
+          <Property Name="aso_id" Type="Int32" />
+          <Property Name="empleado_id" Type="Int32" />
+          <Property Name="monto_aprobado" Type="Double" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Asociacion" Relationship="Self.FK_Valor_Asignado_Asociacion" FromRole="Valor_Asignado" ToRole="Asociacion" />
+          <NavigationProperty Name="Empleado" Relationship="Self.FK_Valor_Asignado_Empleado" FromRole="Valor_Asignado" ToRole="Empleado" />
+          <NavigationProperty Name="Proveedor" Relationship="Self.FK_Convenio_Proveedor" FromRole="Valor_Asignado" ToRole="Proveedor" />
+          <NavigationProperty Name="Valor_Utilizado" Relationship="Self.FK_Valor_Utilizado_Valor_Asignado" FromRole="Valor_Asignado" ToRole="Valor_Utilizado" />
+        </EntityType>
+        <EntityType Name="Valor_Utilizado">
+          <Key>
+            <PropertyRef Name="id_valor_usad" />
+          </Key>
+          <Property Name="id_valor_usad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="valor_asig_id" Type="Int32" />
+          <Property Name="mes_id" Type="Int32" />
+          <Property Name="cantidad_usada" Type="Double" />
+          <Property Name="est_delete" Type="Boolean" />
+          <NavigationProperty Name="Mes" Relationship="Self.FK_Valor_Utilizado_Mes" FromRole="Valor_Utilizado" ToRole="Mes" />
+          <NavigationProperty Name="Valor_Asignado" Relationship="Self.FK_Valor_Utilizado_Valor_Asignado" FromRole="Valor_Utilizado" ToRole="Valor_Asignado" />
+        </EntityType>
+        <Association Name="FK_Asociacion_Proveedor_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Asociacion_Proveedor" Type="Self.Asociacion_Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Asociacion_Proveedor">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_asociacion_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="empleado_asociacion">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="asociacion_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Asignado_Asociacion">
+          <End Role="Asociacion" Type="Self.Asociacion" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Asociacion">
+              <PropertyRef Name="id_asociacion" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="aso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Asociacion_Proveedor_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Asociacion_Proveedor" Type="Self.Asociacion_Proveedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="Asociacion_Proveedor">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cabecera_Descuento_SubDescuento">
+          <End Role="SubDescuento" Type="Self.SubDescuento" Multiplicity="0..1" />
+          <End Role="Cabecera_Descuento" Type="Self.Cabecera_Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubDescuento">
+              <PropertyRef Name="id_subdescuento" />
+            </Principal>
+            <Dependent Role="Cabecera_Descuento">
+              <PropertyRef Name="subdescuento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Cabecera_Descuento">
+          <End Role="Cabecera_Descuento" Type="Self.Cabecera_Descuento" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cabecera_Descuento">
+              <PropertyRef Name="id_cabecera_descuento" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="cab_desc_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Credito_empleado_asociacion">
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="0..1" />
+          <End Role="Credito" Type="Self.Credito" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado_asociacion">
+              <PropertyRef Name="id_empl_aso" />
+            </Principal>
+            <Dependent Role="Credito">
+              <PropertyRef Name="emp_aso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Descuento_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Descuento">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sobrante_Descuento">
+          <End Role="Descuento" Type="Self.Descuento" Multiplicity="0..1" />
+          <End Role="Sobrante" Type="Self.Sobrante" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Descuento">
+              <PropertyRef Name="id_descuento" />
+            </Principal>
+            <Dependent Role="Sobrante">
+              <PropertyRef Name="descuento_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Egresos_Tipo_egreso">
+          <End Role="Tipo_egreso" Type="Self.Tipo_egreso" Multiplicity="0..1" />
+          <End Role="Egresos" Type="Self.Egresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_egreso">
+              <PropertyRef Name="id_tipo_egreso" />
+            </Principal>
+            <Dependent Role="Egresos">
+              <PropertyRef Name="tipo_egreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_empleado_asociacion_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="empleado_asociacion" Type="Self.empleado_asociacion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_asociacion">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Financiero_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="info_financiera" Type="Self.info_financiera" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="info_financiera">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Asignado_Empleado">
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="empleado_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ingresos_Tipo_ingreso">
+          <End Role="Tipo_ingreso" Type="Self.Tipo_ingreso" Multiplicity="0..1" />
+          <End Role="Ingresos" Type="Self.Ingresos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_ingreso">
+              <PropertyRef Name="id_tipo_ingreso" />
+            </Principal>
+            <Dependent Role="Ingresos">
+              <PropertyRef Name="tipo_ingreso_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Utilizado_Mes">
+          <End Role="Mes" Type="Self.Mes" Multiplicity="0..1" />
+          <End Role="Valor_Utilizado" Type="Self.Valor_Utilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mes">
+              <PropertyRef Name="id_mes" />
+            </Principal>
+            <Dependent Role="Valor_Utilizado">
+              <PropertyRef Name="mes_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Convenio_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="0..1" />
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="id_proveedor" />
+            </Principal>
+            <Dependent Role="Valor_Asignado">
+              <PropertyRef Name="proveedor_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuario_tipo_usuario">
+          <End Role="tipo_usuario" Type="Self.tipo_usuario" Multiplicity="0..1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_usuario">
+              <PropertyRef Name="id_t_usuario" />
+            </Principal>
+            <Dependent Role="Usuario">
+              <PropertyRef Name="t_usuario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Valor_Utilizado_Valor_Asignado">
+          <End Role="Valor_Asignado" Type="Self.Valor_Asignado" Multiplicity="0..1" />
+          <End Role="Valor_Utilizado" Type="Self.Valor_Utilizado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Valor_Asignado">
+              <PropertyRef Name="id_valor_asig" />
+            </Principal>
+            <Dependent Role="Valor_Utilizado">
+              <PropertyRef Name="valor_asig_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Roles_Creditos_BDEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Asociacion" EntityType="Self.Asociacion" />
+          <EntitySet Name="Asociacion_Proveedor" EntityType="Self.Asociacion_Proveedor" />
+          <EntitySet Name="Cabecera_Descuento" EntityType="Self.Cabecera_Descuento" />
+          <EntitySet Name="Credito" EntityType="Self.Credito" />
+          <EntitySet Name="Descuento" EntityType="Self.Descuento" />
+          <EntitySet Name="Egresos" EntityType="Self.Egresos" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+          <EntitySet Name="empleado_asociacion" EntityType="Self.empleado_asociacion" />
+          <EntitySet Name="info_financiera" EntityType="Self.info_financiera" />
+          <EntitySet Name="Ingresos" EntityType="Self.Ingresos" />
+          <EntitySet Name="Mes" EntityType="Self.Mes" />
+          <EntitySet Name="Proveedor" EntityType="Self.Proveedor" />
+          <EntitySet Name="Sobrante" EntityType="Self.Sobrante" />
+          <EntitySet Name="SubDescuento" EntityType="Self.SubDescuento" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tipo_egreso" EntityType="Self.Tipo_egreso" />
+          <EntitySet Name="Tipo_ingreso" EntityType="Self.Tipo_ingreso" />
+          <EntitySet Name="tipo_usuario" EntityType="Self.tipo_usuario" />
+          <EntitySet Name="Usuario" EntityType="Self.Usuario" />
+          <EntitySet Name="Valor_Asignado" EntityType="Self.Valor_Asignado" />
+          <EntitySet Name="Valor_Utilizado" EntityType="Self.Valor_Utilizado" />
+          <AssociationSet Name="FK_Asociacion_Proveedor_Asociacion" Association="Self.FK_Asociacion_Proveedor_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Asociacion_Proveedor" EntitySet="Asociacion_Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Asociacion" Association="Self.FK_Egresos_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_asociacion_Asociacion" Association="Self.FK_empleado_asociacion_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Asociacion" Association="Self.FK_Ingresos_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Asignado_Asociacion" Association="Self.FK_Valor_Asignado_Asociacion">
+            <End Role="Asociacion" EntitySet="Asociacion" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Asociacion_Proveedor_Proveedor" Association="Self.FK_Asociacion_Proveedor_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Asociacion_Proveedor" EntitySet="Asociacion_Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cabecera_Descuento_SubDescuento" Association="Self.FK_Cabecera_Descuento_SubDescuento">
+            <End Role="SubDescuento" EntitySet="SubDescuento" />
+            <End Role="Cabecera_Descuento" EntitySet="Cabecera_Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Cabecera_Descuento" Association="Self.FK_Descuento_Cabecera_Descuento">
+            <End Role="Cabecera_Descuento" EntitySet="Cabecera_Descuento" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Credito_empleado_asociacion" Association="Self.FK_Credito_empleado_asociacion">
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+            <End Role="Credito" EntitySet="Credito" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Empleado" Association="Self.FK_Descuento_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Descuento_Mes" Association="Self.FK_Descuento_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Descuento" EntitySet="Descuento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sobrante_Descuento" Association="Self.FK_Sobrante_Descuento">
+            <End Role="Descuento" EntitySet="Descuento" />
+            <End Role="Sobrante" EntitySet="Sobrante" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Mes" Association="Self.FK_Egresos_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Egresos_Tipo_egreso" Association="Self.FK_Egresos_Tipo_egreso">
+            <End Role="Tipo_egreso" EntitySet="Tipo_egreso" />
+            <End Role="Egresos" EntitySet="Egresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_empleado_asociacion_Empleado" Association="Self.FK_empleado_asociacion_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="empleado_asociacion" EntitySet="empleado_asociacion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Usuario" Association="Self.FK_Empleado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Financiero_Empleado" Association="Self.FK_Financiero_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="info_financiera" EntitySet="info_financiera" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Asignado_Empleado" Association="Self.FK_Valor_Asignado_Empleado">
+            <End Role="Empleado" EntitySet="Empleado" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Mes" Association="Self.FK_Ingresos_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ingresos_Tipo_ingreso" Association="Self.FK_Ingresos_Tipo_ingreso">
+            <End Role="Tipo_ingreso" EntitySet="Tipo_ingreso" />
+            <End Role="Ingresos" EntitySet="Ingresos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Utilizado_Mes" Association="Self.FK_Valor_Utilizado_Mes">
+            <End Role="Mes" EntitySet="Mes" />
+            <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Convenio_Proveedor" Association="Self.FK_Convenio_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuario_tipo_usuario" Association="Self.FK_Usuario_tipo_usuario">
+            <End Role="tipo_usuario" EntitySet="tipo_usuario" />
+            <End Role="Usuario" EntitySet="Usuario" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Valor_Utilizado_Valor_Asignado" Association="Self.FK_Valor_Utilizado_Valor_Asignado">
+            <End Role="Valor_Asignado" EntitySet="Valor_Asignado" />
+            <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
+          </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(Roles_Creditos_BDModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(Roles_Creditos_BDModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="spConsultarAsociacion" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarAsociacion_Result)" />
+          <FunctionImport Name="spConsultarAsociacionProveedor" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarAsociacionProveedor_Result)" />
+          <FunctionImport Name="spConsultarCabeceraDescuento" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCabeceraDescuento_Result)" />
+          <FunctionImport Name="spConsultarCredito" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCredito_Result)" />
+          <FunctionImport Name="spConsultarDescuento" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarDescuento_Result)" />
+          <FunctionImport Name="spConsultarEgreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarEgreso_Result)" />
+          <FunctionImport Name="spConsultarEmpleadoAsociacion" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarEmpleadoAsociacion_Result)" />
+          <FunctionImport Name="spConsultarIngreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarIngreso_Result)" />
+          <FunctionImport Name="spConsultarMes" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarMes_Result)" />
+          <FunctionImport Name="spConsultarProveedor" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarProveedor_Result)" />
+          <FunctionImport Name="spConsultarSobrante" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarSobrante_Result)" />
+          <FunctionImport Name="spConsultarSubDescuento" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarSubDescuento_Result)" />
+          <FunctionImport Name="spConsultarTipoEgreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarTipoEgreso_Result)" />
+          <FunctionImport Name="spConsultarTipoIngreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarTipoIngreso_Result)" />
+          <FunctionImport Name="spConsultarValorAsignado" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarValorAsignado_Result)" />
+          <FunctionImport Name="spConsultarValorUtilizado" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarValorUtilizado_Result)" />
+          <FunctionImport Name="spEliminarAsociacion">
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarAsociacionProveedor">
+            <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarCabeceraDescuento">
+            <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarCredito">
+            <Parameter Name="id_credito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarDescuento">
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarEgreso">
+            <Parameter Name="id_egresos" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarEmpleadoAsociacion">
+            <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarIngreso">
+            <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarMes">
+            <Parameter Name="id_mes" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarProveedor">
+            <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarSobrante">
+            <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarSubDescuento">
+            <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarTipoEgreso">
+            <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarTipoIngreso">
+            <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarValorAsignado">
+            <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spEliminarValorUtilizado">
+            <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarAsociacion">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarAsociacionProveedor">
+            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarCabeceraDescuento">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="subdescuento_id" Mode="In" Type="Int32" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarCredito">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="cantidad" Mode="In" Type="Double" />
+            <Parameter Name="fecha_solicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_aprobacion" Mode="In" Type="DateTime" />
+            <Parameter Name="desc_mensual" Mode="In" Type="Double" />
+            <Parameter Name="emp_aso_id" Mode="In" Type="Int32" />
+            <Parameter Name="numero_cuota" Mode="In" Type="Int32" />
+            <Parameter Name="estado_activacion" Mode="In" Type="Boolean" />
+            <Parameter Name="estado_aprobacion" Mode="In" Type="Boolean" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarDescuento">
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="cab_desc_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarEgreso">
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_egreso_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarEmpleadoAsociacion">
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_ingreso" Mode="In" Type="DateTime" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarIngreso">
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_ingreso_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarMes">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarProveedor">
+            <Parameter Name="persona_juridica" Mode="In" Type="String" />
+            <Parameter Name="RUC" Mode="In" Type="String" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarSobrante">
+            <Parameter Name="descuento_id" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarSubDescuento">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarTipoEgreso">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarTipoIngreso">
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarValorAsignado">
+            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+            <Parameter Name="aso_id" Mode="In" Type="Int32" />
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="monto_aprobado" Mode="In" Type="Double" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spInsertarValorUtilizado">
+            <Parameter Name="valor_asig_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad_usada" Mode="In" Type="Double" />
+            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarAsociacion">
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarAsociacionProveedor">
+            <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
+            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarCabeceraDescuento">
+            <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="subdescuento_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarCredito">
+            <Parameter Name="id_credito" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="cantidad" Mode="In" Type="Double" />
+            <Parameter Name="fecha_solicitud" Mode="In" Type="DateTime" />
+            <Parameter Name="fecha_aprobacion" Mode="In" Type="DateTime" />
+            <Parameter Name="desc_mensual" Mode="In" Type="Double" />
+            <Parameter Name="emp_aso_id" Mode="In" Type="Int32" />
+            <Parameter Name="numero_cuota" Mode="In" Type="Int32" />
+            <Parameter Name="estado_activacion" Mode="In" Type="Boolean" />
+            <Parameter Name="estado_aprobacion" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarDescuento">
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="cab_desc_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarEgreso">
+            <Parameter Name="id_egresos" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_egreso_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarEmpleadoAsociacion">
+            <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="fecha_ingreso" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarIngreso">
+            <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+            <Parameter Name="tipo_ingreso_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarMes">
+            <Parameter Name="id_mes" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarProveedor">
+            <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="persona_juridica" Mode="In" Type="String" />
+            <Parameter Name="RUC" Mode="In" Type="String" />
+            <Parameter Name="nombre" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="direccion" Mode="In" Type="String" />
+            <Parameter Name="telefono" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarSobrante">
+            <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
+            <Parameter Name="descuento_id" Mode="In" Type="Int32" />
+            <Parameter Name="valor" Mode="In" Type="Double" />
+            <Parameter Name="estado" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarSubDescuento">
+            <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarTipoEgreso">
+            <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarTipoIngreso">
+            <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarValorAsignado">
+            <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
+            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+            <Parameter Name="aso_id" Mode="In" Type="Int32" />
+            <Parameter Name="empleado_id" Mode="In" Type="Int32" />
+            <Parameter Name="monto_aprobado" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="spModificarValorUtilizado">
+            <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
+            <Parameter Name="valor_asig_id" Mode="In" Type="Int32" />
+            <Parameter Name="mes_id" Mode="In" Type="Int32" />
+            <Parameter Name="cantidad_usada" Mode="In" Type="Double" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarAsociacion_Result">
+          <Property Type="Int32" Name="id_asociacion" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarAsociacionProveedor_Result">
+          <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
+          <Property Type="Int32" Name="proveedor_id" Nullable="true" />
+          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCabeceraDescuento_Result">
+          <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="subdescuento_id" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCredito_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarDescuento_Result">
+          <Property Type="Int32" Name="id_descuento" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="Int32" Name="empleado_id" Nullable="true" />
+          <Property Type="Int32" Name="cab_desc_id" Nullable="true" />
+          <Property Type="Int32" Name="mes_id" Nullable="true" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEgreso_Result">
+          <Property Type="Int32" Name="id_egresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
+          <Property Type="Int32" Name="tipo_egreso_id" Nullable="true" />
+          <Property Type="Int32" Name="mes_id" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEmpleadoAsociacion_Result">
+          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
+          <Property Type="Int32" Name="empleado_id" Nullable="true" />
+          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarIngreso_Result">
+          <Property Type="Int32" Name="id_ingresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="false" />
+          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
+          <Property Type="Int32" Name="tipo_ingreso_id" Nullable="true" />
+          <Property Type="Int32" Name="mes_id" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarMes_Result">
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="15" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarProveedor_Result">
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="String" Name="persona_juridica" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RUC" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarSobrante_Result">
+          <Property Type="Int32" Name="id_sobrante" Nullable="false" />
+          <Property Type="Int32" Name="descuento_id" Nullable="true" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarSubDescuento_Result">
+          <Property Type="Int32" Name="id_subdescuento" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarTipoEgreso_Result">
+          <Property Type="Int32" Name="id_tipo_egreso" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarTipoIngreso_Result">
+          <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarValorAsignado_Result">
+          <Property Type="Int32" Name="id_valor_asig" Nullable="false" />
+          <Property Type="Int32" Name="proveedor_id" Nullable="true" />
+          <Property Type="Int32" Name="aso_id" Nullable="true" />
+          <Property Type="Int32" Name="empleado_id" Nullable="true" />
+          <Property Type="Double" Name="monto_aprobado" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarValorUtilizado_Result">
+          <Property Type="Int32" Name="id_valor_usad" Nullable="false" />
+          <Property Type="Int32" Name="valor_asig_id" Nullable="true" />
+          <Property Type="Int32" Name="mes_id" Nullable="true" />
+          <Property Type="Double" Name="cantidad_usada" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Roles_Creditos_BDModelStoreContainer" CdmEntityContainer="Roles_Creditos_BDEntities1">
+          <EntitySetMapping Name="Asociacion">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Asociacion">
+              <MappingFragment StoreEntitySet="Asociacion">
+                <ScalarProperty Name="id_asociacion" ColumnName="id_asociacion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Asociacion_Proveedor">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Asociacion_Proveedor">
+              <MappingFragment StoreEntitySet="Asociacion_Proveedor">
+                <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cabecera_Descuento">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Cabecera_Descuento">
+              <MappingFragment StoreEntitySet="Cabecera_Descuento">
+                <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="subdescuento_id" ColumnName="subdescuento_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credito">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Credito">
+              <MappingFragment StoreEntitySet="Credito">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Descuento">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Descuento">
+              <MappingFragment StoreEntitySet="Descuento">
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="cab_desc_id" ColumnName="cab_desc_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Egresos">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Egresos">
+              <MappingFragment StoreEntitySet="Egresos">
+                <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="tipo_egreso_id" ColumnName="tipo_egreso_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="usuario_id" ColumnName="usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado_asociacion">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.empleado_asociacion">
+              <MappingFragment StoreEntitySet="empleado_asociacion">
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="info_financiera">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.info_financiera">
+              <MappingFragment StoreEntitySet="info_financiera">
+                <ScalarProperty Name="id_financiero" ColumnName="id_financiero" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ingresos">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Ingresos">
+              <MappingFragment StoreEntitySet="Ingresos">
+                <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="tipo_ingreso_id" ColumnName="tipo_ingreso_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mes">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Mes">
+              <MappingFragment StoreEntitySet="Mes">
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedor">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Proveedor">
+              <MappingFragment StoreEntitySet="Proveedor">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="persona_juridica" ColumnName="persona_juridica" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sobrante">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Sobrante">
+              <MappingFragment StoreEntitySet="Sobrante">
+                <ScalarProperty Name="id_sobrante" ColumnName="id_sobrante" />
+                <ScalarProperty Name="descuento_id" ColumnName="descuento_id" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubDescuento">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.SubDescuento">
+              <MappingFragment StoreEntitySet="SubDescuento">
+                <ScalarProperty Name="id_subdescuento" ColumnName="id_subdescuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_egreso">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Tipo_egreso">
+              <MappingFragment StoreEntitySet="Tipo_egreso">
+                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_ingreso">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Tipo_ingreso">
+              <MappingFragment StoreEntitySet="Tipo_ingreso">
+                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_usuario">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.tipo_usuario">
+              <MappingFragment StoreEntitySet="tipo_usuario">
+                <ScalarProperty Name="id_t_usuario" ColumnName="id_t_usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="t_usuario_id" ColumnName="t_usuario_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valor_Asignado">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Valor_Asignado">
+              <MappingFragment StoreEntitySet="Valor_Asignado">
+                <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="aso_id" ColumnName="aso_id" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="monto_aprobado" ColumnName="monto_aprobado" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Valor_Utilizado">
+            <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Valor_Utilizado">
+              <MappingFragment StoreEntitySet="Valor_Utilizado">
+                <ScalarProperty Name="id_valor_usad" ColumnName="id_valor_usad" />
+                <ScalarProperty Name="valor_asig_id" ColumnName="valor_asig_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="cantidad_usada" ColumnName="cantidad_usada" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="Roles_Creditos_BDModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="Roles_Creditos_BDModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="Roles_Creditos_BDModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="Roles_Creditos_BDModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="Roles_Creditos_BDModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Roles_Creditos_BDModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Roles_Creditos_BDModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spConsultarAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spConsultarAsociacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarAsociacion_Result">
+                <ScalarProperty Name="id_asociacion" ColumnName="id_asociacion" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarAsociacionProveedor" FunctionName="Roles_Creditos_BDModel.Store.spConsultarAsociacionProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarAsociacionProveedor_Result">
+                <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCabeceraDescuento" FunctionName="Roles_Creditos_BDModel.Store.spConsultarCabeceraDescuento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarCabeceraDescuento_Result">
+                <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="subdescuento_id" ColumnName="subdescuento_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCredito" FunctionName="Roles_Creditos_BDModel.Store.spConsultarCredito">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarCredito_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarDescuento" FunctionName="Roles_Creditos_BDModel.Store.spConsultarDescuento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarDescuento_Result">
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="cab_desc_id" ColumnName="cab_desc_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEgreso" FunctionName="Roles_Creditos_BDModel.Store.spConsultarEgreso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarEgreso_Result">
+                <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="tipo_egreso_id" ColumnName="tipo_egreso_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEmpleadoAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spConsultarEmpleadoAsociacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarEmpleadoAsociacion_Result">
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarIngreso" FunctionName="Roles_Creditos_BDModel.Store.spConsultarIngreso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarIngreso_Result">
+                <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
+                <ScalarProperty Name="tipo_ingreso_id" ColumnName="tipo_ingreso_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarMes" FunctionName="Roles_Creditos_BDModel.Store.spConsultarMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarMes_Result">
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarProveedor" FunctionName="Roles_Creditos_BDModel.Store.spConsultarProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarProveedor_Result">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="persona_juridica" ColumnName="persona_juridica" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarSobrante" FunctionName="Roles_Creditos_BDModel.Store.spConsultarSobrante">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarSobrante_Result">
+                <ScalarProperty Name="id_sobrante" ColumnName="id_sobrante" />
+                <ScalarProperty Name="descuento_id" ColumnName="descuento_id" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarSubDescuento" FunctionName="Roles_Creditos_BDModel.Store.spConsultarSubDescuento">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarSubDescuento_Result">
+                <ScalarProperty Name="id_subdescuento" ColumnName="id_subdescuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarTipoEgreso" FunctionName="Roles_Creditos_BDModel.Store.spConsultarTipoEgreso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarTipoEgreso_Result">
+                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarTipoIngreso" FunctionName="Roles_Creditos_BDModel.Store.spConsultarTipoIngreso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarTipoIngreso_Result">
+                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarValorAsignado" FunctionName="Roles_Creditos_BDModel.Store.spConsultarValorAsignado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarValorAsignado_Result">
+                <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
+                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
+                <ScalarProperty Name="aso_id" ColumnName="aso_id" />
+                <ScalarProperty Name="empleado_id" ColumnName="empleado_id" />
+                <ScalarProperty Name="monto_aprobado" ColumnName="monto_aprobado" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarValorUtilizado" FunctionName="Roles_Creditos_BDModel.Store.spConsultarValorUtilizado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarValorUtilizado_Result">
+                <ScalarProperty Name="id_valor_usad" ColumnName="id_valor_usad" />
+                <ScalarProperty Name="valor_asig_id" ColumnName="valor_asig_id" />
+                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="cantidad_usada" ColumnName="cantidad_usada" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spEliminarAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spEliminarAsociacion" />
+          <FunctionImportMapping FunctionImportName="spEliminarAsociacionProveedor" FunctionName="Roles_Creditos_BDModel.Store.spEliminarAsociacionProveedor" />
+          <FunctionImportMapping FunctionImportName="spEliminarCabeceraDescuento" FunctionName="Roles_Creditos_BDModel.Store.spEliminarCabeceraDescuento" />
+          <FunctionImportMapping FunctionImportName="spEliminarCredito" FunctionName="Roles_Creditos_BDModel.Store.spEliminarCredito" />
+          <FunctionImportMapping FunctionImportName="spEliminarDescuento" FunctionName="Roles_Creditos_BDModel.Store.spEliminarDescuento" />
+          <FunctionImportMapping FunctionImportName="spEliminarEgreso" FunctionName="Roles_Creditos_BDModel.Store.spEliminarEgreso" />
+          <FunctionImportMapping FunctionImportName="spEliminarEmpleadoAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spEliminarEmpleadoAsociacion" />
+          <FunctionImportMapping FunctionImportName="spEliminarIngreso" FunctionName="Roles_Creditos_BDModel.Store.spEliminarIngreso" />
+          <FunctionImportMapping FunctionImportName="spEliminarMes" FunctionName="Roles_Creditos_BDModel.Store.spEliminarMes" />
+          <FunctionImportMapping FunctionImportName="spEliminarProveedor" FunctionName="Roles_Creditos_BDModel.Store.spEliminarProveedor" />
+          <FunctionImportMapping FunctionImportName="spEliminarSobrante" FunctionName="Roles_Creditos_BDModel.Store.spEliminarSobrante" />
+          <FunctionImportMapping FunctionImportName="spEliminarSubDescuento" FunctionName="Roles_Creditos_BDModel.Store.spEliminarSubDescuento" />
+          <FunctionImportMapping FunctionImportName="spEliminarTipoEgreso" FunctionName="Roles_Creditos_BDModel.Store.spEliminarTipoEgreso" />
+          <FunctionImportMapping FunctionImportName="spEliminarTipoIngreso" FunctionName="Roles_Creditos_BDModel.Store.spEliminarTipoIngreso" />
+          <FunctionImportMapping FunctionImportName="spEliminarValorAsignado" FunctionName="Roles_Creditos_BDModel.Store.spEliminarValorAsignado" />
+          <FunctionImportMapping FunctionImportName="spEliminarValorUtilizado" FunctionName="Roles_Creditos_BDModel.Store.spEliminarValorUtilizado" />
+          <FunctionImportMapping FunctionImportName="spInsertarAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spInsertarAsociacion" />
+          <FunctionImportMapping FunctionImportName="spInsertarAsociacionProveedor" FunctionName="Roles_Creditos_BDModel.Store.spInsertarAsociacionProveedor" />
+          <FunctionImportMapping FunctionImportName="spInsertarCabeceraDescuento" FunctionName="Roles_Creditos_BDModel.Store.spInsertarCabeceraDescuento" />
+          <FunctionImportMapping FunctionImportName="spInsertarCredito" FunctionName="Roles_Creditos_BDModel.Store.spInsertarCredito" />
+          <FunctionImportMapping FunctionImportName="spInsertarDescuento" FunctionName="Roles_Creditos_BDModel.Store.spInsertarDescuento" />
+          <FunctionImportMapping FunctionImportName="spInsertarEgreso" FunctionName="Roles_Creditos_BDModel.Store.spInsertarEgreso" />
+          <FunctionImportMapping FunctionImportName="spInsertarEmpleadoAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spInsertarEmpleadoAsociacion" />
+          <FunctionImportMapping FunctionImportName="spInsertarIngreso" FunctionName="Roles_Creditos_BDModel.Store.spInsertarIngreso" />
+          <FunctionImportMapping FunctionImportName="spInsertarMes" FunctionName="Roles_Creditos_BDModel.Store.spInsertarMes" />
+          <FunctionImportMapping FunctionImportName="spInsertarProveedor" FunctionName="Roles_Creditos_BDModel.Store.spInsertarProveedor" />
+          <FunctionImportMapping FunctionImportName="spInsertarSobrante" FunctionName="Roles_Creditos_BDModel.Store.spInsertarSobrante" />
+          <FunctionImportMapping FunctionImportName="spInsertarSubDescuento" FunctionName="Roles_Creditos_BDModel.Store.spInsertarSubDescuento" />
+          <FunctionImportMapping FunctionImportName="spInsertarTipoEgreso" FunctionName="Roles_Creditos_BDModel.Store.spInsertarTipoEgreso" />
+          <FunctionImportMapping FunctionImportName="spInsertarTipoIngreso" FunctionName="Roles_Creditos_BDModel.Store.spInsertarTipoIngreso" />
+          <FunctionImportMapping FunctionImportName="spInsertarValorAsignado" FunctionName="Roles_Creditos_BDModel.Store.spInsertarValorAsignado" />
+          <FunctionImportMapping FunctionImportName="spInsertarValorUtilizado" FunctionName="Roles_Creditos_BDModel.Store.spInsertarValorUtilizado" />
+          <FunctionImportMapping FunctionImportName="spModificarAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spModificarAsociacion" />
+          <FunctionImportMapping FunctionImportName="spModificarAsociacionProveedor" FunctionName="Roles_Creditos_BDModel.Store.spModificarAsociacionProveedor" />
+          <FunctionImportMapping FunctionImportName="spModificarCabeceraDescuento" FunctionName="Roles_Creditos_BDModel.Store.spModificarCabeceraDescuento" />
+          <FunctionImportMapping FunctionImportName="spModificarCredito" FunctionName="Roles_Creditos_BDModel.Store.spModificarCredito" />
+          <FunctionImportMapping FunctionImportName="spModificarDescuento" FunctionName="Roles_Creditos_BDModel.Store.spModificarDescuento" />
+          <FunctionImportMapping FunctionImportName="spModificarEgreso" FunctionName="Roles_Creditos_BDModel.Store.spModificarEgreso" />
+          <FunctionImportMapping FunctionImportName="spModificarEmpleadoAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spModificarEmpleadoAsociacion" />
+          <FunctionImportMapping FunctionImportName="spModificarIngreso" FunctionName="Roles_Creditos_BDModel.Store.spModificarIngreso" />
+          <FunctionImportMapping FunctionImportName="spModificarMes" FunctionName="Roles_Creditos_BDModel.Store.spModificarMes" />
+          <FunctionImportMapping FunctionImportName="spModificarProveedor" FunctionName="Roles_Creditos_BDModel.Store.spModificarProveedor" />
+          <FunctionImportMapping FunctionImportName="spModificarSobrante" FunctionName="Roles_Creditos_BDModel.Store.spModificarSobrante" />
+          <FunctionImportMapping FunctionImportName="spModificarSubDescuento" FunctionName="Roles_Creditos_BDModel.Store.spModificarSubDescuento" />
+          <FunctionImportMapping FunctionImportName="spModificarTipoEgreso" FunctionName="Roles_Creditos_BDModel.Store.spModificarTipoEgreso" />
+          <FunctionImportMapping FunctionImportName="spModificarTipoIngreso" FunctionName="Roles_Creditos_BDModel.Store.spModificarTipoIngreso" />
+          <FunctionImportMapping FunctionImportName="spModificarValorAsignado" FunctionName="Roles_Creditos_BDModel.Store.spModificarValorAsignado" />
+          <FunctionImportMapping FunctionImportName="spModificarValorUtilizado" FunctionName="Roles_Creditos_BDModel.Store.spModificarValorUtilizado" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

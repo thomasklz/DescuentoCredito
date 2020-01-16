@@ -7,6 +7,7 @@ namespace Creditos.Models{
     public class mSubDesuento{
         public int id_subdescuento { get; set; }
         public string descripcion { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mSubDesuento() { }
         public mSubDesuento(int id_subdescuento, string descripcion){

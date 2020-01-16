@@ -8,6 +8,7 @@ namespace Creditos.Models
     public class mTipoIngreso{
         public int id_tipo_ingreso { get; set; }
         public string descripcion { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mTipoIngreso() { }
         public mTipoIngreso(int id_tipo_ingreso, string descripcion)

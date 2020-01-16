@@ -8,6 +8,7 @@ namespace Creditos.Models
     public class mAsociacion{
         public int id_asociacion { get; set; }
         public string descripcion { get; set; }
+        public Boolean est_delete { get; set; }
 
         public mAsociacion() { }
         public mAsociacion(int id_asociacion, string descripcion)
