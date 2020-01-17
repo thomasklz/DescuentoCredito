@@ -14,7 +14,6 @@ namespace Creditos.Models
         public String email { get; set; }
         public String direccion { get; set; }
         public String telefono { get; set; }
-        public Boolean est_delete { get; set; }
 
         public mProveedor() { }
         public mProveedor(int id_proveedor, String persona_juridica, String RUC, String nombre, String descripcion, String email, String direccion, String telefono)

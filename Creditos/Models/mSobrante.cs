@@ -10,7 +10,6 @@ namespace Creditos.Models
         public int descuento_id { get; set; }
         public float valor { get; set; }
         public Boolean estado { get; set; }
-        public Boolean est_delete { get; set; }
 
         public mSobrante() { }
         public mSobrante(int id_sobrante, int descuento_id, float valor, Boolean estado){

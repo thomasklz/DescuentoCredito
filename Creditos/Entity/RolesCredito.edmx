@@ -528,11 +528,24 @@
         <Function Name="spConsultarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarConvenios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_asociacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarCreditosActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarCreditosNoAprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarEgresosxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_mes" Type="int" Mode="In" />
+          <Parameter Name="id_asociacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spConsultarIngresosxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_mes" Type="int" Mode="In" />
+          <Parameter Name="id_asociacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spConsultarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -591,18 +604,15 @@
         </Function>
         <Function Name="spInsertarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="proveedor_id" Type="int" Mode="In" />
           <Parameter Name="asociacion_id" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
           <Parameter Name="subdescuento_id" Type="int" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
@@ -614,7 +624,6 @@
           <Parameter Name="numero_cuota" Type="int" Mode="In" />
           <Parameter Name="estado_activacion" Type="bit" Mode="In" />
           <Parameter Name="estado_aprobacion" Type="bit" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="valor" Type="float" Mode="In" />
@@ -622,31 +631,26 @@
           <Parameter Name="cab_desc_id" Type="int" Mode="In" />
           <Parameter Name="mes_id" Type="int" Mode="In" />
           <Parameter Name="fecha" Type="date" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="valor" Type="float" Mode="In" />
           <Parameter Name="asociacion_id" Type="int" Mode="In" />
           <Parameter Name="tipo_egreso_id" Type="int" Mode="In" />
           <Parameter Name="mes_id" Type="int" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="empleado_id" Type="int" Mode="In" />
           <Parameter Name="asociacion_id" Type="int" Mode="In" />
           <Parameter Name="fecha_ingreso" Type="date" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="valor" Type="float" Mode="In" />
           <Parameter Name="asociacion_id" Type="int" Mode="In" />
           <Parameter Name="tipo_ingreso_id" Type="int" Mode="In" />
           <Parameter Name="mes_id" Type="int" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="persona_juridica" Type="varchar" Mode="In" />
@@ -656,38 +660,31 @@
           <Parameter Name="email" Type="varchar" Mode="In" />
           <Parameter Name="direccion" Type="varchar" Mode="In" />
           <Parameter Name="telefono" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarSobrante" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descuento_id" Type="int" Mode="In" />
           <Parameter Name="valor" Type="float" Mode="In" />
           <Parameter Name="estado" Type="bit" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarSubDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarTipoEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarTipoIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarValorAsignado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="proveedor_id" Type="int" Mode="In" />
           <Parameter Name="aso_id" Type="int" Mode="In" />
           <Parameter Name="empleado_id" Type="int" Mode="In" />
           <Parameter Name="monto_aprobado" Type="float" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spInsertarValorUtilizado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="valor_asig_id" Type="int" Mode="In" />
           <Parameter Name="mes_id" Type="int" Mode="In" />
           <Parameter Name="cantidad_usada" Type="float" Mode="In" />
-          <Parameter Name="est_delete" Type="bit" Mode="In" />
         </Function>
         <Function Name="spModificarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_asociacion" Type="int" Mode="In" />
@@ -1450,7 +1447,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Roles_Creditos_BDEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Asociacion" EntityType="Self.Asociacion" />
           <EntitySet Name="Asociacion_Proveedor" EntityType="Self.Asociacion_Proveedor" />
           <EntitySet Name="Cabecera_Descuento" EntityType="Self.Cabecera_Descuento" />
@@ -1601,11 +1598,24 @@
           <FunctionImport Name="spConsultarAsociacion" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarAsociacion_Result)" />
           <FunctionImport Name="spConsultarAsociacionProveedor" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarAsociacionProveedor_Result)" />
           <FunctionImport Name="spConsultarCabeceraDescuento" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCabeceraDescuento_Result)" />
+          <FunctionImport Name="spConsultarConvenios" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarConvenios_Result)">
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarCredito" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCredito_Result)" />
+          <FunctionImport Name="spConsultarCreditosActivos" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCreditosActivos_Result)" />
+          <FunctionImport Name="spConsultarCreditosNoAprobados" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarCreditosNoAprobados_Result)" />
           <FunctionImport Name="spConsultarDescuento" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarDescuento_Result)" />
           <FunctionImport Name="spConsultarEgreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarEgreso_Result)" />
+          <FunctionImport Name="spConsultarEgresosxMes" ReturnType="Collection(Double)">
+            <Parameter Name="id_mes" Mode="In" Type="Int32" />
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarEmpleadoAsociacion" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarEmpleadoAsociacion_Result)" />
           <FunctionImport Name="spConsultarIngreso" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarIngreso_Result)" />
+          <FunctionImport Name="spConsultarIngresosxMes" ReturnType="Collection(Double)">
+            <Parameter Name="id_mes" Mode="In" Type="Int32" />
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarMes" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarMes_Result)" />
           <FunctionImport Name="spConsultarProveedor" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarProveedor_Result)" />
           <FunctionImport Name="spConsultarSobrante" ReturnType="Collection(Roles_Creditos_BDModel.spConsultarSobrante_Result)" />
@@ -1664,18 +1674,15 @@
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacion">
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacionProveedor">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
             <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarCabeceraDescuento">
             <Parameter Name="descripcion" Mode="In" Type="String" />
             <Parameter Name="subdescuento_id" Mode="In" Type="Int32" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarCredito">
             <Parameter Name="descripcion" Mode="In" Type="String" />
@@ -1687,7 +1694,6 @@
             <Parameter Name="numero_cuota" Mode="In" Type="Int32" />
             <Parameter Name="estado_activacion" Mode="In" Type="Boolean" />
             <Parameter Name="estado_aprobacion" Mode="In" Type="Boolean" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarDescuento">
             <Parameter Name="valor" Mode="In" Type="Double" />
@@ -1695,31 +1701,26 @@
             <Parameter Name="cab_desc_id" Mode="In" Type="Int32" />
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
             <Parameter Name="fecha" Mode="In" Type="DateTime" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarEgreso">
             <Parameter Name="valor" Mode="In" Type="Double" />
             <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
             <Parameter Name="tipo_egreso_id" Mode="In" Type="Int32" />
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarEmpleadoAsociacion">
             <Parameter Name="empleado_id" Mode="In" Type="Int32" />
             <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
             <Parameter Name="fecha_ingreso" Mode="In" Type="DateTime" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarIngreso">
             <Parameter Name="valor" Mode="In" Type="Double" />
             <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
             <Parameter Name="tipo_ingreso_id" Mode="In" Type="Int32" />
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarMes">
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarProveedor">
             <Parameter Name="persona_juridica" Mode="In" Type="String" />
@@ -1729,38 +1730,31 @@
             <Parameter Name="email" Mode="In" Type="String" />
             <Parameter Name="direccion" Mode="In" Type="String" />
             <Parameter Name="telefono" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarSobrante">
             <Parameter Name="descuento_id" Mode="In" Type="Int32" />
             <Parameter Name="valor" Mode="In" Type="Double" />
             <Parameter Name="estado" Mode="In" Type="Boolean" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarSubDescuento">
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoEgreso">
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoIngreso">
             <Parameter Name="descripcion" Mode="In" Type="String" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarValorAsignado">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
             <Parameter Name="aso_id" Mode="In" Type="Int32" />
             <Parameter Name="empleado_id" Mode="In" Type="Int32" />
             <Parameter Name="monto_aprobado" Mode="In" Type="Double" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarValorUtilizado">
             <Parameter Name="valor_asig_id" Mode="In" Type="Int32" />
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
             <Parameter Name="cantidad_usada" Mode="In" Type="Double" />
-            <Parameter Name="est_delete" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spModificarAsociacion">
             <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
@@ -1892,7 +1886,44 @@
           <Property Type="Int32" Name="subdescuento_id" Nullable="true" />
           <Property Type="Boolean" Name="est_delete" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="spConsultarConvenios_Result">
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="String" Name="persona_juridica" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RUC" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
         <ComplexType Name="spConsultarCredito_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCreditosActivos_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCreditosNoAprobados_Result">
           <Property Type="Int32" Name="id_credito" Nullable="false" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
           <Property Type="Double" Name="cantidad" Nullable="true" />
@@ -1995,7 +2026,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Roles_Creditos_BDModelStoreContainer" CdmEntityContainer="Roles_Creditos_BDEntities1">
+        <EntityContainerMapping StorageEntityContainer="Roles_Creditos_BDModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Asociacion">
             <EntityTypeMapping TypeName="Roles_Creditos_BDModel.Asociacion">
               <MappingFragment StoreEntitySet="Asociacion">
@@ -2272,9 +2303,58 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarConvenios" FunctionName="Roles_Creditos_BDModel.Store.spConsultarConvenios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarConvenios_Result">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="persona_juridica" ColumnName="persona_juridica" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spConsultarCredito" FunctionName="Roles_Creditos_BDModel.Store.spConsultarCredito">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarCredito_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCreditosActivos" FunctionName="Roles_Creditos_BDModel.Store.spConsultarCreditosActivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarCreditosActivos_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCreditosNoAprobados" FunctionName="Roles_Creditos_BDModel.Store.spConsultarCreditosNoAprobados">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarCreditosNoAprobados_Result">
                 <ScalarProperty Name="id_credito" ColumnName="id_credito" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
                 <ScalarProperty Name="cantidad" ColumnName="cantidad" />
@@ -2314,6 +2394,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEgresosxMes" FunctionName="Roles_Creditos_BDModel.Store.spConsultarEgresosxMes" />
           <FunctionImportMapping FunctionImportName="spConsultarEmpleadoAsociacion" FunctionName="Roles_Creditos_BDModel.Store.spConsultarEmpleadoAsociacion">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarEmpleadoAsociacion_Result">
@@ -2337,6 +2418,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarIngresosxMes" FunctionName="Roles_Creditos_BDModel.Store.spConsultarIngresosxMes" />
           <FunctionImportMapping FunctionImportName="spConsultarMes" FunctionName="Roles_Creditos_BDModel.Store.spConsultarMes">
             <ResultMapping>
               <ComplexTypeMapping TypeName="Roles_Creditos_BDModel.spConsultarMes_Result">

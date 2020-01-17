@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsTipoEgreso{
-        Roles_Creditos_BDEntities1 db = new Roles_Creditos_BDEntities1();
+        Entities db = new Entities();
         public List<mTipoEgreso> mostrar(){
             List<mTipoEgreso> lista_t_egreso = new List<mTipoEgreso>();
             foreach (var item in db.spConsultarTipoEgreso()){
@@ -16,7 +16,7 @@ namespace Creditos.Clases{
             return lista_t_egreso;
         }
         public void ingresar(mTipoEgreso datos){
-            db.spInsertarTipoEgreso(datos.descripcion, datos.est_delete);
+            db.spInsertarTipoEgreso(datos.descripcion);
         }
         public void eliminar(mTipoEgreso datos){
             db.spEliminarTipoEgreso(datos.id_tipo_egreso);

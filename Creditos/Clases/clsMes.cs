@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsMes{
-        Roles_Creditos_BDEntities1 db = new Roles_Creditos_BDEntities1();
+        Entities db = new Entities();
         public List<mMes> mostrarMeses(){
             List<mMes> lista_mes = new List<mMes>();
             foreach (var item in db.spConsultarMes()){
@@ -16,11 +16,10 @@ namespace Creditos.Clases{
             return lista_mes;
         }
         public void ingresarMes(mMes datos){
-            db.spInsertarMes(datos.descripcion, datos.est_delete);
+            db.spInsertarMes(datos.descripcion);
         }
         public void eliminar(mMes datos){
             db.spEliminarMes(datos.id_mes);
-
         }
         public void modificar(mMes datos){
             db.spModificarMes(datos.id_mes, datos.descripcion);

@@ -10,7 +10,6 @@ namespace Creditos.Models
         public int proveedor_id { get; set; }
         public int asociacion_id { get; set; }
         public DateTime fecha { get; set; }
-        public Boolean est_delete { get; set; }
 
         public mAsociacionProveedor() { }
         public mAsociacionProveedor(int id_asoc_prov, int proveedor_id, int asociacion_id, DateTime fecha)

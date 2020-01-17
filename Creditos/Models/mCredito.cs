@@ -15,7 +15,6 @@ namespace Creditos.Models{
         public int numero_cuota { get; set; }
         public Boolean estado_activacion { get; set; }
         public Boolean estado_aprobacion { get; set; }
-        public Boolean est_delete { get; set; }
 
         public mCredito() { }
         public mCredito(int id_credito, String descripcion, float cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, float desc_mensual, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion)

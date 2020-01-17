@@ -15,10 +15,10 @@ namespace Creditos.Entity
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class Roles_Creditos_BDEntities1 : DbContext
+    public partial class Entities : DbContext
     {
-        public Roles_Creditos_BDEntities1()
-            : base("name=Roles_Creditos_BDEntities1")
+        public Entities()
+            : base("name=Entities")
         {
         }
     
@@ -167,9 +167,28 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCabeceraDescuento_Result>("spConsultarCabeceraDescuento");
         }
     
+        public virtual ObjectResult<spConsultarConvenios_Result> spConsultarConvenios(Nullable<int> id_asociacion)
+        {
+            var id_asociacionParameter = id_asociacion.HasValue ?
+                new ObjectParameter("id_asociacion", id_asociacion) :
+                new ObjectParameter("id_asociacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarConvenios_Result>("spConsultarConvenios", id_asociacionParameter);
+        }
+    
         public virtual ObjectResult<spConsultarCredito_Result> spConsultarCredito()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCredito_Result>("spConsultarCredito");
+        }
+    
+        public virtual ObjectResult<spConsultarCreditosActivos_Result> spConsultarCreditosActivos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditosActivos_Result>("spConsultarCreditosActivos");
+        }
+    
+        public virtual ObjectResult<spConsultarCreditosNoAprobados_Result> spConsultarCreditosNoAprobados()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditosNoAprobados_Result>("spConsultarCreditosNoAprobados");
         }
     
         public virtual ObjectResult<spConsultarDescuento_Result> spConsultarDescuento()
@@ -182,6 +201,19 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEgreso_Result>("spConsultarEgreso");
         }
     
+        public virtual ObjectResult<Nullable<double>> spConsultarEgresosxMes(Nullable<int> id_mes, Nullable<int> id_asociacion)
+        {
+            var id_mesParameter = id_mes.HasValue ?
+                new ObjectParameter("id_mes", id_mes) :
+                new ObjectParameter("id_mes", typeof(int));
+    
+            var id_asociacionParameter = id_asociacion.HasValue ?
+                new ObjectParameter("id_asociacion", id_asociacion) :
+                new ObjectParameter("id_asociacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("spConsultarEgresosxMes", id_mesParameter, id_asociacionParameter);
+        }
+    
         public virtual ObjectResult<spConsultarEmpleadoAsociacion_Result> spConsultarEmpleadoAsociacion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadoAsociacion_Result>("spConsultarEmpleadoAsociacion");
@@ -190,6 +222,19 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarIngreso_Result> spConsultarIngreso()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarIngreso_Result>("spConsultarIngreso");
+        }
+    
+        public virtual ObjectResult<Nullable<double>> spConsultarIngresosxMes(Nullable<int> id_mes, Nullable<int> id_asociacion)
+        {
+            var id_mesParameter = id_mes.HasValue ?
+                new ObjectParameter("id_mes", id_mes) :
+                new ObjectParameter("id_mes", typeof(int));
+    
+            var id_asociacionParameter = id_asociacion.HasValue ?
+                new ObjectParameter("id_asociacion", id_asociacion) :
+                new ObjectParameter("id_asociacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("spConsultarIngresosxMes", id_mesParameter, id_asociacionParameter);
         }
     
         public virtual ObjectResult<spConsultarMes_Result> spConsultarMes()
@@ -376,20 +421,16 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarValorUtilizado", id_valor_usadParameter);
         }
     
-        public virtual int spInsertarAsociacion(string descripcion, Nullable<bool> est_delete)
+        public virtual int spInsertarAsociacion(string descripcion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacion", descripcionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacion", descripcionParameter);
         }
     
-        public virtual int spInsertarAsociacionProveedor(Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha, Nullable<bool> est_delete)
+        public virtual int spInsertarAsociacionProveedor(Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha)
         {
             var proveedor_idParameter = proveedor_id.HasValue ?
                 new ObjectParameter("proveedor_id", proveedor_id) :
@@ -403,14 +444,10 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha", fecha) :
                 new ObjectParameter("fecha", typeof(System.DateTime));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacionProveedor", proveedor_idParameter, asociacion_idParameter, fechaParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacionProveedor", proveedor_idParameter, asociacion_idParameter, fechaParameter);
         }
     
-        public virtual int spInsertarCabeceraDescuento(string descripcion, Nullable<int> subdescuento_id, Nullable<bool> est_delete)
+        public virtual int spInsertarCabeceraDescuento(string descripcion, Nullable<int> subdescuento_id)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
@@ -420,14 +457,10 @@ namespace Creditos.Entity
                 new ObjectParameter("subdescuento_id", subdescuento_id) :
                 new ObjectParameter("subdescuento_id", typeof(int));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCabeceraDescuento", descripcionParameter, subdescuento_idParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCabeceraDescuento", descripcionParameter, subdescuento_idParameter);
         }
     
-        public virtual int spInsertarCredito(string descripcion, Nullable<double> cantidad, Nullable<System.DateTime> fecha_solicitud, Nullable<System.DateTime> fecha_aprobacion, Nullable<double> desc_mensual, Nullable<int> emp_aso_id, Nullable<int> numero_cuota, Nullable<bool> estado_activacion, Nullable<bool> estado_aprobacion, Nullable<bool> est_delete)
+        public virtual int spInsertarCredito(string descripcion, Nullable<double> cantidad, Nullable<System.DateTime> fecha_solicitud, Nullable<System.DateTime> fecha_aprobacion, Nullable<double> desc_mensual, Nullable<int> emp_aso_id, Nullable<int> numero_cuota, Nullable<bool> estado_activacion, Nullable<bool> estado_aprobacion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
@@ -465,14 +498,10 @@ namespace Creditos.Entity
                 new ObjectParameter("estado_aprobacion", estado_aprobacion) :
                 new ObjectParameter("estado_aprobacion", typeof(bool));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCredito", descripcionParameter, cantidadParameter, fecha_solicitudParameter, fecha_aprobacionParameter, desc_mensualParameter, emp_aso_idParameter, numero_cuotaParameter, estado_activacionParameter, estado_aprobacionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCredito", descripcionParameter, cantidadParameter, fecha_solicitudParameter, fecha_aprobacionParameter, desc_mensualParameter, emp_aso_idParameter, numero_cuotaParameter, estado_activacionParameter, estado_aprobacionParameter);
         }
     
-        public virtual int spInsertarDescuento(Nullable<double> valor, Nullable<int> empleado_id, Nullable<int> cab_desc_id, Nullable<int> mes_id, Nullable<System.DateTime> fecha, Nullable<bool> est_delete)
+        public virtual int spInsertarDescuento(Nullable<double> valor, Nullable<int> empleado_id, Nullable<int> cab_desc_id, Nullable<int> mes_id, Nullable<System.DateTime> fecha)
         {
             var valorParameter = valor.HasValue ?
                 new ObjectParameter("valor", valor) :
@@ -494,14 +523,10 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha", fecha) :
                 new ObjectParameter("fecha", typeof(System.DateTime));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarDescuento", valorParameter, empleado_idParameter, cab_desc_idParameter, mes_idParameter, fechaParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarDescuento", valorParameter, empleado_idParameter, cab_desc_idParameter, mes_idParameter, fechaParameter);
         }
     
-        public virtual int spInsertarEgreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_egreso_id, Nullable<int> mes_id, Nullable<bool> est_delete)
+        public virtual int spInsertarEgreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_egreso_id, Nullable<int> mes_id)
         {
             var valorParameter = valor.HasValue ?
                 new ObjectParameter("valor", valor) :
@@ -519,14 +544,10 @@ namespace Creditos.Entity
                 new ObjectParameter("mes_id", mes_id) :
                 new ObjectParameter("mes_id", typeof(int));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarEgreso", valorParameter, asociacion_idParameter, tipo_egreso_idParameter, mes_idParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarEgreso", valorParameter, asociacion_idParameter, tipo_egreso_idParameter, mes_idParameter);
         }
     
-        public virtual int spInsertarEmpleadoAsociacion(Nullable<int> empleado_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha_ingreso, Nullable<bool> est_delete)
+        public virtual int spInsertarEmpleadoAsociacion(Nullable<int> empleado_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha_ingreso)
         {
             var empleado_idParameter = empleado_id.HasValue ?
                 new ObjectParameter("empleado_id", empleado_id) :
@@ -540,14 +561,10 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha_ingreso", fecha_ingreso) :
                 new ObjectParameter("fecha_ingreso", typeof(System.DateTime));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarEmpleadoAsociacion", empleado_idParameter, asociacion_idParameter, fecha_ingresoParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarEmpleadoAsociacion", empleado_idParameter, asociacion_idParameter, fecha_ingresoParameter);
         }
     
-        public virtual int spInsertarIngreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id, Nullable<bool> est_delete)
+        public virtual int spInsertarIngreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id)
         {
             var valorParameter = valor.HasValue ?
                 new ObjectParameter("valor", valor) :
@@ -565,27 +582,19 @@ namespace Creditos.Entity
                 new ObjectParameter("mes_id", mes_id) :
                 new ObjectParameter("mes_id", typeof(int));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarIngreso", valorParameter, asociacion_idParameter, tipo_ingreso_idParameter, mes_idParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarIngreso", valorParameter, asociacion_idParameter, tipo_ingreso_idParameter, mes_idParameter);
         }
     
-        public virtual int spInsertarMes(string descripcion, Nullable<bool> est_delete)
+        public virtual int spInsertarMes(string descripcion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarMes", descripcionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarMes", descripcionParameter);
         }
     
-        public virtual int spInsertarProveedor(string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono, Nullable<bool> est_delete)
+        public virtual int spInsertarProveedor(string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono)
         {
             var persona_juridicaParameter = persona_juridica != null ?
                 new ObjectParameter("persona_juridica", persona_juridica) :
@@ -615,14 +624,10 @@ namespace Creditos.Entity
                 new ObjectParameter("telefono", telefono) :
                 new ObjectParameter("telefono", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarProveedor", persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarProveedor", persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter);
         }
     
-        public virtual int spInsertarSobrante(Nullable<int> descuento_id, Nullable<double> valor, Nullable<bool> estado, Nullable<bool> est_delete)
+        public virtual int spInsertarSobrante(Nullable<int> descuento_id, Nullable<double> valor, Nullable<bool> estado)
         {
             var descuento_idParameter = descuento_id.HasValue ?
                 new ObjectParameter("descuento_id", descuento_id) :
@@ -636,53 +641,37 @@ namespace Creditos.Entity
                 new ObjectParameter("estado", estado) :
                 new ObjectParameter("estado", typeof(bool));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarSobrante", descuento_idParameter, valorParameter, estadoParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarSobrante", descuento_idParameter, valorParameter, estadoParameter);
         }
     
-        public virtual int spInsertarSubDescuento(string descripcion, Nullable<bool> est_delete)
+        public virtual int spInsertarSubDescuento(string descripcion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarSubDescuento", descripcionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarSubDescuento", descripcionParameter);
         }
     
-        public virtual int spInsertarTipoEgreso(string descripcion, Nullable<bool> est_delete)
+        public virtual int spInsertarTipoEgreso(string descripcion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarTipoEgreso", descripcionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarTipoEgreso", descripcionParameter);
         }
     
-        public virtual int spInsertarTipoIngreso(string descripcion, Nullable<bool> est_delete)
+        public virtual int spInsertarTipoIngreso(string descripcion)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
                 new ObjectParameter("descripcion", typeof(string));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarTipoIngreso", descripcionParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarTipoIngreso", descripcionParameter);
         }
     
-        public virtual int spInsertarValorAsignado(Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> empleado_id, Nullable<double> monto_aprobado, Nullable<bool> est_delete)
+        public virtual int spInsertarValorAsignado(Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> empleado_id, Nullable<double> monto_aprobado)
         {
             var proveedor_idParameter = proveedor_id.HasValue ?
                 new ObjectParameter("proveedor_id", proveedor_id) :
@@ -700,14 +689,10 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", monto_aprobado) :
                 new ObjectParameter("monto_aprobado", typeof(double));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorAsignado", proveedor_idParameter, aso_idParameter, empleado_idParameter, monto_aprobadoParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorAsignado", proveedor_idParameter, aso_idParameter, empleado_idParameter, monto_aprobadoParameter);
         }
     
-        public virtual int spInsertarValorUtilizado(Nullable<int> valor_asig_id, Nullable<int> mes_id, Nullable<double> cantidad_usada, Nullable<bool> est_delete)
+        public virtual int spInsertarValorUtilizado(Nullable<int> valor_asig_id, Nullable<int> mes_id, Nullable<double> cantidad_usada)
         {
             var valor_asig_idParameter = valor_asig_id.HasValue ?
                 new ObjectParameter("valor_asig_id", valor_asig_id) :
@@ -721,11 +706,7 @@ namespace Creditos.Entity
                 new ObjectParameter("cantidad_usada", cantidad_usada) :
                 new ObjectParameter("cantidad_usada", typeof(double));
     
-            var est_deleteParameter = est_delete.HasValue ?
-                new ObjectParameter("est_delete", est_delete) :
-                new ObjectParameter("est_delete", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorUtilizado", valor_asig_idParameter, mes_idParameter, cantidad_usadaParameter, est_deleteParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorUtilizado", valor_asig_idParameter, mes_idParameter, cantidad_usadaParameter);
         }
     
         public virtual int spModificarAsociacion(Nullable<int> id_asociacion, string descripcion)

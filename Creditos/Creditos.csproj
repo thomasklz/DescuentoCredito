@@ -149,8 +149,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Clases\clsAsociacion.cs" />
+    <Compile Include="Clases\clsCabeceraDescuento.cs" />
+    <Compile Include="Clases\clsIngresos.cs" />
     <Compile Include="Clases\clsMes.cs" />
+    <Compile Include="Clases\clsSubDescuento.cs" />
     <Compile Include="Clases\clsTipoEgreso.cs" />
+    <Compile Include="Clases\clsTipoIngreso.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Entity\Asociacion.cs">
       <DependentUpon>RolesCredito.tt</DependentUpon>
@@ -213,6 +218,15 @@
       <DependentUpon>RolesCredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCabeceraDescuento_Result.cs">
+      <DependentUpon>RolesCredito.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarConvenios_Result.cs">
+      <DependentUpon>RolesCredito.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarCreditosActivos_Result.cs">
+      <DependentUpon>RolesCredito.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarCreditosNoAprobados_Result.cs">
       <DependentUpon>RolesCredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCredito_Result.cs">
