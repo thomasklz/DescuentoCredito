@@ -7,14 +7,14 @@ namespace Creditos.Models
 {
     public class mDescuento{
         public int id_descuento { get; set; }
-        public float valor { get; set; }
+        public double valor { get; set; }
         public int empleado_id { get; set; }
         public int cab_desc_id { get; set; }
         public int mes_id { get; set; }
         public DateTime fecha { get; set; }
 
         public mDescuento() { }
-        public mDescuento(int id_descuento, float valor, int empleado_id, int cab_desc_id, int mes_id, DateTime fecha)
+        public mDescuento(int id_descuento, double valor, int empleado_id, int cab_desc_id, int mes_id, DateTime fecha)
         {
             this.id_descuento = id_descuento;
             this.valor = valor;

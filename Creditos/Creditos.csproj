@@ -150,13 +150,23 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\clsAsociacion.cs" />
+    <Compile Include="Clases\clsAsociacionProveedor.cs" />
     <Compile Include="Clases\clsCabeceraDescuento.cs" />
+    <Compile Include="Clases\clsCredito.cs" />
+    <Compile Include="Clases\clsDescuento.cs" />
+    <Compile Include="Clases\clsEgresos.cs" />
+    <Compile Include="Clases\clsEmpleadoAsociacion.cs" />
     <Compile Include="Clases\clsIngresos.cs" />
     <Compile Include="Clases\clsMes.cs" />
+    <Compile Include="Clases\clsProveedor.cs" />
+    <Compile Include="Clases\clsSobrante.cs" />
     <Compile Include="Clases\clsSubDescuento.cs" />
     <Compile Include="Clases\clsTipoEgreso.cs" />
     <Compile Include="Clases\clsTipoIngreso.cs" />
+    <Compile Include="Clases\clsValorAsignado.cs" />
+    <Compile Include="Clases\clsValorUtilizado.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\mesController.cs" />
     <Compile Include="Entity\Asociacion.cs">
       <DependentUpon>RolesCredito.tt</DependentUpon>
     </Compile>
@@ -373,6 +383,7 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\mes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         public List<mCabeceraDescuento> mostrar(){
             List<mCabeceraDescuento> lista_cabecera_descuento = new List<mCabeceraDescuento>();
             foreach (var item in db.spConsultarCabeceraDescuento()){
-                lista_cabecera_descuento.Add(new mCabeceraDescuento(item.id_cabecera_descuento, item.descripcion, item.subdescuento_id));
+                lista_cabecera_descuento.Add(new mCabeceraDescuento(item.id_cabecera_descuento, item.descripcion, Convert.ToInt32(item.subdescuento_id)));
             }
             return lista_cabecera_descuento;
         }

@@ -7,13 +7,13 @@ namespace Creditos.Models
 {
     public class mProveedor{
         public int id_proveedor { get; set; }
-        public String persona_juridica { get; set; }
-        public String RUC { get; set; }
-        public String nombre { get; set; }
-        public String descripcion { get; set; }
-        public String email { get; set; }
-        public String direccion { get; set; }
-        public String telefono { get; set; }
+        public string persona_juridica { get; set; }
+        public string RUC { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }
+        public string email { get; set; }
+        public string direccion { get; set; }
+        public string telefono { get; set; }
 
         public mProveedor() { }
         public mProveedor(int id_proveedor, String persona_juridica, String RUC, String nombre, String descripcion, String email, String direccion, String telefono)

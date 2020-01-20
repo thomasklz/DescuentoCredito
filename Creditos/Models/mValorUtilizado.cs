@@ -9,10 +9,10 @@ namespace Creditos.Models
         public int id_valor_usad { get; set; }
         public int valor_asig_id { get; set; }
         public int mes_id { get; set; }
-        public float cantidad_usada { get; set; }
+        public double cantidad_usada { get; set; }
 
         public mValorUtilizado() { }
-        public mValorUtilizado(int id_valor_usad, int valor_asig_id, int mes_id, float cantidad_usada){
+        public mValorUtilizado(int id_valor_usad, int valor_asig_id, int mes_id, double cantidad_usada){
             this.id_valor_usad = id_valor_usad;
             this.valor_asig_id = valor_asig_id;
             this.mes_id = mes_id;

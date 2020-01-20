@@ -10,10 +10,10 @@ namespace Creditos.Models
         public int proveedor_id { get; set; }
         public int aso_id { get; set; }
         public int empleado_id { get; set; }
-        public float monto_aprobado { get; set; }
+        public double monto_aprobado { get; set; }
 
         public mValorAsignado() { }
-        public mValorAsignado(int id_valor_asig, int proveedor_id, int aso_id, int empleado_id, float monto_aprobado)
+        public mValorAsignado(int id_valor_asig, int proveedor_id, int aso_id, int empleado_id, double monto_aprobado)
         {
             this.id_valor_asig = id_valor_asig;
             this.proveedor_id = proveedor_id;
