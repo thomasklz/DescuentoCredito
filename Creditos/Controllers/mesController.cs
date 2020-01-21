@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Creditos.Clases;
+using Creditos.Models;
 
 namespace Creditos.Controllers{
     public class mesController : Controller{
         // GET: mes
         public ActionResult Index(){
-            return View();
+            ViewBag.Message = "Your application description page.";
+            List<mMes> list_mes = new List<mMes>();
+            clsMes clsmes = new clsMes();
+            list_mes = clsmes.mostrarMeses();
+            return View(list_mes);
         }
 
         // GET: mes/Details/5
