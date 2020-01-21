@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsTipoEgreso{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mTipoEgreso> mostrar(){
             List<mTipoEgreso> lista_t_egreso = new List<mTipoEgreso>();
             foreach (var item in db.spConsultarTipoEgreso()){

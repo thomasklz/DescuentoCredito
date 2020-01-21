@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -46,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
@@ -67,7 +68,9 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Web" />
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.Routing" />
@@ -165,148 +168,157 @@
     <Compile Include="Clases\clsTipoIngreso.cs" />
     <Compile Include="Clases\clsValorAsignado.cs" />
     <Compile Include="Clases\clsValorUtilizado.cs" />
+    <Compile Include="Controllers\asociacionController.cs" />
+    <Compile Include="Controllers\asociacionProveedorController.cs" />
+    <Compile Include="Controllers\cabeceraDescuentoController.cs" />
+    <Compile Include="Controllers\creditoController.cs" />
+    <Compile Include="Controllers\descuentoController.cs" />
+    <Compile Include="Controllers\egresosController.cs" />
+    <Compile Include="Controllers\empleadoAsociacionController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ingresosController.cs" />
     <Compile Include="Controllers\mesController.cs" />
+    <Compile Include="Controllers\proveedorController.cs" />
+    <Compile Include="Controllers\sobranteController.cs" />
+    <Compile Include="Controllers\subdescuentoController.cs" />
+    <Compile Include="Controllers\tipoEgresosController.cs" />
+    <Compile Include="Controllers\tipoIngresosController.cs" />
+    <Compile Include="Controllers\valorAsignadoController.cs" />
+    <Compile Include="Controllers\valorUtilizadoController.cs" />
     <Compile Include="Entity\Asociacion.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Asociacion_Proveedor.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Cabecera_Descuento.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Credito.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Descuento.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Egresos.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Empleado.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\empleado_asociacion.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\info_financiera.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Ingresos.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Mes.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Proveedor.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\RolesCredito.Context.cs">
+    <Compile Include="Entity\rolescredito.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RolesCredito.Context.tt</DependentUpon>
+      <DependentUpon>rolescredito.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\RolesCredito.cs">
+    <Compile Include="Entity\rolescredito.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\RolesCredito.Designer.cs">
+    <Compile Include="Entity\rolescredito.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>RolesCredito.edmx</DependentUpon>
+      <DependentUpon>rolescredito.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Sobrante.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacionProveedor_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacion_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCabeceraDescuento_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarConvenios_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosActivos_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosNoAprobados_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCredito_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarDescuento_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEgreso_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadoAsociacion_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarIngreso_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarMes_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarProveedor_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSobrante_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSubDescuento_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarTipoEgreso_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarTipoIngreso_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorAsignado_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorUtilizado_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\sp_helpdiagrams_Result.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SubDescuento.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\sysdiagrams.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo_egreso.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo_ingreso.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\tipo_usuario.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Usuario.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Valor_Asignado.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Valor_Utilizado.cs">
-      <DependentUpon>RolesCredito.tt</DependentUpon>
+      <DependentUpon>rolescredito.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -332,15 +344,15 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Entity\RolesCredito.Context.tt">
+    <Content Include="Entity\rolescredito.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RolesCredito.edmx</DependentUpon>
-      <LastGenOutput>RolesCredito.Context.cs</LastGenOutput>
+      <DependentUpon>rolescredito.edmx</DependentUpon>
+      <LastGenOutput>rolescredito.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Entity\RolesCredito.tt">
+    <Content Include="Entity\rolescredito.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>RolesCredito.edmx</DependentUpon>
-      <LastGenOutput>RolesCredito.cs</LastGenOutput>
+      <DependentUpon>rolescredito.edmx</DependentUpon>
+      <LastGenOutput>rolescredito.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -351,12 +363,12 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Entity\RolesCredito.edmx">
+    <EntityDeploy Include="Entity\rolescredito.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>RolesCredito.Designer.cs</LastGenOutput>
+      <LastGenOutput>rolescredito.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Entity\RolesCredito.edmx.diagram">
-      <DependentUpon>RolesCredito.edmx</DependentUpon>
+    <Content Include="Entity\rolescredito.edmx.diagram">
+      <DependentUpon>rolescredito.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -376,17 +388,34 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\about.cshtml" />
+    <Content Include="Views\Home\contact.cshtml" />
+    <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\mes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\asociacionProveedor\" />
+    <Folder Include="Views\asociacion\" />
+    <Folder Include="Views\cabeceraDescuento\" />
+    <Folder Include="Views\credito\" />
+    <Folder Include="Views\descuento\" />
+    <Folder Include="Views\egresos\" />
+    <Folder Include="Views\empleadoAsociacion\" />
+    <Folder Include="Views\ingresos\" />
+    <Folder Include="Views\proveedor\" />
+    <Folder Include="Views\sobrante\" />
+    <Folder Include="Views\subdescuento\" />
+    <Folder Include="Views\tipoEgresos\" />
+    <Folder Include="Views\tipoIngresos\" />
+    <Folder Include="Views\valorAsignado\" />
+    <Folder Include="Views\valorUtilizado\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -440,7 +469,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

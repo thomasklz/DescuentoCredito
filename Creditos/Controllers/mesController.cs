@@ -11,10 +11,10 @@ namespace Creditos.Controllers{
         // GET: mes
         public ActionResult Index(){
             ViewBag.Message = "Your application description page.";
-            List<mMes> list_mes = new List<mMes>();
+            List<mMes> mes = new List<mMes>();
             clsMes clsmes = new clsMes();
-            list_mes = clsmes.mostrarMeses();
-            return View(list_mes);
+            mes = clsmes.mostrarMeses();
+            return View(mes);
         }
 
         // GET: mes/Details/5

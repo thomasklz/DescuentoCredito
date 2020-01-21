@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsMes{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mMes> mostrarMeses(){
             List<mMes> lista_mes = new List<mMes>();
             foreach (var item in db.spConsultarMes()){

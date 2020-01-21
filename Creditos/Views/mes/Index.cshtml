@@ -1,7 +1,25 @@
 ﻿
-@{
-    ViewBag.Title = "Index";
+@model List<Creditos.Models.mMes>
+
+@{ 
+    ViewBag.Message = "Mes";
 }
 
-<h2>Index</h2>
+<select name="descripcion" id="id_mes" class="form-control">
+    @foreach (var item in Model){
+        <option value="id_mes">@item.descripcion</option>
+    }
+</select>
 
+@*<table class="table-hover">
+    <tr>
+        <th>ID</th>
+        <th>MES</th>
+    </tr>
+    @foreach (var item in Model){ 
+    <tr>
+        <td>@item.id_mes</td>
+        <td>@item.descripcion</td>
+    </tr>
+    }
+</table>*@

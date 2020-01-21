@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsValorUtilizado{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mValorUtilizado> mostrar(){
             List<mValorUtilizado> lista_valor_usado = new List<mValorUtilizado>();
             foreach (var item in db.spConsultarValorUtilizado()){

@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsProveedor{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mProveedor> mostrar(){
             List<mProveedor> lista_proveedor = new List<mProveedor>();
             foreach (var item in db.spConsultarProveedor()){

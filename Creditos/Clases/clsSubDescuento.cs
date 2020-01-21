@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsSubDescuento{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mSubDesuento> mostrar(){
             List<mSubDesuento> lista_subdescuento = new List<mSubDesuento>();
             foreach (var item in db.spConsultarSubDescuento())

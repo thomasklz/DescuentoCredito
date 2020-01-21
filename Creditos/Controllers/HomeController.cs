@@ -8,19 +8,19 @@ namespace Creditos.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult index()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult about()
         {
             ViewBag.Message = "Your application description page.";
 
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult contact()
         {
             ViewBag.Message = "Your contact page.";
 

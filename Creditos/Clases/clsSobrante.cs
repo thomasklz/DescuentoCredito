@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsSobrante{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mSobrante> mostrar(){
             List<mSobrante> lista_sobrantes = new List<mSobrante>();
             foreach (var item in db.spConsultarSobrante()){

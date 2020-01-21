@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsIngresos{
-        Entities db = new Entities();
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
         public List<mIngresos> mostrar(){
             List<mIngresos> lista_ingresos = new List<mIngresos>();
             foreach (var item in db.spConsultarIngreso()){
