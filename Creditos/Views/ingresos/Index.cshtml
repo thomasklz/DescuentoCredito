@@ -1,0 +1,41 @@
+﻿
+@model List<Creditos.Models.xxModel>
+
+@{ 
+    ViewBag.Message = "Ingresos";
+}
+<h1>INGRESOS</h1>
+<input name="txtvalor" id="txtvalor" class="form-control" type="number" value="" autocomplete="off" required="required" placeholder="Ingrese el valor">
+<select name="descripcion" id="id_mes" class="form-control">
+    @foreach (var item in Model){
+        <option value="@item.List1.">@item.descripcion</option>
+    }
+</select>
+
+
+@*<select name="descripcion" id="id_mes" class="form-control">
+    @foreach (var item in Model)
+    {
+        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
+    }
+</select>
+
+<select name="descripcion" id="id_mes" class="form-control">
+    @foreach (var item in Model)
+    {
+        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
+    }
+</select>*@
+
+@*<table class="table-hover">
+    <tr>
+        <th>ID</th>
+        <th>MES</th>
+    </tr>
+    @foreach (var item in Model){ 
+    <tr>
+        <td>@item.id_mes</td>
+        <td>@item.descripcion</td>
+    </tr>
+    }
+</table>*@

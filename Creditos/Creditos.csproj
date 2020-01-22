@@ -339,6 +339,7 @@
     <Compile Include="Models\mTipoIngreso.cs" />
     <Compile Include="Models\mValorAsignado.cs" />
     <Compile Include="Models\mValorUtilizado.cs" />
+    <Compile Include="Models\xxModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -398,17 +399,17 @@
     <Content Include="Views\Home\contact.cshtml" />
     <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\mes\Index.cshtml" />
+    <Content Include="Views\asociacion\Index.cshtml" />
+    <Content Include="Views\ingresos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\asociacionProveedor\" />
-    <Folder Include="Views\asociacion\" />
     <Folder Include="Views\cabeceraDescuento\" />
     <Folder Include="Views\credito\" />
     <Folder Include="Views\descuento\" />
     <Folder Include="Views\egresos\" />
     <Folder Include="Views\empleadoAsociacion\" />
-    <Folder Include="Views\ingresos\" />
     <Folder Include="Views\proveedor\" />
     <Folder Include="Views\sobrante\" />
     <Folder Include="Views\subdescuento\" />

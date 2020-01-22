@@ -11,9 +11,27 @@ namespace Creditos.Controllers
     public class ingresosController : Controller
     {
         // GET: ingresos
-        public ActionResult Index()
-        {
-            return View();
+        public ActionResult Index(){
+            ViewBag.Message = "Your application description page.";
+            //xxModel model = new xxModel();
+
+            List<mTipoIngreso> tp_ingr = new List<mTipoIngreso>();
+            //List<mMes> mes = new List<mMes>();
+            //List<mAsociacion> asoc = new List<mAsociacion>();
+
+            clsTipoIngreso clst_ingr = new clsTipoIngreso();
+            //clsMes clsmes = new clsMes();
+            //clsAsociacion clsasoc = new clsAsociacion();
+
+            tp_ingr = clst_ingr.mostrar();
+            //mes = clsmes.mostrarMeses();
+            //asoc = clsasoc.mostrar();
+
+            //model.List1 = mes;
+            //model.List2 = tp_ingr;
+            //model.List3 = asoc;
+
+            return View(tp_ingr);
         }
 
         // GET: ingresos/Details/5

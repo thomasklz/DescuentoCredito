@@ -1,5 +1,5 @@
 ﻿
-@model List<Creditos.Models.mMes>
+@model List<Creditos.Models.mAsociacion>
 
 @{ 
     ViewBag.Message = "Mes";
@@ -7,11 +7,9 @@
 
 <select name="descripcion" id="id_mes" class="form-control">
     @foreach (var item in Model){
-        <option value="@item.id_mes">@item.descripcion</option>
+        <option value="@item.id_asociacion">@item.descripcion</option>
     }
 </select>
-
-@*@Html.RenderAction(Creditos.Controllers.mesController.Index , Creditos.Controllers.mesController.ReferenceEquals)*@
 
 @*<table class="table-hover">
     <tr>

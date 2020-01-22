@@ -11,9 +11,12 @@ namespace Creditos.Controllers
     public class asociacionController : Controller
     {
         // GET: asociacion
-        public ActionResult Index()
-        {
-            return View();
+        public ActionResult Index(){
+             ViewBag.Message = "Your application description page.";
+             List<mAsociacion> aso = new List<mAsociacion>();
+             clsAsociacion clsasoc = new clsAsociacion();
+             aso = clsasoc.mostrar();
+             return View(aso);
         }
 
         // GET: asociacion/Details/5
