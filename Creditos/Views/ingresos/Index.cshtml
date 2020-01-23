@@ -1,15 +1,16 @@
 ﻿
-@model List<Creditos.Models.xxModel>
+@model List<Creditos.Models.mTipoIngreso>
 
 @{ 
     ViewBag.Message = "Ingresos";
 }
 <h1>INGRESOS</h1>
-<input name="txtvalor" id="txtvalor" class="form-control" type="number" value="" autocomplete="off" required="required" placeholder="Ingrese el valor">
-<select name="descripcion" id="id_mes" class="form-control">
+<input name="txtvalor" id="txtvalor" class="form-control" type="number" autocomplete="off" required="required" placeholder="Ingrese el valor">
+<select name="descripcion" id="id_tipo_ingreso" class="form-control">
     @foreach (var item in Model){
-        <option value="@item.List1.">@item.descripcion</option>
+        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
     }
+    
 </select>
 
 
