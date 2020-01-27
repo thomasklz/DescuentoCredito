@@ -8,21 +8,40 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsIngresos{
         Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
+        List<mIngresos> ingr = new List<mIngresos>();
         public List<mIngresos> mostrar(){
-            List<mIngresos> lista_ingresos = new List<mIngresos>();
-            foreach (var item in db.spConsultarIngreso()){
-                lista_ingresos.Add(new mIngresos(item.id_ingresos, item.valor, Convert.ToInt32(item.asociacion_id), Convert.ToInt32(item.tipo_ingreso_id), Convert.ToInt32(item.mes_id)));
+            foreach (var item in db.spConsultarIngreso())
+            {
+                ingr.Add(new mIngresos(item.id_ingresos, item.valor, item.tipoingreso, item.mes));
             }
-            return lista_ingresos;
+            return ingr;
         }
         public void ingresar(mIngresos datos){
-            db.spInsertarIngreso(datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
+            db.spInsertarIngreso(datos.valor, datos.asociacion_id, datos.tipo_ingreso_id, datos.mes_id);
         }
-        public void eliminar(mIngresos datos){
-            db.spEliminarIngreso(datos.id_ingresos);
+        public void eliminar(int id){
+            db.spEliminarIngreso(id);
         }
-        public void modificar(mIngresos datos){
-            db.spModificarIngreso(datos.id_ingresos, datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
+        public Boolean modificar(mIngresos datos){
+            Boolean result = false;
+            try
+            {
+                db.spModificarIngreso(datos.id_ingresos, datos.valor, datos.asociacion_id, datos.tipo_ingreso_id, datos.mes_id);
+                result = true;
+            }
+            catch (Exception)
+            {
+                result = false;
+            }
+            return result;
+        }
+        public List<mIngresos> mostrarById(int id)
+        {
+            foreach (var item in db.spConsultarIngresoById(id))
+            {
+                ingr.Add(new mIngresos(item.id_ingresos, item.valor, item.id_tipo_ingreso, item.id_mes));
+            }
+            return ingr;
         }
     }
 }

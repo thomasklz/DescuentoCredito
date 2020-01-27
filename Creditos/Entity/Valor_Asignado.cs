@@ -23,13 +23,13 @@ namespace Creditos.Entity
         public int id_valor_asig { get; set; }
         public Nullable<int> proveedor_id { get; set; }
         public Nullable<int> aso_id { get; set; }
-        public Nullable<int> empleado_id { get; set; }
+        public Nullable<int> Id_Persona { get; set; }
         public Nullable<double> monto_aprobado { get; set; }
         public Nullable<bool> est_delete { get; set; }
     
         public virtual Asociacion Asociacion { get; set; }
-        public virtual Empleado Empleado { get; set; }
         public virtual Proveedor Proveedor { get; set; }
+        public virtual Persona Persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Valor_Utilizado> Valor_Utilizado { get; set; }
     }

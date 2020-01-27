@@ -11,13 +11,13 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarValorAsignado_Result
+    public partial class spConsultarIngresoById_Result1
     {
-        public int id_valor_asig { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> aso_id { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
-        public Nullable<double> monto_aprobado { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public int id_ingresos { get; set; }
+        public double valor { get; set; }
+        public string tipoingreso { get; set; }
+        public string mes { get; set; }
+        public int id_tipo_ingreso { get; set; }
+        public int id_mes { get; set; }
     }
 }

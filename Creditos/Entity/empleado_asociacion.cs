@@ -21,7 +21,7 @@ namespace Creditos.Entity
         }
     
         public int id_empl_aso { get; set; }
-        public Nullable<int> empleado_id { get; set; }
+        public Nullable<int> Id_Persona { get; set; }
         public Nullable<int> asociacion_id { get; set; }
         public Nullable<System.DateTime> fecha_ingreso { get; set; }
         public Nullable<bool> est_delete { get; set; }
@@ -29,6 +29,6 @@ namespace Creditos.Entity
         public virtual Asociacion Asociacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credito> Credito { get; set; }
-        public virtual Empleado Empleado { get; set; }
+        public virtual Persona Persona { get; set; }
     }
 }

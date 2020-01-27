@@ -10,13 +10,14 @@
 namespace Creditos.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class info_financiera
+    public partial class spConsultarIngreso_Result1
     {
-        public int id_financiero { get; set; }
-        public Nullable<int> empleado_id { get; set; }
-    
-        public virtual Empleado Empleado { get; set; }
+        public int id_ingresos { get; set; }
+        public double valor { get; set; }
+        public string tipoingreso { get; set; }
+        public string mes { get; set; }
+        public int id_tipo_ingreso { get; set; }
+        public int id_mes { get; set; }
     }
 }

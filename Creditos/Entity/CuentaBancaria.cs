@@ -10,14 +10,19 @@
 namespace Creditos.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class spConsultarValorAsignado_Result
+    public partial class CuentaBancaria
     {
-        public int id_valor_asig { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> aso_id { get; set; }
+        public int CuentaBancariaID { get; set; }
+        public string NroCuenta { get; set; }
+        public Nullable<int> BancoId { get; set; }
+        public Nullable<int> TipoCuentaId { get; set; }
         public Nullable<int> Id_Persona { get; set; }
-        public Nullable<double> monto_aprobado { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public Nullable<bool> Eliminado { get; set; }
+    
+        public virtual Banco Banco { get; set; }
+        public virtual Persona Persona { get; set; }
+        public virtual TipoCuentaBancaria TipoCuentaBancaria { get; set; }
     }
 }

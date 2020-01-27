@@ -8,9 +8,12 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsTipoIngreso{
         Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
+        List<mTipoIngreso> lista_t_ingreso = new List<mTipoIngreso>();
+
         public List<mTipoIngreso> mostrar(){
-            List<mTipoIngreso> lista_t_ingreso = new List<mTipoIngreso>();
-            foreach (var item in db.spConsultarTipoIngreso()){
+           
+            foreach (var item in db.spConsultarTipoIngreso())
+            {
                 lista_t_ingreso.Add(new mTipoIngreso(item.id_tipo_ingreso, item.descripcion));
             }
             return lista_t_ingreso;

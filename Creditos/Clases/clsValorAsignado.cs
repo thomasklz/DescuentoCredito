@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         public List<mValorAsignado> mostrar(){
             List<mValorAsignado> lista_valor_asignado = new List<mValorAsignado>();
             foreach (var item in db.spConsultarValorAsignado()){
-                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, Convert.ToInt32(item.proveedor_id), Convert.ToInt32(item.aso_id), Convert.ToInt32(item.empleado_id), Convert.ToDouble(item.monto_aprobado)));
+       //         lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, Convert.ToInt32(item.proveedor_id), Convert.ToInt32(item.aso_id), Convert.ToInt32(item.empleado_id), Convert.ToDouble(item.monto_aprobado)));
             }
             return lista_valor_asignado;
         }
@@ -22,7 +22,7 @@ namespace Creditos.Clases{
             db.spEliminarValorAsignado(datos.id_valor_asig);
         }
         public void modificar(mValorAsignado datos){
-            db.spModificarValorAsignado(datos.id_valor_asig, datos.proveedor_id, datos.aso_id, datos.empleado_id, datos.monto_aprobado);
+      //      db.spModificarValorAsignado(datos.id_valor_asig, datos.proveedor_id, datos.aso_id, datos.empleado_id, datos.monto_aprobado);
         }
     }
 }

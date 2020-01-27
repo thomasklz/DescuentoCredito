@@ -1,42 +1,170 @@
 ﻿
-@model List<Creditos.Models.mTipoIngreso>
+@model Creditos .Models.mIngresos
 
-@{ 
-    ViewBag.Message = "Ingresos";
-}
-<h1>INGRESOS</h1>
-<input name="txtvalor" id="txtvalor" class="form-control" type="number" autocomplete="off" required="required" placeholder="Ingrese el valor">
-<select name="descripcion" id="id_tipo_ingreso" class="form-control">
-    @foreach (var item in Model){
-        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
+    @{
+        List<Creditos.Models.mIngresos> listIngreso = ViewBag.ingresos;
+     }
+        <h1>INGRESOS</h1>
+     @using (Html.BeginForm("Store", "ingresos", FormMethod.Post))
+     {
+            <div class="form-group">
+                <label>Valor</label>
+                @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name="valor" })
+            </div>
+            @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+            <div>
+                <label>Tipo ingreso </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Select Dept--", new { @id = "tipo_ingreso_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <label>Mes </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--rrrrSSSS--", new { @id = "mes_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+     }
+        <table class="table-hover">
+                <tr>
+                    <th>Item</th>
+                    <th>Valor</th>
+                    <th>Tipo Ingreso</th>
+                    <th>Mes</th>
+                    <th>Acciones</th>
+                </tr>
+                @foreach (var item in listIngreso)
+                {
+                <tr class='row_@item.id_ingresos'>
+                    <td>@item.id_ingresos</td>
+                    <td>@item.valor</td>
+                    <td>@item.tipoingreso</td>
+                    <td>@item.mes</td>
+                    <td>
+                       <a href='#' class='btn btn-danger'  onclick='DeleteIngreso(@item.id_ingresos)'><span class='glyphicon glyphicon-trash'></span></a>
+                        <a href='#' class='btn btn-info' data-id="@item.id_ingresos" onclick='EditIngreso(@item.id_ingresos)'><span class='glyphicon glyphicon-edit'></span></a>
+                    </td>
+                </tr>
+                }
+            </table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Modificar Ingresos</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_ingresos, new { @id = "id_ingresos" })
+                        <div class="form-group">
+                            <label>Valor</label>  
+                            @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                        </div>
+                        @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })
+                        <div class="form-group">
+                            <label>Tipo de Ingreso</label>  
+                            @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Select Dept--", new { @id = "tipo_ingreso_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mes</label>  
+                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Select Dept--", new { @id = "mes_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateIngreso()">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var row;
+    function UpdateIngreso(Ingreso) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/ingresos/UpdateIngresos",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#valor').val());
+                    row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+                    row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
     }
-    
-</select>
-
-
-@*<select name="descripcion" id="id_mes" class="form-control">
-    @foreach (var item in Model)
-    {
-        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/ingresos/GetIngresoById?IngresoId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_ingresos").val(obj[0].id_ingresos);
+                    $("#valor").val(obj[0].valor);
+                    $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                    $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+                }
+            })
+        })
+    })
+    function DeleteIngreso(Ingreso) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/ingresos/DeleteIngreso?IngresoId=" + Ingreso,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + Ingreso).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            } 
+        })
     }
-</select>
-
-<select name="descripcion" id="id_mes" class="form-control">
-    @foreach (var item in Model)
-    {
-        <option value="@item.id_tipo_ingreso">@item.descripcion</option>
-    }
-</select>*@
-
-@*<table class="table-hover">
-    <tr>
-        <th>ID</th>
-        <th>MES</th>
-    </tr>
-    @foreach (var item in Model){ 
-    <tr>
-        <td>@item.id_mes</td>
-        <td>@item.descripcion</td>
-    </tr>
-    }
-</table>*@
+</script>

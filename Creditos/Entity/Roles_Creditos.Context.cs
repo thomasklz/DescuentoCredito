@@ -33,124 +33,35 @@ namespace Creditos.Entity
         public virtual DbSet<Credito> Credito { get; set; }
         public virtual DbSet<Descuento> Descuento { get; set; }
         public virtual DbSet<Egresos> Egresos { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
         public virtual DbSet<empleado_asociacion> empleado_asociacion { get; set; }
-        public virtual DbSet<info_financiera> info_financiera { get; set; }
         public virtual DbSet<Ingresos> Ingresos { get; set; }
         public virtual DbSet<Mes> Mes { get; set; }
         public virtual DbSet<Proveedor> Proveedor { get; set; }
         public virtual DbSet<Sobrante> Sobrante { get; set; }
         public virtual DbSet<SubDescuento> SubDescuento { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tipo_egreso> Tipo_egreso { get; set; }
         public virtual DbSet<Tipo_ingreso> Tipo_ingreso { get; set; }
-        public virtual DbSet<tipo_usuario> tipo_usuario { get; set; }
-        public virtual DbSet<Usuario> Usuario { get; set; }
         public virtual DbSet<Valor_Asignado> Valor_Asignado { get; set; }
         public virtual DbSet<Valor_Utilizado> Valor_Utilizado { get; set; }
-    
-        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var versionParameter = version.HasValue ?
-                new ObjectParameter("version", version) :
-                new ObjectParameter("version", typeof(int));
-    
-            var definitionParameter = definition != null ?
-                new ObjectParameter("definition", definition) :
-                new ObjectParameter("definition", typeof(byte[]));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
-        }
-    
-        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
-        }
-    
-        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
-        {
-            var diagramnameParameter = diagramname != null ?
-                new ObjectParameter("diagramname", diagramname) :
-                new ObjectParameter("diagramname", typeof(string));
-    
-            var owner_idParameter = owner_id.HasValue ?
-                new ObjectParameter("owner_id", owner_id) :
-                new ObjectParameter("owner_id", typeof(int));
-    
-            var new_diagramnameParameter = new_diagramname != null ?
-                new ObjectParameter("new_diagramname", new_diagramname) :
-                new ObjectParameter("new_diagramname", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
-        }
-    
-        public virtual int sp_upgraddiagrams()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
+        public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<CategoriaCargo> CategoriaCargo { get; set; }
+        public virtual DbSet<Contrato> Contrato { get; set; }
+        public virtual DbSet<ContratoSubunidad> ContratoSubunidad { get; set; }
+        public virtual DbSet<Denominacion> Denominacion { get; set; }
+        public virtual DbSet<DenominacionRegimen> DenominacionRegimen { get; set; }
+        public virtual DbSet<EscalaOcupacional> EscalaOcupacional { get; set; }
+        public virtual DbSet<NivelOcupacional> NivelOcupacional { get; set; }
+        public virtual DbSet<Sueldo> Sueldo { get; set; }
+        public virtual DbSet<TipoContrato> TipoContrato { get; set; }
+        public virtual DbSet<tipoContratoCargo> tipoContratoCargo { get; set; }
+        public virtual DbSet<TipoRegimen> TipoRegimen { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<CuentaBancaria> CuentaBancaria { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<TipoCuentaBancaria> TipoCuentaBancaria { get; set; }
+        public virtual DbSet<Tipo> Tipo { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<usuarioTipo> usuarioTipo { get; set; }
     
         public virtual ObjectResult<spConsultarAsociacion_Result> spConsultarAsociacion()
         {
@@ -167,13 +78,13 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCabeceraDescuento_Result>("spConsultarCabeceraDescuento");
         }
     
-        public virtual ObjectResult<spConsultarConvenios_Result> spConsultarConvenios(Nullable<int> id_asociacion)
+        public virtual ObjectResult<spConsultarConveniosxAsociacion_Result> spConsultarConveniosxAsociacion(Nullable<int> id_asociacion)
         {
             var id_asociacionParameter = id_asociacion.HasValue ?
                 new ObjectParameter("id_asociacion", id_asociacion) :
                 new ObjectParameter("id_asociacion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarConvenios_Result>("spConsultarConvenios", id_asociacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarConveniosxAsociacion_Result>("spConsultarConveniosxAsociacion", id_asociacionParameter);
         }
     
         public virtual ObjectResult<spConsultarCredito_Result> spConsultarCredito()
@@ -191,9 +102,44 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditosNoAprobados_Result>("spConsultarCreditosNoAprobados");
         }
     
+        public virtual ObjectResult<spConsultarCreditoxCedulaActivos_Result> spConsultarCreditoxCedulaActivos(string cedula, Nullable<int> asociacion_id)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditoxCedulaActivos_Result>("spConsultarCreditoxCedulaActivos", cedulaParameter, asociacion_idParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarCreditoxCedulaInactivos_Result> spConsultarCreditoxCedulaInactivos(string cedula, Nullable<int> asociacion_id)
+        {
+            var cedulaParameter = cedula != null ?
+                new ObjectParameter("cedula", cedula) :
+                new ObjectParameter("cedula", typeof(string));
+    
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditoxCedulaInactivos_Result>("spConsultarCreditoxCedulaInactivos", cedulaParameter, asociacion_idParameter);
+        }
+    
         public virtual ObjectResult<spConsultarDescuento_Result> spConsultarDescuento()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarDescuento_Result>("spConsultarDescuento");
+        }
+    
+        public virtual ObjectResult<Nullable<double>> spConsultarDescuentoxMes(Nullable<int> id_Persona)
+        {
+            var id_PersonaParameter = id_Persona.HasValue ?
+                new ObjectParameter("id_Persona", id_Persona) :
+                new ObjectParameter("id_Persona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("spConsultarDescuentoxMes", id_PersonaParameter);
         }
     
         public virtual ObjectResult<spConsultarEgreso_Result> spConsultarEgreso()
@@ -219,9 +165,22 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadoAsociacion_Result>("spConsultarEmpleadoAsociacion");
         }
     
-        public virtual ObjectResult<spConsultarIngreso_Result> spConsultarIngreso()
+        public virtual ObjectResult<spConsultarEmpleadosxCreditosActivos_Result> spConsultarEmpleadosxCreditosActivos(Nullable<int> asociacion_id)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarIngreso_Result>("spConsultarIngreso");
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadosxCreditosActivos_Result>("spConsultarEmpleadosxCreditosActivos", asociacion_idParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarEmpleadoxCreditoInactivo_Result> spConsultarEmpleadoxCreditoInactivo(Nullable<int> asociacion_id)
+        {
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadoxCreditoInactivo_Result>("spConsultarEmpleadoxCreditoInactivo", asociacion_idParameter);
         }
     
         public virtual ObjectResult<Nullable<double>> spConsultarIngresosxMes(Nullable<int> id_mes, Nullable<int> id_asociacion)
@@ -235,11 +194,6 @@ namespace Creditos.Entity
                 new ObjectParameter("id_asociacion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("spConsultarIngresosxMes", id_mesParameter, id_asociacionParameter);
-        }
-    
-        public virtual ObjectResult<spConsultarMes_Result> spConsultarMes()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarMes_Result>("spConsultarMes");
         }
     
         public virtual ObjectResult<spConsultarProveedor_Result> spConsultarProveedor()
@@ -260,11 +214,6 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarTipoEgreso_Result> spConsultarTipoEgreso()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoEgreso_Result>("spConsultarTipoEgreso");
-        }
-    
-        public virtual ObjectResult<spConsultarTipoIngreso_Result> spConsultarTipoIngreso()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngreso_Result>("spConsultarTipoIngreso");
         }
     
         public virtual ObjectResult<spConsultarValorAsignado_Result> spConsultarValorAsignado()
@@ -338,15 +287,6 @@ namespace Creditos.Entity
                 new ObjectParameter("id_empl_aso", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarEmpleadoAsociacion", id_empl_asoParameter);
-        }
-    
-        public virtual int spEliminarIngreso(Nullable<int> id_ingresos)
-        {
-            var id_ingresosParameter = id_ingresos.HasValue ?
-                new ObjectParameter("id_ingresos", id_ingresos) :
-                new ObjectParameter("id_ingresos", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarIngreso", id_ingresosParameter);
         }
     
         public virtual int spEliminarMes(Nullable<int> id_mes)
@@ -562,27 +502,6 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha_ingreso", typeof(System.DateTime));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarEmpleadoAsociacion", empleado_idParameter, asociacion_idParameter, fecha_ingresoParameter);
-        }
-    
-        public virtual int spInsertarIngreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id)
-        {
-            var valorParameter = valor.HasValue ?
-                new ObjectParameter("valor", valor) :
-                new ObjectParameter("valor", typeof(double));
-    
-            var asociacion_idParameter = asociacion_id.HasValue ?
-                new ObjectParameter("asociacion_id", asociacion_id) :
-                new ObjectParameter("asociacion_id", typeof(int));
-    
-            var tipo_ingreso_idParameter = tipo_ingreso_id.HasValue ?
-                new ObjectParameter("tipo_ingreso_id", tipo_ingreso_id) :
-                new ObjectParameter("tipo_ingreso_id", typeof(int));
-    
-            var mes_idParameter = mes_id.HasValue ?
-                new ObjectParameter("mes_id", mes_id) :
-                new ObjectParameter("mes_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarIngreso", valorParameter, asociacion_idParameter, tipo_ingreso_idParameter, mes_idParameter);
         }
     
         public virtual int spInsertarMes(string descripcion)
@@ -805,35 +724,6 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarCredito", id_creditoParameter, descripcionParameter, cantidadParameter, fecha_solicitudParameter, fecha_aprobacionParameter, desc_mensualParameter, emp_aso_idParameter, numero_cuotaParameter, estado_activacionParameter, estado_aprobacionParameter);
         }
     
-        public virtual int spModificarDescuento(Nullable<int> id_descuento, Nullable<double> valor, Nullable<int> empleado_id, Nullable<int> cab_desc_id, Nullable<int> mes_id, Nullable<System.DateTime> fecha)
-        {
-            var id_descuentoParameter = id_descuento.HasValue ?
-                new ObjectParameter("id_descuento", id_descuento) :
-                new ObjectParameter("id_descuento", typeof(int));
-    
-            var valorParameter = valor.HasValue ?
-                new ObjectParameter("valor", valor) :
-                new ObjectParameter("valor", typeof(double));
-    
-            var empleado_idParameter = empleado_id.HasValue ?
-                new ObjectParameter("empleado_id", empleado_id) :
-                new ObjectParameter("empleado_id", typeof(int));
-    
-            var cab_desc_idParameter = cab_desc_id.HasValue ?
-                new ObjectParameter("cab_desc_id", cab_desc_id) :
-                new ObjectParameter("cab_desc_id", typeof(int));
-    
-            var mes_idParameter = mes_id.HasValue ?
-                new ObjectParameter("mes_id", mes_id) :
-                new ObjectParameter("mes_id", typeof(int));
-    
-            var fechaParameter = fecha.HasValue ?
-                new ObjectParameter("fecha", fecha) :
-                new ObjectParameter("fecha", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarDescuento", id_descuentoParameter, valorParameter, empleado_idParameter, cab_desc_idParameter, mes_idParameter, fechaParameter);
-        }
-    
         public virtual int spModificarEgreso(Nullable<int> id_egresos, Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_egreso_id, Nullable<int> mes_id)
         {
             var id_egresosParameter = id_egresos.HasValue ?
@@ -857,27 +747,6 @@ namespace Creditos.Entity
                 new ObjectParameter("mes_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarEgreso", id_egresosParameter, valorParameter, asociacion_idParameter, tipo_egreso_idParameter, mes_idParameter);
-        }
-    
-        public virtual int spModificarEmpleadoAsociacion(Nullable<int> id_empl_aso, Nullable<int> empleado_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha_ingreso)
-        {
-            var id_empl_asoParameter = id_empl_aso.HasValue ?
-                new ObjectParameter("id_empl_aso", id_empl_aso) :
-                new ObjectParameter("id_empl_aso", typeof(int));
-    
-            var empleado_idParameter = empleado_id.HasValue ?
-                new ObjectParameter("empleado_id", empleado_id) :
-                new ObjectParameter("empleado_id", typeof(int));
-    
-            var asociacion_idParameter = asociacion_id.HasValue ?
-                new ObjectParameter("asociacion_id", asociacion_id) :
-                new ObjectParameter("asociacion_id", typeof(int));
-    
-            var fecha_ingresoParameter = fecha_ingreso.HasValue ?
-                new ObjectParameter("fecha_ingreso", fecha_ingreso) :
-                new ObjectParameter("fecha_ingreso", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarEmpleadoAsociacion", id_empl_asoParameter, empleado_idParameter, asociacion_idParameter, fecha_ingresoParameter);
         }
     
         public virtual int spModificarIngreso(Nullable<int> id_ingresos, Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id)
@@ -1015,31 +884,6 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarTipoIngreso", id_tipo_ingresoParameter, descripcionParameter);
         }
     
-        public virtual int spModificarValorAsignado(Nullable<int> id_valor_asig, Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> empleado_id, Nullable<double> monto_aprobado)
-        {
-            var id_valor_asigParameter = id_valor_asig.HasValue ?
-                new ObjectParameter("id_valor_asig", id_valor_asig) :
-                new ObjectParameter("id_valor_asig", typeof(int));
-    
-            var proveedor_idParameter = proveedor_id.HasValue ?
-                new ObjectParameter("proveedor_id", proveedor_id) :
-                new ObjectParameter("proveedor_id", typeof(int));
-    
-            var aso_idParameter = aso_id.HasValue ?
-                new ObjectParameter("aso_id", aso_id) :
-                new ObjectParameter("aso_id", typeof(int));
-    
-            var empleado_idParameter = empleado_id.HasValue ?
-                new ObjectParameter("empleado_id", empleado_id) :
-                new ObjectParameter("empleado_id", typeof(int));
-    
-            var monto_aprobadoParameter = monto_aprobado.HasValue ?
-                new ObjectParameter("monto_aprobado", monto_aprobado) :
-                new ObjectParameter("monto_aprobado", typeof(double));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, empleado_idParameter, monto_aprobadoParameter);
-        }
-    
         public virtual int spModificarValorUtilizado(Nullable<int> id_valor_usad, Nullable<int> valor_asig_id, Nullable<int> mes_id, Nullable<double> cantidad_usada)
         {
             var id_valor_usadParameter = id_valor_usad.HasValue ?
@@ -1059,6 +903,60 @@ namespace Creditos.Entity
                 new ObjectParameter("cantidad_usada", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorUtilizado", id_valor_usadParameter, valor_asig_idParameter, mes_idParameter, cantidad_usadaParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarTipoIngreso_Result1> spConsultarTipoIngreso()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngreso_Result1>("spConsultarTipoIngreso");
+        }
+    
+        public virtual ObjectResult<spConsultarMes_Result1> spConsultarMes()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarMes_Result1>("spConsultarMes");
+        }
+    
+        public virtual ObjectResult<spConsultarIngreso_Result1> spConsultarIngreso()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarIngreso_Result1>("spConsultarIngreso");
+        }
+    
+        public virtual int spEliminarIngreso(Nullable<int> id_ingresos)
+        {
+            var id_ingresosParameter = id_ingresos.HasValue ?
+                new ObjectParameter("id_ingresos", id_ingresos) :
+                new ObjectParameter("id_ingresos", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarIngreso", id_ingresosParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarIngresoById_Result1> spConsultarIngresoById(Nullable<int> idingreso)
+        {
+            var idingresoParameter = idingreso.HasValue ?
+                new ObjectParameter("idingreso", idingreso) :
+                new ObjectParameter("idingreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarIngresoById_Result1>("spConsultarIngresoById", idingresoParameter);
+        }
+    
+        public virtual int spInsertarIngreso(Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id)
+        {
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(double));
+    
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            var tipo_ingreso_idParameter = tipo_ingreso_id.HasValue ?
+                new ObjectParameter("tipo_ingreso_id", tipo_ingreso_id) :
+                new ObjectParameter("tipo_ingreso_id", typeof(int));
+    
+            var mes_idParameter = mes_id.HasValue ?
+                new ObjectParameter("mes_id", mes_id) :
+                new ObjectParameter("mes_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarIngreso", valorParameter, asociacion_idParameter, tipo_ingreso_idParameter, mes_idParameter);
         }
     }
 }

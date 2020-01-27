@@ -15,7 +15,7 @@ namespace Creditos.Entity
     {
         public int id_descuento { get; set; }
         public Nullable<double> valor { get; set; }
-        public Nullable<int> empleado_id { get; set; }
+        public Nullable<int> Id_Persona { get; set; }
         public Nullable<int> cab_desc_id { get; set; }
         public Nullable<int> mes_id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }

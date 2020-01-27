@@ -8,8 +8,9 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsMes{
         Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
+        List<mMes> lista_mes = new List<mMes>();
         public List<mMes> mostrarMeses(){
-            List<mMes> lista_mes = new List<mMes>();
+           
             foreach (var item in db.spConsultarMes()){
                 lista_mes.Add(new mMes(item.id_mes, item.descripcion));
             }

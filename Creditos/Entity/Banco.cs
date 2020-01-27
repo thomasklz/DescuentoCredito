@@ -12,19 +12,19 @@ namespace Creditos.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuario
+    public partial class Banco
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuario()
+        public Banco()
         {
-            this.Empleado = new HashSet<Empleado>();
+            this.CuentaBancaria = new HashSet<CuentaBancaria>();
         }
     
-        public int id_usuario { get; set; }
-        public Nullable<int> t_usuario_id { get; set; }
+        public int BancoId { get; set; }
+        public string Descripcion { get; set; }
+        public Nullable<bool> Eliminado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Empleado> Empleado { get; set; }
-        public virtual tipo_usuario tipo_usuario { get; set; }
+        public virtual ICollection<CuentaBancaria> CuentaBancaria { get; set; }
     }
 }

@@ -10,17 +10,16 @@
 namespace Creditos.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class spConsultarConvenios_Result
+    public partial class usuarioTipo
     {
-        public int id_proveedor { get; set; }
-        public string persona_juridica { get; set; }
-        public string RUC { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public string email { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public int idTipoUsuario { get; set; }
+        public int Id_Usuario { get; set; }
+        public int idTipo { get; set; }
+        public Nullable<bool> eliminado { get; set; }
+    
+        public virtual Tipo Tipo { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

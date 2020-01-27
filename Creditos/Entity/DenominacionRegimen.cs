@@ -10,14 +10,16 @@
 namespace Creditos.Entity
 {
     using System;
+    using System.Collections.Generic;
     
-    public partial class spConsultarValorAsignado_Result
+    public partial class DenominacionRegimen
     {
-        public int id_valor_asig { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> aso_id { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
-        public Nullable<double> monto_aprobado { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public int DenominacionRegimenId { get; set; }
+        public Nullable<int> DenominacionId { get; set; }
+        public Nullable<int> TipoRegimenId { get; set; }
+        public Nullable<bool> Eliminado { get; set; }
+    
+        public virtual Denominacion Denominacion { get; set; }
+        public virtual TipoRegimen TipoRegimen { get; set; }
     }
 }

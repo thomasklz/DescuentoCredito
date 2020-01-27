@@ -5,106 +5,85 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class ingresosController : Controller
     {
         // GET: ingresos
+        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
+        clsMes clsmes = new clsMes();
+        clsIngresos clsingreso = new clsIngresos();
+        clsTipoIngreso clstipoingresos = new clsTipoIngreso();
+  
+        List<mIngresos> list_ingreso = new List<mIngresos>();
         public ActionResult Index(){
-            ViewBag.Message = "Your application description page.";
-            //xxModel model = new xxModel();
 
-            List<mTipoIngreso> tp_ingr = new List<mTipoIngreso>();
-            List<mMes> mes = new List<mMes>();
-            //List<mAsociacion> asoc = new List<mAsociacion>();
-
-            clsTipoIngreso clst_ingr = new clsTipoIngreso();
-            clsMes clsmes = new clsMes();
-            //clsAsociacion clsasoc = new clsAsociacion();
-
-            tp_ingr = clst_ingr.mostrar();
-            mes = clsmes.mostrarMeses();
-            //asoc = clsasoc.mostrar();
-
-            //model.List1 = mes;
-            //model.List2 = tp_ingr;
-            //model.List3 = asoc;
-            var nose = new object( );
-            
-            return View(tp_ingr);
-        }
-
-        // GET: ingresos/Details/5
-        public ActionResult Details(int id)
-        {
+            ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            ViewBag.ingresos = clsingreso.mostrar();
+          
             return View();
         }
 
-        // GET: ingresos/Create
-        public ActionResult Create()
-        {
-            return View();
+        public ActionResult Store(mIngresos model) {
+
+            clsingreso.ingresar(model);
+            return RedirectToAction("Index");
         }
 
-        // POST: ingresos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult UpdateIngresos(mIngresos model)
         {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (clsingreso.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: ingresos/Edit/5
-        public ActionResult Edit(int id)
+
+        public JsonResult GetIngresoById(int IngresoId)
         {
-            return View();
+            List<mIngresos> model = clsingreso.mostrarById(IngresoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: ingresos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+
+        public JsonResult DeleteIngreso(int IngresoId)
         {
-            try
+            string result = "";
+             Ingresos ingreso = db.Ingresos.Find(IngresoId);
+            if (ingreso != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                clsingreso.eliminar(IngresoId);
+                result = "Eliminado";
             }
-            catch
-            {
-                return View();
+            else {
+                result = "Registro no encontrado";
             }
+        
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: ingresos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
 
-        // POST: ingresos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

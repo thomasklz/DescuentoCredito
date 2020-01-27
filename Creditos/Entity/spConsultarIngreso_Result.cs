@@ -15,9 +15,7 @@ namespace Creditos.Entity
     {
         public int id_ingresos { get; set; }
         public double valor { get; set; }
-        public Nullable<int> asociacion_id { get; set; }
-        public Nullable<int> tipo_ingreso_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string tipoingreso { get; set; }
+        public string mes { get; set; }
     }
 }
