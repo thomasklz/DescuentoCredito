@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsTipoIngreso{
-        Roles_Creditos_BDEntities db = new Roles_Creditos_BDEntities();
+        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
         List<mTipoIngreso> lista_t_ingreso = new List<mTipoIngreso>();
 
         public List<mTipoIngreso> mostrar(){

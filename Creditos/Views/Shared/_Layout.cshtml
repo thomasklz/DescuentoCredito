@@ -1,49 +1,347 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    <title> Sistema Roles y Creditos | Dashboard</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <script src="~/Scripts/jquery.js"></script>
-</head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Inicio", "index", "home")</li>
-                    <li>@Html.ActionLink("Acerca de", "about", "home")</li>
-                    <li>@Html.ActionLink("Mes", "index", "mes")</li>
-                    <li>@Html.ActionLink("Asociaciones", "index", "asociacion")</li>
-                    <li>@Html.ActionLink("Ingresos", "index", "ingresos")</li>
+    @Styles.Render("~/Scripts/ScriptSistema/global/plugins.bundle.css")
+    @Styles.Render("~/Content/css/style.bundle.css")
+    @Styles.Render("~/Scripts/ScriptSistema/custom/fullcalendar/fullcalendar.bundle.css")
 
-                </ul>
+    @Scripts.Render("~/Scripts/ScriptSistema/global/plugins.bundle.js")
+    @Scripts.Render("~/Scripts/ScriptSistema/scripts.bundle.js")
+    @Scripts.Render("~/Scripts/ScriptSistema/pages/dashboard.js")
+
+    <meta name="description" content="Latest updates and statistic charts">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700"> <!--end::Fonts -->
+    
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 1070954, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37564768-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-37564768-1');
+    </script>
+</head>
+<body class="kt-page--loading-enabled kt-page--loading kt-page--fluid kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-subheader--enabled kt-subheader--transparent kt-page--loading">
+    <!-- begin::Header -->
+    <div class="container">
+        <div class="kt-grid kt-grid--hor kt-grid--root">
+            <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
+                <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-wrapper " id="kt_wrapper">
+                    <!-- begin:: Header Principal Institucional -->
+                    <div id="kt_header" class="kt-header kt-grid__item kt-header--fixed " data-ktheader-minimize="on">
+                        <div class="kt-header__top">
+                            <div class="kt-container ">
+                                <!-- begin:: Brand -->
+                                <div class="kt-header__brand kt-grid__item" id="kt_header_brand">
+                                    <div class="kt-header__brand-logo">
+                                        <a href="#">
+                                            <img alt="Logo" src="../Content/media/logos/logo-5.png" />
+                                        </a>
+                                    </div>
+                                    <div class="kt-header__brand-nav">
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-pill btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                                Sitemas Institucionales
+                                            </button>
+                                            <div class="dropdown-menu dropdown-menu-fit dropdown-menu-md">
+                                                <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-margin-t-20 kt-margin-b-20">
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link active" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon2-user"></i></span>
+                                                            <span class="kt-nav__link-text">Talento Humano</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon-feed"></i></span>
+                                                            <span class="kt-nav__link-text">Gestion Academica</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon2-open-text-book"></i></span>
+                                                            <span class="kt-nav__link-text">Biblioteca</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon2-browser"></i></span>
+                                                            <span class="kt-nav__link-text">Pagina Principal</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="kt-nav__separator"></li>
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon-list-2"></i></span>
+                                                            <span class="kt-nav__link-text">Hoja de Vida</span>
+                                                        </a>
+                                                    </li>
+                                                    <li class="kt-nav__item">
+                                                        <a class="kt-nav__link" href="#">
+                                                            <span class="kt-nav__link-icon"><i class="flaticon2-contract"></i></span>
+                                                            <span class="kt-nav__link-text">Editar Datos Personales</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- end:: Brand --> <!-- begin:: Header Topbar -->
+                                <div class="kt-header__topbar">
+                                    <!--begin: Notifications -->
+                                    <div class="kt-header__topbar-item dropdown">
+                                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
+                                            <span class="kt-header__topbar-icon kt-header__topbar-icon--success">
+                                                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                                                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                        <rect x="0" y="0" width="24" height="24" />
+                                                        <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                                                        <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
+                                                    </g>
+                                                </svg> <!--<i class="flaticon2-bell-alarm-symbol"></i>-->
+                                            </span>
+                                            <span class="kt-hidden kt-badge kt-badge--danger"></span>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                                            <form>
+                                                <!--begin: Head -->
+                                                <div class="kt-head kt-head--skin-light kt-head--fit-x kt-head--fit-b">
+                                                    <h3 class="kt-head__title">
+                                                        User Notifications
+                                                        &nbsp;
+                                                        <span class="btn btn-label-primary btn-sm btn-bold btn-font-md">23 new</span>
+                                                    </h3>
+                                                    <ul class="nav nav-tabs nav-tabs-line nav-tabs-bold nav-tabs-line-3x nav-tabs-line-brand kt-notification-item-padding-x" role="tablist">
+                                                        <li class="nav-item">
+                                                            <a class="nav-link active show" data-toggle="tab" href="#topbar_notifications_notifications" role="tab" aria-selected="true">Alerts</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-toggle="tab" href="#topbar_notifications_events" role="tab" aria-selected="false">Events</a>
+                                                        </li>
+                                                        <li class="nav-item">
+                                                            <a class="nav-link" data-toggle="tab" href="#topbar_notifications_logs" role="tab" aria-selected="false">Logs</a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <!--end: Head -->
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                    <!--end: Notifications -->
+                                    <!--begin: User bar -->
+                                    <div class="kt-header__topbar-item kt-header__topbar-item--user">
+                                        <div class="kt-header__topbar-wrapper" data-toggle="dropdown" data-offset="10px,10px">
+                                            <span class="kt-hidden kt-header__topbar-welcome">Hi,</span>
+                                            <span class="kt-hidden kt-header__topbar-username">Nick</span>
+                                            <img class="kt-hidden-" alt="Pic" src="../Content/media/users/300_21.jpg" />
+                                            <span class="kt-header__topbar-icon kt-header__topbar-icon--brand kt-hidden"><b>S</b></span>
+                                        </div>
+                                        <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-xl">
+                                            <!--begin: Head -->
+                                            <div class="kt-user-card kt-user-card--skin-light kt-notification-item-padding-x">
+                                                <div class="kt-user-card__avatar">
+                                                    <img class="kt-hidden-" alt="Pic" src="../Content/media/users/300_25.jpg" />
+                                                    <!--use below badge element instead the user avatar to display username's first letter(remove kt-hidden class to display it) -->
+                                                    <span class="kt-badge kt-badge--username kt-badge--unified-success kt-badge--lg kt-badge--rounded kt-badge--bold kt-hidden">S</span>
+                                                </div>
+                                                <div class="kt-user-card__name">
+                                                    Sean Stone
+                                                </div>
+                                                <div class="kt-user-card__badge">
+                                                    <span class="btn btn-label-primary btn-sm btn-bold btn-font-md">23 messages</span>
+                                                </div>
+                                            </div>
+                                            <!--end: Head -->
+                                            <!--begin: Navigation -->
+                                            <div class="kt-notification">
+                                                <a href="../custom/apps/user/profile-1/personal-information.html" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                        <i class="flaticon2-calendar-3 kt-font-success"></i>
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title kt-font-bold">
+                                                            Mi Perfil
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            Configuracion de la cuenta
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="../custom/apps/user/profile-3.html" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                        <i class="flaticon2-mail kt-font-warning"></i>
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title kt-font-bold">
+                                                            Mi correo electronico Institucional
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            Bandeja de entrada
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="../custom/apps/user/profile-2.html" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                        <i class="flaticon2-rocket-1 kt-font-danger"></i>
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title kt-font-bold">
+                                                            Mi Actividad
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            Ingresos al sistema y Alertas
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <a href="../custom/apps/user/profile-3.html" class="kt-notification__item">
+                                                    <div class="kt-notification__item-icon">
+                                                        <i class="flaticon2-hourglass kt-font-brand"></i>
+                                                    </div>
+                                                    <div class="kt-notification__item-details">
+                                                        <div class="kt-notification__item-title kt-font-bold">
+                                                            Mis Tareas
+                                                        </div>
+                                                        <div class="kt-notification__item-time">
+                                                            Proyectos y Tareas
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <div class="kt-notification__custom kt-space-between">
+                                                    <a href="../custom/user/login-v2.html" target="_blank" class="btn btn-label btn-label-brand btn-sm btn-bold">Cerrar Sesion</a>
+                                                </div>
+                                            </div>
+                                            <!--end: Navigation -->
+                                        </div>
+                                    </div>
+                                    <!--end: User bar -->
+                                </div>
+                                <!-- end:: Header Topbar -->
+                            </div>
+                        </div>
+                        <div class="kt-header__bottom">
+                            <div class="kt-container ">
+                                <!-- begin: Menu Nosotros -->
+                                <button class="kt-header-menu-wrapper-close" id="kt_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+                                <div class="kt-header-menu-wrapper" id="kt_header_menu_wrapper">
+                                    <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
+                                        <ul class="kt-menu__nav ">
+                                            <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Gestiones Adicionales</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tipo de Ingresos</span></a>
+                                                        </li>
+                                                        <li class="kt-menu__item kt-menu__item--active " aria-haspopup="true">
+                                                            <a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tipo de Egresos</span></a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                               <span class="kt-menu__link-text">@Html.ActionLink("Mes", "index", "Mes")</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                                @*<a href="@Html.ActionLink("Mes", "index", "Mes")" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Ingresos</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>*@
+                                            </li>
+                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Egresos</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                            </li>
+                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Proveedores</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                            </li>
+                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Convenios</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- end: Header Menu -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end:: Header -->
+                    <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
+                        <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
+                            <!-- begin:: Encabezado VENTANA PRINCIPAL -->
+                            <div class="kt-subheader kt-grid__item" id="kt_subheader">
+                                <div class="kt-container ">
+                                    <div class="kt-subheader__main">
+                                        <h4 class="kt-subheader__title">
+                                            Ventana Principal
+                                        </h4>
+                                        <span class="kt-subheader__separator kt-hidden"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end:: Subheader -->
+                            <!-- begin:: CONTENIDO -->
+                            <div class="navbar-collapse collapse">
+                                <div class="container body-content">
+                                    @RenderBody()
+                                </div>
+                            </div>
+                            <!-- end:: Content -->
+                        </div>
+                    </div>
+                    <!-- begin:: Footer -->
+                    <div class="kt-footer kt-footer--extended kt-grid__item" id="kt_footer">
+                        <div class="kt-footer__top">
+                            <div class="kt-container ">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="kt-footer__section">
+                                            <h4 class="kt-footer__title">Sistema de Gestion</h4>
+                                            <div class="kt-footer__content">
+                                                Talento Humano.
+                                                Asociaciones.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kt-footer__bottom">
+                            <div class="kt-container ">
+                                <div class="kt-footer__wrapper">
+                                    <div class="kt-footer__section">
+                                        Desarrolladores:
+                                        Joselin Loor, Edson Vidal
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end:: Footer -->
+                </div>
             </div>
         </div>
+        <!-- end:: Header -->
+        <!-- end:: Page -->
+        <!-- begin::Scrolltop -->
+        <div id="kt_scrolltop" class="kt-scrolltop">
+            <i class="fa fa-arrow-up"></i>
+        </div>
+        <!-- end::Scrolltop -->
+        <!-- begin::Global Config(global config for global JS sciprts) -->
+        <script>
+            var KTAppOptions = { "colors": { "state": { "brand": "#3d94fb", "light": "#ffffff", "dark": "#282a3c", "primary": "#5867dd", "success": "#34bfa3", "info": "#3d94fb", "warning": "#ffb822", "danger": "#fd27eb" }, "base": { "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"], "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"] } } };
+        </script>
+        <!-- end::Global Config -->
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
-        </footer>
-    </div>
-
- 
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
-
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </body>
+<!-- end::Body -->
 </html>
