@@ -8,21 +8,38 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsEgresos{
         AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
-        public List<mEgresos> mostrar(){
-            List<mEgresos> lista_egresos = new List<mEgresos>();
-            foreach (var item in db.spConsultarEgreso()){
-                lista_egresos.Add(new mEgresos(item.id_egresos, Convert.ToDouble(item.valor), Convert.ToInt32(item.asociacion_id), Convert.ToInt32(item.tipo_egreso_id), Convert.ToInt32(item.mes_id)));
-            }
-            return lista_egresos;
-        }
+        List<mEgresos> egr = new List<mEgresos>();
+
+        //public List<mEgresos> mostrar(){
+        //    foreach (var item in db.spConsultarEgreso())
+        //    {
+        //        ingr.Add(new mEgresos(item.id_egresos, item.valor, item.tipo_egreso, item.mes));
+        //    }
+        //    return egr;
+        //}
         public void ingresar(mEgresos datos){
             db.spInsertarEgreso(datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
         }
-        public void eliminar(mEgresos datos){
-            db.spEliminarEgreso(datos.id_egresos);
+        public void eliminar(int id){
+            db.spEliminarEgreso(id);
         }
-        public void modificar(mEgresos datos){
-            db.spModificarEgreso(datos.id_egresos, datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
+        public Boolean modificar(mEgresos datos){
+            Boolean result = false;
+            try{
+                db.spModificarEgreso(datos.id_egresos, datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
+                result = true;
+            }catch (Exception){
+                result = false;
+            }
+            return result;
         }
+        //public List<mEgresos> mostrarById(int id)
+        //{
+        //    foreach (var item in db.spConsultarEgresoById(id))
+        //    {
+        //        ingr.Add(new mEgresos(item.id_egresos, item.valor, item.id_tipo_egreso, item.id_mes));
+        //    }
+        //    return egr;
+        //}
     }
 }

@@ -438,6 +438,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\scriptsAJAX\Ajax_egreso.js" />
+    <Content Include="Scripts\scriptsAJAX\Ajax_ingreso.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -456,8 +458,9 @@
     <Content Include="Views\Home\index.cshtml" />
     <Content Include="Views\mes\Index.cshtml" />
     <Content Include="Views\asociacion\Index.cshtml" />
-    <Content Include="Views\ingresos\Index.cshtml" />
+    <Content Include="Views\ingresos\index.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
+    <Content Include="Views\egresos\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -465,7 +468,6 @@
     <Folder Include="Views\cabeceraDescuento\" />
     <Folder Include="Views\credito\" />
     <Folder Include="Views\descuento\" />
-    <Folder Include="Views\egresos\" />
     <Folder Include="Views\empleadoAsociacion\" />
     <Folder Include="Views\proveedor\" />
     <Folder Include="Views\sobrante\" />

@@ -5,87 +5,78 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class egresosController : Controller
     {
         // GET: egresos
-        public ActionResult Index()
-        {
-            return View();
-        }
+        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        clsMes clsmes = new clsMes();
+        clsEgresos clsegreso = new clsEgresos();
+        clsTipoEgreso clstipoegresos = new clsTipoEgreso();
+        List<mEgresos> list_egreso = new List<mEgresos>();
+        //public ActionResult Index(){
+
+        //    ViewBag.tipoegresos = new SelectList(clstipoegresos.mostrar(), "id_tipo_egreso", "descripcion");
+        //    ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+        //    ViewBag.egresos = clsegreso.mostrar();
+
+        //    return View();
+        //}
 
         // GET: egresos/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        
+        public ActionResult Store(mEgresos model){
+
+            clsegreso.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: egresos/Create
-        public ActionResult Create()
-        {
-            return View();
+        public JsonResult UpdateEgresos(mEgresos model){
+            string result = "";
+            try {
+                if (clsegreso.modificar(model) == true){
+                    result = "Registro actualizado";
+                }
+                else{
+                    result = "Error al actualizar";
+                }
+            }
+            catch (Exception)
+            {
+                result = "Error al actualizar";
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
-
-        // POST: egresos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        //public JsonResult GetEgresoById(int EgresoId)
+        //{
+        //    List<mEgresos> model = clsegreso.mostrarById(EgresoId);
+        //    string value = string.Empty;
+        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+        //    {
+        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //    });
+        //    return Json(value, JsonRequestBehavior.AllowGet);
+        //}
+        public JsonResult DeleteEgreso(int EgresoId)
         {
-            try
+            string result = "";
+            Egresos egreso = db.Egresos.Find(EgresoId);
+            if (egreso != null)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                clsegreso.eliminar(EgresoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
 
-        // GET: egresos/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: egresos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: egresos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: egresos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

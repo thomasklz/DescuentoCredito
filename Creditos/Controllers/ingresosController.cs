@@ -17,7 +17,6 @@ namespace Creditos.Controllers
         clsMes clsmes = new clsMes();
         clsIngresos clsingreso = new clsIngresos();
         clsTipoIngreso clstipoingresos = new clsTipoIngreso();
-  
         List<mIngresos> list_ingreso = new List<mIngresos>();
         //public ActionResult Index(){
 
@@ -31,24 +30,20 @@ namespace Creditos.Controllers
         public ActionResult Store(mIngresos model) {
 
             clsingreso.ingresar(model);
-            return RedirectToAction("Index");
+            return RedirectToAction("index");
         }
 
-        public JsonResult UpdateIngresos(mIngresos model)
-        {
+        public JsonResult UpdateIngresos(mIngresos model){
             string result = "";
-            try
-            {
-                if (clsingreso.modificar(model) == true)
-                {
+            try{
+                if (clsingreso.modificar(model) == true){
                     result = "Registro actualizado";
                 }
                 else {
                     result = "Error al actualizar";
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception){
                 result = "Error al actualizar";
             }
 
