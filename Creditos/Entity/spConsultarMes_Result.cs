@@ -15,6 +15,5 @@ namespace Creditos.Entity
     {
         public int id_mes { get; set; }
         public string descripcion { get; set; }
-        public Nullable<bool> est_delete { get; set; }
     }
 }

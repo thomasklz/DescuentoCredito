@@ -14,9 +14,9 @@ namespace Creditos.Entity
     public partial class spConsultarSobrante_Result
     {
         public int id_sobrante { get; set; }
-        public Nullable<int> descuento_id { get; set; }
         public Nullable<double> valor { get; set; }
         public Nullable<bool> estado { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public Nullable<double> descuento { get; set; }
+        public int id_descuento { get; set; }
     }
 }

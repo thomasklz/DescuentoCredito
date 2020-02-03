@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="83278156bde946c6b1da70f5400eace9" Name="Diagram1">
+      <Diagram DiagramId="f79666cdfa4a4cbb84df8d871140c717" Name="Diagram1">
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion_Proveedor" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Cabecera_Descuento" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
@@ -33,7 +33,6 @@
         <EntityTypeShape EntityType="AdministracionAcademicaModel.TipoContrato" Width="1.5" PointX="1.5" PointY="56.125" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.tipoContratoCargo" Width="1.5" PointX="0.75" PointY="42.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.TipoRegimen" Width="1.5" PointX="1.5" PointY="37.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Banco" Width="1.5" PointX="3.75" PointY="5.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.CuentaBancaria" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Persona" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />

@@ -10,13 +10,13 @@ namespace Creditos.Clases{
         AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
         List<mEgresos> egr = new List<mEgresos>();
 
-        //public List<mEgresos> mostrar(){
-        //    foreach (var item in db.spConsultarEgreso())
-        //    {
-        //        ingr.Add(new mEgresos(item.id_egresos, item.valor, item.tipo_egreso, item.mes));
-        //    }
-        //    return egr;
-        //}
+        public List<mEgresos> mostrar(){
+            foreach (var item in db.spConsultarEgreso())
+            {
+                egr.Add(new mEgresos(item.id_egresos, Convert.ToDouble(item.valor), item.tipoegreso, item.mes));
+            }
+            return egr;
+        }
         public void ingresar(mEgresos datos){
             db.spInsertarEgreso(datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
         }
@@ -33,13 +33,11 @@ namespace Creditos.Clases{
             }
             return result;
         }
-        //public List<mEgresos> mostrarById(int id)
-        //{
-        //    foreach (var item in db.spConsultarEgresoById(id))
-        //    {
-        //        ingr.Add(new mEgresos(item.id_egresos, item.valor, item.id_tipo_egreso, item.id_mes));
-        //    }
-        //    return egr;
-        //}
+        public List<mEgresos> mostrarById(int id){
+            foreach (var item in db.spConsultarEgresoById(id)){
+                egr.Add(new mEgresos(item.id_egresos, Convert.ToDouble(item.valor), item.id_tipo_egreso, item.id_mes));
+            }
+            return egr;
+        }
     }
 }

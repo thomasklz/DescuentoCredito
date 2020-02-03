@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="AdministracionAcademicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="AdministracionAcademicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asociacion">
           <Key>
             <PropertyRef Name="id_asociacion" />
@@ -288,16 +288,6 @@
           <Property Name="TipoRegimenId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descripcion" Type="nvarchar" MaxLength="250" />
           <Property Name="Eliminado" Type="bit" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Banco">
           <Key>
@@ -855,20 +845,40 @@
         <Function Name="spConsultarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarAsociacionProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarCabeceraDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
-        <Function Name="spConsultarConvenios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+        <Function Name="spConsultarConveniosxAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="id_asociacion" Type="int" Mode="In" />
         </Function>
         <Function Name="spConsultarCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarCreditosActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarCreditosNoAprobados" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
+        <Function Name="spConsultarCreditoxCedulaActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="cedula" Type="nvarchar" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarCreditoxCedulaInactivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="cedula" Type="nvarchar" Mode="In" />
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
+        <Function Name="spConsultarDescuentoxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="id_Persona" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarEgresosxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="id_mes" Type="int" Mode="In" />
           <Parameter Name="id_asociacion" Type="int" Mode="In" />
         </Function>
         <Function Name="spConsultarEmpleadoAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
+        <Function Name="spConsultarEmpleadosxCreditosActivos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarEmpleadoxCreditoInactivo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="asociacion_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarIngreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
+        <Function Name="spConsultarIngresoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="idingreso" Type="int" Mode="In" />
+        </Function>
         <Function Name="spConsultarIngresosxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="id_mes" Type="int" Mode="In" />
           <Parameter Name="id_asociacion" Type="int" Mode="In" />
@@ -1092,6 +1102,39 @@
           <Parameter Name="mes_id" Type="int" Mode="In" />
           <Parameter Name="cantidad_usada" Type="float" Mode="In" />
         </Function>
+        <Function Name="spConsultarAsociacionProveedorById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idasoprov" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarCabeceraDescuentoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idcabeceradesc" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarCreditoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idcredito" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarDescuentoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="iddescuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarEgresoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idegreso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarEmpleadoAsociacionById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idemplaso" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarProveedorById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idproveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarSobranteById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsobrante" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarSubdescuentoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idsubdescuento" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarValorAsignadoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idvalorasignado" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spConsultarValorUtilizadoById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="idvalorusado" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="AdministracionAcademicaModelStoreContainer">
           <EntitySet Name="Asociacion" EntityType="Self.Asociacion" Schema="aso" store:Type="Tables" />
           <EntitySet Name="Asociacion_Proveedor" EntityType="Self.Asociacion_Proveedor" Schema="aso" store:Type="Tables" />
@@ -1121,7 +1164,6 @@
           <EntitySet Name="TipoContrato" EntityType="Self.TipoContrato" Schema="contrato" store:Type="Tables" />
           <EntitySet Name="tipoContratoCargo" EntityType="Self.tipoContratoCargo" Schema="contrato" store:Type="Tables" />
           <EntitySet Name="TipoRegimen" EntityType="Self.TipoRegimen" Schema="contrato" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Banco" EntityType="Self.Banco" Schema="talentoHumano" store:Type="Tables" />
           <EntitySet Name="CuentaBancaria" EntityType="Self.CuentaBancaria" Schema="talentoHumano" store:Type="Tables" />
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="talentoHumano" store:Type="Tables" />
@@ -1286,7 +1328,8 @@
             <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdministracionAcademicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1635,16 +1678,6 @@
           <Property Name="Eliminado" Type="Boolean" />
           <NavigationProperty Name="DenominacionRegimen" Relationship="Self.FK_DenominacionRegimen_TipoRegimen" FromRole="TipoRegimen" ToRole="DenominacionRegimen" />
           <NavigationProperty Name="NivelOcupacional" Relationship="Self.FK_NivelOcupacional_TipoRegimen" FromRole="TipoRegimen" ToRole="NivelOcupacional" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Banco">
           <Key>
@@ -2244,7 +2277,6 @@
           <EntitySet Name="TipoContrato" EntityType="Self.TipoContrato" />
           <EntitySet Name="tipoContratoCargo" EntityType="Self.tipoContratoCargo" />
           <EntitySet Name="TipoRegimen" EntityType="Self.TipoRegimen" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Banco" EntityType="Self.Banco" />
           <EntitySet Name="CuentaBancaria" EntityType="Self.CuentaBancaria" />
           <EntitySet Name="Persona" EntityType="Self.Persona" />
@@ -2411,21 +2443,40 @@
           <FunctionImport Name="spConsultarAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacion_Result)" />
           <FunctionImport Name="spConsultarAsociacionProveedor" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionProveedor_Result)" />
           <FunctionImport Name="spConsultarCabeceraDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCabeceraDescuento_Result)" />
-          <FunctionImport Name="spConsultarConvenios" ReturnType="Collection(AdministracionAcademicaModel.spConsultarConvenios_Result)">
-          <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          <FunctionImport Name="spConsultarConveniosxAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarConveniosxAsociacion_Result)">
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarCredito" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCredito_Result)" />
           <FunctionImport Name="spConsultarCreditosActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditosActivos_Result)" />
           <FunctionImport Name="spConsultarCreditosNoAprobados" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditosNoAprobados_Result)" />
+          <FunctionImport Name="spConsultarCreditoxCedulaActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditoxCedulaActivos_Result)">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarCreditoxCedulaInactivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditoxCedulaInactivos_Result)">
+            <Parameter Name="cedula" Mode="In" Type="String" />
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuento_Result)" />
+          <FunctionImport Name="spConsultarDescuentoxMes" ReturnType="Collection(Double)">
+            <Parameter Name="id_Persona" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarEgreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEgreso_Result)" />
           <FunctionImport Name="spConsultarEgresosxMes" ReturnType="Collection(Double)">
             <Parameter Name="id_mes" Mode="In" Type="Int32" />
             <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spConsultarEmpleadoAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoAsociacion_Result)">
+          <FunctionImport Name="spConsultarEmpleadoAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoAsociacion_Result)" />
+          <FunctionImport Name="spConsultarEmpleadosxCreditosActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadosxCreditosActivos_Result)">
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarEmpleadoxCreditoInactivo" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoxCreditoInactivo_Result)">
+            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarIngreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarIngreso_Result)" />
+          <FunctionImport Name="spConsultarIngresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarIngresoById_Result)">
+            <Parameter Name="idingreso" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarIngresosxMes" ReturnType="Collection(Double)">
             <Parameter Name="id_mes" Mode="In" Type="Int32" />
             <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
@@ -2439,55 +2490,55 @@
           <FunctionImport Name="spConsultarValorAsignado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorAsignado_Result)" />
           <FunctionImport Name="spConsultarValorUtilizado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorUtilizado_Result)" />
           <FunctionImport Name="spEliminarAsociacion">
-          <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarAsociacionProveedor">
-          <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
+            <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarCabeceraDescuento">
-          <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarCredito">
-          <Parameter Name="id_credito" Mode="In" Type="Int32" />
+            <Parameter Name="id_credito" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarDescuento">
-          <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarEgreso">
-          <Parameter Name="id_egresos" Mode="In" Type="Int32" />
+            <Parameter Name="id_egresos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarEmpleadoAsociacion">
-          <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
+            <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarIngreso">
-          <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
+            <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarMes">
-          <Parameter Name="id_mes" Mode="In" Type="Int32" />
+            <Parameter Name="id_mes" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarProveedor">
-          <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarSobrante">
-          <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
+            <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarSubDescuento">
-          <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
+            <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarTipoEgreso">
-          <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
+            <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarTipoIngreso">
-          <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
+            <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarValorAsignado">
-          <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
+            <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarValorUtilizado">
-          <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
+            <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacion">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacionProveedor">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
@@ -2534,7 +2585,7 @@
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spInsertarMes">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarProveedor">
             <Parameter Name="persona_juridica" Mode="In" Type="String" />
@@ -2551,13 +2602,13 @@
             <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarSubDescuento">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoEgreso">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoIngreso">
-          <Parameter Name="descripcion" Mode="In" Type="String" />
+            <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarValorAsignado">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
@@ -2649,6 +2700,39 @@
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
             <Parameter Name="cantidad_usada" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="spConsultarAsociacionProveedorById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionProveedorById_Result)">
+            <Parameter Name="idasoprov" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarCabeceraDescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCabeceraDescuentoById_Result)">
+            <Parameter Name="idcabeceradesc" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarCreditoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditoById_Result)">
+            <Parameter Name="idcredito" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarDescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuentoById_Result)">
+            <Parameter Name="iddescuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarEgresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEgresoById_Result)">
+            <Parameter Name="idegreso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarEmpleadoAsociacionById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoAsociacionById_Result)">
+            <Parameter Name="idemplaso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarProveedorById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarProveedorById_Result)">
+            <Parameter Name="idproveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarSobranteById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSobranteById_Result)">
+            <Parameter Name="idsobrante" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarSubdescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSubdescuentoById_Result)">
+            <Parameter Name="idsubdescuento" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarValorAsignadoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorAsignadoById_Result)">
+            <Parameter Name="idvalorasignado" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spConsultarValorUtilizadoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorUtilizadoById_Result)">
+            <Parameter Name="idvalorusado" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spConsultarAsociacion_Result">
           <Property Type="Int32" Name="id_asociacion" Nullable="false" />
@@ -2657,18 +2741,17 @@
         </ComplexType>
         <ComplexType Name="spConsultarAsociacionProveedor_Result">
           <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
-          <Property Type="Int32" Name="proveedor_id" Nullable="true" />
-          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
           <Property Type="DateTime" Name="fecha" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarCabeceraDescuento_Result">
           <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
-          <Property Type="Int32" Name="subdescuento_id" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="subdescuento" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_subdescuento" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="spConsultarConvenios_Result">
+        <ComplexType Name="spConsultarConveniosxAsociacion_Result">
           <Property Type="Int32" Name="id_proveedor" Nullable="false" />
           <Property Type="String" Name="persona_juridica" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="RUC" Nullable="true" MaxLength="13" />
@@ -2686,11 +2769,11 @@
           <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
           <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
           <Property Type="Double" Name="desc_mensual" Nullable="true" />
-          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
           <Property Type="Int32" Name="numero_cuota" Nullable="true" />
           <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
           <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="DateTime" Name="empl_aso" Nullable="true" />
+          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarCreditosActivos_Result">
           <Property Type="Int32" Name="id_credito" Nullable="false" />
@@ -2718,42 +2801,130 @@
           <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
           <Property Type="Boolean" Name="est_delete" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="spConsultarCreditoxCedulaActivos_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCreditoxCedulaInactivos_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="emp_aso_id" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+        </ComplexType>
         <ComplexType Name="spConsultarDescuento_Result">
           <Property Type="Int32" Name="id_descuento" Nullable="false" />
           <Property Type="Double" Name="valor" Nullable="true" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="true" />
-          <Property Type="Int32" Name="cab_desc_id" Nullable="true" />
-          <Property Type="Int32" Name="mes_id" Nullable="true" />
           <Property Type="DateTime" Name="fecha" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="cabecera" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarEgreso_Result">
           <Property Type="Int32" Name="id_egresos" Nullable="false" />
           <Property Type="Double" Name="valor" Nullable="true" />
-          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
-          <Property Type="Int32" Name="tipo_egreso_id" Nullable="true" />
-          <Property Type="Int32" Name="mes_id" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="tipoegreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_egreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarEmpleadoAsociacion_Result">
           <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="true" />
-          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
           <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEmpleadosxCreditosActivos_Result">
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="CalleSecundaria" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ReferenciaD" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TelefonoD" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TelefonoC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ParroquiaNac" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNac" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+          <Property Type="Int32" Name="etniaId" Nullable="true" />
+          <Property Type="Int32" Name="CantonId" Nullable="false" />
+          <Property Type="Int32" Name="TipoSangreID" Nullable="true" />
+          <Property Type="Int32" Name="EstadoCivilID" Nullable="true" />
+          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="tipoDocumentoId" Nullable="true" />
+          <Property Type="Int32" Name="sexoId" Nullable="true" />
+          <Property Type="Int32" Name="paisNacionalidadId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEmpleadoxCreditoInactivo_Result">
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="CalleSecundaria" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ReferenciaD" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TelefonoD" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TelefonoC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ParroquiaNac" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNac" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Eliminado" Nullable="false" />
+          <Property Type="Int32" Name="etniaId" Nullable="true" />
+          <Property Type="Int32" Name="CantonId" Nullable="false" />
+          <Property Type="Int32" Name="TipoSangreID" Nullable="true" />
+          <Property Type="Int32" Name="EstadoCivilID" Nullable="true" />
+          <Property Type="String" Name="EmailInstitucional" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="tipoDocumentoId" Nullable="true" />
+          <Property Type="Int32" Name="sexoId" Nullable="true" />
+          <Property Type="Int32" Name="paisNacionalidadId" Nullable="true" />
         </ComplexType>
         <ComplexType Name="spConsultarIngreso_Result">
           <Property Type="Int32" Name="id_ingresos" Nullable="false" />
           <Property Type="Double" Name="valor" Nullable="false" />
-          <Property Type="Int32" Name="asociacion_id" Nullable="true" />
-          <Property Type="Int32" Name="tipo_ingreso_id" Nullable="true" />
-          <Property Type="Int32" Name="mes_id" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="tipoingreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarIngresoById_Result">
+          <Property Type="Int32" Name="id_ingresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="false" />
+          <Property Type="String" Name="tipoingreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarMes_Result">
           <Property Type="Int32" Name="id_mes" Nullable="false" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="15" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
         </ComplexType>
         <ComplexType Name="spConsultarProveedor_Result">
           <Property Type="Int32" Name="id_proveedor" Nullable="false" />
@@ -2768,10 +2939,10 @@
         </ComplexType>
         <ComplexType Name="spConsultarSobrante_Result">
           <Property Type="Int32" Name="id_sobrante" Nullable="false" />
-          <Property Type="Int32" Name="descuento_id" Nullable="true" />
           <Property Type="Double" Name="valor" Nullable="true" />
           <Property Type="Boolean" Name="estado" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="Double" Name="descuento" Nullable="true" />
+          <Property Type="Int32" Name="id_descuento" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarSubDescuento_Result">
           <Property Type="Int32" Name="id_subdescuento" Nullable="false" />
@@ -2786,22 +2957,111 @@
         <ComplexType Name="spConsultarTipoIngreso_Result">
           <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
         </ComplexType>
         <ComplexType Name="spConsultarValorAsignado_Result">
           <Property Type="Int32" Name="id_valor_asig" Nullable="false" />
-          <Property Type="Int32" Name="proveedor_id" Nullable="true" />
-          <Property Type="Int32" Name="aso_id" Nullable="true" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="true" />
           <Property Type="Double" Name="monto_aprobado" Nullable="true" />
-          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarValorUtilizado_Result">
           <Property Type="Int32" Name="id_valor_usad" Nullable="false" />
-          <Property Type="Int32" Name="valor_asig_id" Nullable="true" />
-          <Property Type="Int32" Name="mes_id" Nullable="true" />
           <Property Type="Double" Name="cantidad_usada" Nullable="true" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Double" Name="m_aprobado" Nullable="true" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+          <Property Type="Int32" Name="id_valor_asig" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarAsociacionProveedorById_Result">
+          <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCabeceraDescuentoById_Result">
+          <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="subdescuento" Nullable="true" MaxLength="20" />
+          <Property Type="Int32" Name="id_subdescuento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarCreditoById_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="DateTime" Name="empl_aso" Nullable="true" />
+          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarDescuentoById_Result">
+          <Property Type="Int32" Name="id_descuento" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="cabecera" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEgresoById_Result">
+          <Property Type="Int32" Name="id_egresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="String" Name="tipoegreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_egreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarEmpleadoAsociacionById_Result">
+          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarProveedorById_Result">
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="String" Name="persona_juridica" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="RUC" Nullable="true" MaxLength="13" />
+          <Property Type="String" Name="nombre" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="email" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="direccion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="telefono" Nullable="true" MaxLength="10" />
           <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarSobranteById_Result">
+          <Property Type="Int32" Name="id_sobrante" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="Boolean" Name="estado" Nullable="true" />
+          <Property Type="Double" Name="descuento" Nullable="true" />
+          <Property Type="Int32" Name="id_descuento" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarSubdescuentoById_Result">
+          <Property Type="Int32" Name="id_subdescuento" Nullable="false" />
+          <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
+          <Property Type="Boolean" Name="est_delete" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spConsultarValorAsignadoById_Result">
+          <Property Type="Int32" Name="id_valor_asig" Nullable="false" />
+          <Property Type="Double" Name="monto_aprobado" Nullable="true" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarValorUtilizadoById_Result">
+          <Property Type="Int32" Name="id_valor_usad" Nullable="false" />
+          <Property Type="Double" Name="cantidad_usada" Nullable="true" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Double" Name="m_aprobado" Nullable="true" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+          <Property Type="Int32" Name="id_valor_asig" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3121,17 +3381,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="AdministracionAcademicaModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Banco">
             <EntityTypeMapping TypeName="AdministracionAcademicaModel.Banco">
               <MappingFragment StoreEntitySet="Banco">
@@ -3237,10 +3486,9 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarAsociacionProveedor_Result">
                 <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
-                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
-                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3249,14 +3497,14 @@
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarCabeceraDescuento_Result">
                 <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="subdescuento_id" ColumnName="subdescuento_id" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="subdescuento" ColumnName="subdescuento" />
+                <ScalarProperty Name="id_subdescuento" ColumnName="id_subdescuento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spConsultarConvenios" FunctionName="AdministracionAcademicaModel.Store.spConsultarConvenios">
+          <FunctionImportMapping FunctionImportName="spConsultarConveniosxAsociacion" FunctionName="AdministracionAcademicaModel.Store.spConsultarConveniosxAsociacion">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarConvenios_Result">
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarConveniosxAsociacion_Result">
                 <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
                 <ScalarProperty Name="persona_juridica" ColumnName="persona_juridica" />
                 <ScalarProperty Name="RUC" ColumnName="RUC" />
@@ -3278,11 +3526,11 @@
                 <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
                 <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
                 <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
-                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
                 <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
                 <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
                 <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="empl_aso" ColumnName="empl_aso" />
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3320,28 +3568,67 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCreditoxCedulaActivos" FunctionName="AdministracionAcademicaModel.Store.spConsultarCreditoxCedulaActivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarCreditoxCedulaActivos_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCreditoxCedulaInactivos" FunctionName="AdministracionAcademicaModel.Store.spConsultarCreditoxCedulaInactivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarCreditoxCedulaInactivos_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="emp_aso_id" ColumnName="emp_aso_id" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spConsultarDescuento" FunctionName="AdministracionAcademicaModel.Store.spConsultarDescuento">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarDescuento_Result">
                 <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-                <ScalarProperty Name="cab_desc_id" ColumnName="cab_desc_id" />
-                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
                 <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="cabecera" ColumnName="cabecera" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarDescuentoxMes" FunctionName="AdministracionAcademicaModel.Store.spConsultarDescuentoxMes" />
           <FunctionImportMapping FunctionImportName="spConsultarEgreso" FunctionName="AdministracionAcademicaModel.Store.spConsultarEgreso">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEgreso_Result">
                 <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
-                <ScalarProperty Name="tipo_egreso_id" ColumnName="tipo_egreso_id" />
-                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="tipoegreso" ColumnName="tipoegreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3350,10 +3637,69 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEmpleadoAsociacion_Result">
                 <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
                 <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEmpleadosxCreditosActivos" FunctionName="AdministracionAcademicaModel.Store.spConsultarEmpleadosxCreditosActivos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEmpleadosxCreditosActivos_Result">
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
+                <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+                <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+                <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+                <ScalarProperty Name="etniaId" ColumnName="etniaId" />
+                <ScalarProperty Name="CantonId" ColumnName="CantonId" />
+                <ScalarProperty Name="TipoSangreID" ColumnName="TipoSangreID" />
+                <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
+                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+                <ScalarProperty Name="tipoDocumentoId" ColumnName="tipoDocumentoId" />
+                <ScalarProperty Name="sexoId" ColumnName="sexoId" />
+                <ScalarProperty Name="paisNacionalidadId" ColumnName="paisNacionalidadId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEmpleadoxCreditoInactivo" FunctionName="AdministracionAcademicaModel.Store.spConsultarEmpleadoxCreditoInactivo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEmpleadoxCreditoInactivo_Result">
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
+                <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+                <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+                <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Eliminado" ColumnName="Eliminado" />
+                <ScalarProperty Name="etniaId" ColumnName="etniaId" />
+                <ScalarProperty Name="CantonId" ColumnName="CantonId" />
+                <ScalarProperty Name="TipoSangreID" ColumnName="TipoSangreID" />
+                <ScalarProperty Name="EstadoCivilID" ColumnName="EstadoCivilID" />
+                <ScalarProperty Name="EmailInstitucional" ColumnName="EmailInstitucional" />
+                <ScalarProperty Name="tipoDocumentoId" ColumnName="tipoDocumentoId" />
+                <ScalarProperty Name="sexoId" ColumnName="sexoId" />
+                <ScalarProperty Name="paisNacionalidadId" ColumnName="paisNacionalidadId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3362,10 +3708,22 @@
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarIngreso_Result">
                 <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
-                <ScalarProperty Name="tipo_ingreso_id" ColumnName="tipo_ingreso_id" />
-                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="tipoingreso" ColumnName="tipoingreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarIngresoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarIngresoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarIngresoById_Result">
+                <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tipoingreso" ColumnName="tipoingreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3375,7 +3733,6 @@
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarMes_Result">
                 <ScalarProperty Name="id_mes" ColumnName="id_mes" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3398,10 +3755,10 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarSobrante_Result">
                 <ScalarProperty Name="id_sobrante" ColumnName="id_sobrante" />
-                <ScalarProperty Name="descuento_id" ColumnName="descuento_id" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3428,7 +3785,6 @@
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarTipoIngreso_Result">
                 <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
                 <ScalarProperty Name="descripcion" ColumnName="descripcion" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3436,11 +3792,11 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarValorAsignado_Result">
                 <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
-                <ScalarProperty Name="proveedor_id" ColumnName="proveedor_id" />
-                <ScalarProperty Name="aso_id" ColumnName="aso_id" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
                 <ScalarProperty Name="monto_aprobado" ColumnName="monto_aprobado" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3448,10 +3804,11 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarValorUtilizado_Result">
                 <ScalarProperty Name="id_valor_usad" ColumnName="id_valor_usad" />
-                <ScalarProperty Name="valor_asig_id" ColumnName="valor_asig_id" />
-                <ScalarProperty Name="mes_id" ColumnName="mes_id" />
                 <ScalarProperty Name="cantidad_usada" ColumnName="cantidad_usada" />
-                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="m_aprobado" ColumnName="m_aprobado" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+                <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3500,6 +3857,139 @@
           <FunctionImportMapping FunctionImportName="spModificarTipoEgreso" FunctionName="AdministracionAcademicaModel.Store.spModificarTipoEgreso" />
           <FunctionImportMapping FunctionImportName="spModificarTipoIngreso" FunctionName="AdministracionAcademicaModel.Store.spModificarTipoIngreso" />
           <FunctionImportMapping FunctionImportName="spModificarValorUtilizado" FunctionName="AdministracionAcademicaModel.Store.spModificarValorUtilizado" />
+          <FunctionImportMapping FunctionImportName="spConsultarAsociacionProveedorById" FunctionName="AdministracionAcademicaModel.Store.spConsultarAsociacionProveedorById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarAsociacionProveedorById_Result">
+                <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCabeceraDescuentoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarCabeceraDescuentoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarCabeceraDescuentoById_Result">
+                <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="subdescuento" ColumnName="subdescuento" />
+                <ScalarProperty Name="id_subdescuento" ColumnName="id_subdescuento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarCreditoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarCreditoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarCreditoById_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="empl_aso" ColumnName="empl_aso" />
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarDescuentoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarDescuentoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarDescuentoById_Result">
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="cabecera" ColumnName="cabecera" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="id_cabecera_descuento" ColumnName="id_cabecera_descuento" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEgresoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarEgresoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEgresoById_Result">
+                <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tipoegreso" ColumnName="tipoegreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarEmpleadoAsociacionById" FunctionName="AdministracionAcademicaModel.Store.spConsultarEmpleadoAsociacionById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEmpleadoAsociacionById_Result">
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarProveedorById" FunctionName="AdministracionAcademicaModel.Store.spConsultarProveedorById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarProveedorById_Result">
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="persona_juridica" ColumnName="persona_juridica" />
+                <ScalarProperty Name="RUC" ColumnName="RUC" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+                <ScalarProperty Name="telefono" ColumnName="telefono" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarSobranteById" FunctionName="AdministracionAcademicaModel.Store.spConsultarSobranteById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarSobranteById_Result">
+                <ScalarProperty Name="id_sobrante" ColumnName="id_sobrante" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="descuento" ColumnName="descuento" />
+                <ScalarProperty Name="id_descuento" ColumnName="id_descuento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarSubdescuentoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarSubdescuentoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarSubdescuentoById_Result">
+                <ScalarProperty Name="id_subdescuento" ColumnName="id_subdescuento" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="est_delete" ColumnName="est_delete" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarValorAsignadoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarValorAsignadoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarValorAsignadoById_Result">
+                <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
+                <ScalarProperty Name="monto_aprobado" ColumnName="monto_aprobado" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="id_proveedor" ColumnName="id_proveedor" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spConsultarValorUtilizadoById" FunctionName="AdministracionAcademicaModel.Store.spConsultarValorUtilizadoById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarValorUtilizadoById_Result">
+                <ScalarProperty Name="id_valor_usad" ColumnName="id_valor_usad" />
+                <ScalarProperty Name="cantidad_usada" ColumnName="cantidad_usada" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="m_aprobado" ColumnName="m_aprobado" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+                <ScalarProperty Name="id_valor_asig" ColumnName="id_valor_asig" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

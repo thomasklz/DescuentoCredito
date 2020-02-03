@@ -11,7 +11,7 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarDescuento_Result
+    public partial class spConsultarDescuentoById_Result
     {
         public int id_descuento { get; set; }
         public Nullable<double> valor { get; set; }

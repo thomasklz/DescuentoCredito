@@ -11,7 +11,7 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarConvenios_Result
+    public partial class spConsultarProveedorById_Result
     {
         public int id_proveedor { get; set; }
         public string persona_juridica { get; set; }

@@ -15,9 +15,9 @@ namespace Creditos.Entity
     {
         public int id_egresos { get; set; }
         public Nullable<double> valor { get; set; }
-        public Nullable<int> asociacion_id { get; set; }
-        public Nullable<int> tipo_egreso_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string tipoegreso { get; set; }
+        public string mes { get; set; }
+        public int id_tipo_egreso { get; set; }
+        public int id_mes { get; set; }
     }
 }

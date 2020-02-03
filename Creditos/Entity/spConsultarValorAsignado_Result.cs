@@ -14,10 +14,10 @@ namespace Creditos.Entity
     public partial class spConsultarValorAsignado_Result
     {
         public int id_valor_asig { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> aso_id { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
         public Nullable<double> monto_aprobado { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string proveedor { get; set; }
+        public string persona { get; set; }
+        public int id_proveedor { get; set; }
+        public int Id_Persona { get; set; }
     }
 }

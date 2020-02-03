@@ -18,14 +18,13 @@ namespace Creditos.Controllers
         clsIngresos clsingreso = new clsIngresos();
         clsTipoIngreso clstipoingresos = new clsTipoIngreso();
         List<mIngresos> list_ingreso = new List<mIngresos>();
-        //public ActionResult Index(){
+        public ActionResult Index(){
 
-        //    ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
-        //    ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
-        //    ViewBag.ingresos = clsingreso.mostrar();
-          
-        //    return View();
-        //}
+            ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            ViewBag.ingresos = clsingreso.mostrar();
+            return View();
+        }
 
         public ActionResult Store(mIngresos model) {
 
@@ -51,16 +50,14 @@ namespace Creditos.Controllers
         }
 
 
-        //public JsonResult GetIngresoById(int IngresoId)
-        //{
-        //    List<mIngresos> model = clsingreso.mostrarById(IngresoId);
-        //    string value = string.Empty;
-        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
-        //    {
-        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        //    });
-        //    return Json(value, JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult GetIngresoById(int IngresoId){
+            List<mIngresos> model = clsingreso.mostrarById(IngresoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings{
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
 
 
         public JsonResult DeleteIngreso(int IngresoId)

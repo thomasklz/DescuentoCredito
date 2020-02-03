@@ -14,9 +14,8 @@ namespace Creditos.Entity
     public partial class spConsultarAsociacionProveedor_Result
     {
         public int id_asoc_prov { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> asociacion_id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string proveedor { get; set; }
+        public int id_proveedor { get; set; }
     }
 }

@@ -11,16 +11,13 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarDescuento_Result
+    public partial class spConsultarEgresoById_Result
     {
-        public int id_descuento { get; set; }
+        public int id_egresos { get; set; }
         public Nullable<double> valor { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public string persona { get; set; }
-        public string cabecera { get; set; }
+        public string tipoegreso { get; set; }
         public string mes { get; set; }
-        public int Id_Persona { get; set; }
-        public int id_cabecera_descuento { get; set; }
+        public int id_tipo_egreso { get; set; }
         public int id_mes { get; set; }
     }
 }

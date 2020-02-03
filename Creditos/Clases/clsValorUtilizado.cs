@@ -8,13 +8,13 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsValorUtilizado{
         AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
-        public List<mValorUtilizado> mostrar(){
-            List<mValorUtilizado> lista_valor_usado = new List<mValorUtilizado>();
-            foreach (var item in db.spConsultarValorUtilizado()){
-                lista_valor_usado.Add(new mValorUtilizado(item.id_valor_usad, Convert.ToInt32(item.valor_asig_id), Convert.ToInt32(item.mes_id), Convert.ToDouble(item.cantidad_usada)));
-            }
-            return lista_valor_usado;
-        }
+        //public List<mValorUtilizado> mostrar(){
+        //    List<mValorUtilizado> lista_valor_usado = new List<mValorUtilizado>();
+        //    foreach (var item in db.spConsultarValorUtilizado()){
+        //        lista_valor_usado.Add(new mValorUtilizado(item.id_valor_usad, Convert.ToInt32(item.valor_asig_id), Convert.ToInt32(item.mes_id), Convert.ToDouble(item.cantidad_usada)));
+        //    }
+        //    return lista_valor_usado;
+        //}
         public void ingresar(mValorUtilizado datos){
             db.spInsertarValorUtilizado(datos.valor_asig_id, datos.mes_id, datos.cantidad_usada);
         }

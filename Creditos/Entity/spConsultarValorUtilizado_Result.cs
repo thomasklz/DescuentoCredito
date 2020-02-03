@@ -14,9 +14,10 @@ namespace Creditos.Entity
     public partial class spConsultarValorUtilizado_Result
     {
         public int id_valor_usad { get; set; }
-        public Nullable<int> valor_asig_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
         public Nullable<double> cantidad_usada { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string mes { get; set; }
+        public Nullable<double> m_aprobado { get; set; }
+        public int id_mes { get; set; }
+        public int id_valor_asig { get; set; }
     }
 }

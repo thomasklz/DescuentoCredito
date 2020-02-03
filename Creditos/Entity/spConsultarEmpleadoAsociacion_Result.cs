@@ -14,9 +14,8 @@ namespace Creditos.Entity
     public partial class spConsultarEmpleadoAsociacion_Result
     {
         public int id_empl_aso { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
-        public Nullable<int> asociacion_id { get; set; }
         public Nullable<System.DateTime> fecha_ingreso { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string persona { get; set; }
+        public int Id_Persona { get; set; }
     }
 }
