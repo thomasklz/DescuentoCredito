@@ -16,7 +16,7 @@ namespace Creditos.Models
         public string telefono { get; set; }
 
         public mProveedor() { }
-        public mProveedor(int id_proveedor, String persona_juridica, String RUC, String nombre, String descripcion, String email, String direccion, String telefono)
+        public mProveedor(int id_proveedor, String persona_juridica, string RUC, string nombre, string descripcion, string email, string direccion, string telefono)
         {
             this.id_proveedor = id_proveedor;
             this.persona_juridica = persona_juridica;

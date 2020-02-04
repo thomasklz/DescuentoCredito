@@ -5,87 +5,79 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class proveedorController : Controller
     {
         // GET: proveedor
+        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        clsProveedor clsproveedor = new clsProveedor();
+        List<mProveedor> list_proveedor = new List<mProveedor>();
         public ActionResult Index()
         {
+            ViewBag.proveedores = clsproveedor.mostrar();
             return View();
         }
 
-        // GET: proveedor/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Store(mProveedor model)
         {
-            return View();
+            clsproveedor.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: proveedor/Create
-        public ActionResult Create()
+        public JsonResult UpdateProveedor (mProveedor model)
         {
-            return View();
-        }
-
-        // POST: proveedor/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (clsproveedor.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else
+                {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: proveedor/Edit/5
-        public ActionResult Edit(int id)
+
+        public JsonResult GetProveedorById(int ProveedorId)
         {
-            return View();
+            List<mProveedor> model = clsproveedor.mostrarById(ProveedorId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: proveedor/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+
+        public JsonResult DeleteProveedor (int ProveedorId)
         {
-            try
+            string result = "";
+            Proveedor proveedor = db.Proveedor.Find(ProveedorId);
+            if (proveedor != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                clsproveedor.eliminar(ProveedorId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
 
-        // GET: proveedor/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: proveedor/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
