@@ -1057,5 +1057,30 @@ namespace Creditos.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarValorUtilizadoById_Result>("spConsultarValorUtilizadoById", idvalorusadoParameter);
         }
+    
+        public virtual int spModificarValorAsignado(Nullable<int> id_valor_asig, Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> persona_id, Nullable<double> monto_aprobado)
+        {
+            var id_valor_asigParameter = id_valor_asig.HasValue ?
+                new ObjectParameter("id_valor_asig", id_valor_asig) :
+                new ObjectParameter("id_valor_asig", typeof(int));
+    
+            var proveedor_idParameter = proveedor_id.HasValue ?
+                new ObjectParameter("proveedor_id", proveedor_id) :
+                new ObjectParameter("proveedor_id", typeof(int));
+    
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            var persona_idParameter = persona_id.HasValue ?
+                new ObjectParameter("persona_id", persona_id) :
+                new ObjectParameter("persona_id", typeof(int));
+    
+            var monto_aprobadoParameter = monto_aprobado.HasValue ?
+                new ObjectParameter("monto_aprobado", monto_aprobado) :
+                new ObjectParameter("monto_aprobado", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
+        }
     }
 }

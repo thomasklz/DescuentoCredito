@@ -5,87 +5,83 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
-namespace Creditos.Controllers
-{
-    public class valorAsignadoController : Controller
-    {
-        // GET: valorAsignado
-        public ActionResult Index()
+namespace Creditos.Controllers{
+    public class valorAsignadoController : Controller{
+        // GET: ingresos
+        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        clsProveedor clsmes = new clsProveedor();
+        clsIngresos clsingreso = new clsIngresos();
+        clsTipoIngreso clstipoingresos = new clsTipoIngreso();
+        List<mIngresos> list_ingreso = new List<mIngresos>();
+        //public ActionResult Index()
+        //{
+
+        //    ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
+        //    ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+        //    ViewBag.ingresos = clsingreso.mostrar();
+        //    return View();
+        //}
+
+        public ActionResult Store(mIngresos model)
         {
-            return View();
+
+            clsingreso.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: valorAsignado/Details/5
-        public ActionResult Details(int id)
+        public JsonResult UpdateIngresos(mIngresos model)
         {
-            return View();
-        }
-
-        // GET: valorAsignado/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: valorAsignado/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (clsingreso.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else
+                {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: valorAsignado/Edit/5
-        public ActionResult Edit(int id)
+
+        public JsonResult GetIngresoById(int IngresoId)
         {
-            return View();
+            List<mIngresos> model = clsingreso.mostrarById(IngresoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: valorAsignado/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+
+        public JsonResult DeleteIngreso(int IngresoId)
         {
-            try
+            string result = "";
+            Ingresos ingreso = db.Ingresos.Find(IngresoId);
+            if (ingreso != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                clsingreso.eliminar(IngresoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
 
-        // GET: valorAsignado/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: valorAsignado/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

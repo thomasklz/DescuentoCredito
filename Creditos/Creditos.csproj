@@ -506,11 +506,11 @@
     <Content Include="Views\ingresos\index.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\egresos\index.cshtml" />
+    <Content Include="Views\cabeceraDescuento\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\asociacionProveedor\" />
-    <Folder Include="Views\cabeceraDescuento\" />
     <Folder Include="Views\credito\" />
     <Folder Include="Views\descuento\" />
     <Folder Include="Views\empleadoAsociacion\" />

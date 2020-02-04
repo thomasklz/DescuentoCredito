@@ -1,0 +1,157 @@
+﻿
+@model Creditos.Models.mCabeceraDescuento
+
+@{
+    List<Creditos.Models.mCabeceraDescuento> listCabDesc = ViewBag.cab_desc;
+}
+<h1>Cabecera del Subdescuento</h1>
+@using (Html.BeginForm("Store", "cabeceraDescuento", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Descripcion</label>
+        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+    </div> 
+            @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+            <div>
+                <label>Tipo de Descuento </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.descuentos as SelectList, "--Tipo de Subdescuento--", new { @id = "subdescuento_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+}
+<table class="table-hover">
+    <tr>
+        <th>Item</th>
+        <th>Descripci&oacute;n</th>
+        <th>Tipo de Descuento</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var item in listCabDesc)
+    {
+        <tr class='row_@item.id_cabecera_descuento'>
+            <td>@item.id_cabecera_descuento</td>
+            <td>@item.descripcion</td>
+            <td>@item.subdescuento</td>
+            <td>
+                <a href='#' class='btn btn-danger' onclick='DeleteCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-trash'></span></a>
+                <a href='#' class='btn btn-info' data-id="@item.id_cabecera_descuento" onclick='EditCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Modificar Cabecera de Descuentos</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_cabecera_descuento, new { @id = "id_cabecera_descuentos" })
+                        <div class="form-group">
+                            <label>Descripci&oacute;n</label>
+                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                        </div>
+                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+                        <div class="form-group">
+                            <label>Tipo de Descuento</label>
+                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.descuentos as SelectList, "--Select Subdescuento--", new { @id = "subdescuento_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateCabDesc()">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var row;
+    function UpdateCabDesc(CabDesc) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/cabeceraDescuento/UpdateCabDesc",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#descripcion').val());
+                    row.find("td").eq(2).html($('select[id="subdescuento_id"] option:selected').text());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizar',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/cabeceraDescuento/GetCabDescById?CabDescId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_cabecera_descuento").val(obj[0].id_cabecera_descuento);
+                    $("#descripcion").val(obj[0].descripcion);
+                    $("#subdescuento_id option[value='" + obj[0].subdescuento_id + "']").attr("selected", true);
+                }
+            })
+        })
+    })
+    function DeleteCabDesc(CabDesc) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/cabeceraDescuento/DeleteCabDesc?CabDescId=" + CabDesc,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + CabDesc).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+

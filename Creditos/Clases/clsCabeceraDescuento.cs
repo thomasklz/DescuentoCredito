@@ -8,21 +8,35 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsCabeceraDescuento{
         AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
-        //public List<mCabeceraDescuento> mostrar(){
-        //    List<mCabeceraDescuento> lista_cabecera_descuento = new List<mCabeceraDescuento>();
-        //    foreach (var item in db.spConsultarCabeceraDescuento()){
-        //        lista_cabecera_descuento.Add(new mCabeceraDescuento(item.id_cabecera_descuento, item.descripcion, Convert.ToInt32(item.subdescuento_id)));
-        //    }
-        //    return lista_cabecera_descuento;
-        //}
+        List<mCabeceraDescuento> lista_cabecera_descuento = new List<mCabeceraDescuento>();
+        public List<mCabeceraDescuento> mostrar(){
+            foreach (var item in db.spConsultarCabeceraDescuento()){
+                lista_cabecera_descuento.Add(new mCabeceraDescuento(item.id_cabecera_descuento, item.descripcion, item.subdescuento));
+            }
+            return lista_cabecera_descuento;
+        }
         public void ingresar(mCabeceraDescuento datos){
             db.spInsertarCabeceraDescuento(datos.descripcion, datos.subdescuento_id);
         }
-        public void eliminar(mCabeceraDescuento datos){
-            db.spEliminarCabeceraDescuento(datos.id_cabecera_descuento);
+        public void eliminar(int id){
+            db.spEliminarCabeceraDescuento(id);
         }
-        public void modificar(mCabeceraDescuento datos){
-            db.spModificarCabeceraDescuento(datos.id_cabecera_descuento, datos.descripcion, datos.subdescuento_id);
+        public Boolean modificar(mCabeceraDescuento datos){
+            Boolean result = false;
+            try{
+                db.spModificarCabeceraDescuento(datos.id_cabecera_descuento, datos.descripcion, datos.subdescuento_id);
+                result = true;
+            }
+            catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mCabeceraDescuento> mostrarById(int id){
+            foreach (var item in db.spConsultarCabeceraDescuentoById(id)){
+                lista_cabecera_descuento.Add(new mCabeceraDescuento(item.id_cabecera_descuento, item.descripcion, item.id_subdescuento));
+            }
+            return lista_cabecera_descuento;
         }
     }
 }
