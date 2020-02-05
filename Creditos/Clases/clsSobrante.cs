@@ -7,22 +7,37 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsSobrante{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
-        //public List<mSobrante> mostrar(){
-        //    List<mSobrante> lista_sobrantes = new List<mSobrante>();
-        //    foreach (var item in db.spConsultarSobrante()){
-        //        lista_sobrantes.Add(new mSobrante(item.id_sobrante, Convert.ToInt32(item.descuento_id), Convert.ToDouble(item.valor), Convert.ToBoolean(item.estado)));
-        //    }
-        //    return lista_sobrantes;
-        //}
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        List<mSobrante> lista_sobrantes = new List<mSobrante>();
+
+        public List<mSobrante> mostrar(){
+            foreach (var item in db.spConsultarSobrante()){
+                lista_sobrantes.Add(new mSobrante(item.id_sobrante, Convert.ToDouble(item.valor), item.descuento, Convert.ToBoolean(item.estado)));
+            }
+            return lista_sobrantes;
+        }
         public void ingresar(mSobrante datos){
             db.spInsertarSobrante(datos.descuento_id, datos.valor, datos.estado);
         }
-        public void eliminar(mSobrante datos){
-            db.spEliminarSobrante(datos.id_sobrante);
+        public void eliminar(int id){
+            db.spEliminarSobrante(id);
         }
-        public void modificar(mSobrante datos){
-            db.spModificarSobrante(datos.id_sobrante, datos.descuento_id, datos.valor, datos.estado);
+        public Boolean modificar(mSobrante datos){
+            Boolean result = false;
+            try{
+                db.spModificarSobrante(datos.id_sobrante, datos.descuento_id, datos.valor, datos.estado);
+                result = true;
+            }
+            catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mSobrante> mostrarById(int id){
+            foreach (var item in db.spConsultarSobranteById(id)){
+                lista_sobrantes.Add(new mSobrante(item.id_sobrante, Convert.ToDouble(item.valor), item.id_descuento, Convert.ToBoolean(item.estado)));
+            }
+            return lista_sobrantes;
         }
     }
 }

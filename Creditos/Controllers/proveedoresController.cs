@@ -8,49 +8,40 @@ using Creditos.Models;
 using Creditos.Entity;
 using Newtonsoft.Json;
 
-namespace Creditos.Controllers
-{
-    public class cabeceraDescuentoController : Controller
-    {
-        // GET: cabeceraDescuento
+namespace Creditos.Controllers{
+    public class proveedoresController : Controller{
+        // GET: proveedores
         BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
-        clsSubDescuento clsdesc = new clsSubDescuento();
-        clsCabeceraDescuento clscabdesc = new clsCabeceraDescuento();
-        List<mCabeceraDescuento> list_cab_desc = new List<mCabeceraDescuento>();
-
+        clsProveedores clsProvee = new clsProveedores();
+        List<mProveedores> list_provee = new List<mProveedores>();
         public ActionResult Index(){
-            ViewBag.descuentos = new SelectList(clsdesc.mostrar(), "id_subdescuento", "descripcion");
-            ViewBag.cab_desc = clscabdesc.mostrar();
+            ViewBag.proveedor = clsProvee.mostrar();
             return View();
         }
 
-        public ActionResult Store(mCabeceraDescuento model){
-            clscabdesc.ingresar(model);
+        public ActionResult Store(mProveedores model){
+            clsProvee.ingresar(model);
             return RedirectToAction("index");
         }
 
-        public JsonResult UpdateCabDesc(mCabeceraDescuento model){
+        public JsonResult UpdateProveedores(mProveedores model){
             string result = "";
             try{
-                if (clscabdesc.modificar(model) == true){
+                if (clsProvee.modificar(model) == true){
                     result = "Registro actualizado";
-                }
-                else
-                {
+                }else{
                     result = "Error al actualizar";
                 }
             }
-            catch (Exception)
-            {
+            catch (Exception){
                 result = "Error al actualizar";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult GetCabDescById(int CabDescId){
-            List<mCabeceraDescuento> model = clscabdesc.mostrarById(CabDescId);
+        public JsonResult GetProveedoresById(int ProveedoresId)
+        {
+            List<mProveedores> model = clsProvee.mostrarById(ProveedoresId);
             string value = string.Empty;
             value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings{
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore
@@ -58,14 +49,13 @@ namespace Creditos.Controllers
             return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult DeleteCabDesc(int CabDescId){
+        public JsonResult DeleteProveedores(int ProveedoresId){
             string result = "";
-            Cabecera_Descuento cab_desc = db.Cabecera_Descuento.Find(CabDescId);
-            if (cab_desc != null){
-                clscabdesc.eliminar(CabDescId);
+            Proveedor proveedor = db.Proveedor.Find(ProveedoresId);
+            if (proveedor != null){
+                clsProvee.eliminar(ProveedoresId);
                 result = "Eliminado";
-            }
-            else{
+            }else{
                 result = "Registro no encontrado";
             }
             return Json(result, JsonRequestBehavior.AllowGet);

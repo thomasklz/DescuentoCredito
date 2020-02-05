@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsEgresos{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mEgresos> egr = new List<mEgresos>();
 
         public List<mEgresos> mostrar(){

@@ -5,87 +5,68 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
-namespace Creditos.Controllers
-{
-    public class descuentoController : Controller
-    {
+namespace Creditos.Controllers{
+    public class descuentoController : Controller{
         // GET: descuento
-        public ActionResult Index()
-        {
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        clsMes clsmes = new clsMes();
+        clsCabeceraDescuento clscabec = new clsCabeceraDescuento();
+        clsDescuento clsdescue = new clsDescuento();
+        List<mDescuento> list_ingreso = new List<mDescuento>();
+        public ActionResult Index(){
+            ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }
 
-        // GET: descuento/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        public ActionResult Store(mDescuento model){
+            clsdescue.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: descuento/Create
-        public ActionResult Create()
-        {
-            return View();
+        public JsonResult UpdateDescuentos(mDescuento model){
+            string result = "";
+            try{
+                if (clsdescue.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
+            }
+            catch (Exception){
+                result = "Error al actualizar";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: descuento/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+        public JsonResult GetDescuentoById(int DescuentoId){
+            List<mDescuento> model = clsdescue.mostrarById(DescuentoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: descuento/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: descuento/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
+        public JsonResult DeleteDescuento(int DescuentoId){
+            string result = "";
+            Descuento descuento = db.Descuento.Find(DescuentoId);
+            if (descuento != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                clsdescue.eliminar(DescuentoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
 
-        // GET: descuento/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: descuento/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsMes{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mMes> lista_mes = new List<mMes>();
         public List<mMes> mostrarMeses(){
            

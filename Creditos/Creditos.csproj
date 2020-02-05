@@ -161,7 +161,7 @@
     <Compile Include="Clases\clsEmpleadoAsociacion.cs" />
     <Compile Include="Clases\clsIngresos.cs" />
     <Compile Include="Clases\clsMes.cs" />
-    <Compile Include="Clases\clsProveedor.cs" />
+    <Compile Include="Clases\clsProveedores.cs" />
     <Compile Include="Clases\clsSobrante.cs" />
     <Compile Include="Clases\clsSubDescuento.cs" />
     <Compile Include="Clases\clsTipoEgreso.cs" />
@@ -178,7 +178,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ingresosController.cs" />
     <Compile Include="Controllers\mesController.cs" />
-    <Compile Include="Controllers\proveedorController.cs" />
+    <Compile Include="Controllers\proveedoresController.cs" />
     <Compile Include="Controllers\sobranteController.cs" />
     <Compile Include="Controllers\subdescuentoController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
@@ -421,7 +421,7 @@
     <Compile Include="Models\mDescuento.cs" />
     <Compile Include="Models\mEmpleadoAsociacion.cs" />
     <Compile Include="Models\mIngresos.cs" />
-    <Compile Include="Models\mProveedor.cs" />
+    <Compile Include="Models\mProveedores.cs" />
     <Compile Include="Models\mSobrante.cs" />
     <Compile Include="Models\mSubDesuento.cs" />
     <Compile Include="Models\mTipoEgreso.cs" />
@@ -485,7 +485,9 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\scriptsAJAX\Ajax_egreso.js" />
     <Content Include="Scripts\scriptsAJAX\Ajax_ingreso.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -507,6 +509,9 @@
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\egresos\index.cshtml" />
     <Content Include="Views\cabeceraDescuento\index.cshtml" />
+    <Content Include="Views\sobrante\index.cshtml" />
+    <Content Include="Views\subdescuento\index.cshtml" />
+    <Content Include="Views\proveedores\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -514,9 +519,6 @@
     <Folder Include="Views\credito\" />
     <Folder Include="Views\descuento\" />
     <Folder Include="Views\empleadoAsociacion\" />
-    <Folder Include="Views\proveedor\" />
-    <Folder Include="Views\sobrante\" />
-    <Folder Include="Views\subdescuento\" />
     <Folder Include="Views\tipoEgresos\" />
     <Folder Include="Views\tipoIngresos\" />
     <Folder Include="Views\valorAsignado\" />

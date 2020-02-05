@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsValorAsignado{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mValorAsignado> lista_valor_asignado = new List<mValorAsignado>();
         public List<mValorAsignado> mostrar(){
             foreach (var item in db.spConsultarValorAsignado()){

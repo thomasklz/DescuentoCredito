@@ -7,22 +7,35 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsDescuento{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        List<mDescuento> lista_descuentos = new List<mDescuento>();
         public List<mDescuento> mostrar(){
-            List<mDescuento> lista_descuentos = new List<mDescuento>();
             foreach (var item in db.spConsultarDescuento()){
- //               lista_descuentos.Add(new mDescuento(item.id_descuento, Convert.ToDouble(item.valor), Convert.ToInt32(item.empleado_id), Convert.ToInt32(item.cab_desc_id), Convert.ToInt32(item.mes_id), Convert.ToDateTime(item.fecha)));
+                lista_descuentos.Add(new mDescuento(item.id_descuento, Convert.ToDouble(item.valor), item.cabecera, item.mes, Convert.ToDateTime(item.fecha)));
             }
             return lista_descuentos;
         }
         public void ingresar(mDescuento datos){
             db.spInsertarDescuento(datos.valor, datos.empleado_id, datos.cab_desc_id, datos.mes_id, datos.fecha);
         }
-        public void eliminar(mDescuento datos){
-            db.spEliminarDescuento(datos.id_descuento);
+        public void eliminar(int id){
+            db.spEliminarDescuento(id);
         }
-        public void modificar(mDescuento datos){
-    //        db.spModificarDescuento(datos.id_descuento, datos.valor, datos.empleado_id, datos.cab_desc_id, datos.mes_id, datos.fecha);
+        public Boolean modificar(mDescuento datos){
+            Boolean result = false;
+            try{
+                db.spModificarDescuento(datos.id_descuento, datos.valor, datos.empleado_id, datos.cab_desc_id, datos.mes_id, datos.fecha);
+                result = true;
+            }catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mDescuento> mostrarById(int id){
+            foreach (var item in db.spConsultarDescuentoById(id)){
+                lista_descuentos.Add(new mDescuento(item.id_descuento, Convert.ToDouble(item.valor), item.Id_Persona, item.id_cabecera_descuento, item.id_mes, Convert.ToDateTime(item.fecha)));
+            }
+            return lista_descuentos;
         }
     }
 }

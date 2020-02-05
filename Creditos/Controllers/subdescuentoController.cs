@@ -5,87 +5,79 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class subdescuentoController : Controller
     {
         // GET: subdescuento
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        clsSubDescuento clssubdescuento = new clsSubDescuento();
+        List<mSubDesuento> list_subdescuento = new List<mSubDesuento>();
         public ActionResult Index()
         {
+            ViewBag.subdescuentos = clssubdescuento.mostrar();
             return View();
         }
 
-        // GET: subdescuento/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Store(mSubDesuento model)
         {
-            return View();
+            clssubdescuento.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: subdescuento/Create
-        public ActionResult Create()
+        public JsonResult UpdateSubDescuento(mSubDesuento model)
         {
-            return View();
-        }
-
-        // POST: subdescuento/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (clssubdescuento.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else
+                {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: subdescuento/Edit/5
-        public ActionResult Edit(int id)
+
+        public JsonResult GetSubDescuentoById(int SubDescuentoId)
         {
-            return View();
+            List<mSubDesuento> model = clssubdescuento.mostrarById(SubDescuentoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: subdescuento/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+
+        public JsonResult DeleteSubDescuento(int SubDescuentoId)
         {
-            try
+            string result = "";
+            SubDescuento subdescuento = db.SubDescuento.Find(SubDescuentoId);
+            if (subdescuento != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                clssubdescuento.eliminar(SubDescuentoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
 
-        // GET: subdescuento/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: subdescuento/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

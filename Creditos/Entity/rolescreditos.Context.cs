@@ -15,10 +15,10 @@ namespace Creditos.Entity
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class AdministracionAcademicaEntities : DbContext
+    public partial class BD_Roles_Creditos_Entities : DbContext
     {
-        public AdministracionAcademicaEntities()
-            : base("name=AdministracionAcademicaEntities")
+        public BD_Roles_Creditos_Entities()
+            : base("name=BD_Roles_Creditos_Entities")
         {
         }
     
@@ -1056,6 +1056,35 @@ namespace Creditos.Entity
                 new ObjectParameter("idvalorusado", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarValorUtilizadoById_Result>("spConsultarValorUtilizadoById", idvalorusadoParameter);
+        }
+    
+        public virtual int spModificarDescuento(Nullable<int> id_descuento, Nullable<double> valor, Nullable<int> empleado_id, Nullable<int> cab_desc_id, Nullable<int> mes_id, Nullable<System.DateTime> fecha)
+        {
+            var id_descuentoParameter = id_descuento.HasValue ?
+                new ObjectParameter("id_descuento", id_descuento) :
+                new ObjectParameter("id_descuento", typeof(int));
+    
+            var valorParameter = valor.HasValue ?
+                new ObjectParameter("valor", valor) :
+                new ObjectParameter("valor", typeof(double));
+    
+            var empleado_idParameter = empleado_id.HasValue ?
+                new ObjectParameter("empleado_id", empleado_id) :
+                new ObjectParameter("empleado_id", typeof(int));
+    
+            var cab_desc_idParameter = cab_desc_id.HasValue ?
+                new ObjectParameter("cab_desc_id", cab_desc_id) :
+                new ObjectParameter("cab_desc_id", typeof(int));
+    
+            var mes_idParameter = mes_id.HasValue ?
+                new ObjectParameter("mes_id", mes_id) :
+                new ObjectParameter("mes_id", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarDescuento", id_descuentoParameter, valorParameter, empleado_idParameter, cab_desc_idParameter, mes_idParameter, fechaParameter);
         }
     
         public virtual int spModificarValorAsignado(Nullable<int> id_valor_asig, Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> persona_id, Nullable<double> monto_aprobado)

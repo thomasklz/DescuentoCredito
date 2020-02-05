@@ -11,8 +11,8 @@ using Newtonsoft.Json;
 namespace Creditos.Controllers{
     public class valorAsignadoController : Controller{
         // GET: ingresos
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
-        clsProveedor clsmes = new clsProveedor();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        clsProveedores clsmes = new clsProveedores();
         clsIngresos clsingreso = new clsIngresos();
         clsTipoIngreso clstipoingresos = new clsTipoIngreso();
         List<mIngresos> list_ingreso = new List<mIngresos>();

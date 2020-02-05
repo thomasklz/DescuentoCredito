@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsCabeceraDescuento{
-        AdministracionAcademicaEntities db = new AdministracionAcademicaEntities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mCabeceraDescuento> lista_cabecera_descuento = new List<mCabeceraDescuento>();
         public List<mCabeceraDescuento> mostrar(){
             foreach (var item in db.spConsultarCabeceraDescuento()){

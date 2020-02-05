@@ -5,87 +5,63 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class sobranteController : Controller
     {
         // GET: sobrante
-        public ActionResult Index()
-        {
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        clsDescuento clsdesc = new clsDescuento();
+        clsSobrante clssobra = new clsSobrante();
+        List<mSobrante> list_sobra = new List<mSobrante>();
+        public ActionResult Index(){
+            ViewBag.descu = new SelectList(clsdesc.mostrar(), "id_descuento", "valor");
+            ViewBag.sobrante = clssobra.mostrar();
             return View();
         }
 
-        // GET: sobrante/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        public ActionResult Store(mSobrante model){
+            clssobra.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: sobrante/Create
-        public ActionResult Create()
-        {
-            return View();
+        public JsonResult UpdateSobrante(mSobrante model){
+            string result = "";
+            try{
+                if (clssobra.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
+            }catch (Exception){
+                result = "Error al actualizar";
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: sobrante/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+        public JsonResult GetSobranteById(int SobranteId){
+            List<mSobrante> model = clssobra.mostrarById(SobranteId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings{
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: sobrante/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: sobrante/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+        public JsonResult DeleteSobrante(int SobranteId){
+            string result = "";
+            Sobrante sobra = db.Sobrante.Find(SobranteId);
+            if (sobra != null){
+                clssobra.eliminar(SobranteId);
+                result = "Eliminado";
+            }else{
+                result = "Registro no encontrado";
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: sobrante/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: sobrante/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

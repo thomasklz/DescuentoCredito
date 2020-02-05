@@ -5,7 +5,8 @@ using System.Web;
 
 namespace Creditos.Models
 {
-    public class mProveedor{
+    public class mProveedores
+    {
         public int id_proveedor { get; set; }
         public string persona_juridica { get; set; }
         public string RUC { get; set; }
@@ -15,8 +16,8 @@ namespace Creditos.Models
         public string direccion { get; set; }
         public string telefono { get; set; }
 
-        public mProveedor() { }
-        public mProveedor(int id_proveedor, String persona_juridica, string RUC, string nombre, string descripcion, string email, string direccion, string telefono)
+        public mProveedores() { }
+        public mProveedores(int id_proveedor, string persona_juridica, string RUC, string nombre, string descripcion, string email, string direccion, string telefono)
         {
             this.id_proveedor = id_proveedor;
             this.persona_juridica = persona_juridica;
@@ -25,7 +26,7 @@ namespace Creditos.Models
             this.descripcion = descripcion;
             this.email = email;
             this.direccion = direccion;
-            this.telefono = telefono;
+
         }
     }
 }

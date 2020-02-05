@@ -1,0 +1,157 @@
+﻿
+@model Creditos.Models.mSobrante
+
+@{
+    List<Creditos.Models.mSobrante> listSobra = ViewBag.sobrante;
+}
+<h1>Sobrantes</h1>
+@using (Html.BeginForm("Store", "sobrante", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Valor</label>
+        @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
+    </div>
+            @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+            <div>
+                <label>Descuento </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.descuento_id, ViewBag.descu as SelectList, "-- Descuentos --", new { @id = "descuento_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+}
+<table class="table-hover">
+    <tr>
+        <th>Item</th>
+        <th>Valor</th>
+        <th>Descuento</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var item in listSobra)
+    {
+        <tr class='row_@item.id_sobrante' style="text-align:center">
+            <td>@item.id_sobrante</td>
+            <td>@item.valor</td>
+            <td>@item.descuento</td>
+            <td>
+                <a href='#' class='btn btn-danger' onclick='DeleteSobrante(@item.id_sobrante)'><span class='glyphicon glyphicon-trash'></span></a>
+                <a href='#' class='btn btn-info' data-id="@item.id_sobrante"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Modificar Sobrantes</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_sobrante, new { @id = "id_sobrantes" })
+                        <div class="form-group">
+                            <label>Valor</label>
+                            @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                        </div>
+                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+                        <div class="form-group">
+                            <label>Descuentos</label>
+                            @Html.DropDownListFor(m => m.descuento_id, ViewBag.descu as SelectList, "--Select Descuento--", new { @id = "descuento_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateSobrante()">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var row;
+    function UpdateSobrante(Sobrante) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/sobrante/UpdateSubrante",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#valor').val());
+                    row.find("td").eq(2).html($('select[id="descuento_id"] option:selected').text());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/sobrante/GetSobranteById?SobranteId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_sobrante").val(obj[0].id_sobrante);
+                    $("#valor").val(obj[0].valor);
+                    $("#descuento_id option[value='" + obj[0].descuento_id + "']").attr("selected", true);
+                }
+            })
+        })
+    })
+    function DeleteSobrante(Sobrante) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/sobrante/DeleteSobrante?SobranteId=" + Sobrante,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + Sobrante).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+
