@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="694acc0372ba46a584088cde4b82865a" Name="Diagram1">
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion_Proveedor" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Cabecera_Descuento" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Credito" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Descuento" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Egresos" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.empleado_asociacion" Width="1.5" PointX="6" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Ingresos" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Mes" Width="1.5" PointX="6" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Proveedor" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Sobrante" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.SubDescuento" Width="1.5" PointX="1.5" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_egreso" Width="1.5" PointX="6" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_ingreso" Width="1.5" PointX="9" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Valor_Asignado" Width="1.5" PointX="3" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Valor_Utilizado" Width="1.5" PointX="8.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Cargo" Width="1.5" PointX="1.5" PointY="47.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.CategoriaCargo" Width="1.5" PointX="1.5" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Contrato" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.ContratoSubunidad" Width="1.5" PointX="5.25" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Denominacion" Width="1.5" PointX="1.5" PointY="59.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.DenominacionRegimen" Width="1.5" PointX="3.75" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.EscalaOcupacional" Width="1.5" PointX="0.75" PointY="25.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.NivelOcupacional" Width="1.5" PointX="1.5" PointY="28.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Sueldo" Width="1.5" PointX="1.5" PointY="53" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.TipoContrato" Width="1.5" PointX="1.5" PointY="56.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.tipoContratoCargo" Width="1.5" PointX="0.75" PointY="42.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.TipoRegimen" Width="1.5" PointX="1.5" PointY="37.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Banco" Width="1.5" PointX="3.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.CuentaBancaria" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Persona" Width="1.5" PointX="0.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.TipoCuentaBancaria" Width="1.5" PointX="3.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo" Width="1.5" PointX="3" PointY="40.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Usuarios" Width="1.5" PointX="3" PointY="32.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.usuarioTipo" Width="1.5" PointX="5.25" PointY="33.125" IsExpanded="true" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Asociacion_Proveedor_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Egresos_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_empleado_asociacion_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Ingresos_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Valor_Asignado_Asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Asociacion_Proveedor_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Cabecera_Descuento_SubDescuento" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Descuento_Cabecera_Descuento" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Credito_empleado_asociacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Descuento_Mes" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Descuento_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Sobrante_Descuento" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Egresos_Mes" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Egresos_Tipo_egreso" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_empleado_asociacion_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Ingresos_Mes" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Ingresos_Tipo_ingreso" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Valor_Utilizado_Mes" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Convenio_Proveedor" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Valor_Asignado_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Valor_Utilizado_Valor_Asignado" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Cargo_CategoriaCargo" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_tipoContratoCargo_Cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Contrato_EscalaOcupacional" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Contrato_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Contrato_tipoContratoCargo" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_ContratoSubunidad_Contrato" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_DenominacionRegimen_Denominacion" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_DenominacionRegimen_TipoRegimen" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_EscalaOcupacional_NivelOcupacional" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_NivelOcupacional_TipoRegimen" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_tipoContratoCargo_Sueldo" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_tipoContratoCargo_TipoContrato" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_CuentaBancaria_Banco" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_CuentaBancaria_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_CuentaBancaria_TipoCuentaBancaria" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_Usuarios_Persona" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_usuarioTipo_Tipo" ManuallyRouted="false" />
+        <AssociationConnector Association="AdministracionAcademicaModel.FK_usuarioTipo_Usuarios" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -154,13 +154,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\clsAsociacion.cs" />
     <Compile Include="Clases\clsAsociacionProveedor.cs" />
-    <Compile Include="Clases\clsCabeceraDescuento.cs" />
+    <Compile Include="Clases\clsCabDescuento.cs" />
     <Compile Include="Clases\clsCredito.cs" />
     <Compile Include="Clases\clsDescuento.cs" />
     <Compile Include="Clases\clsEgresos.cs" />
     <Compile Include="Clases\clsEmpleadoAsociacion.cs" />
     <Compile Include="Clases\clsIngresos.cs" />
     <Compile Include="Clases\clsMes.cs" />
+    <Compile Include="Clases\clsPersona.cs" />
     <Compile Include="Clases\clsProveedores.cs" />
     <Compile Include="Clases\clsSobrante.cs" />
     <Compile Include="Clases\clsSubDescuento.cs" />
@@ -170,7 +171,7 @@
     <Compile Include="Clases\clsValorUtilizado.cs" />
     <Compile Include="Controllers\asociacionController.cs" />
     <Compile Include="Controllers\asociacionProveedorController.cs" />
-    <Compile Include="Controllers\cabeceraDescuentoController.cs" />
+    <Compile Include="Controllers\cabDescuentoController.cs" />
     <Compile Include="Controllers\creditoController.cs" />
     <Compile Include="Controllers\descuentoController.cs" />
     <Compile Include="Controllers\egresosController.cs" />
@@ -187,240 +188,247 @@
     <Compile Include="Controllers\valorAsignadoController.cs" />
     <Compile Include="Controllers\valorUtilizadoController.cs" />
     <Compile Include="Entity\Asociacion.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Asociacion_Proveedor.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\asoRolesCreditos.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>asoRolesCreditos.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\asoRolesCreditos.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\asoRolesCreditos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
     </Compile>
     <Compile Include="Entity\Banco.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Cabecera_Descuento.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Cargo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\CategoriaCargo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Contrato.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\ContratoSubunidad.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Credito.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\CuentaBancaria.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Denominacion.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\DenominacionRegimen.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Descuento.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Egresos.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\empleado_asociacion.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\EscalaOcupacional.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Ingresos.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Mes.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\NivelOcupacional.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Persona.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Proveedor.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\rolesCreditos.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rolesCreditos.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\rolesCreditos.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entity\rolesCreditos.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>rolesCreditos.edmx</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Sobrante.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacionProveedorById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacionProveedor_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacion_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCabeceraDescuentoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCabeceraDescuento_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarConveniosxAsociacion_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosActivos_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosNoAprobados_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditoxCedulaActivos_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditoxCedulaInactivos_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCredito_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarDescuentoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarDescuento_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEgresoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEgreso_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadoAsociacionById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadoAsociacion_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadosxCreditosActivos_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadoxCreditoInactivo_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarIngresoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarIngreso_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarMes_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarPersonaById_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarPersona_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarProveedorById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarProveedor_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSobranteById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSobrante_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSubdescuentoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarSubDescuento_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarTipoEgreso_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarTipoIngreso_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorAsignadoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorAsignado_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorUtilizadoById_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarValorUtilizado_Result.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SubDescuento.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Sueldo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\TipoContrato.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\tipoContratoCargo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\TipoCuentaBancaria.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\TipoRegimen.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo_egreso.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo_ingreso.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Usuarios.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\usuarioTipo.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Valor_Asignado.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Valor_Utilizado.cs">
-      <DependentUpon>rolesCreditos.tt</DependentUpon>
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\mAsociacion.cs" />
     <Compile Include="Models\mAsociacionProveedor.cs" />
-    <Compile Include="Models\mCabeceraDescuento.cs" />
+    <Compile Include="Models\mCabDescuento.cs" />
     <Compile Include="Models\mCredito.cs" />
     <Compile Include="Models\mDescuento.cs" />
     <Compile Include="Models\mEmpleadoAsociacion.cs" />
     <Compile Include="Models\mIngresos.cs" />
+    <Compile Include="Models\mPersona.cs" />
     <Compile Include="Models\mProveedores.cs" />
     <Compile Include="Models\mSobrante.cs" />
     <Compile Include="Models\mSubDesuento.cs" />
@@ -440,15 +448,15 @@
     <Content Include="Content\sweetalert\docs.css" />
     <Content Include="Content\sweetalert\sweet-alert.css" />
     <Content Include="Content\sweetalert\thumbs-up.jpg" />
-    <Content Include="Entity\rolesCreditos.Context.tt">
+    <Content Include="Entity\asoRolesCreditos.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>rolesCreditos.edmx</DependentUpon>
-      <LastGenOutput>rolesCreditos.Context.cs</LastGenOutput>
+      <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
+      <LastGenOutput>asoRolesCreditos.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Entity\rolesCreditos.tt">
+    <Content Include="Entity\asoRolesCreditos.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>rolesCreditos.edmx</DependentUpon>
-      <LastGenOutput>rolesCreditos.cs</LastGenOutput>
+      <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
+      <LastGenOutput>asoRolesCreditos.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -464,12 +472,12 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
-    <EntityDeploy Include="Entity\rolesCreditos.edmx">
+    <EntityDeploy Include="Entity\asoRolesCreditos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>rolesCreditos.Designer.cs</LastGenOutput>
+      <LastGenOutput>asoRolesCreditos.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Entity\rolesCreditos.edmx.diagram">
-      <DependentUpon>rolesCreditos.edmx</DependentUpon>
+    <Content Include="Entity\asoRolesCreditos.edmx.diagram">
+      <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -508,20 +516,20 @@
     <Content Include="Views\ingresos\index.cshtml" />
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\egresos\index.cshtml" />
-    <Content Include="Views\cabeceraDescuento\index.cshtml" />
     <Content Include="Views\sobrante\index.cshtml" />
     <Content Include="Views\subdescuento\index.cshtml" />
     <Content Include="Views\proveedores\index.cshtml" />
+    <Content Include="Views\cabDescuento\index.cshtml" />
+    <Content Include="Views\descuento\index.cshtml" />
+    <Content Include="Views\valorAsignado\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\asociacionProveedor\" />
     <Folder Include="Views\credito\" />
-    <Folder Include="Views\descuento\" />
     <Folder Include="Views\empleadoAsociacion\" />
     <Folder Include="Views\tipoEgresos\" />
     <Folder Include="Views\tipoIngresos\" />
-    <Folder Include="Views\valorAsignado\" />
     <Folder Include="Views\valorUtilizado\" />
   </ItemGroup>
   <ItemGroup>
@@ -541,6 +549,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

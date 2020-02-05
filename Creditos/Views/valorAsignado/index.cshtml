@@ -1,0 +1,171 @@
+﻿
+@model Creditos.Models.mValorAsignado
+
+@{
+    List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
+}
+<h1>Asigaci&oacute;n de valores</h1>
+@using (Html.BeginForm("Store", "valorAsignado", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Monto Aprobado</label>
+        @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobados", @class = "form-control", @placeholder = "Monto Aprobado", @name = "monto_aprobado" })
+    </div>
+            @Html.HiddenFor(m => m.aso_id, new { @id = "aso_id", @Value = "1" })
+    <div>
+        <label>Persona </label>
+        <div class="form-group">
+            @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Ingrese una persona--", new { @id = "Id_Personas", @class = "form-control" })
+        </div>
+    </div>
+            <div>
+                <label>Proveedores </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.proveedor_id, ViewBag.proveedor as SelectList, "--Seleccione un Proveedor--", new { @id = "proveedor_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+}
+<table class="table-hover">
+    <tr>
+        <th>Item</th>
+        <th>Monto Aprobado</th>
+        <th>Persona</th>
+        <th>Proveedor</th>
+        <th>Acciones</th>
+    </tr>
+    @foreach (var item in listValAsig)
+    {
+        <tr class='row_@item.id_valor_asig'>
+            <td>@item.id_valor_asig</td>
+            <td>@item.monto_aprobado</td>
+            <td>@item.empleado</td>
+            <td>@item.proveedor</td>
+            <td>
+                <a href='#' class='btn btn-danger' onclick='DeleteValAsignado(@item.id_valor_asig)'><span class='glyphicon glyphicon-trash'></span></a>
+                <a href='#' class='btn btn-info' data-id="@item.id_valor_asig"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Modificar Valores Asignados</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_valor_asig, new { @id = "id_val_asig" })
+                        <div class="form-group">
+                            <label>Valor</label>
+                            @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobado", @class = "form-control", @placeholder = "Name*" })
+                        </div>
+                        @Html.HiddenFor(m => m.aso_id, new { @id = "aso_id", @Value = "1" })
+                        <div class="form-group">
+                            <label>Persona</label>
+                            @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Seleccione una Persona--", new { @id = "empleado_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mes</label>
+                            @Html.DropDownListFor(m => m.proveedor_id, ViewBag.proveedor as SelectList, "--Seleccione Proveedor--", new { @id = "proveedor_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateValAsignado()">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var row;
+    function UpdateValAsignado(ValAsignado) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/valorAsignado/UpdateValAsignado",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#monto_aprobado').val());
+                    row.find("td").eq(3).html($('select[id="proveedor_id"] option:selected').text());
+                    row.find("td").eq(2).html($('select[id="empleado_id"] option:selected').text());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/valorAsignado/GetValAsignadoById?ValAsignadoId=" + ValAsignadoid,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_val_asig").val(obj[0].id_val_asig);
+                    $("#monto_aprobado").val(obj[0].monto_aprobado);
+                    $("#empleado_id option[value='" + obj[0].empleado_id + "']").attr("selected", true);
+                    $("#proveedor_id option[value='" + obj[0].proveedor_id + "']").attr("selected", true);
+                }
+            })
+        })
+    })
+    function DeleteValAsignado(ValAsignado) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/valorAsignado/DeleteValAsignado?ValAsignadoId=" + ValAsignado,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + ValAsignado).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+

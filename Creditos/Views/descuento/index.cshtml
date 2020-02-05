@@ -1,0 +1,190 @@
+﻿
+@model Creditos.Models.mDescuento
+
+@{
+    List<Creditos.Models.mDescuento> listDescuentos = ViewBag.descuentos;
+}
+<h1>Descuentos</h1>
+@using (Html.BeginForm("Store", "descuento", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Valor</label>
+        @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
+    </div>
+            @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+            <div>
+                <label>Persona </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Ingrese una persona--", new { @id = "Id_Personas", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <label>Tipo de Descuento </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione un Descuento--", new { @id = "cab_desc_ids", @class = "form-control" })
+                </div>
+            </div>
+            <div>
+                <label>Mes </label>
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                </div>
+            </div>
+                    @Html.HiddenFor(m => m.fecha, new { @id="fecha", @Value = @DateTime.Now.ToShortDateString() })
+                    @*@Html.TextBoxFor(m => m.fecha, new{@class = "form-control",type = "date"})*@
+                    @*@Html. (m => m.fecha, new { @id = "fechas", @class = "form-control", @placeholder = "@DateTime.Now", @name = "valor" })*@    
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+}
+<table class="table-hover">
+    <tr>
+        <th style="text-align:center">Item</th>
+        <th style="text-align:center">Valor</th>
+        <th style="text-align:center">Persona</th>
+        <th style="text-align:center">Descripción</th>
+        <th style="text-align:center">Mes</th>
+        <th style="text-align:center">Fecha</th>
+        <th style="text-align:center">Acciones</th>
+    </tr>
+    @foreach (var item in listDescuentos)
+    {
+        <tr class='row_@item.id_descuento'>
+            <td>@item.id_descuento</td>
+            <td>@item.valor</td>
+            <td>@item.persona</td>
+            <td>@item.cabecera</td>
+            <td>@item.mes</td>
+            <td>@item.fecha.ToShortDateString()</td>
+            <td>
+                <a href='#' class='btn btn-danger' onclick='DeleteDescuento(@item.id_descuento)'><span class='glyphicon glyphicon-trash'></span></a>
+                <a href='#' class='btn btn-info' data-id="@item.id_descuento"><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    }
+</table>
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h4 id="ModalTitle">Modificar Descuentos</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_descuento, new { @id = "id_descuentos" })
+                        <div class="form-group">
+                            <label>Valor</label>
+                            @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                        </div>
+                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+                        <div class="form-group">
+                            <label>Persona</label>
+                            @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Seleccione una persona--", new { @id = "Id_Persona", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Tipo de Descuento</label>
+                            @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione Descuento--", new { @id = "cab_desc_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <label>Mes</label>
+                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione Mes--", new { @id = "mes_id", @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateDescuento()">Save</a>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var row;
+    function UpdateDescuento(Descuento) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/descuento/UpdateDescuento",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#valor').val());
+                    row.find("td").eq(4).html($('select[id="mes_id"] option:selected').text());
+                    row.find("td").eq(2).html($('select[id="empleado_id"] option:selected').text());
+                    row.find("td").eq(3).html($('select[id="ca_desc_id"] option:selected').text());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/descuento/GetDescuentoById?DescuentoId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_descuento").val(obj[0].id_descuento);
+                    $("#valor").val(obj[0].valor);
+                    $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                    $("#empleado_id option[value='" + obj[0].empleado_id + "']").attr("selected", true);
+                    $("#cab_desc_id option[value='" + obj[0].cab_desc_id + "']").attr("selected", true);
+                }
+            })
+        })
+    })
+    function DeleteDescuento(Descuento) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/descuento/DeleteDescuento?DescuentoId=" + Descuento,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + Descuento).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+

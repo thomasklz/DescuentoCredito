@@ -10,54 +10,40 @@ using Newtonsoft.Json;
 
 namespace Creditos.Controllers{
     public class valorAsignadoController : Controller{
-        // GET: ingresos
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
-        clsProveedores clsmes = new clsProveedores();
-        clsIngresos clsingreso = new clsIngresos();
-        clsTipoIngreso clstipoingresos = new clsTipoIngreso();
-        List<mIngresos> list_ingreso = new List<mIngresos>();
-        //public ActionResult Index()
-        //{
+        // GET: ValorAsignado
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsProveedores clsprovee = new clsProveedores();
+        clsPersona clspersona = new clsPersona();
+        clsValorAsignado clsvalorasig = new clsValorAsignado();
+        List<mValorAsignado> list_valor = new List<mValorAsignado>();
+        public ActionResult Index(){
+            ViewBag.proveedor = new SelectList(clsprovee.mostrar(), "id_proveedor", "nombre");
+            ViewBag.persona = new SelectList(clspersona.mostrar(), "Id_Persona", "Nombres");
+            ViewBag.val_asig = clsvalorasig.mostrar();
+            return View();
+        }
 
-        //    ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
-        //    ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
-        //    ViewBag.ingresos = clsingreso.mostrar();
-        //    return View();
-        //}
-
-        public ActionResult Store(mIngresos model)
-        {
-
-            clsingreso.ingresar(model);
+        public ActionResult Store(mValorAsignado model){
+            clsvalorasig.ingresar(model);
             return RedirectToAction("index");
         }
 
-        public JsonResult UpdateIngresos(mIngresos model)
-        {
+        public JsonResult UpdateValAsignado(mValorAsignado model){
             string result = "";
-            try
-            {
-                if (clsingreso.modificar(model) == true)
-                {
+            try{
+                if (clsvalorasig.modificar(model) == true){
                     result = "Registro actualizado";
-                }
-                else
-                {
+                }else{
                     result = "Error al actualizar";
                 }
-            }
-            catch (Exception)
-            {
+            }catch (Exception){
                 result = "Error al actualizar";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult GetIngresoById(int IngresoId)
-        {
-            List<mIngresos> model = clsingreso.mostrarById(IngresoId);
+        public JsonResult GetValAsignadoById(int ValAsignadoId){
+            List<mValorAsignado> model = clsvalorasig.mostrarById(ValAsignadoId);
             string value = string.Empty;
             value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
@@ -66,21 +52,15 @@ namespace Creditos.Controllers{
             return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult DeleteIngreso(int IngresoId)
-        {
+        public JsonResult DeleteValAsignado(int ValAsignadoId){
             string result = "";
-            Ingresos ingreso = db.Ingresos.Find(IngresoId);
-            if (ingreso != null)
-            {
-                clsingreso.eliminar(IngresoId);
+            Valor_Asignado val_asig = db.Valor_Asignado.Find(ValAsignadoId);
+            if (val_asig != null){
+                clsvalorasig.eliminar(ValAsignadoId);
                 result = "Eliminado";
-            }
-            else
-            {
+            }else{
                 result = "Registro no encontrado";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

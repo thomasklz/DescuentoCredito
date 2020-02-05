@@ -12,13 +12,12 @@ namespace Creditos.Models
         public Nullable<int> cab_desc_id { get; set; }
         public Nullable<int> mes_id { get; set; }
         public DateTime fecha { get; set; }
-        public string empleado { get; set; }
+        public string persona { get; set; }
         public string cabecera { get; set; }
         public string mes { get; set; }
 
         public mDescuento() { }
-        public mDescuento(int id_descuento, double valor, int empleado_id, int cab_desc_id, int mes_id, DateTime fecha)
-        {
+        public mDescuento(int id_descuento, double valor, int empleado_id, int cab_desc_id, int mes_id, DateTime fecha){
             this.id_descuento = id_descuento;
             this.valor = valor;
             this.empleado_id = empleado_id;
@@ -27,11 +26,10 @@ namespace Creditos.Models
             this.fecha = fecha;
 
         }
-        public mDescuento(int id_descuento, double valor, string cabecera, string mes, DateTime fecha)
-        {
+        public mDescuento(int id_descuento, double valor, string persona, string cabecera, string mes, DateTime fecha, string prueba){
             this.id_descuento = id_descuento;
             this.valor = valor;
-            this.empleado = empleado;
+            this.persona = persona;
             this.cabecera = cabecera;
             this.mes = mes;
             this.fecha = fecha;

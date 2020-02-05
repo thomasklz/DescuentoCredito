@@ -13,7 +13,7 @@ namespace Creditos.Controllers
     public class sobranteController : Controller
     {
         // GET: sobrante
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsDescuento clsdesc = new clsDescuento();
         clsSobrante clssobra = new clsSobrante();
         List<mSobrante> list_sobra = new List<mSobrante>();

@@ -13,7 +13,7 @@ namespace Creditos.Controllers
     public class ingresosController : Controller
     {
         // GET: ingresos
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsMes clsmes = new clsMes();
         clsIngresos clsingreso = new clsIngresos();
         clsTipoIngreso clstipoingresos = new clsTipoIngreso();

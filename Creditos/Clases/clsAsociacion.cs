@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsAsociacion {
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         public List<mAsociacion> mostrar(){
             List<mAsociacion> lista_asociacion = new List<mAsociacion>();
             foreach (var item in db.spConsultarAsociacion()){

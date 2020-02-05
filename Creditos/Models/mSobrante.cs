@@ -6,9 +6,9 @@ using System.Web;
 namespace Creditos.Models
 {
     public class mSobrante{
-        private double v1;
-        private double? descuento1;
-        private bool v2;
+        public double v1;
+        public double? descuento1;
+        public bool v2;
 
         public int id_sobrante { get; set; }
         public Nullable<int> descuento_id { get; set; }

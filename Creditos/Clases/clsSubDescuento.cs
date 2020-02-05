@@ -9,7 +9,7 @@ namespace Creditos.Clases
 {
     public class clsSubDescuento
     {
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsSubDescuento clssubd = new clsSubDescuento();
         List<mSubDesuento> lista_subdescuento = new List<mSubDesuento>();
         public List<mSubDesuento> mostrar()

@@ -13,7 +13,7 @@ namespace Creditos.Controllers
     public class egresosController : Controller
     {
         // GET: egresos
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsMes clsmes = new clsMes();
         clsEgresos clsegreso = new clsEgresos();
         clsTipoEgreso clstipoegresos = new clsTipoEgreso();

@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Creditos.Controllers{
     public class proveedoresController : Controller{
         // GET: proveedores
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsProveedores clsProvee = new clsProveedores();
         List<mProveedores> list_provee = new List<mProveedores>();
         public ActionResult Index(){

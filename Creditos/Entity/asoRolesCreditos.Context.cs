@@ -15,13 +15,13 @@ namespace Creditos.Entity
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class BD_Roles_Creditos_Entities : DbContext
+    public partial class BD_AsoRolesCreditos_Entities : DbContext
     {
-        public BD_Roles_Creditos_Entities()
-            : base("name=BD_Roles_Creditos_Entities")
+        public BD_AsoRolesCreditos_Entities()
+            : base("name=BD_AsoRolesCreditos_Entities")
         {
         }
-    
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -213,6 +213,20 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarMes_Result> spConsultarMes()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarMes_Result>("spConsultarMes");
+        }
+    
+        public virtual ObjectResult<spConsultarPersona_Result> spConsultarPersona()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarPersona_Result>("spConsultarPersona");
+        }
+    
+        public virtual ObjectResult<spConsultarPersonaById_Result> spConsultarPersonaById(Nullable<int> idpersona)
+        {
+            var idpersonaParameter = idpersona.HasValue ?
+                new ObjectParameter("idpersona", idpersona) :
+                new ObjectParameter("idpersona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarPersonaById_Result>("spConsultarPersonaById", idpersonaParameter);
         }
     
         public virtual ObjectResult<spConsultarProveedor_Result> spConsultarProveedor()

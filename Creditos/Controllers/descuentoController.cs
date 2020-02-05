@@ -11,14 +11,16 @@ using Newtonsoft.Json;
 namespace Creditos.Controllers{
     public class descuentoController : Controller{
         // GET: descuento
-        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsMes clsmes = new clsMes();
-        clsCabeceraDescuento clscabec = new clsCabeceraDescuento();
+        clsCabDescuento clscabec = new clsCabDescuento();
+        clsPersona clspersona = new clsPersona();
         clsDescuento clsdescue = new clsDescuento();
         List<mDescuento> list_ingreso = new List<mDescuento>();
         public ActionResult Index(){
             ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            ViewBag.persona = new SelectList(clspersona.mostrar(), "Id_Persona", "Nombres");
             ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }
@@ -56,16 +58,12 @@ namespace Creditos.Controllers{
         public JsonResult DeleteDescuento(int DescuentoId){
             string result = "";
             Descuento descuento = db.Descuento.Find(DescuentoId);
-            if (descuento != null)
-            {
+            if (descuento != null){
                 clsdescue.eliminar(DescuentoId);
                 result = "Eliminado";
-            }
-            else
-            {
+            }else{
                 result = "Registro no encontrado";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

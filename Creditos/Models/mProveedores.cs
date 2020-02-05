@@ -17,8 +17,7 @@ namespace Creditos.Models
         public string telefono { get; set; }
 
         public mProveedores() { }
-        public mProveedores(int id_proveedor, string persona_juridica, string RUC, string nombre, string descripcion, string email, string direccion, string telefono)
-        {
+        public mProveedores(int id_proveedor, string persona_juridica, string RUC, string nombre, string descripcion, string email, string direccion, string telefono){
             this.id_proveedor = id_proveedor;
             this.persona_juridica = persona_juridica;
             this.RUC = RUC;
@@ -26,7 +25,7 @@ namespace Creditos.Models
             this.descripcion = descripcion;
             this.email = email;
             this.direccion = direccion;
-
+            this.telefono = telefono;
         }
     }
 }
