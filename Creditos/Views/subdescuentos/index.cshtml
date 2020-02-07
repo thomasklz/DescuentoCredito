@@ -1,0 +1,151 @@
+﻿@model Creditos.Models.mSubDescuentos
+
+@{
+    List<Creditos.Models.mSubDescuentos> listSubDescuento = ViewBag.subdescuento;
+}
+<h1>SubDescuentos</h1>
+@using (Html.BeginForm("Store", "subdescuentos", FormMethod.Post))
+{
+            <div class="form-group">
+                <label>Descripción</label>
+                @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+            </div>
+
+    @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+
+  
+            <div>
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+}
+
+
+            <table class="table-hover">
+             <tr>
+                <th>Item</th>
+                <th>Descripción</th>
+             </tr>
+
+    @foreach (var item in listSubDescuento)
+    {
+        <tr class='row_@item.id_subdescuento'>
+            <td>@item.id_subdescuento</td>
+            <td>@item.descripcion</td>
+            <td>
+                <a href='#' class='btn btn-danger' onclick='DeleteSubDescuentos(@item.id_subdescuento)'><span class='glyphicon glyphicon-trash'></span></a>
+                <a href='#' class='btn btn-info' data-id="@item.id_subdescuento" onclick='EditSubDescuentos(@item.id_subdescuento)'><span class='glyphicon glyphicon-edit'></span></a>
+            </td>
+        </tr>
+    }
+
+        </table>
+        <div class="modal fade" id="MyModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h4 id="ModalTitle">Modificar SubDescuento</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="form">
+                            <fieldset id="SubmitForm">
+                                @Html.HiddenFor(m => m.id_subdescuento, new { @id = "id_subdescuento" })
+
+                                <div class="form-group">
+                                    <label>Descripción</label>
+                                    @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                                </div>
+
+                                @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })*@
+
+                                <div class="form-group">
+                                    <a href="#" class="btn btn-block btn-danger" onclick="UpdateSubDescuentos()">Save</a>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        var row;
+        function UpdateSubDescuentos(SubDescuento) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/subdescuentos/UpdateSubDescuentos",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Registro actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    row.find("td").eq(1).html($('#descripcion').val());
+                } else {
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: 'Error al actualizado',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+                $("#MyModal").modal("hide");
+            }
+        })
+    }
+    $(document).ready(function () {
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/subdescuentos/GetSubDescuentosById?SubDescuentosId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_subdescuento").val(obj[0].id_subdescuento);
+                    $("#descripcion").val(obj[0].descripcion);
+                }
+            })
+        })
+    })
+        function DeleteSubDescuentos(SubDescuento) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/subdescuentos/DeleteSubDescuentos?SubDescuentosId=" + SubDescuento,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+                            )
+                            $(".row_" + SubDescuento).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
+</script>
+

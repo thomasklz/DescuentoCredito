@@ -164,9 +164,11 @@
     <Compile Include="Clases\clsPersona.cs" />
     <Compile Include="Clases\clsProveedores.cs" />
     <Compile Include="Clases\clsSobrante.cs" />
-    <Compile Include="Clases\clsSubDescuento.cs" />
+    <Compile Include="Clases\clsSubDescuentos.cs" />
     <Compile Include="Clases\clsTipoEgreso.cs" />
+    <Compile Include="Clases\clsTipoEgresos.cs" />
     <Compile Include="Clases\clsTipoIngreso.cs" />
+    <Compile Include="Clases\clsTipoIngresos.cs" />
     <Compile Include="Clases\clsValorAsignado.cs" />
     <Compile Include="Clases\clsValorUtilizado.cs" />
     <Compile Include="Controllers\asociacionController.cs" />
@@ -181,7 +183,7 @@
     <Compile Include="Controllers\mesController.cs" />
     <Compile Include="Controllers\proveedoresController.cs" />
     <Compile Include="Controllers\sobranteController.cs" />
-    <Compile Include="Controllers\subdescuentoController.cs" />
+    <Compile Include="Controllers\subdescuentosController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\tipoEgresosController.cs" />
     <Compile Include="Controllers\tipoIngresosController.cs" />
@@ -361,7 +363,13 @@
     <Compile Include="Entity\spConsultarSubDescuento_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConsultarTipoEgresoById_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spConsultarTipoEgreso_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarTipoIngresoById_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarTipoIngreso_Result.cs">
@@ -431,7 +439,7 @@
     <Compile Include="Models\mPersona.cs" />
     <Compile Include="Models\mProveedores.cs" />
     <Compile Include="Models\mSobrante.cs" />
-    <Compile Include="Models\mSubDesuento.cs" />
+    <Compile Include="Models\mSubDescuentos.cs" />
     <Compile Include="Models\mTipoEgreso.cs" />
     <Compile Include="Models\mEgresos.cs" />
     <Compile Include="Models\mMes.cs" />
@@ -470,8 +478,6 @@
     <Content Include="Content\sweetalert\sweet-alert.less" />
     <Content Include="Content\sweetalert\sweet-alert-combine.less" />
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
-    <Content Include="Content\bootstrap\variables.less" />
-    <Content Include="Content\bootstrap\mixins.less" />
     <EntityDeploy Include="Entity\asoRolesCreditos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>asoRolesCreditos.Designer.cs</LastGenOutput>
@@ -479,6 +485,8 @@
     <Content Include="Entity\asoRolesCreditos.edmx.diagram">
       <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\variables.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -517,19 +525,19 @@
     <Content Include="Views\Sweet\Alert.cshtml" />
     <Content Include="Views\egresos\index.cshtml" />
     <Content Include="Views\sobrante\index.cshtml" />
-    <Content Include="Views\subdescuento\index.cshtml" />
     <Content Include="Views\proveedores\index.cshtml" />
     <Content Include="Views\cabDescuento\index.cshtml" />
     <Content Include="Views\descuento\index.cshtml" />
     <Content Include="Views\valorAsignado\index.cshtml" />
+    <Content Include="Views\subdescuentos\index.cshtml" />
+    <Content Include="Views\tipoEgresos\index.cshtml" />
+    <Content Include="Views\tipoIngresos\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\asociacionProveedor\" />
     <Folder Include="Views\credito\" />
     <Folder Include="Views\empleadoAsociacion\" />
-    <Folder Include="Views\tipoEgresos\" />
-    <Folder Include="Views\tipoIngresos\" />
     <Folder Include="Views\valorUtilizado\" />
   </ItemGroup>
   <ItemGroup>

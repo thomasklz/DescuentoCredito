@@ -1,69 +1,78 @@
-﻿
-@model Creditos.Models.mCabDescuento
+﻿@model Creditos.Models.mTipoIngreso
+@{List<Creditos.Models.mTipoIngreso> listTipoIngreso = ViewBag.tipoingreso;}
 
-@{
-    List<Creditos.Models.mCabDescuento> listCabDesc = ViewBag.listCabDesc;
-}
-<h1>Cabecera del Subdescuento</h1>
-@using (Html.BeginForm("Store", "cabDescuento", FormMethod.Post))
-{
-    <div class="form-group">
-        <label>Descripcion</label>
-        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Tipo de Ingresos</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
     </div>
-    @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+</div>
+
+@using (Html.BeginForm("Store", "tipoingresos", FormMethod.Post))
+{
     <div>
-        <label>Tipo de Descuento </label>
-        <div class="form-group">
-            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Tipo de Subdescuento--", new { @id = "subdescuento_ids", @class = "form-control" })
+        <label>Descripción:</label>
+        <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
         </div>
     </div>
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <br />
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <br />
 }
-<table class="table-hover">
+
+
+<table class="table" style="text-align:center">
     <tr>
         <th>Item</th>
-        <th>Descripci&oacute;n</th>
-        <th>Tipo de Descuento</th>
+        <th>Descripción</th>
         <th>Acciones</th>
     </tr>
-    @foreach (var item in listCabDesc)
+
+    @foreach (var item in listTipoIngreso)
     {
-        <tr class='row_@item.id_cabecera_descuento'>
-            <td>@item.id_cabecera_descuento</td>
+        <tr class='row_@item.id_tipo_ingreso'>
+            <td>@item.id_tipo_ingreso</td>
             <td>@item.descripcion</td>
-            <td>@item.subdescuento</td>
             <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-trash'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_cabecera_descuento" onclick='EditCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-edit'></span></a>
+                <a href='#'class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
+                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_tipo_ingreso"><span class='flaticon2-pen'></span></a>
             </td>
         </tr>
     }
+
 </table>
 <div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Cabecera de Descuentos</h4>
+                <h4 id="ModalTitle">Modificar Tipos de Ingresos</h4>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m.id_cabecera_descuento, new { @id = "id_cabecera_descuentos" })
+                        @Html.HiddenFor(m => m.id_tipo_ingreso, new { @id = "id_tipo_ingreso" })
+
                         <div class="form-group">
-                            <label>Descripci&oacute;n</label>
+                            <label>Descripción</label>
                             @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
                         </div>
-                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+
+
+                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })*@
+
                         <div class="form-group">
-                            <label>Tipo de Descuento</label>
-                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Select Subdescuento--", new { @id = "subdescuento_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateCabDesc()">Save</a>
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateTipoIngresos()">Save</a>
                         </div>
                     </fieldset>
                 </form>
@@ -71,13 +80,14 @@
         </div>
     </div>
 </div>
+
 <script>
     var row;
-    function UpdateCabDesc(CabDesc) {
+    function UpdateTipoIngresos(TipoIngreso) {
         var data = $("#SubmitForm").serialize();
         $.ajax({
             type: "Post",
-            url: "/cabDescuento/UpdateCab_Desc",
+            url: "/tipoingresos/UpdateTipoIngresos",
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
@@ -89,12 +99,12 @@
                         timer: 1500
                     })
                     row.find("td").eq(1).html($('#descripcion').val());
-                    row.find("td").eq(2).html($('select[id="subdescuento_id"] option:selected').text());
+
                 } else {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'error',
-                        title: 'Error al actualizar',
+                        title: 'Error al actualizado',
                         showConfirmButton: false,
                         timer: 1500
                     })
@@ -110,17 +120,16 @@
             $("#MyModal").modal();
             $.ajax({
                 type: "GET",
-                url: "/cabDescuento/GetCab_DescById?Cab_DescId=" + id,
+                url: "/tipoingresos/GetTipoIngresosById?TipoIngresosId=" + id,
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    $("#id_cabecera_descuento").val(obj[0].id_cabecera_descuento);
+                    $("#id_tipo_ingreso").val(obj[0].id_tipo_ingreso);
                     $("#descripcion").val(obj[0].descripcion);
-                    $("#subdescuento_id option[value='" + obj[0].subdescuento_id + "']").attr("selected", true);
                 }
             })
         })
     })
-    function DeleteCabDesc(CabDesc) {
+    function DeleteTipoIngresos(TipoIngreso) {
         Swal.fire({
             title: 'Estás seguro?',
             text: 'Deseas eliminar el registro seleccionado!',
@@ -132,7 +141,7 @@
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: "/cabDescuento/DeleteCab_Desc?Cab_DescId=" + CabDesc,
+                    url: "/tipoingresos/DeleteTipoIngresos?TipoIngresoId=" + TipoIngreso,
                     success: function (result) {
                         if (result == "Eliminado") {
                             Swal.fire(
@@ -140,7 +149,7 @@
                                 'El registro fue borrado con éxito',
                                 'success'
                             )
-                            $(".row_" + CabDesc).remove();
+                            $(".row_" + TipoIngreso).remove();
                         } else {
                             Swal.fire(
                                 'Borrado!',
@@ -154,3 +163,4 @@
         })
     }
 </script>
+

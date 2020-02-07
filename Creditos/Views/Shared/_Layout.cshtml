@@ -244,29 +244,78 @@
                                     <div id="kt_header_menu" class="kt-header-menu kt-header-menu-mobile ">
                                         <ul class="kt-menu__nav ">
                                             <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Gestiones Adicionales</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">ASOCIACI&Oacute;N</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                                                     <ul class="kt-menu__subnav">
+                                                        
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tipo de Ingresos</span></a>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Ingresos", "index", "ingresos")</span></p>
                                                         </li>
-                                                        <li class="kt-menu__item kt-menu__item--active " aria-haspopup="true">
-                                                            <a href="#" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Tipo de Egresos</span></a>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Egresos", "index", "egresos")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Tipo de Ingresos", "index", "tipoIngresos")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Tipo de Egresos", "index", "tipoEgresos")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Proveedores", "index", "proveedores")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Convenios", "index", "asociacionProveedor")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Ingreso a Asociación", "index", "empleadoAsociacion")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Créditos", "index", "credito")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "index", "#")</span></p>
                                                         </li>
                                                     </ul>
                                                 </div>
                                             </li>
-                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                                <span class="kt-menu__link-text">@Html.ActionLink("Ingresos", "index", "ingresos")</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
-                                                
+                                            <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">N&Oacute;MINA</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Gestión de Descuentos", "index", "descuento")</span></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </li>
-                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                                <span class="kt-menu__link-text">@Html.ActionLink("Egresos", "index", "egresos")</span><i class="kt-menu__ver-arrow la la-angle-right"></i>
+                                            
+                                            <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">PROVEEDORES</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Valores Utilizados", "index", "valorUtilizado")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Editar Información", "index", "proveedores")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "index", "valorUtilizado")</span></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </li>
-                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Proveedores</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
-                                            </li>
-                                            <li class="kt-menu__item kt-menu__item--submenu kt-menu__item--rel" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
-                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">Convenios</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a>
+                                            <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
+                                                <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">USUARIO</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
+                                                    <ul class="kt-menu__subnav">
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Rol de Pagos detallado", "index", "informeRol")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "index", "valorUtilizado")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Créditos", "index", "credito")</span></p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
                                             </li>
                                         </ul>
                                     </div>
@@ -278,21 +327,7 @@
                     <!-- begin:: CONTENIDOS -->
                     <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
                         <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-                            <!-- begin:: Encabezado VENTANA PRINCIPAL -->
-                            <div class="kt-subheader kt-grid__item" id="kt_subheader">
-                                <div class="kt-container ">
-                                    <div class="kt-subheader__main">
-                                        <h3>
-                                            Bienvenidos
-                                            <small>Contenido Inicial</small>
-                                        </h3>
-                                        <span class="kt-subheader__separator kt-hidden"></span>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            <!-- end:: Subheader -->
+                            
                             <!-- begin:: CONTENIDO -->
                             <div class="navbar-collapse collapse">
                                 <div class="container body-content">

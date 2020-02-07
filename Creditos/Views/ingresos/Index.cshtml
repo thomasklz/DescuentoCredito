@@ -4,31 +4,64 @@
 @{
      List<Creditos.Models.mIngresos> listIngreso = ViewBag.ingresos;
 }
-<h1>Ingresos</h1>
-     @using (Html.BeginForm("Store", "ingresos", FormMethod.Post))
-     {
-            <div class="form-group">
-                <label>Valor</label>
-                @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name="valor" })
-            </div>
-            @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
-            <div>
-                <label>Tipo ingreso </label>
-                <div class="form-group">
-                    @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Tipo de Ingreso--", new { @id = "tipo_ingreso_ids", @class = "form-control" })
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Ingresos</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
+    </div>
+</div>
+<!-- end:: Subheader -->
+
+@using (Html.BeginForm("Store", "ingresos", FormMethod.Post))
+{
+
+    <div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Cantidad:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                            @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Tipo de Ingreso:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
+                            @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Tipo de Ingreso--", new { @id = "tipo_ingreso_ids", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Mes:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div>
-                <label>Mes </label>
-                <div class="form-group">
-                    @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
-                </div>
-            </div>
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        </div>
+    </div>
+    @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <br />
      }
-        <table class="table-hover">
+        <table class="table" style="text-align:center">
                 <tr>
                     <th>Item</th>
                     <th>Valor</th>
@@ -44,8 +77,8 @@
                     <td>@item.tipoingreso</td>
                     <td>@item.mes</td>
                     <td>
-                       <a href='#' class='btn btn-danger'  onclick='DeleteIngreso(@item.id_ingresos)'><span class='glyphicon glyphicon-trash'></span></a>
-                        <a href='#' class='btn btn-info' data-id="@item.id_ingresos"><span class='glyphicon glyphicon-edit'></span></a>
+                       <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteIngreso(@item.id_ingresos)'><span class='flaticon2-rubbish-bin'></span></a>
+                        <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_ingresos"><span class='flaticon2-pen'></span></a>
                     </td>
                 </tr>
                 }

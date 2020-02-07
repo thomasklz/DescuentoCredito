@@ -1,59 +1,106 @@
 ﻿@model Creditos.Models.mProveedores
+@{List<Creditos.Models.mProveedores> listProveedor = ViewBag.proveedor;}
 
-@{
-    List<Creditos.Models.mProveedores> listProveedor = ViewBag.proveedor;
-}
-<h1>PROVEEDOR</h1>
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Proveedores</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
+    </div>
+</div>
+
 @using (Html.BeginForm("Store", "proveedores", FormMethod.Post))
 {
-    <div class="form-group">
-        <label>Persona Jurídica</label>
-        @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridicas", @class = "form-control", @placeholder = "Persona Jurídica", @name = "persona_juridica" })
+    <div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Persona Jur&iacute;dica:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridicas", @class = "form-control", @placeholder = "Representante Legal", @name = "persona_juridica" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>RUC:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
+                            @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", @name = "RUC" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Nombre del Proveedor</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
+                            @Html.TextBoxFor(m => m.nombre, new { @id = "nombres", @class = "form-control", @placeholder = "Nombre", @name = "nombre" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Descripci&oacute;n:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-sticky-note"></i></span></div>
+                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Email:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
+                            @Html.TextBoxFor(m => m.email, new { @id = "emails", @class = "form-control", @placeholder = "Email", @name = "email" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Direcci&oacute;n:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-home"></i></span></div>
+                            @Html.TextBoxFor(m => m.direccion, new { @id = "direccions", @class = "form-control", @placeholder = "Dirección", @name = "direccion" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Tel&eacute;fono</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
+                            @Html.TextBoxFor(m => m.telefono, new { @id = "telefonos", @class = "form-control", @placeholder = "Teléfono", @name = "telefono" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
             @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
-
-            <div class="form-group">
-                <label>RUC</label>
-                @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", @name = "RUC" })
-            </div>
-
-
-            <div class="form-group">
-                <label>Nombre</label>
-                @Html.TextBoxFor(m => m.nombre, new { @id = "nombres", @class = "form-control", @placeholder = "Nombre", @name = "nombre" })
-            </div>
-
-            <div class="form-group">
-                <label>Descripción</label>
-                @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
-            </div>
-
-
-            <div class="form-group">
-                <label>Email</label>
-                @Html.TextBoxFor(m => m.email, new { @id = "emails", @class = "form-control", @placeholder = "Email", @name = "email" })
-            </div>
-
-
-            <div class="form-group">
-                <label>Dirección</label>
-                @Html.TextBoxFor(m => m.direccion, new { @id = "direccions", @class = "form-control", @placeholder = "Dirección", @name = "direccion" })
-            </div>
-
-
-            <div class="form-group">
-                <label>Teléfono</label>
-                @Html.TextBoxFor(m => m.telefono, new { @id = "telefonos", @class = "form-control", @placeholder = "Teléfono", @name = "telefono" })
-            </div>
-
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <br />
 }
 
-
-<table class="table-hover">
+<table class="table" style="text-align:center">
     <tr>
         <th>Item</th>
         <th>Persona Jurídica</th>
@@ -63,6 +110,7 @@
         <th>Email</th>
         <th>Direción</th>
         <th>Teléfono</th>
+        <th>Acciones</th>
     </tr>
 
     @foreach (var item in listProveedor)
@@ -77,8 +125,8 @@
             <td>@item.direccion</td>
             <td>@item.telefono</td>
             <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteProveedor(@item.id_proveedor)'><span class='glyphicon glyphicon-trash'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_proveedor" onclick='EditProveedor(@item.id_proveedor)'><span class='glyphicon glyphicon-edit'></span></a>
+                <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteProveedor(@item.id_proveedor)'><span class='flaticon2-rubbish-bin'></span></a>
+                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_proveedor" onclick='EditProveedor(@item.id_proveedor)'><span class='flaticon2-pen'></span></a>
             </td>
         </tr>
     }

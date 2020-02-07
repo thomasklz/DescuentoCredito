@@ -8,32 +8,31 @@ using Creditos.Models;
 using Creditos.Entity;
 using Newtonsoft.Json;
 
-namespace Creditos.Controllers
-{
-    public class subdescuentoController : Controller
-    {
-        // GET: subdescuento
+namespace Creditos.Controllers{
+    public class subdescuentosController : Controller{
+
+        // GET: subdescuentos
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
-        clsSubDescuento clssubdescuento = new clsSubDescuento();
-        List<mSubDesuento> list_subdescuento = new List<mSubDesuento>();
+        clsSubDescuentos clssubd = new clsSubDescuentos();
+        List<mSubDescuentos> lista_subd = new List<mSubDescuentos>();
         public ActionResult Index()
         {
-            ViewBag.subdescuentos = clssubdescuento.mostrar();
+            ViewBag.subdescuento = clssubd.mostrar();
             return View();
         }
 
-        public ActionResult Store(mSubDesuento model)
+        public ActionResult Store(mSubDescuentos model)
         {
-            clssubdescuento.ingresar(model);
+            clssubd.ingresar(model);
             return RedirectToAction("index");
         }
 
-        public JsonResult UpdateSubDescuento(mSubDesuento model)
+        public JsonResult UpdateSubDescuentos(mSubDescuentos model)
         {
             string result = "";
             try
             {
-                if (clssubdescuento.modificar(model) == true)
+                if (clssubd.modificar(model) == true)
                 {
                     result = "Registro actualizado";
                 }
@@ -46,14 +45,12 @@ namespace Creditos.Controllers
             {
                 result = "Error al actualizar";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult GetSubDescuentoById(int SubDescuentoId)
+        public JsonResult GetSubDescuentosById(int SubDescuentosId)
         {
-            List<mSubDesuento> model = clssubdescuento.mostrarById(SubDescuentoId);
+            List<mSubDescuentos> model = clssubd.mostrarById(SubDescuentosId);
             string value = string.Empty;
             value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
@@ -62,21 +59,19 @@ namespace Creditos.Controllers
             return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-
-        public JsonResult DeleteSubDescuento(int SubDescuentoId)
+        public JsonResult DeleteSubDescuentos(int SubDescuentosId)
         {
             string result = "";
-            SubDescuento subdescuento = db.SubDescuento.Find(SubDescuentoId);
+            SubDescuento subdescuento = db.SubDescuento.Find(SubDescuentosId);
             if (subdescuento != null)
             {
-                clssubdescuento.eliminar(SubDescuentoId);
+                clssubd.eliminar(SubDescuentosId);
                 result = "Eliminado";
             }
             else
             {
                 result = "Registro no encontrado";
             }
-
             return Json(result, JsonRequestBehavior.AllowGet);
         }
     }

@@ -7,21 +7,19 @@ using Creditos.Entity;
 
 namespace Creditos.Clases
 {
-    public class clsSubDescuento
+    public class clsSubDescuentos
     {
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
-        clsSubDescuento clssubd = new clsSubDescuento();
-        List<mSubDesuento> lista_subdescuento = new List<mSubDesuento>();
-        public List<mSubDesuento> mostrar()
+        List<mSubDescuentos> listasubd = new List<mSubDescuentos>();
+        public List<mSubDescuentos> mostrar()
         {
-
             foreach (var item in db.spConsultarSubDescuento())
             {
-                lista_subdescuento.Add(new mSubDesuento(item.id_subdescuento, item.descripcion));
+                listasubd.Add(new mSubDescuentos(item.id_subdescuento, item.descripcion));
             }
-            return lista_subdescuento;
+            return listasubd;
         }
-        public void ingresar(mSubDesuento datos)
+        public void ingresar(mSubDescuentos datos)
         {
             db.spInsertarSubDescuento(datos.descripcion);
         }
@@ -29,8 +27,7 @@ namespace Creditos.Clases
         {
             db.spEliminarSubDescuento(id);
         }
-
-        public Boolean modificar(mSubDesuento datos)
+        public Boolean modificar(mSubDescuentos datos)
         {
             Boolean result = false;
             try
@@ -44,13 +41,13 @@ namespace Creditos.Clases
             }
             return result;
         }
-        public List<mSubDesuento> mostrarById(int id)
+        public List<mSubDescuentos> mostrarById(int id)
         {
             foreach (var item in db.spConsultarSubdescuentoById(id))
             {
-                lista_subdescuento.Add(new mSubDesuento(item.id_subdescuento, item.descripcion));
+                listasubd.Add(new mSubDescuentos(item.id_subdescuento, item.descripcion));
             }
-            return lista_subdescuento;
+            return listasubd;
         }
     }
 }

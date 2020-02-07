@@ -1,170 +1,200 @@
 ﻿
 @model Creditos.Models.mEgresos
+@{List<Creditos.Models.mEgresos> listEgreso = ViewBag.egresos;}
 
-@{
-    List<Creditos.Models.mEgresos> listEgreso = ViewBag.egresos;
-}
-<h1>EGRESOS</h1>
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Egresos</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
+    </div>
+</div>
+
 @using (Html.BeginForm("Store", "egresos", FormMethod.Post))
 {
-    <div class="form-group">
-        <label>Valor</label>
-        @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
-    </div>
-            @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
-            <div>
-                <label>Tipo Egreso </label>
-                <div class="form-group">
-                    @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_ids", @class = "form-control" })
+    <div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Cantidad:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                            @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <label>Mes </label>
-                <div class="form-group">
-                    @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Tipo de Egreso:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-bolt"></i></span></div>
+                            @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_ids", @class = "form-control" })
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
-}
-<table class="table-hover">
-    <tr>
-        <th>Item</th>
-        <th>Valor</th>
-        <th>Tipo Egreso</th>
-        <th>Mes</th>
-        <th>Acciones</th>
-    </tr>
-    @foreach (var item in listEgreso)
-    {
-        <tr class='row_@item.id_egresos'>
-            <td>@item.id_egresos</td>
-            <td>@item.valor</td>
-            <td>@item.tipoegreso</td>
-            <td>@item.mes</td>
-            <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteEgreso(@item.id_egresos)'><span class='flaticon2-rubbish-bin'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_egresos" onclick='EditEgreso(@item.id_egresos)'><span class='flaticon2-pen'></span></a>
-            </td>
-        </tr>
-    }
-</table>
-<div class="modal fade" id="MyModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Egresos</h4>
-            </div>
-            <div class="modal-body">
-                <form id="form">
-                    <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m.id_egresos, new { @id = "id_egresos" })
-                        <div class="form-group">
-                            <label>Valor</label>
-                            @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Mes:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
                         </div>
-                        @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
-                        <div class="form-group">
-                            <label>Tipo de Egreso</label>
-                            @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label>Mes</label>
-                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateEgreso()">Guardar</a>
-                        </div>
-                    </fieldset>
-                </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script>    
-    var row;
-    function UpdateEgreso(Egreso) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/egresos/UpdateEgresos",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    row.find("td").eq(1).html($('#valor').val());
-                    row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
-                    row.find("td").eq(2).html($('select[id="tipo_egreso_id"] option:selected').text());
-                } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+    @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+    <br />
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <br />
+}
+            <table class="table" style="text-align:center">
+                <tr>
+                    <th>Item</th>
+                    <th>Valor</th>
+                    <th>Tipo Egreso</th>
+                    <th>Mes</th>
+                    <th>Acciones</th>
+                </tr>
+                @foreach (var item in listEgreso)
+                {
+                    <tr class='row_@item.id_egresos'>
+                        <td>@item.id_egresos</td>
+                        <td>@item.valor</td>
+                        <td>@item.tipoegreso</td>
+                        <td>@item.mes</td>
+                        <td>
+                            <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEgreso(@item.id_egresos)'><span class='flaticon2-rubbish-bin'></span></a>
+                            <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_egresos" onclick='EditEgreso(@item.id_egresos)'><span class='flaticon2-pen'></span></a>
+                        </td>
+                    </tr>
                 }
-                $("#MyModal").modal("hide");
-            }
-        })
-    }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
-            $.ajax({
-                type: "GET",
-                url: "/egresos/GetEgresoById?EgresoId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#id_egresos").val(obj[0].id_egresos);
-                    $("#valor").val(obj[0].valor);
-                    $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
-                    $("#tipo_egreso_id option[value='" + obj[0].tipo_egreso_id + "']").attr("selected", true);
-                }
-            })
-        })
-    })
-    function DeleteEgreso(Egreso) {
-        Swal.fire({
-            title: '¿Está seguro?',
-            text: '¿Desea eliminar el registro seleccionado?',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: "/egresos/DeleteEgreso?EgresoId=" + Egreso,
-                    success: function (result) {
-                        if (result == "Eliminado") {
-                            Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
-                                'success'
-                            )
-                            $(".row_" + Egreso).remove();
-                        } else {
-                            Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
-                                'error'
-                            )
+            </table>
+            <div class="modal fade" id="MyModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+                            <h4 id="ModalTitle">Modificar Egresos</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form id="form">
+                                <fieldset id="SubmitForm">
+                                    @Html.HiddenFor(m => m.id_egresos, new { @id = "id_egresos" })
+                                    <div class="form-group">
+                                        <label>Valor</label>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                                    </div>
+                                    @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+                                    <div class="form-group">
+                                        <label>Tipo de Egreso</label>
+                                        @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_id", @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mes</label>
+                                        @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_id", @class = "form-control" })
+                                    </div>
+                                    <div class="form-group">
+                                        <a href="#" class="btn btn-block btn-danger" onclick="UpdateEgreso()">Guardar</a>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+
+                var row;
+                function UpdateEgreso(Egreso) {
+                    var data = $("#SubmitForm").serialize();
+                    $.ajax({
+                        type: "Post",
+                        url: "/egresos/UpdateEgresos",
+                        data: data,
+                        success: function (result) {
+                            if (result == "Registro actualizado") {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'Registro actualizado',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                                row.find("td").eq(1).html($('#valor').val());
+                                row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+                                row.find("td").eq(2).html($('select[id="tipo_egreso_id"] option:selected').text());
+                            } else {
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'error',
+                                    title: 'Error al actualizado',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                })
+                            }
+                            $("#MyModal").modal("hide");
                         }
-                    }
+                    })
+                }
+                $(document).ready(function () {
+                    $('[data-id]').click(function () {
+                        row = $(this).parents("tr");
+                        var id = $(this).data("id")
+                        $("#MyModal").modal();
+                        $.ajax({
+                            type: "GET",
+                            url: "/egresos/GetEgresoById?EgresoId=" + id,
+                            success: function (data) {
+                                var obj = JSON.parse(data);
+                                $("#id_egresos").val(obj[0].id_egresos);
+                                $("#valor").val(obj[0].valor);
+                                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                                $("#tipo_egreso_id option[value='" + obj[0].tipo_egreso_id + "']").attr("selected", true);
+                            }
+                        })
+                    })
                 })
-            }
-        })
-    }
-</script>
+                function DeleteEgreso(Egreso) {
+                    Swal.fire({
+                        title: '¿Está seguro?',
+                        text: '¿Desea eliminar el registro seleccionado?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Borrar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.value) {
+                            $.ajax({
+                                type: "POST",
+                                url: "/egresos/DeleteEgreso?EgresoId=" + Egreso,
+                                success: function (result) {
+                                    if (result == "Eliminado") {
+                                        Swal.fire(
+                                            'Borrado!',
+                                            'El registro fue borrado con éxito',
+                                            'success'
+                                        )
+                                        $(".row_" + Egreso).remove();
+                                    } else {
+                                        Swal.fire(
+                                            'Borrado!',
+                                            'No se pudo eliminar el registro',
+                                            'error'
+                                        )
+                                    }
+                                }
+                            })
+                        }
+                    })
+                }
+            </script>

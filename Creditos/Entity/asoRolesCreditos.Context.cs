@@ -21,7 +21,7 @@ namespace Creditos.Entity
             : base("name=BD_AsoRolesCreditos_Entities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -1124,6 +1124,24 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarTipoEgresoById_Result> spConsultarTipoEgresoById(Nullable<int> id_tipo_egreso)
+        {
+            var id_tipo_egresoParameter = id_tipo_egreso.HasValue ?
+                new ObjectParameter("id_tipo_egreso", id_tipo_egreso) :
+                new ObjectParameter("id_tipo_egreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoEgresoById_Result>("spConsultarTipoEgresoById", id_tipo_egresoParameter);
+        }
+    
+        public virtual ObjectResult<spConsultarTipoIngresoById_Result> spConsultarTipoIngresoById(Nullable<int> id_tipo_ingreso)
+        {
+            var id_tipo_ingresoParameter = id_tipo_ingreso.HasValue ?
+                new ObjectParameter("id_tipo_ingreso", id_tipo_ingreso) :
+                new ObjectParameter("id_tipo_ingreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngresoById_Result>("spConsultarTipoIngresoById", id_tipo_ingresoParameter);
         }
     }
 }

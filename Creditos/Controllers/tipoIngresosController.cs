@@ -5,87 +5,76 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class tipoIngresosController : Controller
     {
         // GET: tipoIngresos
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsTipoIngresos tipoin = new clsTipoIngresos();
+        List<mTipoIngreso> list_tipoi = new List<mTipoIngreso>();
         public ActionResult Index()
         {
+            ViewBag.tipoingreso = tipoin.mostrar();
             return View();
         }
 
-        // GET: tipoIngresos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Store(mTipoIngreso model)
         {
-            return View();
+            tipoin.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: tipoIngresos/Create
-        public ActionResult Create()
+        public JsonResult UpdateTipoIngresos(mTipoIngreso model)
         {
-            return View();
-        }
-
-        // POST: tipoIngresos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (tipoin.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else
+                {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: tipoIngresos/Edit/5
-        public ActionResult Edit(int id)
+        public JsonResult GetTipoIngresosById(int TipoIngresoId)
         {
-            return View();
+            List<mTipoIngreso> model = tipoin.mostrarById(TipoIngresoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: tipoIngresos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult DeleteTipoIngresos(int TipoIngresoId)
         {
-            try
+            string result = "";
+            Tipo_ingreso tipoingreso = db.Tipo_ingreso.Find(TipoIngresoId);
+            if (tipoingreso != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                tipoin.eliminar(TipoIngresoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: tipoIngresos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: tipoIngresos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

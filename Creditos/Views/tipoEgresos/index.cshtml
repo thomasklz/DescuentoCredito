@@ -1,37 +1,49 @@
-﻿@model Creditos.Models.mSubDesuento
+﻿@model Creditos.Models.mTipoEgreso
+@{List<Creditos.Models.mTipoEgreso> listTipoEgreso = ViewBag.tipoegreso;}
 
-@{
-    List<Creditos.Models.mSubDesuento> listSubDesuento = ViewBag.subdescuentos;
-}
-<h1>SUBDESCUENTOS</h1>
-@using (Html.BeginForm("Store", "subdescuentos", FormMethod.Post))
-{
-    <div class="form-group">
-        <label>Descripción</label>
-        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Tipo de Egresos</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
     </div>
+</div>
 
-            @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
-
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+@using (Html.BeginForm("Store", "tipoegresos", FormMethod.Post))
+{
+    <div>
+        <label>Descripción:</label>
+        <div class="input-group">
+            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción del Egreso", @name = "descripcion" })
+        </div>
+    </div>
+    <br />
+    <div>
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+    <br />
 }
 
-<table class="table-hover">
+<table class="table" style="text-align:center">
     <tr>
         <th>Item</th>
         <th>Descripción</th>
+        <th>Acciones</th>
     </tr>
-
-    @foreach (var item in listSubDesuento)
+    @foreach (var item in listTipoEgreso)
     {
-        <tr class='row_@item.id_subdescuento'>
-            <td>@item.id_subdescuento</td>
+        <tr class='row_@item.id_tipo_egreso'>
+            <td>@item.id_tipo_egreso</td>
             <td>@item.descripcion</td>
             <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteSubDescuento(@item.id_subdescuento)'><span class='glyphicon glyphicon-trash'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_subdescuento" onclick='EditSubDescuento(@item.id_subdescuento)'><span class='glyphicon glyphicon-edit'></span></a>
+                <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteTipoEgresos(@item.id_tipo_egreso)'><span class='flaticon2-rubbish-bin'></span></a>
+                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_tipo_egreso" ><span class='flaticon2-pen'></span></a>
             </td>
         </tr>
     }
@@ -42,23 +54,19 @@
         <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar SubDescuento</h4>
+                <h4 id="ModalTitle">Modificar Tipos de Egresos</h4>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m.id_subdescuento, new { @id = "id_subdescuento" })
+                        @Html.HiddenFor(m => m.id_tipo_egreso, new { @id = "id_tipo_egreso" })
 
                         <div class="form-group">
                             <label>Descripción</label>
                             @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
                         </div>
-
-
-                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })*@
-
                         <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateSubDescuento()">Save</a>
+                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateTipoEgresos()">Save</a>
                         </div>
                     </fieldset>
                 </form>
@@ -68,11 +76,11 @@
 </div>
 <script>
     var row;
-    function UpdateSubDescuento(SubDescuento) {
+    function UpdateTipoEgresos(TipoEgreso) {
         var data = $("#SubmitForm").serialize();
         $.ajax({
             type: "Post",
-            url: "/subdescuentos/UpdateSubDescuento",
+            url: "/tipoegresos/UpdateTipoEgresos",
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
@@ -84,6 +92,7 @@
                         timer: 1500
                     })
                     row.find("td").eq(1).html($('#descripcion').val());
+
                 } else {
                     Swal.fire({
                         position: 'top-end',
@@ -104,16 +113,16 @@
             $("#MyModal").modal();
             $.ajax({
                 type: "GET",
-                url: "/subdescuentos/GetSubDescuentoById?SubDescuentoId=" + id,
+                url: "/tipoegresos/GetTipoEgresosById?TipoEgresosId=" + id,
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    $("#id_subdescuento").val(obj[0].id_subdescuento);
+                    $("#id_tipo_egreso").val(obj[0].id_tipo_egreso);
                     $("#descripcion").val(obj[0].descripcion);
                 }
             })
         })
     })
-    function DeleteSubDescuento(SubDescuento) {
+    function DeleteTipoEgresos(TipoEgreso) {
         Swal.fire({
             title: 'Estás seguro?',
             text: 'Deseas eliminar el registro seleccionado!',
@@ -125,7 +134,7 @@
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: "/subdescuentos/DeleteSubDescuento?SubDescuentoId=" + SubDescuento,
+                    url: "/tipoegresos/DeleteTipoEgresos?TipoEgresoId=" + TipoEgreso,
                     success: function (result) {
                         if (result == "Eliminado") {
                             Swal.fire(
@@ -133,7 +142,7 @@
                                 'El registro fue borrado con éxito',
                                 'success'
                             )
-                            $(".row_" + SubDescuento).remove();
+                            $(".row_" + TipoEgreso).remove();
                         } else {
                             Swal.fire(
                                 'Borrado!',
@@ -147,3 +156,4 @@
         })
     }
 </script>
+

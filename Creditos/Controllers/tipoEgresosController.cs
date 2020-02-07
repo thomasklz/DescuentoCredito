@@ -5,87 +5,75 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class tipoEgresosController : Controller
     {
         // GET: tipoEgresos
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsTipoEgresos tipoeg = new clsTipoEgresos();
+        List<mTipoEgreso> list_tipoe = new List<mTipoEgreso>();
         public ActionResult Index()
         {
+            ViewBag.tipoegreso = tipoeg.mostrar();
             return View();
         }
 
-        // GET: tipoEgresos/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Store(mTipoEgreso model)
         {
-            return View();
+            tipoeg.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: tipoEgresos/Create
-        public ActionResult Create()
+        public JsonResult UpdateTipoEgresos(mTipoEgreso model)
         {
-            return View();
-        }
-
-        // POST: tipoEgresos/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
+            string result = "";
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                if (tipoeg.modificar(model) == true)
+                {
+                    result = "Registro actualizado";
+                }
+                else
+                {
+                    result = "Error al actualizar";
+                }
             }
-            catch
+            catch (Exception)
             {
-                return View();
+                result = "Error al actualizar";
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: tipoEgresos/Edit/5
-        public ActionResult Edit(int id)
+        public JsonResult GetTipoEgresosById(int TipoEgresoId)
         {
-            return View();
+            List<mTipoEgreso> model = tipoeg.mostrarById(TipoEgresoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: tipoEgresos/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult DeleteTipoEgresos(int TipoEgresoId)
         {
-            try
+            string result = "";
+            Tipo_egreso tipoegreso = db.Tipo_egreso.Find(TipoEgresoId);
+            if (tipoegreso != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                tipoeg.eliminar(TipoEgresoId);
+                result = "Eliminado";
             }
-            catch
+            else
             {
-                return View();
+                result = "Registro no encontrado";
             }
-        }
-
-        // GET: tipoEgresos/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: tipoEgresos/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

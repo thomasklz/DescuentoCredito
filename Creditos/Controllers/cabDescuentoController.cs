@@ -13,11 +13,11 @@ namespace Creditos.Controllers{
         // GET: cabDescuento
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
         clsCabDescuento clscabdesc = new clsCabDescuento();
-        //clsSubDescuento clssubdesc = new clsSubDescuento();
+        clsSubDescuentos clssubdesc = new clsSubDescuentos();
         List<mCabDescuento> list_cabdesc = new List<mCabDescuento>();
         public ActionResult Index()
         {
-            //ViewBag.subdescuento = new SelectList(clssubdesc.mostrar(), "id_subdescuento", "descripcion");
+            ViewBag.subdescuento = new SelectList(clssubdesc.mostrar(), "id_subdescuento", "descripcion");
             ViewBag.listCabDesc = clscabdesc.mostrar();
             return View();
         }
