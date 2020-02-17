@@ -5,87 +5,83 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
-namespace Creditos.Controllers
-{
+namespace Creditos.Controllers{
     public class creditoController : Controller
     {
         // GET: credito
-        public ActionResult Index()
-        {
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsEmpleadoAsociacion clsempl_aso = new clsEmpleadoAsociacion();
+        //clsIngresos clsingreso = new clsIngresos();
+        clsCredito clscred = new clsCredito();
+        List<mCredito> list_credito = new List<mCredito>();
+        public ActionResult indexU(){
+            ViewBag.credxus = clscred.mostrarByUser(3);
             return View();
         }
-
-        // GET: credito/Details/5
-        public ActionResult Details(int id)
+        public ActionResult indexA()
         {
+            ViewBag.credNoAp = clscred.mostrarNoAp();
+            ViewBag.creditos = clscred.mostrar();
             return View();
         }
-
-        // GET: credito/Create
-        public ActionResult Create()
-        {
-            return View();
+        public ActionResult Store(mCredito model){
+            clscred.ingresar(model);
+            return RedirectToAction("indexU");
         }
 
-        // POST: credito/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //public JsonResult UpdateIngresos(mIngresos model)
+        //{
+        //    string result = "";
+        //    try
+        //    {
+        //        if (clsingreso.modificar(model) == true)
+        //        {
+        //            result = "Registro actualizado";
+        //        }
+        //        else
+        //        {
+        //            result = "Error al actualizar";
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        result = "Error al actualizar";
+        //    }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        // GET: credito/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: credito/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //public JsonResult GetIngresoById(int IngresoId)
+        //{
+        //    List<mIngresos> model = clsingreso.mostrarById(IngresoId);
+        //    string value = string.Empty;
+        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+        //    {
+        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //    });
+        //    return Json(value, JsonRequestBehavior.AllowGet);
+        //}
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
-        // GET: credito/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public JsonResult DeleteIngreso(int IngresoId)
+        //{
+        //    string result = "";
+        //    Ingresos ingreso = db.Ingresos.Find(IngresoId);
+        //    if (ingreso != null)
+        //    {
+        //        clsingreso.eliminar(IngresoId);
+        //        result = "Eliminado";
+        //    }
+        //    else
+        //    {
+        //        result = "Registro no encontrado";
+        //    }
 
-        // POST: credito/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

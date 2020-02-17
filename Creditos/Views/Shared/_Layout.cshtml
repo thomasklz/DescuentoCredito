@@ -37,6 +37,69 @@
 </head>
 <body class="kt-page--loading-enabled kt-page--loading kt-page--fluid kt-header--fixed kt-header--minimize-topbar kt-header-mobile--fixed kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-subheader--enabled kt-subheader--transparent kt-page--loading">
     <!-- begin::Header -->
+    <!-- begin::MOBILE :: PENDIENTE DE ADAPTAR -->
+    <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed ">
+        <div class="kt-header-mobile__brand">
+            <a class="kt-header-mobile__logo" href="#">
+                <img alt="Logo" src="../Content/media/logos/logo-5-sm.png" />
+            </a>
+            <div class="kt-header-mobile__nav">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-pill btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Sitemas Institucionales
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-fit dropdown-menu-md">
+                        <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-margin-t-20 kt-margin-b-20">
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link active" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon2-user"></i></span>
+                                    <span class="kt-nav__link-text">Talento Humano</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon-feed"></i></span>
+                                    <span class="kt-nav__link-text">Gestion Academica</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon2-open-text-book"></i></span>
+                                    <span class="kt-nav__link-text">Biblioteca</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon2-browser"></i></span>
+                                    <span class="kt-nav__link-text">Pagina Principal</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__separator"></li>
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon-list-2"></i></span>
+                                    <span class="kt-nav__link-text">Hoja de Vida</span>
+                                </a>
+                            </li>
+                            <li class="kt-nav__item">
+                                <a class="kt-nav__link" href="#">
+                                    <span class="kt-nav__link-icon"><i class="flaticon2-contract"></i></span>
+                                    <span class="kt-nav__link-text">Editar Datos Personales</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="kt-header-mobile__toolbar">
+
+            <button class="kt-header-mobile__toolbar-toggler" data-toggle="kt-tooltip" data-original-title="Opciones" id="kt_header_mobile_toggler"><span></span></button>
+            <button class="kt-header-mobile__toolbar-topbar-toggler" data-toggle="kt-tooltip" data-original-title="Perfil" id="kt_header_mobile_topbar_toggler"><i class="flaticon-more-1"></i></button>
+        </div>
+    </div>
+    <!-- begin::MOBILE :: PENDIENTE DE ADAPTAR -->
+
     <div class="container">
         <div class="kt-grid kt-grid--hor kt-grid--root">
             <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--ver kt-page">
@@ -269,7 +332,10 @@
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Ingreso a Asociación", "index", "empleadoAsociacion")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Créditos", "index", "credito")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Aprobar Créditos", "indexA", "credito")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Cantidad Asignada", "index", "valorAsignado")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "index", "#")</span></p>
@@ -283,10 +349,12 @@
                                                         <li class="kt-menu__item " aria-haspopup="true">
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Gestión de Descuentos", "index", "descuento")</span></p>
                                                         </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "index", "#")</span></p>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </li>
-                                            
                                             <li class="kt-menu__item kt-menu__item--open kt-menu__item--here kt-menu__item--submenu kt-menu__item--rel kt-menu__item--open kt-menu__item--here" data-ktmenu-submenu-toggle="click" aria-haspopup="true">
                                                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">PROVEEDORES</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                                                     <ul class="kt-menu__subnav">
@@ -312,7 +380,7 @@
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "index", "valorUtilizado")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Créditos", "index", "credito")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Solicitar Créditos", "indexU", "credito")</span></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -325,6 +393,7 @@
                         <!-- end: Header Menu -->
                     </div>
                     <!-- begin:: CONTENIDOS -->
+
                     <div class="kt-body kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor kt-grid--stretch" id="kt_body">
                         <div class="kt-content kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
                             

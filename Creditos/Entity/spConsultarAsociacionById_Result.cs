@@ -11,12 +11,10 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarEmpleadoAsociacion_Result
+    public partial class spConsultarAsociacionById_Result
     {
-        public int id_empl_aso { get; set; }
-        public Nullable<System.DateTime> fecha_ingreso { get; set; }
-        public string persona { get; set; }
-        public string aso { get; set; }
-        public int Id_Persona { get; set; }
+        public int id_asociacion { get; set; }
+        public string descripcion { get; set; }
+        public Nullable<bool> est_delete { get; set; }
     }
 }

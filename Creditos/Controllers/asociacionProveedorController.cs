@@ -5,87 +5,68 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
+
 
 namespace Creditos.Controllers
 {
     public class asociacionProveedorController : Controller
     {
         // GET: asociacionProveedor
-        public ActionResult Index()
-        {
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsAsociacion clsaso = new clsAsociacion();
+        clsProveedores clsprov = new clsProveedores();
+        clsAsociacionProveedor cls_aso_pro = new clsAsociacionProveedor();
+        List<mAsociacionProveedor> list_aso_prov = new List<mAsociacionProveedor>();
+        public ActionResult Index(){
+            ViewBag.asoc = new SelectList(clsaso.mostrar(), "id_asociacion", "descripcion");
+            ViewBag.proveedor = clsprov.mostrar();
+            ViewBag.aso_prov = cls_aso_pro.mostrar();
             return View();
         }
 
-        // GET: asociacionProveedor/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        public ActionResult Store(mAsociacionProveedor model){
+            cls_aso_pro.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: asociacionProveedor/Create
-        public ActionResult Create()
+        public JsonResult UpdateAsoProv(mAsociacionProveedor model)
         {
-            return View();
+            string result = "";
+            try{
+                if (cls_aso_pro.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
+            }catch (Exception){
+                result = "Error al actualizar";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: asociacionProveedor/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public JsonResult GetAsoProvById(int AsoProvId)
         {
-            try
+            List<mAsociacionProveedor> model = cls_aso_pro.mostrarById(AsoProvId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: asociacionProveedor/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: asociacionProveedor/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+        public JsonResult DeleteAsoProv(int AsoProvId){
+            string result = "";
+            Asociacion_Proveedor aso_prov = db.Asociacion_Proveedor.Find(AsoProvId);
+            if (aso_prov != null){
+                cls_aso_pro.eliminar(AsoProvId);
+                result = "Eliminado";
+            }else{
+                result = "Registro no encontrado";
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: asociacionProveedor/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: asociacionProveedor/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -8,21 +8,36 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsAsociacionProveedor{
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
-        //public List<mAsociacionProveedor> mostrar(){
-        //    List<mAsociacionProveedor> lista_aso_prov = new List<mAsociacionProveedor>();
-        //    foreach (var item in db.spConsultarAsociacionProveedor()){
-        //        lista_aso_prov.Add(new mAsociacionProveedor(item.id_asoc_prov, Convert.ToInt32(item.proveedor_id),Convert.ToInt32(item.asociacion_id),Convert.ToDateTime(item.fecha)));
-        //    }
-        //    return lista_aso_prov;
-        //}
+        List<mAsociacionProveedor> lista_Aso_rpov = new List<mAsociacionProveedor>();
+        public List<mAsociacionProveedor> mostrar(){
+            foreach (var item in db.spConsultarAsociacionProveedor()){
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.aso, Convert.ToDateTime(item.fecha)));
+            }
+            return lista_Aso_rpov;
+        }
         public void ingresar(mAsociacionProveedor datos){
             db.spInsertarAsociacionProveedor(datos.proveedor_id, datos.asociacion_id, datos.fecha);
+
         }
-        public void eliminar(mAsociacionProveedor datos){
-            db.spEliminarAsociacionProveedor(datos.id_asoc_prov);
+        public void eliminar(int id){
+            db.spEliminarAsociacionProveedor(id);
         }
-        public void modificar(mAsociacionProveedor datos){
-            db.spModificarAsociacionProveedor(datos.id_asoc_prov, datos.proveedor_id, datos.asociacion_id, datos.fecha);
+        public Boolean modificar(mAsociacionProveedor datos){
+            Boolean result = false;
+            try{
+                db.spModificarAsociacionProveedor(datos.id_asoc_prov, datos.proveedor_id, datos.asociacion_id, datos.fecha);
+                result = true;
+            }
+            catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mAsociacionProveedor> mostrarById(int id){
+            foreach (var item in db.spConsultarAsociacionProveedorById(id)){
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.aso, Convert.ToDateTime(item.fecha)));
+            }
+            return lista_Aso_rpov;
         }
     }
 }

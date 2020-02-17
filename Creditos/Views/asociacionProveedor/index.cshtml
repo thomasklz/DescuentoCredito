@@ -1,0 +1,268 @@
+﻿
+@model Creditos.Models.mAsociacionProveedor
+
+
+@{
+    List<Creditos.Models.mAsociacionProveedor> listEmplAso = ViewBag.aso_prov;
+    List<Creditos.Models.mProveedores> listProv = ViewBag.proveedor;
+}
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Ingreso de Convenios</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("Store", "asociacionProveedor", FormMethod.Post))
+{
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Proveedores</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table" style="text-align:center" id="tablaSA">
+                    <tr>
+                        <th>Item</th>
+                        <th>RUC</th>
+                        <th>Representante</th>
+                        <th>Proveedor</th>
+                        <th>Actividad</th>
+                        <th>Dirección</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                    @foreach (var item in listProv)
+                    {
+                        <tr class='row_@item.id_proveedor'>
+                            <td>@item.id_proveedor</td>
+                            <td>@item.RUC</td>
+                            <td>@item.persona_juridica</td>
+                            <td>@item.nombre</td>
+                            <td>@item.descripcion</td>
+                            <td>@item.direccion</td>
+                            <td>@item.telefono</td>
+                            <td>
+                                <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>RUC:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            @Html.TextBox("ruc", null, new { @class = "form-control", disabled = "disabled", placeholder = "RUC" })
+                        </div>
+                        @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_id", @Value = "" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Nombre:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            @Html.TextBox("nombre", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Servicio:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            @Html.TextBox("descripcion", null, new { @class = "form-control", disabled = "disabled", placeholder = "Descripción" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Fecha de Unión:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            @Html.TextBoxFor(m => m.fecha, new { @class = "form-control", type = "date" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Asociación:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Asociación--", new { @id = "asociacion_ids", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Confirmar" class="btn btn-primary" />
+        </div>
+    </div>
+    <br />
+    <br />
+
+}
+<table class="table" style="text-align:center">
+    <tr>
+        <th>Item</th>
+        <th>Proveedor</th>
+        <th>Asociación</th>
+        <th>Fecha de Ingreso</th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in listEmplAso)
+    {
+        <tr class='row_@item.id_asoc_prov'>
+            <td>@item.id_asoc_prov</td>
+            <td>@item.proveedor</td>
+            <td>@item.aso</td>
+            <td>@item.fecha.ToShortDateString()</td>
+            <td>
+                <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteAsoProv(@item.id_asoc_prov)'><span class='flaticon2-rubbish-bin'></span></a>
+                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_asoc_prov" @*onclick='EditProveedor(@item.id_empl_aso)'*@><span class='flaticon2-pen'></span></a>
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    $(document).ready(function () {
+        $('.add').click(function () {
+        Swal.fire({
+           title: 'Proveedor Añadido',
+           icon: 'success',
+           confirmButtonText: 'Ok',
+           cancelButtonText: 'Cancelar'})
+            $('#ruc').val($(this).parents("tr").find("td").eq(1).html());
+            $('#nombre').val($(this).parents("tr").find("td").eq(3).html());
+            $('#descripcion').val($(this).parents("tr").find("td").eq(4).html());
+            $('#proveedor_id').val($(this).parents("tr").find("td").eq(0).html());
+            $("#accor").trigger("click")
+        })
+    })
+</script>
+<script>
+    var row;
+    //function UpdateIngreso(Ingreso) {
+    //    var data = $("#SubmitForm").serialize();
+    //    $.ajax({
+    //        type: "Post",
+    //        url: "/ingresos/UpdateIngresos",
+    //        data: data,
+    //        success: function (result) {
+    //            if (result == "Registro actualizado") {
+    //                Swal.fire({
+    //                    position: 'top-end',
+    //                    icon: 'success',
+    //                    title: 'Registro actualizado',
+    //                    showConfirmButton: false,
+    //                    timer: 1500
+    //                })
+    //                row.find("td").eq(1).html($('#valor').val());
+    //                row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+    //                row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
+    //            } else {
+    //                Swal.fire({
+    //                    position: 'top-end',
+    //                    icon: 'error',
+    //                    title: 'Error al actualizado',
+    //                    showConfirmButton: false,
+    //                    timer: 1500
+    //                })
+    //            }
+    //            $("#MyModal").modal("hide");
+    //        }
+    //    })
+    //}
+    //$(document).ready(function () {
+    //    $('[data-id]').click(function () {
+    //        row = $(this).parents("tr");
+    //        var id = $(this).data("id")
+    //        $("#MyModal").modal();
+    //        $.ajax({
+    //            type: "GET",
+    //            url: "/ingresos/GetIngresoById?IngresoId=" + id,
+    //            success: function (data) {
+    //                var obj = JSON.parse(data);
+    //                $("#id_ingresos").val(obj[0].id_ingresos);
+    //                $("#valor").val(obj[0].valor);
+    //                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+    //                $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+    //            }
+    //        })
+    //    })
+    //})
+    function DeleteAsoProv(AsoProv) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/asociacionProveedor/DeleteAsoProv?AsoProvId=" + AsoProv,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+
+                            )
+                            $(".row_" + AsoProv).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                        //$('#tablaSA').DataTable().ajax.reload();
+                        var table = document.getElementById("#tablaSA");
+                        table.refresh();
+                    }
+                })
+            }
+            })
+
+    }
+</script>

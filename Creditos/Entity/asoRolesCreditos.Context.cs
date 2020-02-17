@@ -63,9 +63,31 @@ namespace Creditos.Entity
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<usuarioTipo> usuarioTipo { get; set; }
     
+        public virtual int spAprobarCredito(Nullable<int> idcredito, Nullable<System.DateTime> fecha_aprobacion)
+        {
+            var idcreditoParameter = idcredito.HasValue ?
+                new ObjectParameter("idcredito", idcredito) :
+                new ObjectParameter("idcredito", typeof(int));
+    
+            var fecha_aprobacionParameter = fecha_aprobacion.HasValue ?
+                new ObjectParameter("fecha_aprobacion", fecha_aprobacion) :
+                new ObjectParameter("fecha_aprobacion", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spAprobarCredito", idcreditoParameter, fecha_aprobacionParameter);
+        }
+    
         public virtual ObjectResult<spConsultarAsociacion_Result> spConsultarAsociacion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsociacion_Result>("spConsultarAsociacion");
+        }
+    
+        public virtual ObjectResult<spConsultarAsociacionById_Result> spConsultarAsociacionById(Nullable<int> id_asociacion)
+        {
+            var id_asociacionParameter = id_asociacion.HasValue ?
+                new ObjectParameter("id_asociacion", id_asociacion) :
+                new ObjectParameter("id_asociacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsociacionById_Result>("spConsultarAsociacionById", id_asociacionParameter);
         }
     
         public virtual ObjectResult<spConsultarAsociacionProveedor_Result> spConsultarAsociacionProveedor()
@@ -95,6 +117,15 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarCreditosActivos_Result> spConsultarCreditosActivos()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditosActivos_Result>("spConsultarCreditosActivos");
+        }
+    
+        public virtual ObjectResult<spConsultarCreditosEmpleado_Result> spConsultarCreditosEmpleado(Nullable<int> idpersona)
+        {
+            var idpersonaParameter = idpersona.HasValue ?
+                new ObjectParameter("idpersona", idpersona) :
+                new ObjectParameter("idpersona", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarCreditosEmpleado_Result>("spConsultarCreditosEmpleado", idpersonaParameter);
         }
     
         public virtual ObjectResult<spConsultarCreditosNoAprobados_Result> spConsultarCreditosNoAprobados()
@@ -163,6 +194,11 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarEmpleadoAsociacion_Result> spConsultarEmpleadoAsociacion()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadoAsociacion_Result>("spConsultarEmpleadoAsociacion");
+        }
+    
+        public virtual ObjectResult<spConsultarEmpleadosSinAso_Result> spConsultarEmpleadosSinAso()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarEmpleadosSinAso_Result>("spConsultarEmpleadosSinAso");
         }
     
         public virtual ObjectResult<spConsultarEmpleadosxCreditosActivos_Result> spConsultarEmpleadosxCreditosActivos(Nullable<int> asociacion_id)
@@ -249,9 +285,27 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoEgreso_Result>("spConsultarTipoEgreso");
         }
     
+        public virtual ObjectResult<spConsultarTipoEgresoById_Result> spConsultarTipoEgresoById(Nullable<int> id_tipo_egreso)
+        {
+            var id_tipo_egresoParameter = id_tipo_egreso.HasValue ?
+                new ObjectParameter("id_tipo_egreso", id_tipo_egreso) :
+                new ObjectParameter("id_tipo_egreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoEgresoById_Result>("spConsultarTipoEgresoById", id_tipo_egresoParameter);
+        }
+    
         public virtual ObjectResult<spConsultarTipoIngreso_Result> spConsultarTipoIngreso()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngreso_Result>("spConsultarTipoIngreso");
+        }
+    
+        public virtual ObjectResult<spConsultarTipoIngresoById_Result> spConsultarTipoIngresoById(Nullable<int> id_tipo_ingreso)
+        {
+            var id_tipo_ingresoParameter = id_tipo_ingreso.HasValue ?
+                new ObjectParameter("id_tipo_ingreso", id_tipo_ingreso) :
+                new ObjectParameter("id_tipo_ingreso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngresoById_Result>("spConsultarTipoIngresoById", id_tipo_ingresoParameter);
         }
     
         public virtual ObjectResult<spConsultarValorAsignado_Result> spConsultarValorAsignado()
@@ -447,7 +501,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCabeceraDescuento", descripcionParameter, subdescuento_idParameter);
         }
     
-        public virtual int spInsertarCredito(string descripcion, Nullable<double> cantidad, Nullable<System.DateTime> fecha_solicitud, Nullable<System.DateTime> fecha_aprobacion, Nullable<double> desc_mensual, Nullable<int> emp_aso_id, Nullable<int> numero_cuota, Nullable<bool> estado_activacion, Nullable<bool> estado_aprobacion)
+        public virtual int spInsertarCredito(string descripcion, Nullable<double> cantidad, Nullable<System.DateTime> fecha_solicitud, Nullable<double> desc_mensual, Nullable<int> emp_aso_id, Nullable<int> numero_cuota)
         {
             var descripcionParameter = descripcion != null ?
                 new ObjectParameter("descripcion", descripcion) :
@@ -461,10 +515,6 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha_solicitud", fecha_solicitud) :
                 new ObjectParameter("fecha_solicitud", typeof(System.DateTime));
     
-            var fecha_aprobacionParameter = fecha_aprobacion.HasValue ?
-                new ObjectParameter("fecha_aprobacion", fecha_aprobacion) :
-                new ObjectParameter("fecha_aprobacion", typeof(System.DateTime));
-    
             var desc_mensualParameter = desc_mensual.HasValue ?
                 new ObjectParameter("desc_mensual", desc_mensual) :
                 new ObjectParameter("desc_mensual", typeof(double));
@@ -477,15 +527,7 @@ namespace Creditos.Entity
                 new ObjectParameter("numero_cuota", numero_cuota) :
                 new ObjectParameter("numero_cuota", typeof(int));
     
-            var estado_activacionParameter = estado_activacion.HasValue ?
-                new ObjectParameter("estado_activacion", estado_activacion) :
-                new ObjectParameter("estado_activacion", typeof(bool));
-    
-            var estado_aprobacionParameter = estado_aprobacion.HasValue ?
-                new ObjectParameter("estado_aprobacion", estado_aprobacion) :
-                new ObjectParameter("estado_aprobacion", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCredito", descripcionParameter, cantidadParameter, fecha_solicitudParameter, fecha_aprobacionParameter, desc_mensualParameter, emp_aso_idParameter, numero_cuotaParameter, estado_activacionParameter, estado_aprobacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarCredito", descripcionParameter, cantidadParameter, fecha_solicitudParameter, desc_mensualParameter, emp_aso_idParameter, numero_cuotaParameter);
         }
     
         public virtual int spInsertarDescuento(Nullable<double> valor, Nullable<int> empleado_id, Nullable<int> cab_desc_id, Nullable<int> mes_id, Nullable<System.DateTime> fecha)
@@ -817,6 +859,27 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarEgreso", id_egresosParameter, valorParameter, asociacion_idParameter, tipo_egreso_idParameter, mes_idParameter);
         }
     
+        public virtual int spModificarEmpleadoAsociacion(Nullable<int> id_emp_aso, Nullable<int> empleado_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha)
+        {
+            var id_emp_asoParameter = id_emp_aso.HasValue ?
+                new ObjectParameter("id_emp_aso", id_emp_aso) :
+                new ObjectParameter("id_emp_aso", typeof(int));
+    
+            var empleado_idParameter = empleado_id.HasValue ?
+                new ObjectParameter("empleado_id", empleado_id) :
+                new ObjectParameter("empleado_id", typeof(int));
+    
+            var asociacion_idParameter = asociacion_id.HasValue ?
+                new ObjectParameter("asociacion_id", asociacion_id) :
+                new ObjectParameter("asociacion_id", typeof(int));
+    
+            var fechaParameter = fecha.HasValue ?
+                new ObjectParameter("fecha", fecha) :
+                new ObjectParameter("fecha", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarEmpleadoAsociacion", id_emp_asoParameter, empleado_idParameter, asociacion_idParameter, fechaParameter);
+        }
+    
         public virtual int spModificarIngreso(Nullable<int> id_ingresos, Nullable<double> valor, Nullable<int> asociacion_id, Nullable<int> tipo_ingreso_id, Nullable<int> mes_id)
         {
             var id_ingresosParameter = id_ingresos.HasValue ?
@@ -1124,24 +1187,6 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
-        }
-    
-        public virtual ObjectResult<spConsultarTipoEgresoById_Result> spConsultarTipoEgresoById(Nullable<int> id_tipo_egreso)
-        {
-            var id_tipo_egresoParameter = id_tipo_egreso.HasValue ?
-                new ObjectParameter("id_tipo_egreso", id_tipo_egreso) :
-                new ObjectParameter("id_tipo_egreso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoEgresoById_Result>("spConsultarTipoEgresoById", id_tipo_egresoParameter);
-        }
-    
-        public virtual ObjectResult<spConsultarTipoIngresoById_Result> spConsultarTipoIngresoById(Nullable<int> id_tipo_ingreso)
-        {
-            var id_tipo_ingresoParameter = id_tipo_ingreso.HasValue ?
-                new ObjectParameter("id_tipo_ingreso", id_tipo_ingreso) :
-                new ObjectParameter("id_tipo_ingreso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarTipoIngresoById_Result>("spConsultarTipoIngresoById", id_tipo_ingresoParameter);
         }
     }
 }

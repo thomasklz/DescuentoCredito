@@ -5,87 +5,67 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class empleadoAsociacionController : Controller
     {
         // GET: empleadoAsociacion
-        public ActionResult Index()
-        {
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsAsociacion clsaso = new clsAsociacion();
+        clsPersona clspersona = new clsPersona();
+        clsEmpleadoAsociacion clsempl_aso = new clsEmpleadoAsociacion();
+        List<mEmpleadoAsociacion> list_em_aso = new List<mEmpleadoAsociacion>();
+        public ActionResult Index(){
+            ViewBag.asoc = new SelectList(clsaso.mostrar(), "id_asociacion", "descripcion");
+            ViewBag.persona = clspersona.mostrarSinAso();
+            ViewBag.empl_aso = clsempl_aso.mostrar();
             return View();
         }
 
-        // GET: empleadoAsociacion/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        public ActionResult Store(mEmpleadoAsociacion model){
+            clsempl_aso.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: empleadoAsociacion/Create
-        public ActionResult Create()
+        public JsonResult UpdateEmplAso(mEmpleadoAsociacion model)
         {
-            return View();
+            string result = "";
+            try{
+                if (clsempl_aso.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
+            }
+            catch (Exception){
+                result = "Error al actualizar";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: empleadoAsociacion/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+        public JsonResult GetEmplAsoById(int EmplAsoId){
+            List<mEmpleadoAsociacion> model = clsempl_aso.mostrarById(EmplAsoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: empleadoAsociacion/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: empleadoAsociacion/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+        public JsonResult DeleteEmplAso(int EmplAsoId){
+            string result = "";
+            empleado_asociacion val_asig = db.empleado_asociacion.Find(EmplAsoId);
+            if (val_asig != null){
+                clsempl_aso.eliminar(EmplAsoId);
+                result = "Eliminado";
+            }else{
+                result = "Registro no encontrado";
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: empleadoAsociacion/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: empleadoAsociacion/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

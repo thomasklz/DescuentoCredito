@@ -16,6 +16,7 @@ namespace Creditos.Entity
         public int id_empl_aso { get; set; }
         public Nullable<System.DateTime> fecha_ingreso { get; set; }
         public string persona { get; set; }
+        public string aso { get; set; }
         public int Id_Persona { get; set; }
     }
 }

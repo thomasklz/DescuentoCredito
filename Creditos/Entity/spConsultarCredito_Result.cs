@@ -19,10 +19,13 @@ namespace Creditos.Entity
         public Nullable<System.DateTime> fecha_solicitud { get; set; }
         public Nullable<System.DateTime> fecha_aprobacion { get; set; }
         public Nullable<double> desc_mensual { get; set; }
+        public Nullable<int> emp_aso_id { get; set; }
         public Nullable<int> numero_cuota { get; set; }
         public Nullable<bool> estado_activacion { get; set; }
         public Nullable<bool> estado_aprobacion { get; set; }
-        public Nullable<System.DateTime> empl_aso { get; set; }
+        public Nullable<bool> est_delete { get; set; }
+        public string persona { get; set; }
+        public string aso { get; set; }
         public int id_empl_aso { get; set; }
     }
 }

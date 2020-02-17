@@ -20,7 +20,7 @@ namespace Creditos.Controllers{
         public ActionResult Index(){
             ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
-            ViewBag.persona = new SelectList(clspersona.mostrar(), "Id_Persona", "Nombres");
+            ViewBag.persona = clspersona.mostrar();
             ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }

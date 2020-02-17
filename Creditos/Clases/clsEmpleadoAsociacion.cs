@@ -8,21 +8,37 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsEmpleadoAsociacion{
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        List<mEmpleadoAsociacion> lista_empl_Aso = new List<mEmpleadoAsociacion>();
         public List<mEmpleadoAsociacion> mostrar(){
-            List<mEmpleadoAsociacion> lista_empl_aso = new List<mEmpleadoAsociacion>();
-            foreach (var item in db.spConsultarEmpleadoAsociacion()){
-       //         lista_empl_aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, Convert.ToInt32(item.empleado_id), Convert.ToInt32(item.asociacion_id), Convert.ToDateTime(item.fecha_ingreso)));
+            foreach (var item in db.spConsultarEmpleadoAsociacion())
+            {
+                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, item.aso, Convert.ToDateTime(item.fecha_ingreso)));
             }
-            return lista_empl_aso;
+            return lista_empl_Aso;
         }
         public void ingresar(mEmpleadoAsociacion datos){
             db.spInsertarEmpleadoAsociacion(datos.empleado_id, datos.asociacion_id, datos.fecha_ingreso);
+
         }
-        public void eliminar(mEmpleadoAsociacion datos){
-            db.spEliminarEmpleadoAsociacion(datos.id_empl_aso);
+        public void eliminar(int id){
+            db.spEliminarEmpleadoAsociacion(id);
         }
-        public void modificar(mEmpleadoAsociacion datos){
-       //     db.spModificarEmpleadoAsociacion(datos.id_empl_aso, datos.empleado_id, datos.asociacion_id, datos.fecha_ingreso);
+        public Boolean modificar(mEmpleadoAsociacion datos){
+            Boolean result = false;
+            try{
+                db.spModificarEmpleadoAsociacion(datos.id_empl_aso, datos.empleado_id, datos.asociacion_id, datos.fecha_ingreso);
+                result = true;
+            }
+            catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mEmpleadoAsociacion> mostrarById(int id){
+            foreach (var item in db.spConsultarEmpleadoAsociacionById(id)){
+                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, item.aso, Convert.ToDateTime(item.fecha_ingreso)));
+            }
+            return lista_empl_Aso;
         }
     }
 }

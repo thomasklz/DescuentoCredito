@@ -8,21 +8,34 @@ using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsAsociacion {
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        List<mAsociacion> aso = new List<mAsociacion>();
         public List<mAsociacion> mostrar(){
-            List<mAsociacion> lista_asociacion = new List<mAsociacion>();
             foreach (var item in db.spConsultarAsociacion()){
-                lista_asociacion.Add(new mAsociacion(item.id_asociacion, item.descripcion));
+                aso.Add(new mAsociacion(item.id_asociacion, item.descripcion));
             }
-            return lista_asociacion;
+            return aso;
         }
         public void ingresar(mAsociacion datos){
             db.spInsertarAsociacion(datos.descripcion);
         }
-        public void eliminar(mAsociacion datos){
-            db.spEliminarAsociacion(datos.id_asociacion);
+        public void eliminar(int id){
+            db.spEliminarAsociacion(id);
         }
-        public void modificar(mAsociacion datos){
-            db.spModificarAsociacion(datos.id_asociacion, datos.descripcion);
+        public Boolean modificar(mAsociacion datos){
+            Boolean result = false;
+            try{
+                db.spModificarAsociacion(datos.id_asociacion, datos.descripcion);
+                result = true;
+            }catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mAsociacion> mostrarById(int id){
+            foreach (var item in db.spConsultarAsociacionById(id)){
+                aso.Add(new mAsociacion(item.id_asociacion, item.descripcion));
+            }
+            return aso;
         }
     }
 }

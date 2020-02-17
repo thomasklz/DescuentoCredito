@@ -270,6 +270,9 @@
     <Compile Include="Entity\Sobrante.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConsultarAsociacionById_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spConsultarAsociacionProveedorById_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -292,6 +295,9 @@
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosActivos_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarCreditosEmpleado_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCreditosNoAprobados_Result.cs">
@@ -322,6 +328,9 @@
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadoAsociacion_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarEmpleadosSinAso_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarEmpleadosxCreditosActivos_Result.cs">
@@ -478,6 +487,8 @@
     <Content Include="Content\sweetalert\sweet-alert.less" />
     <Content Include="Content\sweetalert\sweet-alert-combine.less" />
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
+    <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Content\bootstrap\variables.less" />
     <EntityDeploy Include="Entity\asoRolesCreditos.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>asoRolesCreditos.Designer.cs</LastGenOutput>
@@ -485,8 +496,6 @@
     <Content Include="Entity\asoRolesCreditos.edmx.diagram">
       <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap\mixins.less" />
-    <Content Include="Content\bootstrap\variables.less" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -532,12 +541,13 @@
     <Content Include="Views\subdescuentos\index.cshtml" />
     <Content Include="Views\tipoEgresos\index.cshtml" />
     <Content Include="Views\tipoIngresos\index.cshtml" />
+    <Content Include="Views\asociacionProveedor\index.cshtml" />
+    <Content Include="Views\empleadoAsociacion\index.cshtml" />
+    <Content Include="Views\credito\indexU.cshtml" />
+    <Content Include="Views\credito\indexA.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\asociacionProveedor\" />
-    <Folder Include="Views\credito\" />
-    <Folder Include="Views\empleadoAsociacion\" />
     <Folder Include="Views\valorUtilizado\" />
   </ItemGroup>
   <ItemGroup>

@@ -20,5 +20,11 @@ namespace Creditos.Clases{
             }
             return person;
         }
+        public List<mPersona> mostrarSinAso(){
+            foreach (var item in db.spConsultarEmpleadosSinAso()){
+                person.Add(new mPersona(Convert.ToInt32(item.Id_Persona), item.Nombres, item.SegundoNombre, item.ApellidoPaterno, item.ApellidoMaterno, item.Cedula, item.Direccion, item.CalleSecundaria, item.Numero, item.ReferenciaD, item.TelefonoD, item.TelefonoC, item.ParroquiaNac, Convert.ToDateTime(item.FechaNac), item.Email));
+            }
+            return person;
+        }
     }
 }

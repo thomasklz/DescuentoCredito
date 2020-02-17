@@ -16,6 +16,7 @@ namespace Creditos.Entity
         public int id_asoc_prov { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public string proveedor { get; set; }
+        public string aso { get; set; }
         public int id_proveedor { get; set; }
     }
 }

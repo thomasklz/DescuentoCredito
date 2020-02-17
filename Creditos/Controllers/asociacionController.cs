@@ -5,90 +5,68 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
+
 
 namespace Creditos.Controllers
 {
     public class asociacionController : Controller
     {
         // GET: asociacion
-        public ActionResult Index(){
-             ViewBag.Message = "Your application description page.";
-             List<mAsociacion> aso = new List<mAsociacion>();
-             clsAsociacion clsasoc = new clsAsociacion();
-             aso = clsasoc.mostrar();
-             return View(aso);
-        }
-
-        // GET: asociacion/Details/5
-        public ActionResult Details(int id)
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsAsociacion asoc = new clsAsociacion();
+        List<mAsociacion> list_aso = new List<mAsociacion>();
+        public ActionResult Index()
         {
+            ViewBag.asoc = asoc.mostrar();
             return View();
         }
 
-        // GET: asociacion/Create
-        public ActionResult Create()
+        public ActionResult Store(mAsociacion model)
         {
-            return View();
+            asoc.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // POST: asociacion/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+        public JsonResult UpdateAsoc(mAsociacion model){
+            string result = "";
+            try{
+                if (asoc.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
             }
-            catch
-            {
-                return View();
+            catch (Exception){
+                result = "Error al actualizar";
             }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: asociacion/Edit/5
-        public ActionResult Edit(int id)
+        public JsonResult GetAsocById(int AsocId)
         {
-            return View();
+            List<mAsociacion> model = asoc.mostrarById(AsocId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
         }
 
-        // POST: asociacion/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public JsonResult DeleteAsoc(int AsocId)
         {
-            try
+            string result = "";
+            Asociacion asoci = db.Asociacion.Find(AsocId);
+            if (asoci != null)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
+                asoc.eliminar(AsocId);
+                result = "Eliminado";
+            }else{
+                result = "Registro no encontrado";
             }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: asociacion/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: asociacion/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

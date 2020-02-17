@@ -1,0 +1,326 @@
+﻿
+@model Creditos.Models.mEmpleadoAsociacion
+
+
+@{
+    List<Creditos.Models.mEmpleadoAsociacion> listEmplAso = ViewBag.empl_aso;
+    List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
+}
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h2>
+                BIENVENIDOS
+                <small>Ingreso a Asociacion</small>
+            </h2>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("Store", "empleadoAsociacion", FormMethod.Post))
+{
+<p>
+    <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button"  id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Personas</a>
+</p>
+<div class="row">
+    <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+
+            <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                <div class="kt-input-icon kt-input-icon--left">
+                                    <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                    <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                        <span><i class="la la-search"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover" style="text-align:center" id="tablaSA">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Cedula</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Direción</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="buscar">
+                    @foreach (var item in listPersona)
+                    {
+                        <tr class='row_@item.Id_Persona'>
+                            <td>@item.Id_Persona</td>
+                            <td>@item.Cedula</td>
+                            <td>@item.Nombres @item.SegundoNombre</td>
+                            <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
+                            <td>@item.Direccion</td>
+                            <td>@item.Numero</td>
+                            <td>
+                                <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="kt-portlet__body">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="kt-section">
+                    <label>Cedula:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                        @Html.TextBox("Cedulas", null, new { @class = "form-control",onkeyup="validar()", disabled = "disabled", placeholder ="Cédula" })
+                    </div>
+                    @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_id", @Value = "" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="kt-section">
+                    <label>Nombres:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                        @Html.TextBox("Nombress", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombres" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="kt-section">
+                    <label>Apellidos:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                        @Html.TextBox("SegundoNombres", null, new { @class = "form-control", disabled = "disabled", placeholder = "Apellido" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="kt-section">
+                    <label>Fecha de Union:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            @Html.TextBoxFor(m => m.fecha_ingreso, new { @class = "form-control", type = "date" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="kt-section">
+                    <label>Asociación:</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                        @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Asociación--" , new { @id = "asociacion_ids", @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <input id="btnIngreso" type="submit" value="Confirmar" class="btn btn-primary" />
+    </div>
+</div>
+<br />
+}
+<p>
+    <a class='btn btn-outline-warning' data-toggle="collapse" href="#multiCollapseExample2" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Lista de Personas en las Asociaciones</a>
+</p>
+
+<div class="row">
+    <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample2">
+
+            <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                <div class="row align-items-center">
+                    <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                <div class="kt-input-icon kt-input-icon--left">
+                                    <input type="text" class="form-control filtrar" placeholder="Search...">
+                                    <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                        <span><i class="la la-search"></i></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-hover" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Empleado</th>
+                        <th>Asociación</th>
+                        <th>Fecha de Ingreso</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="buscar">
+                    @foreach (var item in listEmplAso)
+                    {
+                        <tr class='row_@item.id_empl_aso'>
+                            <td>@item.id_empl_aso</td>
+                            <td>@item.persona</td>
+                            <td>@item.aso</td>
+                            <td>@item.fecha_ingreso.ToShortDateString()</td>
+                            <td>
+                                <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEmplAso(@item.id_empl_aso)'><span class='flaticon2-rubbish-bin'></span></a>
+                                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_empl_aso" @*onclick='EditProveedor(@item.id_empl_aso)'*@><span class='flaticon2-pen'></span></a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    //Validacion
+    //function validar() {
+    //    if ($("#Cedulas") == '') {
+    //        $("#btnIngreso").attr("disabled");
+    //    } else {
+    //        $('#btnIngreso').removeAttr("disabled")
+    //    }
+    //}
+
+    //paginacion
+
+    $(document).ready(function () {
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+           // $("btnIngreso").attr("disabled", true);
+        }(jQuery));
+    });
+    //Llenar un empleado
+    $(document).ready(function () {
+       // debugger
+       
+        $('.add').click(function () {
+        Swal.fire({
+           title: 'Persona Añadida',
+           icon: 'success',
+           confirmButtonText: 'Ok',
+           cancelButtonText: 'Cancelar'})
+            $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
+            $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
+            $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
+            $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
+            $("#accor").trigger("click")
+        })
+    })
+</script>
+<script>
+    var row;
+    //function UpdateIngreso(Ingreso) {
+    //    var data = $("#SubmitForm").serialize();
+    //    $.ajax({
+    //        type: "Post",
+    //        url: "/ingresos/UpdateIngresos",
+    //        data: data,
+    //        success: function (result) {
+    //            if (result == "Registro actualizado") {
+    //                Swal.fire({
+    //                    position: 'top-end',
+    //                    icon: 'success',
+    //                    title: 'Registro actualizado',
+    //                    showConfirmButton: false,
+    //                    timer: 1500
+    //                })
+    //                row.find("td").eq(1).html($('#valor').val());
+    //                row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+    //                row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
+    //            } else {
+    //                Swal.fire({
+    //                    position: 'top-end',
+    //                    icon: 'error',
+    //                    title: 'Error al actualizado',
+    //                    showConfirmButton: false,
+    //                    timer: 1500
+    //                })
+    //            }
+    //            $("#MyModal").modal("hide");
+    //        }
+    //    })
+    //}
+    //$(document).ready(function () {
+    //    $('[data-id]').click(function () {
+    //        row = $(this).parents("tr");
+    //        var id = $(this).data("id")
+    //        $("#MyModal").modal();
+    //        $.ajax({
+    //            type: "GET",
+    //            url: "/ingresos/GetIngresoById?IngresoId=" + id,
+    //            success: function (data) {
+    //                var obj = JSON.parse(data);
+    //                $("#id_ingresos").val(obj[0].id_ingresos);
+    //                $("#valor").val(obj[0].valor);
+    //                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+    //                $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+    //            }
+    //        })
+    //    })
+    //})
+    function DeleteEmplAso(EmplAso) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Deseas eliminar el registro seleccionado!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Borrar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/empleadoAsociacion/DeleteEmplAso?EmplAsoId=" + EmplAso,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'Borrado!',
+                                'El registro fue borrado con éxito',
+                                'success'
+
+                            )
+                            $(".row_" + EmplAso).remove();
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo eliminar el registro',
+                                'error'
+                            )
+                        }
+                        //$('#tablaSA').DataTable().ajax.reload();
+                        var table = document.getElementById("#tablaSA");
+                        table.refresh();
+                    }
+                })
+            }
+            })
+        
+    }
+</script>
