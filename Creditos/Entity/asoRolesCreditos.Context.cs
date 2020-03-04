@@ -700,7 +700,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarTipoIngreso", descripcionParameter);
         }
     
-        public virtual int spInsertarValorAsignado(Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> empleado_id, Nullable<double> monto_aprobado)
+        public virtual int spInsertarValorAsignado(Nullable<int> proveedor_id, Nullable<int> aso_id, Nullable<int> id_Persona, Nullable<double> monto_aprobado)
         {
             var proveedor_idParameter = proveedor_id.HasValue ?
                 new ObjectParameter("proveedor_id", proveedor_id) :
@@ -710,15 +710,15 @@ namespace Creditos.Entity
                 new ObjectParameter("aso_id", aso_id) :
                 new ObjectParameter("aso_id", typeof(int));
     
-            var empleado_idParameter = empleado_id.HasValue ?
-                new ObjectParameter("empleado_id", empleado_id) :
-                new ObjectParameter("empleado_id", typeof(int));
+            var id_PersonaParameter = id_Persona.HasValue ?
+                new ObjectParameter("Id_Persona", id_Persona) :
+                new ObjectParameter("Id_Persona", typeof(int));
     
             var monto_aprobadoParameter = monto_aprobado.HasValue ?
                 new ObjectParameter("monto_aprobado", monto_aprobado) :
                 new ObjectParameter("monto_aprobado", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorAsignado", proveedor_idParameter, aso_idParameter, empleado_idParameter, monto_aprobadoParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarValorAsignado", proveedor_idParameter, aso_idParameter, id_PersonaParameter, monto_aprobadoParameter);
         }
     
         public virtual int spInsertarValorUtilizado(Nullable<int> valor_asig_id, Nullable<int> mes_id, Nullable<double> cantidad_usada)
@@ -1187,6 +1187,24 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
+        }
+    
+        public virtual ObjectResult<spEmpleadoxProveedor_Result> spEmpleadoxProveedor(Nullable<int> proveedor_id)
+        {
+            var proveedor_idParameter = proveedor_id.HasValue ?
+                new ObjectParameter("proveedor_id", proveedor_id) :
+                new ObjectParameter("proveedor_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEmpleadoxProveedor_Result>("spEmpleadoxProveedor", proveedor_idParameter);
+        }
+    
+        public virtual ObjectResult<spConultarValorUsadoxProv_Result> spConultarValorUsadoxProv(Nullable<int> proveedor_id)
+        {
+            var proveedor_idParameter = proveedor_id.HasValue ?
+                new ObjectParameter("proveedor_id", proveedor_id) :
+                new ObjectParameter("proveedor_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConultarValorUsadoxProv_Result>("spConultarValorUsadoxProv", proveedor_idParameter);
         }
     }
 }

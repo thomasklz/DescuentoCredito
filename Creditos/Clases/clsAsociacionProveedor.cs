@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         List<mAsociacionProveedor> lista_Aso_rpov = new List<mAsociacionProveedor>();
         public List<mAsociacionProveedor> mostrar(){
             foreach (var item in db.spConsultarAsociacionProveedor()){
-                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.aso, Convert.ToDateTime(item.fecha)));
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.id_proveedor, item.aso, Convert.ToDateTime(item.fecha)));
             }
             return lista_Aso_rpov;
         }
@@ -35,7 +35,7 @@ namespace Creditos.Clases{
         }
         public List<mAsociacionProveedor> mostrarById(int id){
             foreach (var item in db.spConsultarAsociacionProveedorById(id)){
-                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.aso, Convert.ToDateTime(item.fecha)));
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.id_proveedor, item.id_asociacion, Convert.ToDateTime(item.fecha)));
             }
             return lista_Aso_rpov;
         }

@@ -26,6 +26,7 @@ namespace Creditos.Controllers{
         }
 
         public ActionResult Store(mDescuento model){
+            
             clsdescue.ingresar(model);
             return RedirectToAction("index");
         }

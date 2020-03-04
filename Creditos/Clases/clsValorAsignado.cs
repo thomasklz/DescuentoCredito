@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         List<mValorAsignado> lista_valor_asignado = new List<mValorAsignado>();
         public List<mValorAsignado> mostrar(){
             foreach (var item in db.spConsultarValorAsignado()){
-                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.proveedor, item.persona, Convert.ToDouble(item.monto_aprobado)));
+                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.proveedor, item.id_proveedor, item.persona, item.Id_Persona, Convert.ToDouble(item.monto_aprobado)));
             }
             return lista_valor_asignado;
         }
@@ -21,25 +21,25 @@ namespace Creditos.Clases{
         public void eliminar(int id){
             db.spEliminarValorAsignado(id);
         }
-        public Boolean modificar(mValorAsignado datos)
-        {
+        public Boolean modificar(mValorAsignado datos){
             Boolean result = false;
-            try
-            {
+            try{
                 db.spModificarValorAsignado(datos.id_valor_asig, datos.proveedor_id, datos.aso_id, datos.empleado_id, datos.monto_aprobado);
                 result = true;
-            }
-            catch (Exception)
-            {
+            }catch (Exception){
                 result = false;
             }
             return result;
         }
-        public List<mValorAsignado> mostrarById(int id)
-        {
-            foreach (var item in db.spConsultarValorAsignadoById(id))
-            {
+        public List<mValorAsignado> mostrarById(int id){
+            foreach (var item in db.spConsultarValorAsignadoById(id)){
                 lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.proveedor, item.persona, Convert.ToDouble(item.monto_aprobado)));
+            }
+            return lista_valor_asignado;
+        }
+        public List<mValorAsignado> mostrarEnAso(int id){
+            foreach (var item in db.spEmpleadoxProveedor(id)){
+                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.ci, item.persona, Convert.ToDouble(item.monto_aprobado)));
             }
             return lista_valor_asignado;
         }

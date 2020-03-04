@@ -12,13 +12,13 @@ namespace Creditos.Controllers{
     public class valorAsignadoController : Controller{
         // GET: ValorAsignado
         BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
-        clsProveedores clsprovee = new clsProveedores();
-        clsPersona clspersona = new clsPersona();
+        clsAsociacionProveedor clsprovee = new clsAsociacionProveedor();
+        clsEmpleadoAsociacion clsemp_aso = new clsEmpleadoAsociacion();
         clsValorAsignado clsvalorasig = new clsValorAsignado();
         List<mValorAsignado> list_valor = new List<mValorAsignado>();
         public ActionResult Index(){
-            ViewBag.proveedor = new SelectList(clsprovee.mostrar(), "id_proveedor", "nombre");
-            ViewBag.persona = new SelectList(clspersona.mostrar(), "Id_Persona", "Nombres");
+            ViewBag.proveedor = clsprovee.mostrar();
+            ViewBag.persona = clsemp_aso.mostrar();
             ViewBag.val_asig = clsvalorasig.mostrar();
             return View();
         }

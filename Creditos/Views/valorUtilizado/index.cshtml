@@ -1,17 +1,17 @@
 ﻿
-@model Creditos.Models.mEmpleadoAsociacion
-
+@model Creditos.Models.mValorUtilizado
 
 @{
-    List<Creditos.Models.mEmpleadoAsociacion> listEmplAso = ViewBag.empl_aso;
-    List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
+    List<Creditos.Models.mValorUtilizado> listValUtil = ViewBag.val_util;
+    List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
 }
+
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
                 BIENVENIDOS
-                <small>Nuevos miembros - Asociacion</small>
+                <small>Valores Utilizados - Proveedor</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
@@ -19,122 +19,119 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Store", "empleadoAsociacion", FormMethod.Post))
+@using (Html.BeginForm("Store", "valorutilizado", FormMethod.Post))
 {
     <br />
-<p>
-    <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button"  id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Personas sin Asociaci&oacute;n</a>
-</p>
-<div class="row">
-    <div class="col">
-        <div class="collapse multi-collapse" id="multiCollapseExample1">
+    <p>
+        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Personas Asociadas:</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
 
-            <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                <div class="row align-items-center">
-                    <div class="col-xl-8 order-2 order-xl-1">
-                        <div class="row align-items-center">
-                            <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                <div class="kt-input-icon kt-input-icon--left">
-                                    <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
-                                    <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                        <span><i class="la la-search"></i></span>
-                                    </span>
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <table class="table table-hover" style="text-align:center" id="tablaSA">
-                <thead>
-                    <tr>
-                        <th>Item</th>
-                        <th>Cedula</th>
-                        <th>Nombres</th>
-                        <th>Apellidos</th>
-                        <th>Direción</th>
-                        <th>Teléfono</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="buscar">
-                    @foreach (var item in listPersona)
-                    {
-                        <tr class='row_@item.Id_Persona'>
-                            <td>@item.Id_Persona</td>
-                            <td>@item.Cedula</td>
-                            <td>@item.Nombres @item.SegundoNombre</td>
-                            <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
-                            <td>@item.Direccion</td>
-                            <td>@item.Numero</td>
-                            <td>
-                                <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                            </td>
+                <table class="table table-hover" style="text-align:center" id="tablaSA">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Cedula</th>
+                            <th>Empleado</th>
+                            <th>Monto Aprobado</th>
+                            <th>Acciones</th>
                         </tr>
-                    }
-                </tbody>
-        </table>
-        </div>
-    </div>
-</div>
-<div>
-    <div class="kt-portlet__body">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="kt-section">
-                    <label>Cedula:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
-                        @Html.TextBox("Cedulas", null, new { @class = "form-control",onkeyup="validar()", disabled = "disabled", placeholder ="Cédula" })
-                    </div>
-                    @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_id", @Value = "" })
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="kt-section">
-                    <label>Nombres:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                        @Html.TextBox("Nombress", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombres" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="kt-section">
-                    <label>Apellidos:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                        @Html.TextBox("SegundoNombres", null, new { @class = "form-control", disabled = "disabled", placeholder = "Apellido" })
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="kt-section">
-                    <label>Fecha de Union:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                            @Html.TextBoxFor(m => m.fecha_ingreso, new { @class = "form-control", type = "date" })
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="kt-section">
-                    <label>Asociación:</label>
-                    <div class="input-group">
-                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
-                        @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Asociación--" , new { @id = "asociacion_ids", @class = "form-control" })
-                    </div>
-                </div>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listValAsig)
+                        {
+                            <tr class='row_@item.id_valor_asig'>
+                                <td>@item.id_valor_asig</td>
+                                <td>@item.proveedor</td>
+                                <td>@item.empleado</td>
+                                <td>@item.monto_aprobado</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
     <div>
-        <input id="btnIngreso" type="submit" value="Confirmar" class="btn btn-primary" />
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Cedula:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            @Html.TextBox("cedula", null, new { @class = "form-control", disabled = "disabled", placeholder = "Cédula" })
+                        </div>
+                        @Html.HiddenFor(m => m.valor_asig_id, new { @id = "valor_asig_id", @Value = "" })
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Empleado:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            @Html.TextBox("persona", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Valor M&aacute;ximo Asignado:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                            @Html.TextBox("valorAsignado", null, new { @class = "form-control", disabled = "disabled", placeholder = "Valor Nominal Asignado" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Mes:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="kt-section">
+                            <label>Cantidad Utilizada:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                @Html.TextBoxFor(m => m.cantidad_usada, new { @id = "cantidad_usada", @class = "form-control", @placeholder = "Valor Consumido", @name = "cantidad_usada" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        <div>
+            <input id="btnIngreso" type="submit" value="Confirmar" class="btn btn-primary" />
+        </div>
     </div>
-</div>
-<br />
+    <br />
 }
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
@@ -147,7 +144,7 @@
                         <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
                         <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
                     </g>
-                </svg> Personas en las Asociaciones
+                </svg> Valores Utilizados
             </div>
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
@@ -173,22 +170,21 @@
                         <tr>
                             <th>Item</th>
                             <th>Empleado</th>
-                            <th>Asociación</th>
-                            <th>Fecha de Ingreso</th>
+                            <th>Aociaci&oacute;n</th>
+                            <th>Mes</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
-                        @foreach (var item in listEmplAso)
-                        {
-                            <tr class='row_@item.id_empl_aso'>
-                                <td>@item.id_empl_aso</td>
+                        @foreach (var item in listValUtil){
+                            <tr class='row_@item.id_valor_usad'>
+                                <td>@item.id_valor_usad</td>
                                 <td>@item.persona</td>
                                 <td>@item.aso</td>
-                                <td>@item.fecha_ingreso.ToShortDateString()</td>
+                                <td>@item.mes</td>
                                 <td>
-                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEmplAso(@item.id_empl_aso)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_empl_aso"><span class='flaticon2-pen'></span></a>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEmplAso(@item.id_valor_usad)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_valor_usad"><span class='flaticon2-pen'></span></a>
                                 </td>
                             </tr>
                         }
@@ -199,7 +195,7 @@
     </div>
 </div>
 
-<div class="modal fade" id="MyModal">
+@*<div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -309,144 +305,145 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
-<script>
+<div>
+    @*<script>
+        </div>
+            //Validacion
+            //function validar() {
+            //    if ($("#Cedulas") == '') {
+            //        $("#btnIngreso").attr("disabled");
+            //    } else {
+            //        $('#btnIngreso').removeAttr("disabled")
+            //    }
+            //}
 
-    //Validacion
-    //function validar() {
-    //    if ($("#Cedulas") == '') {
-    //        $("#btnIngreso").attr("disabled");
-    //    } else {
-    //        $('#btnIngreso').removeAttr("disabled")
-    //    }
-    //}
+            //paginacion
 
-    //paginacion
-
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
+            $(document).ready(function () {
+                (function ($) {
+                    $('.filtrar').keyup(function () {
+                        var rex = new RegExp($(this).val(), 'i');
+                        $('.buscar tr').hide();
+                        $('.buscar tr').filter(function () {
+                            return rex.test($(this).text());
+                        }).show();
+                    });
+                   // $("btnIngreso").attr("disabled", true);
+                }(jQuery));
             });
-           // $("btnIngreso").attr("disabled", true);
-        }(jQuery));
-    });
-    //Llenar un empleado
-    $(document).ready(function () {
-       // debugger
-       
-        $('.add').click(function () {
-        Swal.fire({
-           title: 'Persona Añadida',
-           icon: 'success',
-           confirmButtonText: 'Ok',
-           cancelButtonText: 'Cancelar'})
-            $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
-            $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
-            $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
-            $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accor").trigger("click")
-        })
-        $('.adds').click(function () {
-            Swal.fire({
-                title: 'Persona Añadida',
-                icon: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#nombres').val($(this).parents("tr").find("td").eq(2).html());
-            $('#empleado_ids').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accors").trigger("click")
-        })
-    })
+            //Llenar un empleado
+            $(document).ready(function () {
+               // debugger
 
-    var row;
-    function UpdateEmplAso(EmplAso) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/empleadoAsociacion/UpdateEmplAso",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire(
-                        'Actualizado!',
-                        'Registro Actualizado',
-                        'success'
-                    )
-                    row.find("td").eq(1).html($('#nombres').val());
-                    row.find("td").eq(2).html($('select[id="asociacion_id"] option:selected').text());
-
-                } else {
-                    Swal.fire(
-                        'Reintentar!',
-                        'ERROR AL ACTUALIZAR',
-                        'error'
-                    )
-                }
-                $("#MyModal").modal("hide");
-            }
-        })
-    }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
-            $.ajax({
-                type: "GET",
-                url: "/empleadoAsociacion/GetEmplAsoById?EmplAsoId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    
-                    $("#id_empl_asos").val(obj[0].id_empl_aso);
-                    $("#fecha_").val(obj[0].valor);
-                    $("#asociacion_id option[value='" + obj[0].asociacion_id + "']").attr("selected", true);
-                }
+                $('.add').click(function () {
+                Swal.fire({
+                   title: 'Persona Añadida',
+                   icon: 'success',
+                   confirmButtonText: 'Ok',
+                   cancelButtonText: 'Cancelar'})
+                    $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
+                    $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
+                    $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
+                    $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
+                    $("#accor").trigger("click")
+                })
+                $('.adds').click(function () {
+                    Swal.fire({
+                        title: 'Persona Añadida',
+                        icon: 'success',
+                        confirmButtonText: 'Ok',
+                        cancelButtonText: 'Cancelar'
+                    })
+                    $('#nombres').val($(this).parents("tr").find("td").eq(2).html());
+                    $('#empleado_ids').val($(this).parents("tr").find("td").eq(0).html());
+                    $("#accors").trigger("click")
+                })
             })
-        })
-    })
-    function DeleteEmplAso(EmplAso) {
-        Swal.fire({
-            title: 'Estás seguro?',
-            text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
+
+            var row;
+            function UpdateEmplAso(EmplAso) {
+                var data = $("#SubmitForm").serialize();
                 $.ajax({
-                    type: "POST",
-                    url: "/empleadoAsociacion/DeleteEmplAso?EmplAsoId=" + EmplAso,
+                    type: "Post",
+                    url: "/empleadoAsociacion/UpdateEmplAso",
+                    data: data,
                     success: function (result) {
-                        if (result == "Eliminado") {
+                        if (result == "Registro actualizado") {
                             Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
+                                'Actualizado!',
+                                'Registro Actualizado',
                                 'success'
-
                             )
-                            $(".row_" + EmplAso).remove();
+                            row.find("td").eq(1).html($('#nombres').val());
+                            row.find("td").eq(2).html($('select[id="asociacion_id"] option:selected').text());
+
                         } else {
                             Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
+                                'Reintentar!',
+                                'ERROR AL ACTUALIZAR',
                                 'error'
                             )
                         }
-                        //$('#tablaSA').DataTable().ajax.reload();
-                        var table = document.getElementById("#tablaSA");
-                        table.refresh();
+                        $("#MyModal").modal("hide");
                     }
                 })
             }
+            $(document).ready(function () {
+                $('[data-id]').click(function () {
+                    row = $(this).parents("tr");
+                    var id = $(this).data("id")
+                    $("#MyModal").modal();
+                    $.ajax({
+                        type: "GET",
+                        url: "/empleadoAsociacion/GetEmplAsoById?EmplAsoId=" + id,
+                        success: function (data) {
+                            var obj = JSON.parse(data);
+
+                            $("#id_empl_asos").val(obj[0].id_empl_aso);
+                            $("#fecha_").val(obj[0].valor);
+                            $("#asociacion_id option[value='" + obj[0].asociacion_id + "']").attr("selected", true);
+                        }
+                    })
+                })
             })
-        
-    }
-</script>
+            function DeleteEmplAso(EmplAso) {
+                Swal.fire({
+                    title: 'Estás seguro?',
+                    text: 'Deseas eliminar el registro seleccionado!',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Borrar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.value) {
+                        $.ajax({
+                            type: "POST",
+                            url: "/empleadoAsociacion/DeleteEmplAso?EmplAsoId=" + EmplAso,
+                            success: function (result) {
+                                if (result == "Eliminado") {
+                                    Swal.fire(
+                                        'Borrado!',
+                                        'El registro fue borrado con éxito',
+                                        'success'
+
+                                    )
+                                    $(".row_" + EmplAso).remove();
+                                } else {
+                                    Swal.fire(
+                                        'Borrado!',
+                                        'No se pudo eliminar el registro',
+                                        'error'
+                                    )
+                                }
+                                //$('#tablaSA').DataTable().ajax.reload();
+                                var table = document.getElementById("#tablaSA");
+                                table.refresh();
+                            }
+                        })
+                    }
+                    })
+
+            }
+        </script>*@

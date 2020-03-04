@@ -18,5 +18,6 @@ namespace Creditos.Entity
         public string proveedor { get; set; }
         public string aso { get; set; }
         public int id_proveedor { get; set; }
+        public int id_asociacion { get; set; }
     }
 }

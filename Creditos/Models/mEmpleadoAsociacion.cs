@@ -28,5 +28,13 @@ namespace Creditos.Models
             this.aso = aso;
             this.fecha_ingreso = fecha_ingreso;
         }
+        public mEmpleadoAsociacion(int id_empl_aso, string persona, int empleado_id, string aso, DateTime fecha_ingreso)
+        {
+            this.id_empl_aso = id_empl_aso;
+            this.persona = persona;
+            this.empleado_id = empleado_id;
+            this.aso = aso;
+            this.fecha_ingreso = fecha_ingreso;
+        }
     }
 }

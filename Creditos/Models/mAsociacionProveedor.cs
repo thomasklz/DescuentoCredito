@@ -28,5 +28,13 @@ namespace Creditos.Models
             this.aso = aso;
             this.fecha = fecha;
         }
+        public mAsociacionProveedor(int id_asoc_prov, string proveedor, int proveedor_id, string aso, DateTime fecha)
+        {
+            this.id_asoc_prov = id_asoc_prov;
+            this.proveedor = proveedor;
+            this.proveedor_id = proveedor_id;
+            this.aso = aso;
+            this.fecha = fecha;
+        }
     }
 }

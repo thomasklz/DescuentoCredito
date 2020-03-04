@@ -20,7 +20,7 @@
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
         <div class="card-header" id="headingOne7">
-            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" id="accors" aria-expanded="true" aria-controls="collapseOne7">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
                     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                         <polygon points="0 0 24 0 24 24 0 24"></polygon>
@@ -65,7 +65,7 @@
                     <tbody class="buscar">
                         @foreach (var item in listNoAp)
                         {
-                            <tr class='row_@item.id_credito'>
+                            <tr id="fila_@item.id_credito" class='row_@item.id_credito'>
                                 <td>@item.id_credito</td>
                                 <td>@item.descripcion</td>
                                 <td>@item.persona</td>
@@ -76,7 +76,7 @@
                                 <td>@item.fecha_solicitud.ToShortDateString()</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-hover-danger btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" data-original-title="Rechazar" onclick='DeleteIngreso(@item.id_credito)'><span class='la la-close'></span></a>
-                                    <a href='#' class='btn btn-outline-hover-primary btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" data-original-title="Detalles" onclick='DeleteIngreso(@item.id_credito)'><span class='la la-info'></span></a>
+                                    <a href='#' class='btn btn-outline-hover-primary btn-sm btn-icon btn-circle infor' data-toggle="kt-tooltip" data-original-title="Detalles" data-id="@item.id_credito"><span class='la la-info'></span></a>
                                     <a href='#' class='btn btn-outline-hover-info btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" data-original-title="Aprobar" data-id="@item.id_credito"><span class='la la-check'></span></a>
                                 </td>
                             </tr>
@@ -172,8 +172,147 @@
     </div>
 </div>
 
+<div class="modal fade" id="MyModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Modificar Cr&eacute;ditos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+                        @Html.HiddenFor(m => m.id_credito, new { @id = "id_creditos" })
+                        @Html.HiddenFor(m => m.fecha_aprobacion, new { @id = "fecha", @Value = @DateTime.Now.ToShortDateString() })
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Estado:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.estado_aprobacion, new { @id = "estado", @class = "form-control", disabled = "disabled", @placeholder = "Crédito Aprobado" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Con fecha:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        <label>@DateTime.Now.ToShortDateString()</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success aprobar" onclick="AprobarCredito()">Aceptar y Aprobar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
+<div class="modal fade modalinfo" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Informaci&oacute;n de Cr&eacute;ditos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
 
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Descipcion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Solicitado por:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.persona, new { @id = "persona", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>De la Asociación:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.aso, new { @id = "aso", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>La cantidad de:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.cantidad, new { @id = "cantidad", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con número de cuotas:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuota", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con un Descuento mensual:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensual", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Fue soliciado el:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.fecha_solicitud, new { @id = "fecha_solicitud", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>.</label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" data-dismiss="modal">Aceptar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     //Validacion
@@ -199,75 +338,73 @@
            // $("btnIngreso").attr("disabled", true);
         }(jQuery));
     });
-    //Llenar un empleado
-    $(document).ready(function () {
-       // debugger
 
-        $('.add').click(function () {
-        Swal.fire({
-           title: 'Persona Añadida',
-           icon: 'success',
-           confirmButtonText: 'Ok',
-           cancelButtonText: 'Cancelar'})
-            $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
-            $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
-            $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
-            $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accor").trigger("click")
+    var row;
+    function AprobarCredito(Credito) {
+        var data = $("#SubmitForm").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/credito/AprobarCredito",
+            data: data,
+            success: function (result) {
+                if (result == "Crédito Aprobado") {
+                    Swal.fire(
+                        'Aprobado!',
+                        '',
+                        'success'
+                    )
+                } else {
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL APROBAR',
+                        'error'
+                    )
+                }
+                $("#MyModal").modal("hide");
+                $("#accors").trigger("click");
+                //location.reload();
+            }
+        })
+    }
+    $(document).ready(function () {
+
+        $('[data-id]').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/credito/GetCreditoById?CreditoId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_creditos").val(obj[0].id_credito);
+                }
+            })
         })
     })
-</script>
-<script>
-    var row;
-    //function UpdateIngreso(Ingreso) {
-    //    var data = $("#SubmitForm").serialize();
-    //    $.ajax({
-    //        type: "Post",
-    //        url: "/ingresos/UpdateIngresos",
-    //        data: data,
-    //        success: function (result) {
-    //            if (result == "Registro actualizado") {
-    //                Swal.fire({
-    //                    position: 'top-end',
-    //                    icon: 'success',
-    //                    title: 'Registro actualizado',
-    //                    showConfirmButton: false,
-    //                    timer: 1500
-    //                })
-    //                row.find("td").eq(1).html($('#valor').val());
-    //                row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
-    //                row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
-    //            } else {
-    //                Swal.fire({
-    //                    position: 'top-end',
-    //                    icon: 'error',
-    //                    title: 'Error al actualizado',
-    //                    showConfirmButton: false,
-    //                    timer: 1500
-    //                })
-    //            }
-    //            $("#MyModal").modal("hide");
-    //        }
-    //    })
-    //}
-    //$(document).ready(function () {
-    //    $('[data-id]').click(function () {
-    //        row = $(this).parents("tr");
-    //        var id = $(this).data("id")
-    //        $("#MyModal").modal();
-    //        $.ajax({
-    //            type: "GET",
-    //            url: "/ingresos/GetIngresoById?IngresoId=" + id,
-    //            success: function (data) {
-    //                var obj = JSON.parse(data);
-    //                $("#id_ingresos").val(obj[0].id_ingresos);
-    //                $("#valor").val(obj[0].valor);
-    //                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
-    //                $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
-    //            }
-    //        })
-    //    })
-    //})
+
+    $(document).ready(function () {
+        $('.infor').click(function () {
+            row = $(this).parents("tr");
+            var id = $(this).data("id")
+            $(".modalinfo").modal();
+            $.ajax({
+                type: "GET",
+                url: "/credito/GetCreditoById?CreditoId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_creditos").val(obj[0].id_credito);
+                    $("#descripcion").val(obj[0].descripcion);
+                    $("#persona").val(obj[0].persona);
+                    $("#aso").val(obj[0].aso);
+                    $("#cantidad").val(obj[0].cantidad);
+                    $("#numero_cuota").val(obj[0].numero_cuota);
+                    $("#desc_mensual").val(obj[0].desc_mensual);
+                    $("#fecha_solicitud").val(obj[0].fecha_solicitud);
+                }
+            })
+        })
+    })
     function DeleteEmplAso(EmplAso) {
         Swal.fire({
             title: 'Estás seguro?',
@@ -306,4 +443,6 @@
             })
 
     }
+   
+
 </script>

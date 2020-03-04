@@ -12,7 +12,7 @@ namespace Creditos.Clases{
         public List<mEmpleadoAsociacion> mostrar(){
             foreach (var item in db.spConsultarEmpleadoAsociacion())
             {
-                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, item.aso, Convert.ToDateTime(item.fecha_ingreso)));
+                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, item.Id_Persona, item.aso, Convert.ToDateTime(item.fecha_ingreso)));
             }
             return lista_empl_Aso;
         }
@@ -36,7 +36,7 @@ namespace Creditos.Clases{
         }
         public List<mEmpleadoAsociacion> mostrarById(int id){
             foreach (var item in db.spConsultarEmpleadoAsociacionById(id)){
-                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, item.aso, Convert.ToDateTime(item.fecha_ingreso)));
+                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.Id_Persona, item.id_asociacion, Convert.ToDateTime(item.fecha_ingreso)));
             }
             return lista_empl_Aso;
         }

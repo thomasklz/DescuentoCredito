@@ -396,6 +396,12 @@
     <Compile Include="Entity\spConsultarValorUtilizado_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConultarValorUsadoxProv_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spEmpleadoxProveedor_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\SubDescuento.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -545,10 +551,12 @@
     <Content Include="Views\empleadoAsociacion\index.cshtml" />
     <Content Include="Views\credito\indexU.cshtml" />
     <Content Include="Views\credito\indexA.cshtml" />
+    <Content Include="Views\valorUtilizado\index.cshtml" />
+    <Content Include="Views\proveedores\indexp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\valorUtilizado\" />
+    <Folder Include="Content\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

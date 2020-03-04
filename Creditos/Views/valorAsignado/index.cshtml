@@ -3,54 +3,279 @@
 
 @{
     List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
+    List<Creditos.Models.mEmpleadoAsociacion> listEmplAso = ViewBag.persona;
+    List<Creditos.Models.mAsociacionProveedor> listAsoProv = ViewBag.proveedor;
+
 }
-<h1>Asigaci&oacute;n de valores</h1>
-@using (Html.BeginForm("Store", "valorAsignado", FormMethod.Post))
-{
-    <div class="form-group">
-        <label>Monto Aprobado</label>
-        @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobados", @class = "form-control", @placeholder = "Monto Aprobado", @name = "monto_aprobado" })
-    </div>
-            @Html.HiddenFor(m => m.aso_id, new { @id = "aso_id", @Value = "1" })
-    <div>
-        <label>Persona </label>
-        <div class="form-group">
-            @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Ingrese una persona--", new { @id = "Id_Personas", @class = "form-control" })
+
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h4>
+                BIENVENIDOS
+                <small>Asignar Valores - Asociacion</small>
+            </h4>
+            <span class="kt-subheader__separator kt-hidden"></span>
         </div>
     </div>
-            <div>
-                <label>Proveedores </label>
-                <div class="form-group">
-                    @Html.DropDownListFor(m => m.proveedor_id, ViewBag.proveedor as SelectList, "--Seleccione un Proveedor--", new { @id = "proveedor_ids", @class = "form-control" })
+</div>
+
+@using (Html.BeginForm("Store", "valorAsignado", FormMethod.Post))
+{
+
+    <br />
+    <p>
+        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample" role="button" id="accorp" aria-expanded="false" aria-controls="multiCollapseExample">Personas en la Asociaci&oacute;n</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" style="text-align:center" id="tablaSA">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th style="display:none;"></th>
+                            <th>Persona</th>
+                            <th>Asociaci&oacute;n</th>
+                            <th>Fecha de Uni&oacute;n</th>
+                            <th>Agregar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listEmplAso)
+                        {
+                            <tr class='row_@item.id_empl_aso'>
+                                <td>@item.id_empl_aso</td>
+                                <td style="display:none;">@item.empleado_id</td>
+                                <td>@item.persona</td>
+                                <td>@item.aso</td>
+                                <td>@item.fecha_ingreso.ToShortDateString()</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-warning addpe' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Persona:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("nombre", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
                 </div>
             </div>
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Asociaci&oacute;n:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("asop", null, new { @class = "form-control", disabled = "disabled", placeholder = "Asociación" })
+                </div>
             </div>
+        </div>
+        @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_idss", @Value = "" })
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Fecha de Uni&oacute;n:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("fechap", null, new { @class = "form-control", disabled = "disabled", placeholder = "Fecha" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <p>
+        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accorpr" aria-expanded="false" aria-controls="multiCollapseExample1">Proveedores disponibles</a>
+    </p>
+    <div class="row">
+        <div class="col">
+            <div class="collapse multi-collapse" id="multiCollapseExample1">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" style="text-align:center" id="tablaSA">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th style="display:none;"></th>
+                            <th>Proveedor</th>
+                            <th>Asociaci&oacute;n</th>
+                            <th>Fecha de Uni&oacute;n</th>
+                            <th>Agregar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listAsoProv)
+                        {
+                            <tr class='row_@item.id_asoc_prov'>
+                                <td>@item.id_asoc_prov</td>
+                                <td style="display:none;">@item.proveedor_id</td>
+                                <td>@item.proveedor</td>
+                                <td>@item.aso</td>
+                                <td>@item.fecha.ToShortDateString()</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-warning addpr' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Proveedor:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("proveedors", null, new { @class = "form-control", disabled = "disabled", placeholder = "Proveedor" })
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_id", @Value = "" })
+        @Html.HiddenFor(m => m.aso_id, new { @id = "asociacion_id", @Value = "1" })
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Asociaci&oacute;n:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("asopr", null, new { @class = "form-control", disabled = "disabled", placeholder = "Asociación" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Fecha de Convenio:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBox("fechapr", null, new { @class = "form-control", disabled = "disabled", placeholder = "Fecha" })
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="kt-section">
+                <label>Monto Aprobado:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobados", @class = "form-control", @placeholder = "Monto Aprobado", @name = "monto_aprobado" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <input type="submit" value="Confirmar" class="btn btn-primary" />
+    </div>
+    <br />
 }
-<table class="table-hover">
-    <tr>
-        <th>Item</th>
-        <th>Monto Aprobado</th>
-        <th>Persona</th>
-        <th>Proveedor</th>
-        <th>Acciones</th>
-    </tr>
-    @foreach (var item in listValAsig)
-    {
-        <tr class='row_@item.id_valor_asig'>
-            <td>@item.id_valor_asig</td>
-            <td>@item.monto_aprobado</td>
-            <td>@item.empleado</td>
-            <td>@item.proveedor</td>
-            <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteValAsignado(@item.id_valor_asig)'><span class='glyphicon glyphicon-trash'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_valor_asig"><span class='glyphicon glyphicon-edit'></span></a>
-            </td>
-        </tr>
-    }
-</table>
-<div class="modal fade" id="MyModal">
+
+
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Proveedores con Convenios Actuales
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+            <div class="card-body">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Monto Aprobado</th>
+                            <th>Persona</th>
+                            <th>Proveedor</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listValAsig)
+                        {
+                            <tr class='row_@item.id_valor_asig'>
+                                <td>@item.id_valor_asig</td>
+                                <td>@item.monto_aprobado</td>
+                                <td>@item.empleado</td>
+                                <td>@item.proveedor</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteValAsignado(@item.id_valor_asig)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_valor_asig"><span class='flaticon2-pen'></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@*<div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,8 +307,48 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
+
+
 <script>
+    $(document).ready(function () {
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+        }(jQuery));
+        $('.addpe').click(function () {
+            Swal.fire({
+                title: 'Persona Añadida',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar'
+            })
+            $('#empleado_idss').val($(this).parents("tr").find("td").eq(1).html());
+            $('#nombre').val($(this).parents("tr").find("td").eq(2).html());
+            $('#asop').val($(this).parents("tr").find("td").eq(3).html());
+            $('#fechap').val($(this).parents("tr").find("td").eq(4).html());
+            $("#accorp").trigger("click")
+        })
+
+        $('.addpr').click(function () {
+            Swal.fire({
+                title: 'Proveedor Añadido',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar'
+            })
+            $('#proveedor_id').val($(this).parents("tr").find("td").eq(1).html());
+            $('#proveedors').val($(this).parents("tr").find("td").eq(2).html());
+            $('#asopr').val($(this).parents("tr").find("td").eq(3).html());
+            $('#fechapr').val($(this).parents("tr").find("td").eq(4).html());
+            $("#accorpr").trigger("click")
+        })
+    })
     var row;
     function UpdateValAsignado(ValAsignado) {
         var data = $("#SubmitForm").serialize();

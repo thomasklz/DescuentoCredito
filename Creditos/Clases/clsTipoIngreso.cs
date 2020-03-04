@@ -21,12 +21,24 @@ namespace Creditos.Clases{
         public void ingresar(mTipoIngreso datos){
             db.spInsertarTipoIngreso(datos.descripcion);
         }
-        public void eliminar(mTipoIngreso datos){
-            db.spEliminarTipoIngreso(datos.id_tipo_ingreso);
-
+        public void eliminar(int id){
+            db.spEliminarTipoIngreso(id);
         }
-        public void modificar(mTipoIngreso datos){
-            db.spModificarTipoIngreso(datos.id_tipo_ingreso, datos.descripcion);
+        public Boolean modificar(mTipoIngreso datos){
+            Boolean result = false;
+            try{
+                db.spModificarTipoIngreso(datos.id_tipo_ingreso, datos.descripcion);
+                result = true;
+            }catch (Exception){
+                result = false;
+            }
+            return result;
+        }
+        public List<mTipoIngreso> mostrarById(int id){
+            foreach (var item in db.spConsultarTipoIngresoById(id)){
+                lista_t_ingreso.Add(new mTipoIngreso(item.id_tipo_ingreso, item.descripcion));
+            }
+            return lista_t_ingreso;
         }
     }
 }

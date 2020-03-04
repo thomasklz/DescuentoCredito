@@ -18,5 +18,6 @@ namespace Creditos.Entity
         public string persona { get; set; }
         public string aso { get; set; }
         public int Id_Persona { get; set; }
+        public int id_asociacion { get; set; }
     }
 }

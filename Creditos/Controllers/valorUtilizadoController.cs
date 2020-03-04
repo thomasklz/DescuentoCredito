@@ -5,87 +5,77 @@ using System.Web;
 using System.Web.Mvc;
 using Creditos.Clases;
 using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class valorUtilizadoController : Controller
     {
         // GET: valorUtilizado
-        public ActionResult Index()
-        {
+        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        clsMes clsmes = new clsMes();
+        clsValorAsignado clsvalorasig = new clsValorAsignado();
+        clsValorUtilizado clsvalorutil = new clsValorUtilizado();
+        List<mValorUtilizado> list_valor = new List<mValorUtilizado>();
+        public ActionResult Index(){
+            ViewBag.val_asig = clsvalorasig.mostrarEnAso(2);
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            ViewBag.val_util = clsvalorutil.mostrarxProv(2);
             return View();
         }
 
-        // GET: valorUtilizado/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
+        public ActionResult Store(mValorUtilizado model){
+            clsvalorutil.ingresar(model);
+            return RedirectToAction("index");
         }
 
-        // GET: valorUtilizado/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public JsonResult UpdateValAsignado(mValorUtilizado model)
+        //{
+        //    string result = "";
+        //    try
+        //    {
+        //        if (clsvalorasig.modificar(model) == true)
+        //        {
+        //            result = "Registro actualizado";
+        //        }
+        //        else
+        //        {
+        //            result = "Error al actualizar";
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        result = "Error al actualizar";
+        //    }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
 
-        // POST: valorUtilizado/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //public JsonResult GetValAsignadoById(int ValAsignadoId)
+        //{
+        //    List<mValorUtilizado> model = clsvalorasig.mostrarById(ValAsignadoId);
+        //    string value = string.Empty;
+        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+        //    {
+        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        //    });
+        //    return Json(value, JsonRequestBehavior.AllowGet);
+        //}
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: valorUtilizado/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: valorUtilizado/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: valorUtilizado/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: valorUtilizado/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //public JsonResult DeleteValAsignado(int ValAsignadoId)
+        //{
+        //    string result = "";
+        //    Valor_Asignado val_asig = db.Valor_Asignado.Find(ValAsignadoId);
+        //    if (val_asig != null)
+        //    {
+        //        clsvalorasig.eliminar(ValAsignadoId);
+        //        result = "Eliminado";
+        //    }
+        //    else
+        //    {
+        //        result = "Registro no encontrado";
+        //    }
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

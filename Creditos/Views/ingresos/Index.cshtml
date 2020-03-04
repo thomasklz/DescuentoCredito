@@ -1,9 +1,7 @@
 ﻿
 @model Creditos .Models.mIngresos
-
-@{
-     List<Creditos.Models.mIngresos> listIngreso = ViewBag.ingresos;
-}
+@{List<Creditos.Models.mIngresos> listIngreso = ViewBag.ingresos;
+    }
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
@@ -56,12 +54,11 @@
         </div>
     </div>
     @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
-    <div>
-        <input type="submit" value="Confirmar" class="btn btn-primary" />
-    </div>
-    <br />
-     }
-
+<div>
+    <input type="submit" value="Confirmar" class="btn btn-primary" />
+</div>
+<br />
+}
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
@@ -76,7 +73,7 @@
                 </svg> Ingresos Totales
             </div>
         </div>
-        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7" style="">
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="row align-items-center">
@@ -125,33 +122,56 @@
     </div>
 </div>
 
-
-<div class="modal fade" id="MyModal">
+<div class="modal fade" id="MyModal"> 
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Ingresos</h4>
+                <h4 id="ModalTitle" style="text-align:center">Modificar Ingresos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
                         @Html.HiddenFor(m => m.id_ingresos, new { @id = "id_ingresos" })
-                        <div class="form-group">
-                            <label>Valor</label>  
-                            @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                        @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Cantidad:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Tipo de Ingreso:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
+                                        @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Tipo de Ingreso--", new { @id = "tipo_ingreso_id", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })
-                        <div class="form-group">
-                            <label>Tipo de Ingreso</label>  
-                            @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Select Dept--", new { @id = "tipo_ingreso_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <label>Mes</label>  
-                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Select Dept--", new { @id = "mes_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateIngreso()">Save</a>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Mes:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Elija un Mes--", new { @id = "mes_id", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>.</label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateIngreso()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -159,6 +179,7 @@
         </div>
     </div>
 </div>
+
 <script>
     $(document).ready(function () {
         (function ($) {
@@ -169,7 +190,6 @@
                     return rex.test($(this).text());
                 }).show();
             });
-            // $("btnIngreso").attr("disabled", true);
         }(jQuery));
     });
     var row;
@@ -181,24 +201,20 @@
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
                     row.find("td").eq(1).html($('#valor').val());
                     row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
                     row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
                 }
                 $("#MyModal").modal("hide");
             }
@@ -256,4 +272,3 @@
         })
     }
 </script>
-

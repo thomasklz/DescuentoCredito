@@ -6,7 +6,7 @@
         <div class="kt-subheader__main">
             <h4>
                 BIENVENIDOS
-                <small>Proveedores</small>
+                <small>Editar Informaci&oacute;n - Proveedores</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
@@ -26,7 +26,7 @@
                         <label>Persona Jur&iacute;dica:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridicas", @class = "form-control", @placeholder = "Representante Legal", @name = "persona_juridica" })
+                            @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridicas", @class = "form-control", disabled="disabled", @placeholder = "Representante Legal", @name = "persona_juridica" })
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                         <label>RUC:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
-                            @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", @name = "RUC" })
+                            @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", disabled = "disabled", @name = "RUC" })
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                         <label>Nombre del Proveedor</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
-                            @Html.TextBoxFor(m => m.nombre, new { @id = "nombres", @class = "form-control", @placeholder = "Nombre", @name = "nombre" })
+                            @Html.TextBoxFor(m => m.nombre, new { @id = "nombres", @class = "form-control", @placeholder = "Nombre", disabled = "disabled", @name = "nombre" })
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <label>Servicio que provee:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-sticky-note"></i></span></div>
-                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", disabled = "disabled", @placeholder = "Descripción", @name = "descripcion" })
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                         <label>Email:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                            @Html.TextBoxFor(m => m.email, new { @id = "emails", @class = "form-control", @placeholder = "Email", @name = "email" })
+                            @Html.TextBoxFor(m => m.email, new { @id = "emails", @class = "form-control", @placeholder = "Email", disabled = "disabled", @name = "email" })
                         </div>
                     </div>
                 </div>
@@ -75,11 +75,12 @@
                         <label>Direcci&oacute;n:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-home"></i></span></div>
-                            @Html.TextBoxFor(m => m.direccion, new { @id = "direccions", @class = "form-control", @placeholder = "Dirección", @name = "direccion" })
+                            @Html.TextBoxFor(m => m.direccion, new { @id = "direccions", @class = "form-control", @placeholder = "Dirección", disabled = "disabled", @name = "direccion" })
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="kt-portlet__body">
             <div class="row">
@@ -88,20 +89,30 @@
                         <label>Tel&eacute;fono</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                            @Html.TextBoxFor(m => m.telefono, new { @id = "telefonos", @class = "form-control", @placeholder = "Teléfono", @name = "telefono" })
+                            @Html.TextBoxFor(m => m.telefono, new { @id = "telefonos", @class = "form-control", @placeholder = "Teléfono", disabled = "disabled", @name = "telefono" })
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-pull-2">
+                    <input type="button" value="Editar info" class="btn btn-primary" />
+                </div>
+                <div class="col-lg-pull-2">
+                    <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
     </div>
+
     <div>
-        <input type="submit" value="Save" class="btn btn-primary" />
     </div>
     <br />
 }
 
-<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+@*<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
         <div class="card-header" id="headingOne7">
             <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
@@ -169,7 +180,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 <div class="modal fade" id="MyModal">
     <div class="modal-dialog">
@@ -270,17 +281,7 @@
 
 
 <script>
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            });
-        }(jQuery));
-    });
+    
     var row;
     function UpdateProveedor(Proveedor) {
         var data = $("#SubmitForm").serialize();
@@ -339,37 +340,4 @@
             })
         })
     })
-    function DeleteProveedor(Proveedor) {
-        Swal.fire({
-            title: 'Estás seguro?',
-            text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: "/proveedores/DeleteProveedores?ProveedoresId=" + Proveedor,
-                    success: function (result) {
-                        if (result == "Eliminado") {
-                            Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
-                                'success'
-                            )
-                            $(".row_" + Proveedor).remove();
-                        } else {
-                            Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
-                                'error'
-                            )
-                        }
-                    }
-                })
-            }
-        })
-    }
 </script>

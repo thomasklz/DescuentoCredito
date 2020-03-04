@@ -1,21 +1,26 @@
-﻿@model Creditos.Models.mTipoIngreso
+﻿
+@model Creditos.Models.mTipoIngreso
 @{List<Creditos.Models.mTipoIngreso> listTipoIngreso = ViewBag.tipoingreso;}
 
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
-            <h2>
+            <h4>
                 BIENVENIDOS
                 <small>Tipo de Ingresos</small>
-            </h2>
+            </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
 
     </div>
 </div>
+<!-- end:: Subheader -->
 
 @using (Html.BeginForm("Store", "tipoingresos", FormMethod.Post))
 {
+    <br />
+    <br />
     <div>
         <label>Descripción:</label>
         <div class="input-group">
@@ -25,54 +30,98 @@
     </div>
     <br />
     <div>
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <input type="submit" value="Confirmar" class="btn btn-primary" />
     </div>
     <br />
 }
 
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Todos los tipos de Ingresos
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+            <div class="card-body">
+                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                    <div class="row align-items-center">
+                        <div class="col-xl-8 order-2 order-xl-1">
+                            <div class="row align-items-center">
+                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                    <div class="kt-input-icon kt-input-icon--left">
+                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                            <span><i class="la la-search"></i></span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>ITEM</th>
+                            <th>DESCRIPCI&Oacute;N</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listTipoIngreso)
+                        {
+                            <tr class='row_@item.id_tipo_ingreso'>
+                                <td>@item.id_tipo_ingreso</td>
+                                <td>@item.descripcion</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_tipo_ingreso"><span class='flaticon2-pen'></span></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
-<table class="table" style="text-align:center">
-    <tr>
-        <th>Item</th>
-        <th>Descripción</th>
-        <th>Acciones</th>
-    </tr>
-
-    @foreach (var item in listTipoIngreso)
-    {
-        <tr class='row_@item.id_tipo_ingreso'>
-            <td>@item.id_tipo_ingreso</td>
-            <td>@item.descripcion</td>
-            <td>
-                <a href='#'class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
-                <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_tipo_ingreso"><span class='flaticon2-pen'></span></a>
-            </td>
-        </tr>
-    }
-
-</table>
 <div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Tipos de Ingresos</h4>
+                <h4 id="ModalTitle" style="text-align:center">Modificar Tipos de Ingresos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
                         @Html.HiddenFor(m => m.id_tipo_ingreso, new { @id = "id_tipo_ingreso" })
-
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-
-                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value="1" })*@
-
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateTipoIngresos()">Save</a>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Descripción:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                                        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateTipoIngresos()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -82,6 +131,17 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+        }(jQuery));
+    });
     var row;
     function UpdateTipoIngresos(TipoIngreso) {
         var data = $("#SubmitForm").serialize();
@@ -120,7 +180,7 @@
             $("#MyModal").modal();
             $.ajax({
                 type: "GET",
-                url: "/tipoingresos/GetTipoIngresosById?TipoIngresosId=" + id,
+                url: "/tipoingresos/GetTipoIngresosById?TipoIngresoId=" + id,
                 success: function (data) {
                     var obj = JSON.parse(data);
                     $("#id_tipo_ingreso").val(obj[0].id_tipo_ingreso);

@@ -18,12 +18,14 @@ namespace Creditos.Controllers{
             ViewBag.proveedor = clsProvee.mostrar();
             return View();
         }
-
+        public ActionResult Indexp(){
+            return View();
+        }
         public ActionResult Store(mProveedores model){
             clsProvee.ingresar(model);
             return RedirectToAction("index");
         }
-
+        
         public JsonResult UpdateProveedores(mProveedores model){
             string result = "";
             try{

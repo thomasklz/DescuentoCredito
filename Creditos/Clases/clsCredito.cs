@@ -46,6 +46,7 @@ namespace Creditos.Clases {
             }
             return result;
         }
+
         public List<mCredito> mostrarById(int id){
             foreach (var item in db.spConsultarCreditoById(id)){
                 lista_creditos.Add(new mCredito(item.id_credito, item.descripcion, Convert.ToDouble(item.cantidad), Convert.ToDateTime(item.fecha_solicitud), Convert.ToDateTime(item.fecha_aprobacion), Convert.ToDouble(item.desc_mensual), item.persona, item.aso, Convert.ToInt32(item.numero_cuota), Convert.ToBoolean(item.estado_activacion), Convert.ToBoolean(item.estado_aprobacion)));

@@ -23,9 +23,7 @@
                 <div class="col-lg-12">
                     <div class="kt-section">
                         <label>Descripción:</label>
-                        
-                            @Html.TextAreaFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
-                        
+                            @Html.TextAreaFor(m => m.descripcion, new { style= "max-width:none;", @id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
                     </div>
                 </div>
             </div>
@@ -97,7 +95,7 @@
             <td>@item.cantidad</td>
             <td>@item.numero_cuota</td>
             <td>@item.desc_mensual</td>
-            <td>@item.fecha_solicitud</td>
+            <td>@item.fecha_solicitud.ToShortDateString()</td>
             @if (item.estado_aprobacion == true){
                 <td>@item.fecha_aprobacion.ToShortDateString()</td>
             }else{<td>No se ha aprobado</td> }

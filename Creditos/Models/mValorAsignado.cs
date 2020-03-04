@@ -30,6 +30,15 @@ namespace Creditos.Models
             this.empleado = empleado;
             this.monto_aprobado = monto_aprobado;
         }
+        public mValorAsignado(int id_valor_asig, string proveedor, int proveedor_id, string empleado,int empleado_id, double monto_aprobado)
+        {
+            this.id_valor_asig = id_valor_asig;
+            this.proveedor = proveedor;
+            this.proveedor_id = proveedor_id;
+            this.empleado = empleado;
+            this.empleado_id = empleado_id;
+            this.monto_aprobado = monto_aprobado;
+        }
         public mValorAsignado(int id_valor_asig, int proveedor_id, int empleado_id, double monto_aprobado)
         {
             this.id_valor_asig = id_valor_asig;

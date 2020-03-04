@@ -32,40 +32,30 @@ namespace Creditos.Controllers{
             return RedirectToAction("indexU");
         }
 
-        //public JsonResult UpdateIngresos(mIngresos model)
-        //{
-        //    string result = "";
-        //    try
-        //    {
-        //        if (clsingreso.modificar(model) == true)
-        //        {
-        //            result = "Registro actualizado";
-        //        }
-        //        else
-        //        {
-        //            result = "Error al actualizar";
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        result = "Error al actualizar";
-        //    }
+        public JsonResult AprobarCredito(mCredito model){
+            string result = "";
+            try{
+                if (clscred.aprobar(model) == true){
+                    result = "Credito Aprobado";
+                }else{
+                    result = "Error al Aprobar";
+                }
+            }catch (Exception){
+                result = "Error al Aprobar";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-
-
-        //public JsonResult GetIngresoById(int IngresoId)
-        //{
-        //    List<mIngresos> model = clsingreso.mostrarById(IngresoId);
-        //    string value = string.Empty;
-        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
-        //    {
-        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        //    });
-        //    return Json(value, JsonRequestBehavior.AllowGet);
-        //}
-
+        public JsonResult GetCreditoById(int CreditoId)
+        {
+            List<mCredito> model = clscred.mostrarById(CreditoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
 
         //public JsonResult DeleteIngreso(int IngresoId)
         //{
