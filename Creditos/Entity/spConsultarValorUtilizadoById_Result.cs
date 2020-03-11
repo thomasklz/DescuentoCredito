@@ -13,55 +13,15 @@ namespace Creditos.Entity
     
     public partial class spConsultarValorUtilizadoById_Result
     {
-        public int id_asociacion { get; set; }
-        public string descripcion { get; set; }
-        public Nullable<bool> est_delete { get; set; }
         public int id_valor_asig { get; set; }
-        public Nullable<int> proveedor_id { get; set; }
-        public Nullable<int> aso_id { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
-        public Nullable<double> monto_aprobado { get; set; }
-        public Nullable<bool> est_delete1 { get; set; }
-        public int id_valor_usad { get; set; }
-        public Nullable<int> valor_asig_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<double> cantidad_usada { get; set; }
-        public Nullable<bool> est_delete2 { get; set; }
         public int id_proveedor { get; set; }
-        public string persona_juridica { get; set; }
-        public string RUC { get; set; }
+        public int Id_Persona { get; set; }
+        public Nullable<double> monto_aprobado { get; set; }
+        public int id_valor_usad { get; set; }
         public string nombre { get; set; }
-        public string descripcion1 { get; set; }
-        public string email { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public Nullable<bool> est_delete3 { get; set; }
+        public string persona { get; set; }
+        public Nullable<double> cantidad_usada { get; set; }
         public int id_mes { get; set; }
-        public string descripcion2 { get; set; }
-        public Nullable<bool> est_delete4 { get; set; }
-        public int Id_Persona1 { get; set; }
-        public string Nombres { get; set; }
-        public string SegundoNombre { get; set; }
-        public string ApellidoPaterno { get; set; }
-        public string ApellidoMaterno { get; set; }
-        public string Cedula { get; set; }
-        public string Direccion1 { get; set; }
-        public string CalleSecundaria { get; set; }
-        public string Numero { get; set; }
-        public string ReferenciaD { get; set; }
-        public string TelefonoD { get; set; }
-        public string TelefonoC { get; set; }
-        public string ParroquiaNac { get; set; }
-        public System.DateTime FechaNac { get; set; }
-        public string Email1 { get; set; }
-        public bool Eliminado { get; set; }
-        public Nullable<int> etniaId { get; set; }
-        public int CantonId { get; set; }
-        public Nullable<int> TipoSangreID { get; set; }
-        public Nullable<int> EstadoCivilID { get; set; }
-        public string EmailInstitucional { get; set; }
-        public Nullable<int> tipoDocumentoId { get; set; }
-        public Nullable<int> sexoId { get; set; }
-        public Nullable<int> paisNacionalidadId { get; set; }
+        public string mes { get; set; }
     }
 }

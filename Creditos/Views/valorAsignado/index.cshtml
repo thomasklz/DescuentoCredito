@@ -228,9 +228,9 @@
             <div class="card-body">
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                     <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
+                        <div class="col-xl-10 order-2 order-xl-1">
                             <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                <div class="col-md-12 kt-margin-b-20-tablet-and-mobile">
                                     <div class="kt-input-icon kt-input-icon--left">
                                         <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
                                         <span class="kt-input-icon__icon kt-input-icon__icon--left">
@@ -273,42 +273,176 @@
     </div>
 </div>
 
-
-
-@*<div class="modal fade" id="MyModal">
+<div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Valores Asignados</h4>
+                <h4 id="ModalTitle" style="text-align:center">Modificar Valores Asignados </h4>
+                <a href="#" data-dismiss="modal">&times;</a>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m.id_valor_asig, new { @id = "id_val_asig" })
-                        <div class="form-group">
-                            <label>Valor</label>
-                            @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobado", @class = "form-control", @placeholder = "Name*" })
-                        </div>
+
+                        @Html.HiddenFor(m => m.id_valor_asig, new { @id = "id_val_asigssss" })
                         @Html.HiddenFor(m => m.aso_id, new { @id = "aso_id", @Value = "1" })
-                        <div class="form-group">
-                            <label>Persona</label>
-                            @Html.DropDownListFor(m => m.empleado_id, ViewBag.persona as SelectList, "--Seleccione una Persona--", new { @id = "empleado_id", @class = "form-control" })
+
+                        <p>
+                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample3" role="button" id="accorp3" aria-expanded="false" aria-controls="multiCollapseExample3">Personas en la Asociaci&oacute;n</a>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapseExample3">
+                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-8 order-2 order-xl-1">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                                        <div class="kt-input-icon kt-input-icon--left">
+                                                            <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
+                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                                <span><i class="la la-search"></i></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th style="display:none;"></th>
+                                                <th>Persona</th>
+                                                <th>Asociaci&oacute;n</th>
+                                                <th>Fecha de Uni&oacute;n</th>
+                                                <th>Agregar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="buscar">
+                                            @foreach (var item in listEmplAso)
+                                            {
+                                                <tr class='row_@item.id_empl_aso'>
+                                                    <td>@item.id_empl_aso</td>
+                                                    <td style="display:none;">@item.empleado_id</td>
+                                                    <td>@item.persona</td>
+                                                    <td>@item.aso</td>
+                                                    <td>@item.fecha_ingreso.ToShortDateString()</td>
+                                                    <td>
+                                                        <a href='#' class='btn btn-outline-warning addpemo' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Mes</label>
-                            @Html.DropDownListFor(m => m.proveedor_id, ViewBag.proveedor as SelectList, "--Seleccione Proveedor--", new { @id = "proveedor_id", @class = "form-control" })
+                        @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_idsss", @Value = "" })
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="kt-section">
+                                    <label>Persona:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBox("nombresss", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateValAsignado()">Save</a>
+
+
+                        <p>
+                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample4" role="button" id="accorpr4" aria-expanded="false" aria-controls="multiCollapseExample4">Proveedores disponibles</a>
+                        </p>
+                        <div class="row">
+                            <div class="col">
+                                <div class="collapse multi-collapse" id="multiCollapseExample4">
+                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
+                                        <div class="row align-items-center">
+                                            <div class="col-xl-8 order-2 order-xl-1">
+                                                <div class="row align-items-center">
+                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                                        <div class="kt-input-icon kt-input-icon--left">
+                                                            <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
+                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                                <span><i class="la la-search"></i></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
+                                        <thead>
+                                            <tr>
+                                                <th>Item</th>
+                                                <th style="display:none;"></th>
+                                                <th>Proveedor</th>
+                                                <th>Asociaci&oacute;n</th>
+                                                <th>Fecha de Uni&oacute;n</th>
+                                                <th>Agregar</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="buscar">
+                                            @foreach (var item in listAsoProv)
+                                            {
+                                                <tr class='row_@item.id_asoc_prov'>
+                                                    <td>@item.id_asoc_prov</td>
+                                                    <td style="display:none;">@item.proveedor_id</td>
+                                                    <td>@item.proveedor</td>
+                                                    <td>@item.aso</td>
+                                                    <td>@item.fecha.ToShortDateString()</td>
+                                                    <td>
+                                                        <a href='#' class='btn btn-outline-warning addprmo' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_idss", @Value = "" })
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="kt-section">
+                                    <label>Proveedor:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBox("proveedorsss", null, new { @class = "form-control", disabled = "disabled", placeholder = "Proveedor" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Monto Aprobado:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobadoss", @class = "form-control", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br/></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateValAsignado()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
-</div>*@
-
+</div>
 
 <script>
     $(document).ready(function () {
@@ -321,6 +455,7 @@
                 }).show();
             });
         }(jQuery));
+
         $('.addpe').click(function () {
             Swal.fire({
                 title: 'Persona Añadida',
@@ -348,6 +483,30 @@
             $('#fechapr').val($(this).parents("tr").find("td").eq(4).html());
             $("#accorpr").trigger("click")
         })
+
+        $('.addpemo').click(function () {
+            Swal.fire({
+                title: 'Persona Añadida',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar'
+            })
+            $('#empleado_idsss').val($(this).parents("tr").find("td").eq(1).html());
+            $('#nombresss').val($(this).parents("tr").find("td").eq(2).html());
+            $("#accorp3").trigger("click")
+        })
+
+        $('.addprmo').click(function () {
+            Swal.fire({
+                title: 'Proveedor Añadido',
+                icon: 'success',
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar'
+            })
+            $('#proveedor_idss').val($(this).parents("tr").find("td").eq(1).html());
+            $('#proveedorsss').val($(this).parents("tr").find("td").eq(2).html());
+            $("#accorpr4").trigger("click")
+        })
     })
     var row;
     function UpdateValAsignado(ValAsignado) {
@@ -358,24 +517,20 @@
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    row.find("td").eq(1).html($('#monto_aprobado').val());
-                    row.find("td").eq(3).html($('select[id="proveedor_id"] option:selected').text());
-                    row.find("td").eq(2).html($('select[id="empleado_id"] option:selected').text());
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
+                    row.find("td").eq(1).html($('#monto_aprobadoss').val());
+                    row.find("td").eq(2).html($('#nombresss').val());
+                    row.find("td").eq(3).html($('#proveedorsss').val());
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
                 }
                 $("#MyModal").modal("hide");
             }
@@ -388,13 +543,15 @@
             $("#MyModal").modal();
             $.ajax({
                 type: "GET",
-                url: "/valorAsignado/GetValAsignadoById?ValAsignadoId=" + ValAsignadoid,
+                url: "/valorAsignado/GetValAsignadoById?ValAsignadoId=" + id,
                 success: function (data) {
                     var obj = JSON.parse(data);
-                    $("#id_val_asig").val(obj[0].id_val_asig);
-                    $("#monto_aprobado").val(obj[0].monto_aprobado);
-                    $("#empleado_id option[value='" + obj[0].empleado_id + "']").attr("selected", true);
-                    $("#proveedor_id option[value='" + obj[0].proveedor_id + "']").attr("selected", true);
+                    $("#id_val_asigssss").val(obj[0].id_valor_asig);
+                    $("#empleado_idsss").val(obj[0].empleado_id);
+                    $("#proveedor_idss").val(obj[0].proveedor_id);
+                    $("#monto_aprobadoss").val(obj[0].monto_aprobado);
+                    $("#nombresss").val(obj[0].empleado);
+                    $("#proveedorsss").val(obj[0].proveedor);
                 }
             })
         })

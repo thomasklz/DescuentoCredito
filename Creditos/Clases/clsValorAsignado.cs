@@ -33,7 +33,7 @@ namespace Creditos.Clases{
         }
         public List<mValorAsignado> mostrarById(int id){
             foreach (var item in db.spConsultarValorAsignadoById(id)){
-                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.proveedor, item.persona, Convert.ToDouble(item.monto_aprobado)));
+                lista_valor_asignado.Add(new mValorAsignado(item.id_valor_asig, item.proveedor, item.id_proveedor, item.persona, item.Id_Persona, Convert.ToDouble(item.monto_aprobado)));
             }
             return lista_valor_asignado;
         }

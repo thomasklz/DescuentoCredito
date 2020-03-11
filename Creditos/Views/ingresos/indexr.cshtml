@@ -1,0 +1,115 @@
+﻿@model Creditos.Models.mIngresos
+@{List<Creditos.Models.mIngresos> listReporteIngreso = ViewBag.ingresos;
+     }
+    <!-- begin:: Encabezado VENTANA PRINCIPAL -->
+    <div class="kt-subheader kt-grid__item" id="kt_subheader">
+        <div class="kt-container ">
+            <div class="kt-subheader__main">
+                <h4>
+                     Reporte de Ingesos Mensuales
+                </h4>
+                <span class="kt-subheader__separator kt-hidden"></span>
+            </div>
+        </div>
+    </div>
+    <!-- end:: Subheader -->
+    @using (Html.BeginForm("Store", "ingresos", FormMethod.Post))
+    {
+        <br />
+        <br /> 
+        <div>
+            <div class="kt-portlet__body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="kt-section">
+                            <label>Mes:</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+        <div>
+            <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
+            <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+        </div>
+        <br />
+    }
+
+    <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+        <div class="card">
+            <div id="contenedorIngresos">
+            </div>
+        </div>
+    </div>
+
+    @*Reporte*@
+    <script type="text/javascript">
+
+        function generarReporteI() {
+            var _idMes = $('#mes_ids').val();
+
+            $('#id_ingresos').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarIngreso", "ingresos")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _idMes: _idMes, _idIngreso: _idIngreso },
+            beforeSend: function () {
+                $("#contenedorIngresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contenedorIngresos").html(data.tabla);
+                } else {
+                    $("#contenedorIngresos").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+    }
+    </script>
+    @*hasta aqui*@
+
+    <script>
+        function Imprimir() {
+
+          $("#contenedorIngresos").print({
+            addGlobalStyles: true,
+            stylesheet: null,
+            rejectWindow: true,
+            noPrintSelector: "",
+            iframe: true,
+            append: null,
+            prepend: null
+        });
+        }
+    </script>

@@ -318,6 +318,15 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarValorUtilizado_Result>("spConsultarValorUtilizado");
         }
     
+        public virtual ObjectResult<spConultarValorUsadoxProv_Result> spConultarValorUsadoxProv(Nullable<int> proveedor_id)
+        {
+            var proveedor_idParameter = proveedor_id.HasValue ?
+                new ObjectParameter("proveedor_id", proveedor_id) :
+                new ObjectParameter("proveedor_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConultarValorUsadoxProv_Result>("spConultarValorUsadoxProv", proveedor_idParameter);
+        }
+    
         public virtual int spEliminarAsociacion(Nullable<int> id_asociacion)
         {
             var id_asociacionParameter = id_asociacion.HasValue ?
@@ -460,6 +469,15 @@ namespace Creditos.Entity
                 new ObjectParameter("id_valor_usad", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spEliminarValorUtilizado", id_valor_usadParameter);
+        }
+    
+        public virtual ObjectResult<spEmpleadoxProveedor_Result> spEmpleadoxProveedor(Nullable<int> proveedor_id)
+        {
+            var proveedor_idParameter = proveedor_id.HasValue ?
+                new ObjectParameter("proveedor_id", proveedor_id) :
+                new ObjectParameter("proveedor_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEmpleadoxProveedor_Result>("spEmpleadoxProveedor", proveedor_idParameter);
         }
     
         public virtual int spInsertarAsociacion(string descripcion)
@@ -1187,24 +1205,6 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
-        }
-    
-        public virtual ObjectResult<spEmpleadoxProveedor_Result> spEmpleadoxProveedor(Nullable<int> proveedor_id)
-        {
-            var proveedor_idParameter = proveedor_id.HasValue ?
-                new ObjectParameter("proveedor_id", proveedor_id) :
-                new ObjectParameter("proveedor_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spEmpleadoxProveedor_Result>("spEmpleadoxProveedor", proveedor_idParameter);
-        }
-    
-        public virtual ObjectResult<spConultarValorUsadoxProv_Result> spConultarValorUsadoxProv(Nullable<int> proveedor_id)
-        {
-            var proveedor_idParameter = proveedor_id.HasValue ?
-                new ObjectParameter("proveedor_id", proveedor_id) :
-                new ObjectParameter("proveedor_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConultarValorUsadoxProv_Result>("spConultarValorUsadoxProv", proveedor_idParameter);
         }
     }
 }

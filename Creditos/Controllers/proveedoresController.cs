@@ -19,6 +19,7 @@ namespace Creditos.Controllers{
             return View();
         }
         public ActionResult Indexp(){
+            ViewBag.proveedor = clsProvee.mostrarProveedor(2);
             return View();
         }
         public ActionResult Store(mProveedores model){

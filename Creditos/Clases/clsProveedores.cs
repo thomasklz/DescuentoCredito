@@ -40,5 +40,13 @@ namespace Creditos.Clases
             }
             return provee;
         }
+        public mProveedores mostrarProveedor(int id){
+            mProveedores objprov = new mProveedores();
+            foreach (var item in db.spConsultarProveedorById(id))
+            {
+                objprov = new mProveedores(item.id_proveedor, item.persona_juridica, item.RUC, item.nombre, item.descripcion, item.email, item.direccion, item.telefono);
+            }
+            return objprov;
+        }
     }
 }

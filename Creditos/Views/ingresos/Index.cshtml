@@ -51,13 +51,14 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
-    @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
-<div>
-    <input type="submit" value="Confirmar" class="btn btn-primary" />
-</div>
-<br />
+    @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" }) 
+        <div>
+         <input type="submit" value="Confirmar" class="btn btn-primary" />  
+        </div>
+    <br />
 }
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
@@ -117,8 +118,13 @@
                         }
                     </tbody>
                 </table>
+
+
             </div>
         </div>
+        <br />
+        <br />
+       
     </div>
 </div>
 
@@ -166,7 +172,7 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>.</label>
+                                    <label><br /></label>
                                     <div class="input-group">
                                         <a href="#" class="btn btn-label-success" onclick="UpdateIngreso()">Guardar Cambios</a>
                                     </div>
@@ -179,96 +185,103 @@
         </div>
     </div>
 </div>
-
-<script>
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            });
-        }(jQuery));
-    });
-    var row;
-    function UpdateIngreso(Ingreso) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/ingresos/UpdateIngresos",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire(
-                        'Actualizado!',
-                        'Registro Actualizado',
-                        'success'
-                    )
-                    row.find("td").eq(1).html($('#valor').val());
-                    row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
-                    row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
-                } else {
-                    Swal.fire(
-                        'Reintentar!',
-                        'ERROR AL ACTUALIZAR',
-                        'error'
-                    )
-                }
-                $("#MyModal").modal("hide");
-            }
-        })
-    }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
+  
+    <script>
+        $(document).ready(function () {
+            console.log($("#id_ingresos").val());
+            (function ($) {
+                $('.filtrar').keyup(function () {
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+                });
+            }(jQuery));
+        });
+        var row;
+        function UpdateIngreso(Ingreso) {
+            var data = $("#SubmitForm").serialize();
             $.ajax({
-                type: "GET",
-                url: "/ingresos/GetIngresoById?IngresoId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#id_ingresos").val(obj[0].id_ingresos);
-                    $("#valor").val(obj[0].valor);
-                    $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
-                    $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+                type: "Post",
+                url: "/ingresos/UpdateIngresos",
+                data: data,
+                success: function (result) {
+                    if (result == "Registro actualizado") {
+                        Swal.fire(
+                            'Actualizado!',
+                            'Registro Actualizado',
+                            'success'
+                        )
+                        row.find("td").eq(1).html($('#valor').val());
+                        row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+                        row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
+                    } else {
+                        Swal.fire(
+                            'Reintentar!',
+                            'ERROR AL ACTUALIZAR',
+                            'error'
+                        )
+                    }
+                    $("#MyModal").modal("hide");
                 }
             })
-        })
-    })
-    function DeleteIngreso(Ingreso) {
-        Swal.fire({
-            title: 'Estás seguro?',
-            text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
+        }
+        $(document).ready(function () {
+            console.log($("#id_ingresos").val());
+
+            $('[data-id]').click(function () {
+                row = $(this).parents("tr");
+                var id = $(this).data("id")
+                $("#MyModal").modal();
                 $.ajax({
-                    type: "POST",
-                    url: "/ingresos/DeleteIngreso?IngresoId=" + Ingreso,
-                    success: function (result) {
-                        if (result == "Eliminado") {
-                            Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
-                                'success'
-                            )
-                            $(".row_" + Ingreso).remove();
-                        } else {
-                            Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
-                                'error'
-                            )
-                        }
+                    type: "GET",
+                    url: "/ingresos/GetIngresoById?IngresoId=" + id,
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        $("#id_ingresos").val(obj[0].id_ingresos);
+                        $("#valor").val(obj[0].valor);
+                        console.log($("#valor").val());
+
+                        $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                        $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
                     }
                 })
-            }
+            })
         })
-    }
+        function DeleteIngreso(Ingreso) {
+            Swal.fire({
+                title: 'Estás seguro?',
+                text: 'Deseas eliminar el registro seleccionado!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Borrar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/ingresos/DeleteIngreso?IngresoId=" + Ingreso,
+                        success: function (result) {
+                            if (result == "Eliminado") {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'El registro fue borrado con éxito',
+                                    'success'
+                                )
+                                $(".row_" + Ingreso).remove();
+                            } else {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'No se pudo eliminar el registro',
+                                    'error'
+                                )
+                            }
+                        }
+                    })
+                }
+            })
+        }   
 </script>
+
+

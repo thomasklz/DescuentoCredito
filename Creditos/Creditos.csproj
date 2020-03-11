@@ -553,6 +553,8 @@
     <Content Include="Views\credito\indexA.cshtml" />
     <Content Include="Views\valorUtilizado\index.cshtml" />
     <Content Include="Views\proveedores\indexp.cshtml" />
+    <Content Include="Views\ingresos\indexr.cshtml" />
+    <Content Include="Views\valorUtilizado\indexa.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

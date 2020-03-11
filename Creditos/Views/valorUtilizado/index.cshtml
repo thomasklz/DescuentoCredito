@@ -19,7 +19,7 @@
     </div>
 </div>
 
-@using (Html.BeginForm("Store", "valorutilizado", FormMethod.Post))
+@using (Html.BeginForm("Store", "valorUtilizado", FormMethod.Post))
 {
     <br />
     <p>
@@ -172,6 +172,8 @@
                             <th>Empleado</th>
                             <th>Aociaci&oacute;n</th>
                             <th>Mes</th>
+                            <th>Valor Aprobado</th>
+                            <th>Valor Utilizado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -182,6 +184,8 @@
                                 <td>@item.persona</td>
                                 <td>@item.aso</td>
                                 <td>@item.mes</td>
+                                <td>@item.cantidad_aprobada</td>
+                                <td>@item.cantidad_usada</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEmplAso(@item.id_valor_usad)'><span class='flaticon2-rubbish-bin'></span></a>
                                     <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_valor_usad"><span class='flaticon2-pen'></span></a>
@@ -195,7 +199,7 @@
     </div>
 </div>
 
-@*<div class="modal fade" id="MyModal">
+<div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -205,19 +209,20 @@
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
+                        
                         <p>
-                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapse" role="button" id="accors" aria-expanded="false" aria-controls="multiCollapse">Personas Disponibles</a>
+                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample" role="button" id="accord" aria-expanded="false" aria-controls="multiCollapseExample">Personas Asociadas:</a>
                         </p>
                         <div class="row">
                             <div class="col">
-                                <div class="collapse multi-collapse" id="multiCollapse">
+                                <div class="collapse multi-collapse" id="multiCollapseExample">
                                     <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
                                         <div class="row align-items-center">
                                             <div class="col-xl-8 order-2 order-xl-1">
                                                 <div class="row align-items-center">
                                                     <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                                                         <div class="kt-input-icon kt-input-icon--left">
-                                                            <input type="text" class="form-control filtrar" placeholder="Search...">
+                                                            <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
                                                             <span class="kt-input-icon__icon kt-input-icon__icon--left">
                                                                 <span><i class="la la-search"></i></span>
                                                             </span>
@@ -232,23 +237,19 @@
                                             <tr>
                                                 <th>Item</th>
                                                 <th>Cedula</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Direción</th>
-                                                <th>Teléfono</th>
+                                                <th>Empleado</th>
+                                                <th>Monto Aprobado</th>
                                                 <th>Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody class="buscar">
-                                            @foreach (var item in listPersona)
+                                            @foreach (var item in listValAsig)
                                             {
-                                                <tr class='row_@item.Id_Persona'>
-                                                    <td>@item.Id_Persona</td>
-                                                    <td>@item.Cedula</td>
-                                                    <td>@item.Nombres @item.SegundoNombre</td>
-                                                    <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
-                                                    <td>@item.Direccion</td>
-                                                    <td>@item.Numero</td>
+                                                <tr class='row_@item.id_valor_asig'>
+                                                    <td>@item.id_valor_asig</td>
+                                                    <td>@item.proveedor</td>
+                                                    <td>@item.empleado</td>
+                                                    <td>@item.monto_aprobado</td>
                                                     <td>
                                                         <a href='#' class='btn btn-outline-warning adds' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
                                                     </td>
@@ -259,24 +260,25 @@
                                 </div>
                             </div>
                         </div>
-                        @Html.HiddenFor(m => m.id_empl_aso, new { @id = "id_empl_asos" })
-                        @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_ids", @Value = "" })
+                        
+                        @Html.HiddenFor(m => m.id_valor_usad, new { @id = "id_empl_asos" })
+                        @Html.HiddenFor(m => m.valor_asig_id, new { @id = "valor_asig_ids" })
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Nombre:</label>
+                                    <label>Empleado:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                        @Html.TextBoxFor(m => m.persona, new { @id = "nombres", @class = "form-control", disabled = "disabled", @placeholder = "Nueva persona" })
+                                        @Html.TextBox("personasss", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Asociaci&oacute;n:</label>
+                                    <label>Valor M&aacute;ximo Asignado:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                        @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Elija una Asociacion--", new { @id = "asociacion_id", @class = "form-control" })
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBox("valorAsignados", null, new { @class = "form-control", disabled = "disabled", placeholder = "Valor Nominal Asignado" })
                                     </div>
                                 </div>
                             </div>
@@ -284,16 +286,27 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Persona Ingresada el:</label>
+                                    <label>Mes:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                        @Html.TextBoxFor(m => m.fecha_ingreso, new { @id = "fecha_", @class = "form-control", type = "date" })
+                                        @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>.</label>
+                                    <label>Cantidad Utilizada:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.cantidad_usada, new { @id = "cantidad_usadas", @class = "form-control", @placeholder = "Valor Consumido", @name = "cantidad_usada" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br/></label>
                                     <div class="input-group">
                                         <a href="#" class="btn btn-label-success" onclick="UpdateEmplAso()">Guardar Cambios</a>
                                     </div>
@@ -305,145 +318,143 @@
             </div>
         </div>
     </div>
-</div>*@
+</div>
+<script>
+        //Validacion
+        //function validar() {
+        //    if ($("#Cedulas") == '') {
+        //        $("#btnIngreso").attr("disabled");
+        //    } else {
+        //        $('#btnIngreso').removeAttr("disabled")
+        //    }
+        //}
 
-<div>
-    @*<script>
-        </div>
-            //Validacion
-            //function validar() {
-            //    if ($("#Cedulas") == '') {
-            //        $("#btnIngreso").attr("disabled");
-            //    } else {
-            //        $('#btnIngreso').removeAttr("disabled")
-            //    }
-            //}
+        //paginacion
 
-            //paginacion
-
-            $(document).ready(function () {
-                (function ($) {
-                    $('.filtrar').keyup(function () {
-                        var rex = new RegExp($(this).val(), 'i');
-                        $('.buscar tr').hide();
-                        $('.buscar tr').filter(function () {
-                            return rex.test($(this).text());
-                        }).show();
-                    });
-                   // $("btnIngreso").attr("disabled", true);
-                }(jQuery));
-            });
-            //Llenar un empleado
-            $(document).ready(function () {
-               // debugger
-
-                $('.add').click(function () {
-                Swal.fire({
-                   title: 'Persona Añadida',
-                   icon: 'success',
-                   confirmButtonText: 'Ok',
-                   cancelButtonText: 'Cancelar'})
-                    $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
-                    $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
-                    $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
-                    $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
-                    $("#accor").trigger("click")
-                })
-                $('.adds').click(function () {
-                    Swal.fire({
-                        title: 'Persona Añadida',
-                        icon: 'success',
-                        confirmButtonText: 'Ok',
-                        cancelButtonText: 'Cancelar'
-                    })
-                    $('#nombres').val($(this).parents("tr").find("td").eq(2).html());
-                    $('#empleado_ids').val($(this).parents("tr").find("td").eq(0).html());
-                    $("#accors").trigger("click")
-                })
+        $(document).ready(function () {
+            (function ($) {
+                $('.filtrar').keyup(function () {
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+                });
+               // $("btnIngreso").attr("disabled", true);
+            }(jQuery));
+        });
+        //Llenar un empleado
+        $(document).ready(function () {
+            $('.add').click(function () {
+            Swal.fire({
+               title: 'Persona Añadida',
+               icon: 'success',
+               confirmButtonText: 'Ok',
+               cancelButtonText: 'Cancelar'})
+                $('#cedula').val($(this).parents("tr").find("td").eq(1).html());
+                $('#persona').val($(this).parents("tr").find("td").eq(2).html());
+                $('#valorAsignado').val($(this).parents("tr").find("td").eq(3).html());
+                $('#valor_asig_id').val($(this).parents("tr").find("td").eq(0).html());
+                $("#accor").trigger("click")
             })
-
-            var row;
-            function UpdateEmplAso(EmplAso) {
-                var data = $("#SubmitForm").serialize();
-                $.ajax({
-                    type: "Post",
-                    url: "/empleadoAsociacion/UpdateEmplAso",
-                    data: data,
-                    success: function (result) {
-                        if (result == "Registro actualizado") {
-                            Swal.fire(
-                                'Actualizado!',
-                                'Registro Actualizado',
-                                'success'
-                            )
-                            row.find("td").eq(1).html($('#nombres').val());
-                            row.find("td").eq(2).html($('select[id="asociacion_id"] option:selected').text());
-
-                        } else {
-                            Swal.fire(
-                                'Reintentar!',
-                                'ERROR AL ACTUALIZAR',
-                                'error'
-                            )
-                        }
-                        $("#MyModal").modal("hide");
-                    }
-                })
-            }
-            $(document).ready(function () {
-                $('[data-id]').click(function () {
-                    row = $(this).parents("tr");
-                    var id = $(this).data("id")
-                    $("#MyModal").modal();
-                    $.ajax({
-                        type: "GET",
-                        url: "/empleadoAsociacion/GetEmplAsoById?EmplAsoId=" + id,
-                        success: function (data) {
-                            var obj = JSON.parse(data);
-
-                            $("#id_empl_asos").val(obj[0].id_empl_aso);
-                            $("#fecha_").val(obj[0].valor);
-                            $("#asociacion_id option[value='" + obj[0].asociacion_id + "']").attr("selected", true);
-                        }
-                    })
-                })
-            })
-            function DeleteEmplAso(EmplAso) {
+            $('.adds').click(function () {
                 Swal.fire({
-                    title: 'Estás seguro?',
-                    text: 'Deseas eliminar el registro seleccionado!',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Borrar',
+                    title: 'Persona Modificada',
+                    icon: 'success',
+                    confirmButtonText: 'Ok',
                     cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.value) {
-                        $.ajax({
-                            type: "POST",
-                            url: "/empleadoAsociacion/DeleteEmplAso?EmplAsoId=" + EmplAso,
-                            success: function (result) {
-                                if (result == "Eliminado") {
-                                    Swal.fire(
-                                        'Borrado!',
-                                        'El registro fue borrado con éxito',
-                                        'success'
+                })
+                $('#personasss').val($(this).parents("tr").find("td").eq(2).html());
+                $('#valorAsignados').val($(this).parents("tr").find("td").eq(3).html());
+                $('#valor_asig_ids').val($(this).parents("tr").find("td").eq(0).html());
+                $("#accord").trigger("click")
+            })
+        })
 
-                                    )
-                                    $(".row_" + EmplAso).remove();
-                                } else {
-                                    Swal.fire(
-                                        'Borrado!',
-                                        'No se pudo eliminar el registro',
-                                        'error'
-                                    )
-                                }
-                                //$('#tablaSA').DataTable().ajax.reload();
-                                var table = document.getElementById("#tablaSA");
-                                table.refresh();
-                            }
-                        })
+        var row;
+        function UpdateEmplAso(EmplAso) {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/empleadoAsociacion/UpdateEmplAso",
+                data: data,
+                success: function (result) {
+                    if (result == "Registro actualizado") {
+                        Swal.fire(
+                            'Actualizado!',
+                            'Registro Actualizado',
+                            'success'
+                        )
+                        row.find("td").eq(1).html($('#nombres').val());
+                        row.find("td").eq(2).html($('select[id="mes_id"] option:selected').text());
+
+                    } else {
+                        Swal.fire(
+                            'Reintentar!',
+                            'ERROR AL ACTUALIZAR',
+                            'error'
+                        )
                     }
-                    })
+                    $("#MyModal").modal("hide");
+                }
+            })
+        }
+        $(document).ready(function () {
+            $('[data-id]').click(function () {
+                row = $(this).parents("tr");
+                var id = $(this).data("id")
+                $("#MyModal").modal();
+                $.ajax({
+                    type: "GET",
+                    url: "/valorUtilizado/GetValUsadoById?ValUsadoId=" + id,
+                    success: function (data) {
+                        var obj = JSON.parse(data);
+                        $("#id_valor_usads").val(obj[0].id_valor_usad);
+                        $("#cantidad_usadas").val(obj[0].cantidad_usada);
+                        $("#valorAsignados").val(obj[0].cantidad_aprobada);
+                        $("#valor_asig_ids").val(obj[0].valor_asig_id);
+                        $("#personasss").val(obj[0].persona);
+                        $("#mes_ids option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                    }
+                })
+            })
+        })
+        function DeleteEmplAso(EmplAso) {
+            Swal.fire({
+                title: 'Estás seguro?',
+                text: 'Deseas eliminar el registro seleccionado!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Borrar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/empleadoAsociacion/DeleteEmplAso?EmplAsoId=" + EmplAso,
+                        success: function (result) {
+                            if (result == "Eliminado") {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'El registro fue borrado con éxito',
+                                    'success'
 
-            }
-        </script>*@
+                                )
+                                $(".row_" + EmplAso).remove();
+                            } else {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'No se pudo eliminar el registro',
+                                    'error'
+                                )
+                            }
+                            //$('#tablaSA').DataTable().ajax.reload();
+                            var table = document.getElementById("#tablaSA");
+                            table.refresh();
+                        }
+                    })
+                }
+                })
+
+        }
+    </script>

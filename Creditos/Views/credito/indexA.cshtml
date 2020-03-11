@@ -218,7 +218,7 @@
     </div>
 </div>
 
-<div class="modal fade modalinfo" >
+<div class="modal fade" id="modalinfo" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -306,7 +306,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </fieldset>
                 </form>
             </div>
@@ -347,7 +346,7 @@
             url: "/credito/AprobarCredito",
             data: data,
             success: function (result) {
-                if (result == "Crédito Aprobado") {
+                if (result == "Credito Aprobado") {
                     Swal.fire(
                         'Aprobado!',
                         '',
@@ -360,12 +359,11 @@
                         'error'
                     )
                 }
-                $("#MyModal").modal("hide");
-                $("#accors").trigger("click");
-                //location.reload();
+                location.reload();
             }
         })
     }
+
     $(document).ready(function () {
 
         $('[data-id]').click(function () {
@@ -387,7 +385,7 @@
         $('.infor').click(function () {
             row = $(this).parents("tr");
             var id = $(this).data("id")
-            $(".modalinfo").modal();
+            $("#modalinfo").modal();
             $.ajax({
                 type: "GET",
                 url: "/credito/GetCreditoById?CreditoId=" + id,
@@ -440,9 +438,6 @@
                     }
                 })
             }
-            })
-
+        })
     }
-   
-
 </script>

@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         List<mValorUtilizado> lista_valor_utili = new List<mValorUtilizado>();
         public List<mValorUtilizado> mostrar(){
             foreach (var item in db.spConsultarValorUtilizado()){
-                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_asig, item.id_valor_asig, item.Nombres+' '+item.ApellidoPaterno, item.nombre, item.descripcion2, Convert.ToDouble(item.monto_aprobado)));
+                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.persona, item.nombre, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
             }
             return lista_valor_utili;
         }
@@ -33,13 +33,13 @@ namespace Creditos.Clases{
         }
         public List<mValorUtilizado> mostrarById(int id){
             foreach (var item in db.spConsultarValorUtilizadoById(id)){
-                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_asig, item.id_valor_asig, item.id_mes, Convert.ToDouble(item.monto_aprobado)));
+                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.id_valor_asig, item.persona, item.id_mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
             }
             return lista_valor_utili;
         }
         public List<mValorUtilizado> mostrarxProv(int id){
             foreach (var item in db.spConultarValorUsadoxProv(id)){
-                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_asig, item.aso, item.persona, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.monto_aprobado)));
+                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.aso, item.id_valor_asig, item.persona, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
             }
             return lista_valor_utili;
         }

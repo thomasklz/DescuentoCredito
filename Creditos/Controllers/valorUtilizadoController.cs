@@ -30,52 +30,41 @@ namespace Creditos.Controllers
             return RedirectToAction("index");
         }
 
-        //public JsonResult UpdateValAsignado(mValorUtilizado model)
-        //{
-        //    string result = "";
-        //    try
-        //    {
-        //        if (clsvalorasig.modificar(model) == true)
-        //        {
-        //            result = "Registro actualizado";
-        //        }
-        //        else
-        //        {
-        //            result = "Error al actualizar";
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        result = "Error al actualizar";
-        //    }
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult UpdateValUsado(mValorUtilizado model){
+            string result = "";
+            try{
+                if (clsvalorutil.modificar(model) == true){
+                    result = "Registro actualizado";
+                }else{
+                    result = "Error al actualizar";
+                }
+            }catch (Exception){
+                result = "Error al actualizar";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
 
-        //public JsonResult GetValAsignadoById(int ValAsignadoId)
-        //{
-        //    List<mValorUtilizado> model = clsvalorasig.mostrarById(ValAsignadoId);
-        //    string value = string.Empty;
-        //    value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
-        //    {
-        //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-        //    });
-        //    return Json(value, JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult GetValUsadoById(int ValUsadoId){
+            List<mValorUtilizado> model = clsvalorutil.mostrarById(ValUsadoId);
+            string value = string.Empty;
+            value = JsonConvert.SerializeObject(model, Formatting.Indented, new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+            });
+            return Json(value, JsonRequestBehavior.AllowGet);
+        }
 
-        //public JsonResult DeleteValAsignado(int ValAsignadoId)
-        //{
-        //    string result = "";
-        //    Valor_Asignado val_asig = db.Valor_Asignado.Find(ValAsignadoId);
-        //    if (val_asig != null)
-        //    {
-        //        clsvalorasig.eliminar(ValAsignadoId);
-        //        result = "Eliminado";
-        //    }
-        //    else
-        //    {
-        //        result = "Registro no encontrado";
-        //    }
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
+        public JsonResult DeleteValUsado(int ValUsadoId){
+            string result = "";
+            Valor_Utilizado val_usad = db.Valor_Utilizado.Find(ValUsadoId);
+            if (val_usad != null){
+                clsvalorutil.eliminar(ValUsadoId);
+                result = "Eliminado";
+            }
+            else{
+                result = "Registro no encontrado";
+            }
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
     }
 }
