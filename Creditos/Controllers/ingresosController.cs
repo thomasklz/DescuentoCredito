@@ -110,7 +110,7 @@ namespace Creditos.Controllers
 
                     //var _objTipoIn = clstipoingresos.mostrar().Where(i => i.id_tipo_ingreso == _idTipoIngresoEntero).FirstOrDefault();
                     var _objMes = clsmes.mostrarMeses().Where(c => c.id_mes == _idMesEntero).FirstOrDefault();
-                    var _objIngreso = clsingreso.mostrar().Where(i => i.valor == _idIngresoEntero).FirstOrDefault();
+                    //var _objIngreso = clsingreso.mostrar().Where(i => i.valor == _idIngresoEntero).FirstOrDefault();
 
                     if (_objMes == null)
                     {
@@ -141,7 +141,7 @@ namespace Creditos.Controllers
                       "<tbody>" +
                         "<tr>" +
                           //"<td colspan='3'><center><br/>" + _objTipoIn.descripcion.ToUpper() + "<br/></center></td>" +
-                          "<td colspan='2'><center><br/>" + _objIngreso.valor + "<br/></center></td>" +
+                          //"<td colspan='2'><center><br/>" + _objIngreso.valor + "<br/></center></td>" +
                        "</tr>" +
                        "<tr>" +
                           "<td colspan='3' style='text-align:right; background-color:#f7f5f5'><b><br/>TOTAL<br/></b></td>" +

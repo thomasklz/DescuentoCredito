@@ -26,5 +26,11 @@ namespace Creditos.Clases{
             }
             return person;
         }
+        public List<mPersona> mostrarcongastos(){
+            foreach (var item in db.spConsultarDescuentoxMes()){
+                person.Add(new mPersona(item.Id_Persona, item.Nombres, item.SegundoNombre, item.ApellidoPaterno, item.ApellidoMaterno, item.Cedula, item.Direccion, item.CalleSecundaria, item.Numero, item.ReferenciaD, item.TelefonoD, item.TelefonoC, item.ParroquiaNac, item.FechaNac, item.Email, Convert.ToDouble(item.sumatoria), item.aso));
+            }
+            return person;
+        }
     }
 }

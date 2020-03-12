@@ -870,9 +870,7 @@
           <Parameter Name="asociacion_id" Type="int" Mode="In" />
         </Function>
         <Function Name="spConsultarDescuento" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
-        <Function Name="spConsultarDescuentoxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
-          <Parameter Name="id_Persona" Type="int" Mode="In" />
-        </Function>
+        <Function Name="spConsultarDescuentoxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarEgreso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso" />
         <Function Name="spConsultarEgresosxMes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="id_mes" Type="int" Mode="In" />
@@ -2513,9 +2511,7 @@
             <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuento_Result)" />
-          <FunctionImport Name="spConsultarDescuentoxMes" ReturnType="Collection(Double)">
-            <Parameter Name="id_Persona" Mode="In" Type="Int32" />
-          </FunctionImport>
+          <FunctionImport Name="spConsultarDescuentoxMes" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuentoxMes_Result)" />
           <FunctionImport Name="spConsultarEgreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEgreso_Result)" />
           <FunctionImport Name="spConsultarEgresosxMes" ReturnType="Collection(Double)">
             <Parameter Name="id_mes" Mode="In" Type="Int32" />
@@ -2958,6 +2954,25 @@
           <Property Type="Int32" Name="Id_Persona" Nullable="false" />
           <Property Type="Int32" Name="id_cabecera_descuento" Nullable="false" />
           <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spConsultarDescuentoxMes_Result">
+          <Property Type="String" Name="aso" Nullable="true" MaxLength="50" />
+          <Property Type="Double" Name="sumatoria" Nullable="true" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="CalleSecundaria" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Numero" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="ReferenciaD" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TelefonoD" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="TelefonoC" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="ParroquiaNac" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaNac" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="spConsultarEgreso_Result">
           <Property Type="Int32" Name="id_egresos" Nullable="false" />
@@ -3886,7 +3901,29 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spConsultarDescuentoxMes" FunctionName="AdministracionAcademicaModel.Store.spConsultarDescuentoxMes" />
+          <FunctionImportMapping FunctionImportName="spConsultarDescuentoxMes" FunctionName="AdministracionAcademicaModel.Store.spConsultarDescuentoxMes">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarDescuentoxMes_Result">
+                <ScalarProperty Name="aso" ColumnName="aso" />
+                <ScalarProperty Name="sumatoria" ColumnName="sumatoria" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="SegundoNombre" ColumnName="SegundoNombre" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="CalleSecundaria" ColumnName="CalleSecundaria" />
+                <ScalarProperty Name="Numero" ColumnName="Numero" />
+                <ScalarProperty Name="ReferenciaD" ColumnName="ReferenciaD" />
+                <ScalarProperty Name="TelefonoD" ColumnName="TelefonoD" />
+                <ScalarProperty Name="TelefonoC" ColumnName="TelefonoC" />
+                <ScalarProperty Name="ParroquiaNac" ColumnName="ParroquiaNac" />
+                <ScalarProperty Name="FechaNac" ColumnName="FechaNac" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spConsultarEgreso" FunctionName="AdministracionAcademicaModel.Store.spConsultarEgreso">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarEgreso_Result">

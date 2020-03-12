@@ -164,13 +164,9 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarDescuento_Result>("spConsultarDescuento");
         }
     
-        public virtual ObjectResult<Nullable<double>> spConsultarDescuentoxMes(Nullable<int> id_Persona)
+        public virtual ObjectResult<spConsultarDescuentoxMes_Result> spConsultarDescuentoxMes()
         {
-            var id_PersonaParameter = id_Persona.HasValue ?
-                new ObjectParameter("id_Persona", id_Persona) :
-                new ObjectParameter("id_Persona", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<double>>("spConsultarDescuentoxMes", id_PersonaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarDescuentoxMes_Result>("spConsultarDescuentoxMes");
         }
     
         public virtual ObjectResult<spConsultarEgreso_Result> spConsultarEgreso()

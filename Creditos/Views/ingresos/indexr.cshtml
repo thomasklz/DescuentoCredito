@@ -53,13 +53,13 @@
 
         function generarReporteI() {
             var _idMes = $('#mes_ids').val();
-
-            $('#id_ingresos').val();
+            var _idIngreso = $('#_idIngreso').val();
         $.ajax({
             url: '@Url.Action("ConsultarIngreso", "ingresos")',
             type: 'post',
             dataType: 'JSON',
-            data: { _idMes: _idMes, _idIngreso: _idIngreso },
+            data: { _idMes: _idMes },
+            data: { _idIngreso: _idIngreso },
             beforeSend: function () {
                 $("#contenedorIngresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
 

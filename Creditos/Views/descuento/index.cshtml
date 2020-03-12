@@ -21,37 +21,43 @@
 
 @using (Html.BeginForm("Store", "descuento", FormMethod.Post))
 {
-    <p>
+    <br/>
+    <label>Agregar personas:</label>
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <div class="row align-items-center">
+                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                    <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" id="idLocalNames" class="form-control" onfocus="this.label = '';" placeholder="Buscar empleado...">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                            <span><i class="la la-search"></i></span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div>
+    @*<p>
         <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Empleados ESPAM-MFL</a>
-    </p>
+    </p>*@</div>
     <div class="row">
         <div class="col">
             <div class="collapse multi-collapse" id="multiCollapseExample1">
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control filtrar" placeholder="Search..." >
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
-                <table class="table" style="text-align:center" id="tablaSA">
+                <table class="table table-hover" style="text-align:center; display:none;" id="tablaSA">
                     <thead>
                         <tr>
-                            <th>Item</th>
+                            <th><b>Item</b></th>
                             <th>Cedula</th>
-                            <th>Nombres</th>
-                            <th>Apellidos</th>
+                            <th>Empleado</th>
                             <th>Direción</th>
                             <th>Teléfono</th>
+                            <th>Asociacion</th>
+                            <th>Sumatoria Gastos Asociación</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
@@ -61,10 +67,14 @@
                             <tr class='row_@item.Id_Persona'>
                                 <td>@item.Id_Persona</td>
                                 <td>@item.Cedula</td>
-                                <td>@item.Nombres @item.SegundoNombre</td>
-                                <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
+                                <td>@item.Nombres @item.SegundoNombre @item.ApellidoPaterno @item.ApellidoMaterno</td>
                                 <td>@item.Direccion</td>
                                 <td>@item.Numero</td>
+                                <td>@item.aso</td>
+                                @if (item.gastos != 0){
+                                   <td>@item.gastos</td>
+                                }else{<td>No registra gastos</td> }
+                                
                                 <td>
                                     <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
                                 </td>
@@ -75,7 +85,6 @@
             </div>
         </div>
     </div>
-
     <div>
         <div class="kt-portlet__body">
             <div class="row">
@@ -143,7 +152,7 @@
             <input type="submit" value="Confirmar" class="btn btn-primary" />
         </div>
     </div>
-<br/> 
+    <br/> 
 }
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
@@ -348,6 +357,15 @@
 </div>
 
 <script>
+    $(document).on('focus', '#idLocalNames', function () {
+        $(this).autocomplete({
+            //source have a url of a service
+            source: '@Url.Action("AutoCompleteExternalDataExample2")',
+            minLength: 0//min = 2 characters
+        });
+    });
+
+
     $(document).ready(function () {
         (function ($) {
             $('.filtrar').keyup(function () {

@@ -347,11 +347,19 @@
             data: data,
             success: function (result) {
                 if (result == "Credito Aprobado") {
-                    Swal.fire(
-                        'Aprobado!',
-                        '',
-                        'success'
-                    )
+                    Swal.fire({
+                        title: 'CRÉDITO APROBADO',
+                        text: "Se recargará la página!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.value) {
+                            location.reload();
+                        } location.reload();
+
+                    })
                 } else {
                     Swal.fire(
                         'Reintentar!',
@@ -359,7 +367,6 @@
                         'error'
                     )
                 }
-                location.reload();
             }
         })
     }

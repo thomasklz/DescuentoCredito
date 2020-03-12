@@ -20,7 +20,7 @@ namespace Creditos.Controllers{
         public ActionResult Index(){
             ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
-            ViewBag.persona = clspersona.mostrar();
+            ViewBag.persona = clspersona.mostrarcongastos();
             ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }
@@ -45,7 +45,23 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-
+        public ActionResult AutoCompleteExternalDataExample2(string term /*our key word*/){
+            //items is the source data and can be replaced by a request to a DataBase
+            string[] items = {"Test", "Test 1", "Test 2",
+        "Example 1", "Example 2", "Example 3"};
+            //initialize the list of AutoList object
+            List<AutoList> filteredItems = new List<AutoList>();
+            int cp = 0;
+            foreach (var elem in items){
+                if (elem.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0){
+                    cp++;
+                    //buil our result list
+                    AutoList autoList = new AutoList("" + cp, elem);
+                    filteredItems.Add(autoList);
+                }
+            }
+            return Json(filteredItems, JsonRequestBehavior.AllowGet);
+        }
         public JsonResult GetDescuentoById(int DescuentoId){
             List<mDescuento> model = clsdescue.mostrarById(DescuentoId);
             string value = string.Empty;

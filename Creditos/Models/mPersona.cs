@@ -20,6 +20,8 @@ namespace Creditos.Models{
         public string ParroquiaNac { get; set; }
         public DateTime FechaNac { get; set; }
         public string Email { get; set; }
+        public double gastos { get; set; }
+        public string aso { get; set; }
         public mPersona(){}
         public mPersona(int Id_Persona, string Nombres, string SegundoNombre, string ApellidoPaterno, string ApellidoMaterno, string Cedula, string Direccion, string CalleSecundaria, string Numero,string ReferenciaD,string TelefonoD, string TelefonoC, string ParroquiaNac, DateTime FechaNac, string Email){
             this.Id_Persona = Id_Persona;
@@ -37,6 +39,26 @@ namespace Creditos.Models{
             this.ParroquiaNac = ParroquiaNac;
             this.FechaNac = FechaNac;
             this.Email = Email;
+        }
+        public mPersona(int Id_Persona, string Nombres, string SegundoNombre, string ApellidoPaterno, string ApellidoMaterno, string Cedula, string Direccion, string CalleSecundaria, string Numero, string ReferenciaD, string TelefonoD, string TelefonoC, string ParroquiaNac, DateTime FechaNac, string Email, double gastos, string aso)
+        {
+            this.Id_Persona = Id_Persona;
+            this.Nombres = Nombres;
+            this.SegundoNombre = SegundoNombre;
+            this.ApellidoPaterno = ApellidoPaterno;
+            this.ApellidoMaterno = ApellidoMaterno;
+            this.Cedula = Cedula;
+            this.Direccion = Direccion;
+            this.CalleSecundaria = CalleSecundaria;
+            this.Numero = Numero;
+            this.ReferenciaD = ReferenciaD;
+            this.TelefonoD = TelefonoD;
+            this.TelefonoC = TelefonoC;
+            this.ParroquiaNac = ParroquiaNac;
+            this.FechaNac = FechaNac;
+            this.Email = Email;
+            this.gastos = gastos;
+            this.aso = aso;
         }
     }
 }
