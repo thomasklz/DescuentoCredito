@@ -12,7 +12,7 @@ namespace Creditos.Controllers{
     public class subdescuentosController : Controller{
 
         // GET: subdescuentos
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         clsSubDescuentos clssubd = new clsSubDescuentos();
         List<mSubDescuentos> lista_subd = new List<mSubDescuentos>();
         public ActionResult Index()
@@ -74,5 +74,22 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ValidarSubdescuento(string _descr){
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try{
+                if (string.IsNullOrEmpty(_descr)){
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>Ingrese todos los datos</div>";
+                }else{
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                }
+            }catch (Exception ex){
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

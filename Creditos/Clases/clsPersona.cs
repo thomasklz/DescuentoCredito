@@ -6,7 +6,7 @@ using Creditos.Models;
 using Creditos.Entity;
 namespace Creditos.Clases{
     public class clsPersona{
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mPersona> person = new List<mPersona>();
         public List<mPersona> mostrar(){
             foreach (var item in db.spConsultarPersona()){

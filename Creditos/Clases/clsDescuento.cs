@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsDescuento{
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mDescuento> lista_descuentos = new List<mDescuento>();
         public List<mDescuento> mostrar(){
             foreach (var item in db.spConsultarDescuento()){
@@ -34,6 +34,12 @@ namespace Creditos.Clases{
         public List<mDescuento> mostrarById(int id){
             foreach (var item in db.spConsultarDescuentoById(id)){
                 lista_descuentos.Add(new mDescuento(item.id_descuento, Convert.ToDouble(item.valor), item.Id_Persona, item.id_cabecera_descuento, item.id_mes, Convert.ToDateTime(item.fecha)));
+            }
+            return lista_descuentos;
+        }
+        public List<mDescuento> mostrarxEmpleado(int id){
+            foreach (var item in db.spConsultarDescuentoxEmpleado(id)){
+                lista_descuentos.Add(new mDescuento(item.id_descuento, Convert.ToDouble(item.valor), item.persona, item.cabecera, item.mes, Convert.ToDateTime(item.fecha), "0"));
             }
             return lista_descuentos;
         }

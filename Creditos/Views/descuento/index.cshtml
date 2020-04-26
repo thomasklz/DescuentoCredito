@@ -1,4 +1,5 @@
-﻿
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
 @model Creditos.Models.mDescuento
 
 @{
@@ -6,6 +7,7 @@
     List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
 }
 
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
@@ -15,13 +17,24 @@
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
-
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    N&oacute;mina
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
     </div>
 </div>
+<!-- end:: Subheader -->
 
 @using (Html.BeginForm("Store", "descuento", FormMethod.Post))
 {
-    <br/>
+    <h2 style="text-align:center;">Agregar Descuentos</h2>
+    <br />
     <label>Agregar personas:</label>
     <div class="row align-items-center">
         <div class="col-lg-6">
@@ -170,29 +183,14 @@
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control filtrar" placeholder="Search...">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover" style="text-align:center" id="tablaSA">
+                
+                <table class="table table-hover" style="text-align:center" id="example">
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Valor</th>
-                            <th>Persona</th>
-                            <th>Descripción</th>
+                            <th>Valor del Descuento</th>
+                            <th>Empleado</th>
+                            <th>Detalle</th>
                             <th>Mes</th>
                             <th>Fecha</th>
                             <th>Acciones</th>
@@ -203,14 +201,14 @@
                         {
                             <tr class='row_@item.id_descuento'>
                                 <td>@item.id_descuento</td>
-                                <td>@item.valor</td>
+                                <td>$ @item.valor</td>
                                 <td>@item.persona</td>
                                 <td>@item.cabecera</td>
                                 <td>@item.mes</td>
                                 <td>@item.fecha.ToShortDateString()</td>
                                 <td>
-                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteDescuento(@item.id_descuento)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_descuento"><span class='flaticon2-pen'></span></a>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteDescuento(@item.id_descuento)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <button class='btn btn-outline-info edit' value="@item.id_descuento" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
                             </tr>
                         }
@@ -357,6 +355,10 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        $('#example').dataTable();
+    });
+
     $(document).on('focus', '#idLocalNames', function () {
         $(this).autocomplete({
             //source have a url of a service
@@ -381,7 +383,7 @@
         $('.add').click(function () {
             Swal.fire({
                 title: 'Persona Añadida',
-                icon: 'success',
+                type: 'success',
                 confirmButtonText: 'Ok',
                 cancelButtonText: 'Cancelar'
             })
@@ -396,7 +398,7 @@
         $('.adds').click(function () {
             Swal.fire({
                 title: 'Persona Añadida',
-                icon: 'success',
+                type: 'success',
                 confirmButtonText: 'Ok',
                 cancelButtonText: 'Cancelar'
             })
@@ -435,31 +437,30 @@
             }
         })
     }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
-            $.ajax({
-                type: "GET",
-                url: "/descuento/GetDescuentoById?DescuentoId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#id_descuentos").val(obj[0].id_descuento);
-                    $("#valor").val(obj[0].valor);
-                    $("#fecha_").val(obj[0].fecha);
-                    $("#empleado_ids").val(obj[0].empleado_id);
-                    $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
-                    $("#cab_desc_id option[value='" + obj[0].cab_desc_id + "']").attr("selected", true);
-                }
-            })
+    $('body').on('click', '.edit', function () {
+        var id = $(this).val();
+        row = $(this).parents("tr");
+        $("#MyModal").modal();
+        $.ajax({
+            type: "GET",
+            url: "/descuento/GetDescuentoById?DescuentoId=" + id,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id_descuentos").val(obj[0].id_descuento);
+                $("#valor").val(obj[0].valor);
+                $("#fecha_").val(obj[0].fecha);
+                $("#empleado_ids").val(obj[0].empleado_id);
+                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                $("#cab_desc_id option[value='" + obj[0].cab_desc_id + "']").attr("selected", true);
+            }
         })
     })
+
     function DeleteDescuento(Descuento) {
         Swal.fire({
             title: 'Estás seguro?',
             text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Borrar',
             cancelButtonText: 'Cancelar'

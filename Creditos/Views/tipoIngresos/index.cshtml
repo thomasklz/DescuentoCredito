@@ -1,4 +1,5 @@
-﻿
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
 @model Creditos.Models.mTipoIngreso
 @{List<Creditos.Models.mTipoIngreso> listTipoIngreso = ViewBag.tipoingreso;}
 
@@ -12,28 +13,51 @@
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
-
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    Asociaci&oacute;n
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
     </div>
 </div>
 <!-- end:: Subheader -->
 
 @using (Html.BeginForm("Store", "tipoingresos", FormMethod.Post))
 {
-    <br />
+    <h2 style="text-align:center;">Agregar nuevo Tipo de Ingreso</h2>
     <br />
     <div>
-        <label>Descripción:</label>
-        <div class="input-group">
-            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
-            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
+        <div class="row">
+            <div class="col-lg-4">
+                <label>Descripción:</label>
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                    @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", onkeyup = "validar()", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                </div>
+            </div>
         </div>
     </div>
     <br />
     <div>
-        <input type="submit" value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngreso" type="button" onclick="ValidarIngreso(); " value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngresoss" type="submit" style="display:none;" />
+
     </div>
     <br />
 }
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div id="contenedorIngresos">
+        </div>
+    </div>
+</div>
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
@@ -50,23 +74,8 @@
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover" style="text-align:center">
+
+                <table class="table table-hover" id="example" style="text-align:center">
                     <thead>
                         <tr>
                             <th>ITEM</th>
@@ -81,8 +90,8 @@
                                 <td>@item.id_tipo_ingreso</td>
                                 <td>@item.descripcion</td>
                                 <td>
-                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_tipo_ingreso"><span class='flaticon2-pen'></span></a>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <button class='btn btn-outline-info edit' value="@item.id_tipo_ingreso" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
                             </tr>
                         }
@@ -130,53 +139,113 @@
     </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            });
-        }(jQuery));
-    });
-    var row;
-    function UpdateTipoIngresos(TipoIngreso) {
-        var data = $("#SubmitForm").serialize();
+<script type="text/javascript">
+
+        function ValidarIngreso() {
+            var _descr = $('#descripcions').val();
         $.ajax({
-            type: "Post",
-            url: "/tipoingresos/UpdateTipoIngresos",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
+            url: '@Url.Action("ValidarTipoIngreso", "tipoIngresos")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _descr: _descr },
+            success: function (data) {
+                console.log(data);
+                $("#btnIngreso").attr("submit");
+                if (data.validar == true) {
                     Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    row.find("td").eq(1).html($('#descripcion').val());
+                        title: 'Confirmar?',
+                        text: "Se almacenará el nuevo dato!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        cancelButtonText: 'Editar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                            $("#btnIngresoss").trigger("click");
+                        };
+                        })
 
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    $("#contenedorIngresos").html(data.mensaje);
                 }
-                $("#MyModal").modal("hide");
-            }
-        })
+            },
+        });
     }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            $('#descripcions').keyup(function () {
+                var _thisDesc = $('#descripcions');
+                var _desc = $('#descripcions').val();
+                _thisDesc.attr('style', 'background:white');
+                if (_desc == null || _desc.length == 0) {
+                    $('#descripcions').removeClass('is-valid');
+                    $('#descripcions').addClass('is-invalid');
+                } else {
+                    $('#descripcions').removeClass('is-invalid');
+                    $('#descripcions').addClass('is-valid');
+                }
+            });
+        });
+</script>
+
+<script>
+        function validarTdatos() {
+            desc = document.getElementById("descripcions").value;
+            if (desc == null || desc.length == 0 || /^\s+$/.test(desc)) {
+                $('#descripcions').addClass('is-invalid');
+                return true;
+            } else ValidarIngreso();
+        }
+
+        $(document).ready(function () {
+            $('#example').dataTable();
+        });
+
+        $(document).ready(function () {
+            (function ($) {
+                $('.filtrar').keyup(function () {
+                    var rex = new RegExp($(this).val(), 'i');
+                    $('.buscar tr').hide();
+                    $('.buscar tr').filter(function () {
+                        return rex.test($(this).text());
+                    }).show();
+                });
+            }(jQuery));
+        });
+        var row;
+        function UpdateTipoIngresos(TipoIngreso) {
+            var data = $("#SubmitForm").serialize();
+            $.ajax({
+                type: "Post",
+                url: "/tipoingresos/UpdateTipoIngresos",
+                data: data,
+                success: function (result) {
+                    if (result == "Registro actualizado") {
+                        Swal.fire(
+                            'Actualizado!',
+                            'Registro Actualizado',
+                            'success'
+                        )
+                        row.find("td").eq(1).html($('#descripcion').val());
+
+                    } else {
+                        Swal.fire(
+                            'Reintentar!',
+                            'ERROR AL ACTUALIZAR',
+                            'error'
+                        )
+                    }
+                    $("#MyModal").modal("hide");
+                }
+            })
+        }
+        $('body').on('click', '.edit', function () {
+            var id = $(this).val();
             row = $(this).parents("tr");
-            var id = $(this).data("id")
             $("#MyModal").modal();
             $.ajax({
                 type: "GET",
@@ -188,39 +257,38 @@
                 }
             })
         })
-    })
-    function DeleteTipoIngresos(TipoIngreso) {
-        Swal.fire({
-            title: 'Estás seguro?',
-            text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: "/tipoingresos/DeleteTipoIngresos?TipoIngresoId=" + TipoIngreso,
-                    success: function (result) {
-                        if (result == "Eliminado") {
-                            Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
-                                'success'
-                            )
-                            $(".row_" + TipoIngreso).remove();
-                        } else {
-                            Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
-                                'error'
-                            )
-                        }
-                    }
-                })
-            }
-        })
-    }
-</script>
 
+        function DeleteTipoIngresos(TipoIngreso) {
+            Swal.fire({
+                title: 'Estás seguro?',
+                text: 'Deseas eliminar el registro seleccionado!',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Borrar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.value) {
+                    $.ajax({
+                        type: "POST",
+                        url: "/tipoingresos/DeleteTipoIngresos?TipoIngresoId=" + TipoIngreso,
+                        success: function (result) {
+                            if (result == "Eliminado") {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'El registro fue borrado con éxito',
+                                    'success'
+                                )
+                                $(".row_" + TipoIngreso).remove();
+                            } else {
+                                Swal.fire(
+                                    'Borrado!',
+                                    'No se pudo eliminar el registro',
+                                    'error'
+                                )
+                            }
+                        }
+                    })
+                }
+            })
+        }
+</script>

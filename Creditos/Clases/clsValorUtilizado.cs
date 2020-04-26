@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsValorUtilizado{
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mValorUtilizado> lista_valor_utili = new List<mValorUtilizado>();
         public List<mValorUtilizado> mostrar(){
             foreach (var item in db.spConsultarValorUtilizado()){
@@ -40,6 +40,12 @@ namespace Creditos.Clases{
         public List<mValorUtilizado> mostrarxProv(int id){
             foreach (var item in db.spConultarValorUsadoxProv(id)){
                 lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.aso, item.id_valor_asig, item.persona, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
+            }
+            return lista_valor_utili;
+        }
+        public List<mValorUtilizado> mostrarxEmpleado(int id){
+            foreach (var item in db.spConsultarValorUsadoxEmpleado(id)){
+                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.persona, item.nombre, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
             }
             return lista_valor_utili;
         }

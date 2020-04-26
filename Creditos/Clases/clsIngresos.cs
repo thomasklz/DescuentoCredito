@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsIngresos{
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mIngresos> ingr = new List<mIngresos>();
         public List<mIngresos> mostrar(){
             foreach (var item in db.spConsultarIngreso()){
@@ -16,7 +16,7 @@ namespace Creditos.Clases{
             return ingr;
         }
         public void ingresar(mIngresos datos){
-            db.spInsertarIngreso(datos.valor, datos.asociacion_id, datos.tipo_ingreso_id, datos.mes_id);
+            db.spInsertarIngreso(Convert.ToDouble(datos.valor), datos.asociacion_id, datos.tipo_ingreso_id, datos.mes_id);
         }
         public void eliminar(int id){
             db.spEliminarIngreso(id);

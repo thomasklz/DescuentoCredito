@@ -15,11 +15,12 @@ namespace Creditos.Models{
         public int numero_cuota { get; set; }
         public Boolean estado_activacion { get; set; }
         public Boolean estado_aprobacion { get; set; }
+        public Boolean estado_rechazo { get; set; }
         public string persona { get; set; }
         public string aso { get; set; }
 
         public mCredito() { }
-        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion){
+        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo){
             this.id_credito = id_credito;
             this.descripcion = descripcion;
             this.cantidad = cantidad;
@@ -30,8 +31,9 @@ namespace Creditos.Models{
             this.numero_cuota = numero_cuota;
             this.estado_activacion = estado_activacion;
             this.estado_aprobacion = estado_aprobacion;
+            this.estado_rechazo = estado_rechazo;
         }
-        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, string persona, string aso, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion)
+        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, string persona, string aso, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo)
         {
             this.id_credito = id_credito;
             this.descripcion = descripcion;
@@ -44,6 +46,7 @@ namespace Creditos.Models{
             this.numero_cuota = numero_cuota;
             this.estado_activacion = estado_activacion;
             this.estado_aprobacion = estado_aprobacion;
+            this.estado_rechazo = estado_rechazo;
         }
 
     }

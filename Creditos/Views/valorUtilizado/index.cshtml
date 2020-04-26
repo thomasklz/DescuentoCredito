@@ -1,26 +1,38 @@
-﻿
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
 @model Creditos.Models.mValorUtilizado
 
 @{
     List<Creditos.Models.mValorUtilizado> listValUtil = ViewBag.val_util;
     List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
 }
-
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
                 BIENVENIDOS
-                <small>Valores Utilizados - Proveedor</small>
+                <small>Valores Utilizados</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
-
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    Proveedores
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
     </div>
 </div>
+<!-- end:: Subheader -->
 
 @using (Html.BeginForm("Store", "valorUtilizado", FormMethod.Post))
 {
+    <h2 style="text-align:center;">Agregar Valores Usados por Empleado</h2>
     <br />
     <p>
         <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Personas Asociadas:</a>
@@ -128,11 +140,18 @@
                 </div>
         </div>
         <div>
-            <input id="btnIngreso" type="submit" value="Confirmar" class="btn btn-primary" />
+            <input id="btnIngreso" type="button" onclick="ValidarIngreso(); " value="Confirmar" class="btn btn-primary" />
+            <input id="btnIngresoss" type="submit" style="display:none;" />  
         </div>
     </div>
     <br />
 }
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div id="contenedorIngresos">
+        </div>
+    </div>
+</div>
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
@@ -149,23 +168,7 @@
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <table class="table table-hover" style="text-align:center">
+                <table class="table table-hover" id="example" style="text-align:center">
                     <thead>
                         <tr>
                             <th>Item</th>
@@ -187,8 +190,8 @@
                                 <td>@item.cantidad_aprobada</td>
                                 <td>@item.cantidad_usada</td>
                                 <td>
-                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteEmplAso(@item.id_valor_usad)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <a href='#' class='btn btn-outline-info' data-toggle="kt-tooltip" data-original-title="Modificar" data-id="@item.id_valor_usad"><span class='flaticon2-pen'></span></a>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteEmplAso(@item.id_valor_usad)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <button class='btn btn-outline-info edit' value="@item.id_valor_usad" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
                             </tr>
                         }
@@ -261,7 +264,7 @@
                             </div>
                         </div>
                         
-                        @Html.HiddenFor(m => m.id_valor_usad, new { @id = "id_empl_asos" })
+                        @Html.HiddenFor(m => m.id_valor_usad, new { @id = "id_valor_usads" })
                         @Html.HiddenFor(m => m.valor_asig_id, new { @id = "valor_asig_ids" })
                         <div class="row">
                             <div class="col-lg-6">
@@ -308,7 +311,7 @@
                                 <div class="kt-section">
                                     <label><br/></label>
                                     <div class="input-group">
-                                        <a href="#" class="btn btn-label-success" onclick="UpdateEmplAso()">Guardar Cambios</a>
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateValUsado()">Guardar Cambios</a>
                                     </div>
                                 </div>
                             </div>
@@ -319,17 +322,51 @@
         </div>
     </div>
 </div>
-<script>
-        //Validacion
-        //function validar() {
-        //    if ($("#Cedulas") == '') {
-        //        $("#btnIngreso").attr("disabled");
-        //    } else {
-        //        $('#btnIngreso').removeAttr("disabled")
-        //    }
-        //}
 
-        //paginacion
+<script type="text/javascript">
+
+      function ValidarIngreso() {
+          var _idValorAsign = $('#valor_asig_id').val();
+          var _idMes = $('#mes_ids').val();
+          var _cantidad = $('#cantidad_usada').val();
+
+        $.ajax({
+            url: '@Url.Action("ValidarValorUtil", "valorUtilizado")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _idValorAsign: _idValorAsign, _idMes: _idMes, _cantidad: _cantidad},
+            success: function (data) {
+                console.log(data);
+                $("#btnIngreso").attr("submit");
+                if (data.validar == true) {
+                    Swal.fire({
+                        title: 'Confirmar?',
+                        text: "Se almacenará el nuevo dato!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        cancelButtonText: 'Editar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                            $("#btnIngresoss").trigger("click");
+                        };
+                        })
+
+                } else {
+                    $("#contenedorIngresos").html(data.mensaje);
+                }
+            },
+        });
+    }
+</script>
+
+<script>
+
+      $(document).ready(function () {
+          $('#example').dataTable();
+      });
 
         $(document).ready(function () {
             (function ($) {
@@ -348,7 +385,7 @@
             $('.add').click(function () {
             Swal.fire({
                title: 'Persona Añadida',
-               icon: 'success',
+               type: 'success',
                confirmButtonText: 'Ok',
                cancelButtonText: 'Cancelar'})
                 $('#cedula').val($(this).parents("tr").find("td").eq(1).html());
@@ -360,7 +397,7 @@
             $('.adds').click(function () {
                 Swal.fire({
                     title: 'Persona Modificada',
-                    icon: 'success',
+                    type: 'success',
                     confirmButtonText: 'Ok',
                     cancelButtonText: 'Cancelar'
                 })
@@ -372,11 +409,11 @@
         })
 
         var row;
-        function UpdateEmplAso(EmplAso) {
+        function UpdateValUsado(ValUsado) {
             var data = $("#SubmitForm").serialize();
             $.ajax({
                 type: "Post",
-                url: "/empleadoAsociacion/UpdateEmplAso",
+                url: "/valorUtilizado/UpdateValUsado",
                 data: data,
                 success: function (result) {
                     if (result == "Registro actualizado") {
@@ -385,9 +422,10 @@
                             'Registro Actualizado',
                             'success'
                         )
-                        row.find("td").eq(1).html($('#nombres').val());
-                        row.find("td").eq(2).html($('select[id="mes_id"] option:selected').text());
-
+                        row.find("td").eq(1).html($('#personasss').val());
+                        row.find("td").eq(3).html($('select[id="mes_ids"] option:selected').text());
+                        row.find("td").eq(4).html($('#valorAsignados').val());
+                        row.find("td").eq(5).html($('#cantidad_usadas').val());
                     } else {
                         Swal.fire(
                             'Reintentar!',
@@ -399,31 +437,30 @@
                 }
             })
         }
-        $(document).ready(function () {
-            $('[data-id]').click(function () {
-                row = $(this).parents("tr");
-                var id = $(this).data("id")
-                $("#MyModal").modal();
-                $.ajax({
-                    type: "GET",
-                    url: "/valorUtilizado/GetValUsadoById?ValUsadoId=" + id,
-                    success: function (data) {
-                        var obj = JSON.parse(data);
-                        $("#id_valor_usads").val(obj[0].id_valor_usad);
-                        $("#cantidad_usadas").val(obj[0].cantidad_usada);
-                        $("#valorAsignados").val(obj[0].cantidad_aprobada);
-                        $("#valor_asig_ids").val(obj[0].valor_asig_id);
-                        $("#personasss").val(obj[0].persona);
-                        $("#mes_ids option[value='" + obj[0].mes_id + "']").attr("selected", true);
-                    }
-                })
+        $('body').on('click', '.edit', function () {
+            var id = $(this).val();
+            row = $(this).parents("tr");
+            $("#MyModal").modal();
+            $.ajax({
+                type: "GET",
+                url: "/valorUtilizado/GetValUsadoById?ValUsadoId=" + id,
+                success: function (data) {
+                    var obj = JSON.parse(data);
+                    $("#id_valor_usads").val(obj[0].id_valor_usad);
+                    $("#cantidad_usadas").val(obj[0].cantidad_usada);
+                    $("#valorAsignados").val(obj[0].cantidad_aprobada);
+                    $("#valor_asig_ids").val(obj[0].valor_asig_id);
+                    $("#personasss").val(obj[0].persona);
+                    $("#mes_ids option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                }
             })
         })
+
         function DeleteEmplAso(EmplAso) {
             Swal.fire({
                 title: 'Estás seguro?',
                 text: 'Deseas eliminar el registro seleccionado!',
-                icon: 'warning',
+                type: 'warning',
                 showCancelButton: true,
                 confirmButtonText: 'Borrar',
                 cancelButtonText: 'Cancelar'

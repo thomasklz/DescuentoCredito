@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 namespace Creditos.Controllers{
     public class proveedoresController : Controller{
         // GET: proveedores
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         clsProveedores clsProvee = new clsProveedores();
         List<mProveedores> list_provee = new List<mProveedores>();
         public ActionResult Index(){
@@ -62,6 +62,29 @@ namespace Creditos.Controllers{
                 result = "Registro no encontrado";
             }
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ValidarProveedor(string _per_jur, string _ruc, string _nombre, string _descr, string _mail, string _dirc, string _telef)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                if (string.IsNullOrEmpty(_per_jur) || string.IsNullOrEmpty(_ruc) || string.IsNullOrEmpty(_nombre) || string.IsNullOrEmpty(_descr) || string.IsNullOrEmpty(_mail) || string.IsNullOrEmpty(_dirc) || string.IsNullOrEmpty(_telef))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>Ingrese todos los datos</div>";
+                }
+                else
+                {
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
     }
 }

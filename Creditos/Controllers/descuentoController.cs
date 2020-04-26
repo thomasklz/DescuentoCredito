@@ -11,20 +11,25 @@ using Newtonsoft.Json;
 namespace Creditos.Controllers{
     public class descuentoController : Controller{
         // GET: descuento
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         clsMes clsmes = new clsMes();
         clsCabDescuento clscabec = new clsCabDescuento();
         clsPersona clspersona = new clsPersona();
         clsDescuento clsdescue = new clsDescuento();
+        clsValorUtilizado clsValUsado = new clsValorUtilizado();
         List<mDescuento> list_ingreso = new List<mDescuento>();
-        public ActionResult Index(){
+        public ActionResult index(){
             ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
             ViewBag.persona = clspersona.mostrarcongastos();
             ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }
-
+        public ActionResult indexp(){
+            ViewBag.valUsado = clsValUsado.mostrarxEmpleado(4);
+            ViewBag.descuentosxE = clsdescue.mostrarxEmpleado(4);
+            return View();
+        }
         public ActionResult Store(mDescuento model){
             
             clsdescue.ingresar(model);

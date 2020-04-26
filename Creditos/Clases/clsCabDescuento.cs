@@ -7,7 +7,7 @@ using Creditos.Entity;
 
 namespace Creditos.Clases{
     public class clsCabDescuento{
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mCabDescuento> cab_desc = new List<mCabDescuento>();
         public List<mCabDescuento> mostrar(){
             foreach (var item in db.spConsultarCabeceraDescuento()){
@@ -33,7 +33,7 @@ namespace Creditos.Clases{
         }
         public List<mCabDescuento> mostrarById(int id){
             foreach (var item in db.spConsultarCabeceraDescuentoById(id)){
-                cab_desc.Add(new mCabDescuento(item.id_cabecera_descuento, item.descripcion, item.subdescuento));
+                cab_desc.Add(new mCabDescuento(item.id_cabecera_descuento, item.descripcion, item.id_subdescuento));
             }
             return cab_desc;
         }

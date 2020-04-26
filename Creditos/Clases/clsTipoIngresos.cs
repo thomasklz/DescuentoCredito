@@ -8,7 +8,7 @@ namespace Creditos.Clases
 {
     public class clsTipoIngresos
     {
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mTipoIngreso> tipoi = new List<mTipoIngreso>();
         public List<mTipoIngreso> mostrar()
         {

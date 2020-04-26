@@ -24,5 +24,6 @@ namespace Creditos.Entity
         public Nullable<bool> estado_activacion { get; set; }
         public Nullable<bool> estado_aprobacion { get; set; }
         public Nullable<bool> est_delete { get; set; }
+        public Nullable<bool> estado_rechazo { get; set; }
     }
 }

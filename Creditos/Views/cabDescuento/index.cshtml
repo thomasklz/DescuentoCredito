@@ -1,69 +1,163 @@
-﻿
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
 @model Creditos.Models.mCabDescuento
 
 @{
     List<Creditos.Models.mCabDescuento> listCabDesc = ViewBag.listCabDesc;
 }
-<h1>Cabecera del Subdescuento</h1>
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h5>
+                BIENVENIDOS
+                <small>Cabecera de Descuentos</small>
+            </h5>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    N&oacute;mina
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
+    </div>
+</div>
+<!-- end:: Subheader -->
+
 @using (Html.BeginForm("Store", "cabDescuento", FormMethod.Post))
 {
-    <div class="form-group">
-        <label>Descripcion</label>
-        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
-    </div>
-    @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
+    <h2 style="text-align:center;">Ingresar Nuevo Subdescuento</h2>
+    <br />
     <div>
-        <label>Tipo de Descuento </label>
-        <div class="form-group">
-            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Tipo de Subdescuento--", new { @id = "subdescuento_ids", @class = "form-control" })
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Descripcion:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>Subdescuento:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
+                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "Elija un Subdescuento", new { @id = "subdescuento_ids", @class = "form-control" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-            <div>
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div>
+        <input id="btnIngreso" type="button" onclick="validarTdatos()" value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngresoss" type="submit" style="display:none;" />
+    </div>
+    <br />
 }
-<table class="table-hover">
-    <tr>
-        <th>Item</th>
-        <th>Descripci&oacute;n</th>
-        <th>Tipo de Descuento</th>
-        <th>Acciones</th>
-    </tr>
-    @foreach (var item in listCabDesc)
-    {
-        <tr class='row_@item.id_cabecera_descuento'>
-            <td>@item.id_cabecera_descuento</td>
-            <td>@item.descripcion</td>
-            <td>@item.subdescuento</td>
-            <td>
-                <a href='#' class='btn btn-danger' onclick='DeleteCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-trash'></span></a>
-                <a href='#' class='btn btn-info' data-id="@item.id_cabecera_descuento" onclick='EditCabDesc(@item.id_cabecera_descuento)'><span class='glyphicon glyphicon-edit'></span></a>
-            </td>
-        </tr>
-    }
-</table>
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div id="contenedorIngresos">
+        </div>
+    </div>
+</div>
+
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Cabeceras de Descuentos
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+            <div class="card-body">
+                <table class=" table table-hover" id="example" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Descripci&oacute;n</th>
+                            <th>Tipo de Descuento</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listCabDesc)
+                        {
+                            <tr class='row_@item.id_cabecera_descuento'>
+                                <td>@item.id_cabecera_descuento</td>
+                                <td>@item.descripcion</td>
+                                <td>@item.subdescuento</td>
+                                <td>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteCabDesc(@item.id_cabecera_descuento)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <button class='btn btn-outline-info edit' value="@item.id_cabecera_descuento" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="MyModal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Cabecera de Descuentos</h4>
+                <h4 id="ModalTitle" style="text-align:center">Modificar Cabecera de Descuentos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
                         @Html.HiddenFor(m => m.id_cabecera_descuento, new { @id = "id_cabecera_descuentos" })
-                        <div class="form-group">
-                            <label>Descripci&oacute;n</label>
-                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Cantidad:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Tipo de Ingreso:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
+                                        @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Subdescuentos--", new { @id = "subdescuento_id", @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        @*@Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })*@
-                        <div class="form-group">
-                            <label>Tipo de Descuento</label>
-                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Select Subdescuento--", new { @id = "subdescuento_id", @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateCabDesc()">Save</a>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateCabDesc()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
@@ -71,7 +165,89 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+      function ValidarIngreso() {
+          var _descr = $('#descripcions').val();
+          var _idSubdesc = $('#subdescuento_ids').val();
+
+        $.ajax({
+            url: '@Url.Action("ValidarCabDesc", "cabDescuento")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _descr: _descr, _idSubdesc: _idSubdesc},
+            success: function (data) {
+                console.log(data);
+                $("#btnIngreso").attr("submit");
+                if (data.validar == true) {
+                    Swal.fire({
+                        title: 'Confirmar?',
+                        text: "Se almacenará el nuevo dato!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        cancelButtonText: 'Editar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                            $("#btnIngresoss").trigger("click");
+                        };
+                        })
+
+                } else {
+                    $("#contenedorIngresos").html(data.mensaje);
+                }
+            },
+        });
+    }
+</script>
+
+<script type="text/javascript">
+      $(function () {
+          $('#descripcions').keyup(function () {
+              var _thisDesc = $('#descripcions');
+              var _desc = $('#descripcions').val();
+              _thisDesc.attr('style', 'background:white');
+              if (_desc == null || _desc.length == 0) {
+                  $('#descripcions').removeClass('is-valid');
+                  $('#descripcions').addClass('is-invalid');
+              } else {
+                  $('#descripcions').removeClass('is-invalid');
+                  $('#descripcions').addClass('is-valid');
+              }
+          });
+      });
+</script>
+
 <script>
+      function validarTdatos() {
+          desc = document.getElementById("descripcions").value;
+          subd = document.getElementById("subdescuento_ids").selectedIndex;
+          if (desc == null || desc.length == 0 || /^\s+$/.test(desc)) {
+              $('#descripcions').addClass('is-invalid');
+              return true;
+          } else if (subd == null || subd == 0) {
+              $('#subdescuento_ids').addClass('is-invalid');
+              return true;
+          } else ValidarIngreso();
+      }
+      $(document).ready(function () {
+          $('#example').dataTable();
+      });
+
+    $(document).ready(function () {
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+        }(jQuery));
+    });
     var row;
     function UpdateCabDesc(CabDesc) {
         var data = $("#SubmitForm").serialize();
@@ -81,50 +257,45 @@
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
                     row.find("td").eq(1).html($('#descripcion').val());
                     row.find("td").eq(2).html($('select[id="subdescuento_id"] option:selected').text());
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizar',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
                 }
                 $("#MyModal").modal("hide");
             }
         })
     }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
-            $.ajax({
-                type: "GET",
-                url: "/cabDescuento/GetCab_DescById?Cab_DescId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#id_cabecera_descuento").val(obj[0].id_cabecera_descuento);
-                    $("#descripcion").val(obj[0].descripcion);
-                    $("#subdescuento_id option[value='" + obj[0].subdescuento_id + "']").attr("selected", true);
-                }
-            })
+    $('body').on('click', '.edit', function () {
+        var id = $(this).val();
+        row = $(this).parents("tr");
+        $("#MyModal").modal();
+        $.ajax({
+            type: "GET",
+            url: "/cabDescuento/GetCab_DescById?Cab_DescId=" + id,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id_cabecera_descuento").val(obj[0].id_cabecera_descuento);
+                $("#descripcion").val(obj[0].descripcion);
+                $("#subdescuento_id option[value='" + obj[0].subdescuento_id + "']").attr("selected", true);
+            }
         })
     })
+
     function DeleteCabDesc(CabDesc) {
         Swal.fire({
             title: 'Estás seguro?',
             text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Borrar',
             cancelButtonText: 'Cancelar'

@@ -14,7 +14,7 @@ namespace Creditos.Controllers
     public class asociacionController : Controller
     {
         // GET: asociacion
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         clsAsociacion asoc = new clsAsociacion();
         List<mAsociacion> list_aso = new List<mAsociacion>();
         public ActionResult Index()

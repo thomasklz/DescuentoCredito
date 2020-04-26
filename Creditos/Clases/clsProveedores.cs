@@ -8,7 +8,7 @@ namespace Creditos.Clases
 {
     public class clsProveedores
     {
-        BD_AsoRolesCreditos_Entities db = new BD_AsoRolesCreditos_Entities();
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mProveedores> provee = new List<mProveedores>();
         public List<mProveedores> mostrar(){
             foreach (var item in db.spConsultarProveedor()){

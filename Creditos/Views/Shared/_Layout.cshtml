@@ -10,7 +10,9 @@
     @Styles.Render("~/Content/jquery-ui-themes-1.12.1/jquery-ui.min.css")
 
     @Styles.Render("~/Scripts/ScriptSistema/custom/fullcalendar/fullcalendar.bundle.css")
-
+    @Scripts.Render("~/Scripts/jquery-3.4.1.js")
+    @Scripts.Render("~/Scripts/jquery-3.4.1.min.js")
+    @Scripts.Render("~/Scripts/paginacion.js")
     @Scripts.Render("~/Scripts/ScriptSistema/global/plugins.bundle.js")
     @Scripts.Render("~/Scripts/ScriptSistema/scripts.bundle.js")
     @Scripts.Render("~/Scripts/ScriptSistema/pages/dashboard.js")
@@ -128,25 +130,25 @@
                                             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-md">
                                                 <ul class="kt-nav kt-nav--bold kt-nav--md-space kt-margin-t-20 kt-margin-b-20">
                                                     <li class="kt-nav__item">
-                                                        <a class="kt-nav__link active" href="#">
+                                                        <a class="kt-nav__link active" href="http://talentohumano.espam.edu.ec/">
                                                             <span class="kt-nav__link-icon"><i class="flaticon2-user"></i></span>
                                                             <span class="kt-nav__link-text">Talento Humano</span>
                                                         </a>
                                                     </li>
                                                     <li class="kt-nav__item">
-                                                        <a class="kt-nav__link" href="#">
+                                                        <a class="kt-nav__link" href=""http://gestionacademica.espam.edu.ec/loginci.aspx"">
                                                             <span class="kt-nav__link-icon"><i class="flaticon-feed"></i></span>
                                                             <span class="kt-nav__link-text">Gestion Academica</span>
                                                         </a>
                                                     </li>
                                                     <li class="kt-nav__item">
-                                                        <a class="kt-nav__link" href="#">
+                                                        <a class="kt-nav__link" href="http://biblioteca.espam.edu.ec/">
                                                             <span class="kt-nav__link-icon"><i class="flaticon2-open-text-book"></i></span>
                                                             <span class="kt-nav__link-text">Biblioteca</span>
                                                         </a>
                                                     </li>
                                                     <li class="kt-nav__item">
-                                                        <a class="kt-nav__link" href="#">
+                                                        <a class="kt-nav__link" href="http://www.espam.edu.ec/">
                                                             <span class="kt-nav__link-icon"><i class="flaticon2-browser"></i></span>
                                                             <span class="kt-nav__link-text">Pagina Principal</span>
                                                         </a>
@@ -383,7 +385,7 @@
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Rol de Pagos detallado", "index", "informeRol")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "index", "valorUtilizado")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "indexp", "descuento")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Solicitar Créditos", "indexU", "credito")</span></p>

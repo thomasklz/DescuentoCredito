@@ -1,29 +1,45 @@
-﻿@model Creditos.Models.mCredito
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
+@model Creditos.Models.mCredito
 @{List<Creditos.Models.mCredito> listCredxUsu = ViewBag.credxus;}
 
  <!-- begin::Barra Inicio -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
-            <h4>
+            <h5>
                 BIENVENIDOS
                 <small>Solicitud de Creditos</small>
-            </h4>
+            </h5>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    Usuario
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
     </div>
 </div>
  <!-- end::Barra Inicio -->
 
 @using (Html.BeginForm("Store", "credito", FormMethod.Post))
 {
+    <h2 style="text-align:center;">Solicitar un Cr&eacute;dito.</h2>
+    <br />
     <div>
         <div class="kt-portlet__body">
             <div class="row">
-                <div class="col-lg-12">
+                <div class="col-lg-4">
                     <div class="kt-section">
                         <label>Descripción:</label>
-                            @Html.TextAreaFor(m => m.descripcion, new { style= "max-width:none;", @id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
+                            @Html.TextAreaFor(m => m.descripcion, new {@id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
+                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                     </div>
                 </div>
             </div>
@@ -34,6 +50,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                             @Html.TextBoxFor(m => m.cantidad, new { @id = "cantidads", @class = "form-control", @placeholder = "Cantidad", @name = "cantidad" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                         </div>
                     </div>
                 </div>
@@ -43,6 +61,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                             @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuotas", @class = "form-control", @placeholder = "Número de Cuotas", @name = "numero_cuota" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                         </div>
                     </div>
                 </div>
@@ -52,6 +72,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-credit-card"></i></span></div>
                             @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensuals", @class = "form-control", @placeholder = "Descuento Mensual", @name = "desc_mensual"})
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                         </div>
                     </div>
                 </div>
@@ -70,188 +92,369 @@
         
     </div>
     <div>
-        <input type="submit" value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngreso" type="button" onclick="validarTdatos()" value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngresoss" type="submit" style="display:none;" />
     </div>
     <br />
 }
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div id="contenedorIngresos">
+        </div>
+    </div>
+</div>
 
-<table class="table table-hover" style="text-align:center">
-    <tr>
-        <th>Item</th>
-        <th>Valor</th>
-        <th>Num. cuotas</th>
-        <th>Desc. Mensual</th>
-        <th>Fecha Solicitud</th>
-        <th>Fecha Aprobación</th>
-        <th>Aprobación</th>
-        <th>Estado</th>
-        <th>Acción</th>
-    </tr>
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Creditos Personales
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
+            <div class="card-body">
 
-    @foreach (var item in listCredxUsu)
-    {
-        <tr class='row_@item.id_credito'>
-            <td>@item.id_credito</td>
-            <td>@item.cantidad</td>
-            <td>@item.numero_cuota</td>
-            <td>@item.desc_mensual</td>
-            <td>@item.fecha_solicitud.ToShortDateString()</td>
-            @if (item.estado_aprobacion == true){
-                <td>@item.fecha_aprobacion.ToShortDateString()</td>
-            }else{<td>No se ha aprobado</td> }
-           @if (item.estado_aprobacion == true){
-            <td>APROBADO</td>
-           }else{<td>NO APROBADO</td> }
-            @if (item.estado_activacion == false && item.estado_aprobacion == false){
-                <td>NO APROBADO</td>
-            }else{if (item.estado_activacion == false){
-                    <td>CADUCADO</td>
-                }else{ <td>ACTIVO</td> }
-            }
-            <td>
-                <a href='#' class='btn btn-outline-primary' data-toggle="kt-tooltip" data-original-title="Información" onclick='DeleteCredito(@item.id_credito)'><span class='la la-info'></span></a>
-            </td>
-        </tr>
-    }
+                <table class="table table-hover" id="example" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Valor</th>
+                            <th>Num. cuotas</th>
+                            <th>Desc. Mensual</th>
+                            <th>Fecha Solicitud</th>
+                            <th>Fecha Aprob/Rechaz</th>
+                            <th>Aprobación</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @foreach (var item in listCredxUsu)
+                        {
+                            <tr class='row_@item.id_credito'>
+                                <td>@item.id_credito</td>
+                                <td>@item.cantidad</td>
+                                <td>@item.numero_cuota</td>
+                                <td>@item.desc_mensual</td>
+                                <td>@item.fecha_solicitud.ToShortDateString()</td>
+                                @if (item.estado_aprobacion == true || item.estado_rechazo == true){
+                                    <td>@item.fecha_aprobacion.ToShortDateString()</td>
+                                }else{
+                                    <td>No se ha revisado</td> }
 
-</table>
-@*<div class="modal fade" id="MyModal">
+                                @if (item.estado_aprobacion == true){
+                                    <td>APROBADO</td>
+                                }else{
+                                    if (item.estado_rechazo==true){
+                                        <td>RECHAZADO</td>
+                                    }else{ <td>No se ha revisado</td> }}
+
+
+                                @if (item.estado_activacion == false && item.estado_aprobacion == false){
+                                    <td>NO APROBADO</td>
+                                }else{
+                                    if (item.estado_activacion == false){
+                                        <td>CADUCADO</td>
+                                    }else{
+                                        <td>ACTIVO</td> }
+                                }
+                                <td>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteCredito(@item.id_credito)'><span class='flaticon2-rubbish-bin'></span></a>
+                                    <button class='btn btn-outline-info infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalinfo">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h4 id="ModalTitle">Modificar Proveedor</h4>
+                <h4 id="ModalTitle" style="text-align:center">Informaci&oacute;n de Cr&eacute;ditos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
             </div>
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        @Html.HiddenFor(m => m.id_proveedor, new { @id = "id_proveedor" })
-
-                        <div class="form-group">
-                            <label>Persona Jurídica</label>
-                            @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridica", @class = "form-control", @placeholder = "Name*" })
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Descipcion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Solicitado por:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.persona, new { @id = "persona", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>De la Asociación:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.aso, new { @id = "aso", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-
-                        <div class="form-group">
-                            <label>RUC</label>
-                            @Html.TextBoxFor(m => m.RUC, new { @id = "RUC", @class = "form-control", @placeholder = "Name*" })
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>La cantidad de:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.cantidad, new { @id = "cantidad", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con número de cuotas:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuota", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con un Descuento mensual:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensual", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label>Nombre</label>
-                            @Html.TextBoxFor(m => m.nombre, new { @id = "nombre", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-                        <div class="form-group">
-                            <label>Descripción</label>
-                            @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-                        <div class="form-group">
-                            <label>Email</label>
-                            @Html.TextBoxFor(m => m.email, new { @id = "email", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-                        <div class="form-group">
-                            <label>Dirección</label>
-                            @Html.TextBoxFor(m => m.direccion, new { @id = "direccion", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-
-                        <div class="form-group">
-                            <label>Teléfono</label>
-                            @Html.TextBoxFor(m => m.telefono, new { @id = "telefono", @class = "form-control", @placeholder = "Name*" })
-                        </div>
-
-
-                        <div class="form-group">
-                            <a href="#" class="btn btn-block btn-danger" onclick="UpdateProveedor()">Save</a>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Fue soliciado el:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.fecha_solicitud, new { @id = "fecha_solicitud", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" data-dismiss="modal">Aceptar</a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </fieldset>
                 </form>
             </div>
         </div>
     </div>
-</div>*@
+</div>
+
+<script type="text/javascript">
+
+        function ValidarIngreso() {
+            var _descr = $('#descripcions').val();
+            var _cantidad = $('#cantidads').val();
+            var _nCuotas = $('#numero_cuotas').val();
+            var _descMensual = $('#desc_mensuals').val();
+            var _fecha = $('#fecha').val();
+            var _idEmplAso = $('#asociacion_id').val();
+
+        $.ajax({
+            url: '@Url.Action("ValidarCredito", "credito")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _descr: _descr, _cantidad: _cantidad, _nCuotas: _nCuotas, _descMensual: _descMensual, _fecha: _fecha, _idEmplAso: _idEmplAso },
+            success: function (data) {
+                console.log(data);
+                $("#btnIngreso").attr("submit");
+                if (data.validar == true) {
+                    Swal.fire({
+                        title: 'Confirmar?',
+                        text: "Se almacenará el nuevo dato!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        cancelButtonText: 'Editar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                            $("#btnIngresoss").trigger("click");
+                        };
+                        })
+
+                } else {
+                    $("#contenedorIngresos").html(data.mensaje);
+                }
+            },
+        });
+    }
+</script>
+
+<script type="text/javascript">
+        var a = 1;
+        var b = 1;
+        $(function () {
+            $('#descripcions').keyup(function () {
+                var _thisDesc = $('#descripcions');
+                var _desc = $('#descripcions').val();
+                _thisDesc.attr('style', 'background:white');
+                if (_desc == null || _desc.length == 0 ) {
+                    $('#descripcions').removeClass('is-valid');
+                    $('#descripcions').addClass('is-invalid');
+                } else {
+                    $('#descripcions').removeClass('is-invalid');
+                    $('#descripcions').addClass('is-valid');
+                }
+            });
+        });
+
+        $(function () {
+            $('#cantidads').keyup(function () {
+                var _thisCnt = $('#cantidads');
+                var _cnt = $('#cantidads').val();
+                _thisCnt.attr('style', 'background:white');
+                if (_cnt == null || isNaN(_cnt) || _cnt == 0) {
+                    $('#cantidads').removeClass('is-valid');
+                    $('#cantidads').addClass('is-invalid');
+                    a++;
+                } else {
+                    $('#cantidads').removeClass('is-invalid');
+                    $('#cantidads').addClass('is-valid');
+                    a = 0;
+                }
+            });
+        });
+        $(function () {
+            $('#numero_cuotas').keyup(function () {
+                var _thisNcts = $('#numero_cuotas');
+                var _nCts = $('#numero_cuotas').val();
+                _thisNcts.attr('style', 'background:white');
+                if (isNaN(_nCts) || _nCts == null || _nCts == 0) {
+                    $('#numero_cuotas').removeClass('is-valid');
+                    $('#numero_cuotas').addClass('is-invalid');
+                    a++;
+                } else {
+                    $('#numero_cuotas').removeClass('is-invalid');
+                    $('#numero_cuotas').addClass('is-valid');
+                    b = 0;
+                }
+            });
+        });
+        $(function () {
+            $('#desc_mensuals').keyup(function () {
+                var _thisDsc = $('#desc_mensuals');
+                var _Desc = $('#desc_mensuals').val();
+                _thisDsc.attr('style', 'background:white');
+                if (typeof (_Desc) == "number" || _Desc == null || _Desc == 0) {
+                    $('#desc_mensuals').removeClass('is-valid');
+                    $('#desc_mensuals').addClass('is-invalid');
+                } else {
+                    $('#desc_mensuals').removeClass('is-invalid');
+                    $('#desc_mensuals').addClass('is-valid');
+                }
+            });
+        });
+</script>
+
 <script>
+    function validarTdatos() {
+            desc = document.getElementById("descripcions").value;
+            cant = document.getElementById("cantidads").value;
+            n_cuotas = document.getElementById("numero_cuotas").value;
+            desc_mensual = document.getElementById("desc_mensuals").value;
+
+            if (desc == null || desc.length == 0) {
+                $('#descripcions').addClass('is-invalid');
+                return true;
+            } else if (typeof (cant) == "number" || cant == null || cant == 0) {
+                $('#cantidads').addClass('is-invalid');
+                return true;
+            } else if (typeof (n_cuotas) == "number" || n_cuotas == null || n_cuotas == 0) {
+                $('#numero_cuotas').addClass('is-invalid');
+                return true;
+            } else if (typeof (desc_mensual) == "number" || desc_mensual == null || desc_mensual == 0) {
+                $('#desc_mensuals').addClass('is-invalid');
+                return true;
+            }ValidarIngreso();
+        }
+
+    $(document).ready(function () {
+            $('#example').dataTable();
+        });
+
     $(document).ready(function () {
 
         $('.add').click(function () {
-            Swal.fire({
-                title: 'Descuento Calculado: ',
-                icon: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#desc_mensuals').val($('#cantidads').val() / $('#numero_cuotas').val())
-        })
-    })
-
-
-    var row;
-    function UpdateProveedor(Proveedor) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/proveedores/UpdateProveedores",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                    row.find("td").eq(1).html($('#persona_juridica').val());
-                    row.find("td").eq(2).html($('#RUC').val());
-                    row.find("td").eq(3).html($('#nombre').val());
-                    row.find("td").eq(4).html($('#descripcion').val());
-                    row.find("td").eq(5).html($('#email').val());
-                    row.find("td").eq(6).html($('#direccion').val());
-                    row.find("td").eq(7).html($('#telefono').val());
-                } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
-                }
-                $("#MyModal").modal("hide");
+            if (a > 0 || b > 0 ) {
+                Swal.fire({
+                    title: 'ERROR! ',
+                    text: 'Revise los formatos de antes de calcular',
+                    type: 'warning',
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Cancelar'
+                })
+            } else {
+                Swal.fire({
+                    title: 'Descuento Calculado: ',
+                    type: 'success',
+                    confirmButtonText: 'Ok',
+                    cancelButtonText: 'Cancelar'
+                })
+                $('#desc_mensuals').val($('#cantidads').val() / $('#numero_cuotas').val())
             }
         })
-    }
-    $(document).ready(function () {
-        $('[data-id]').click(function () {
-            row = $(this).parents("tr");
-            var id = $(this).data("id")
-            $("#MyModal").modal();
-            $.ajax({
-                type: "GET",
-                url: "/proveedores/GetProveedoresById?ProveedoresId=" + id,
-                success: function (data) {
-                    var obj = JSON.parse(data);
-                    $("#id_proveedor").val(obj[0].id_proveedor);
-                    $("#persona_juridica").val(obj[0].persona_juridica);
-                    $("#RUC").val(obj[0].RUC);
-                    $("#nombre").val(obj[0].nombre);
-                    $("#descripcion").val(obj[0].descripcion);
-                    $("#email").val(obj[0].email);
-                    $("#direccion").val(obj[0].direccion);
-                    $("#telefono").val(obj[0].telefono);
-                }
-            })
+    })
+
+    var row;
+    $('body').on('click', '.infor', function () {
+        var id = $(this).val();
+        row = $(this).parents("tr");
+        $("#modalinfo").modal();
+        $.ajax({
+            type: "GET",
+            url: "/credito/GetCreditoById?CreditoId=" + id,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                $("#id_creditos").val(obj[0].id_credito);
+                $("#descripcion").val(obj[0].descripcion);
+                $("#persona").val(obj[0].persona);
+                $("#aso").val(obj[0].aso);
+                $("#cantidad").val(obj[0].cantidad);
+                $("#numero_cuota").val(obj[0].numero_cuota);
+                $("#desc_mensual").val(obj[0].desc_mensual);
+                $("#fecha_solicitud").val(obj[0].fecha_solicitud);
+            }
         })
     })
-    function DeleteProveedor(Proveedor) {
+
+    function DeleteCredito(Credito) {
         Swal.fire({
             title: 'Estás seguro?',
             text: 'Deseas eliminar el registro seleccionado!',
-            icon: 'warning',
+            type: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Borrar',
             cancelButtonText: 'Cancelar'
@@ -259,7 +462,7 @@
             if (result.value) {
                 $.ajax({
                     type: "POST",
-                    url: "/proveedores/DeleteProveedores?ProveedoresId=" + Proveedor,
+                    url: "/credito/DeleteCredito?CreditoId=" + Credito,
                     success: function (result) {
                         if (result == "Eliminado") {
                             Swal.fire(
@@ -267,7 +470,7 @@
                                 'El registro fue borrado con éxito',
                                 'success'
                             )
-                            $(".row_" + Proveedor).remove();
+                            $(".row_" + Credito).remove();
                         } else {
                             Swal.fire(
                                 'Borrado!',
@@ -280,4 +483,7 @@
             }
         })
     }
+
+    
+
 </script>
