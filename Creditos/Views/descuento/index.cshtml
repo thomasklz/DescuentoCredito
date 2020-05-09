@@ -137,6 +137,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                             @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
                         </div>
                     </div>
                 </div>
@@ -146,6 +148,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione un Descuento--", new { @id = "cab_desc_ids", @class = "form-control" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado el descuento.</div>
                         </div>
                     </div>
                 </div>
@@ -155,6 +159,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                             @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un mes.</div>
                         </div>
                     </div>
                 </div>

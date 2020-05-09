@@ -124,6 +124,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha seleccioando un mes.</div>
                         </div>
                     </div>
                 </div>
@@ -134,6 +136,8 @@
                             <div class="input-group">
                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                                 @Html.TextBoxFor(m => m.cantidad_usada, new { @id = "cantidad_usada", @class = "form-control", @placeholder = "Valor Consumido", @name = "cantidad_usada" })
+                                <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
                             </div>
                         </div>
                     </div>

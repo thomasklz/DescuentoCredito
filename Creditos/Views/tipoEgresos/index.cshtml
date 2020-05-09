@@ -119,6 +119,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                                         @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                                     </div>
                                 </div>
                             </div>
@@ -126,7 +128,7 @@
                                 <div class="kt-section">
                                     <label><br /></label>
                                     <div class="input-group">
-                                        <a href="#" class="btn btn-label-success" onclick="UpdateTipoEgresos()">Guardar Cambios</a>
+                                        <a href="#" class="btn btn-label-success" onclick="validarTdatosModal()">Guardar Cambios</a>
                                     </div>
                                 </div>
                             </div>
@@ -189,9 +191,34 @@
               }
           });
       });
+
+      $(function () {
+          $('#descripcion').keyup(function () {
+              var _thisDesc = $('#descripcion');
+              var _desc = $('#descripcion').val();
+              _thisDesc.attr('style', 'background:white');
+              if (_desc == null || _desc.length == 0) {
+                  $('#descripcion').removeClass('is-valid');
+                  $('#descripcion').addClass('is-invalid');
+              } else {
+                  $('#descripcion').removeClass('is-invalid');
+                  $('#descripcion').addClass('is-valid');
+              }
+          });
+      });
 </script>
 
 <script>
+      function validarTdatosModal() {
+          desc = document.getElementById("descripcion").value;
+          if (desc == null || desc.length == 0 || /^\s+$/.test(desc)) {
+              $('#descripcion').addClass('is-invalid');
+              return true;
+          } else {
+              $('#descripcion').removeClass('is-invalid');
+              UpdateTipoEgresos();
+          }
+      }
       function validarTdatos() {
           desc = document.getElementById("descripcions").value;
           if (desc == null || desc.length == 0 || /^\s+$/.test(desc)) {

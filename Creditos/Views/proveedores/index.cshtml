@@ -52,7 +52,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                             @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", @name = "RUC" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
                             @Html.TextBoxFor(m => m.email, new { @id = "emails", @class = "form-control", @placeholder = "Ej: empresa@empresa.com", @name = "email" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                         </div>
                     </div>
                 </div>
@@ -117,7 +117,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
                             @Html.TextBoxFor(m => m.telefono, new { @id = "telefonos", @title="Insertar teléfono", @class = "form-control", @placeholder = "(--- --- ----)", @name = "telefono" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                         </div>
                     </div>
                 </div>
@@ -210,6 +210,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBoxFor(m => m.persona_juridica, new { @id = "persona_juridica", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                                     </div>
                                 </div>
                             </div>
@@ -219,6 +221,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                                         @Html.TextBoxFor(m => m.RUC, new { @id = "RUC", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +234,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
                                         @Html.TextBoxFor(m => m.nombre, new { @id = "nombre", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                                     </div>
                                 </div>
                             </div>
@@ -239,6 +245,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-sticky-note"></i></span></div>
                                         @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                                     </div>
                                 </div>
                             </div>
@@ -250,6 +258,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
                                         @Html.TextBoxFor(m => m.email, new { @id = "email", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                                     </div>
                                 </div>
                             </div>
@@ -259,6 +269,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-home"></i></span></div>
                                         @Html.TextBoxFor(m => m.direccion, new { @id = "direccion", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                                     </div>
                                 </div>
                             </div>
@@ -270,6 +282,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
                                         @Html.TextBoxFor(m => m.telefono, new { @id = "telefono", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
                                     </div>
                                 </div>
                             </div>
@@ -277,7 +291,7 @@
                                 <div class="kt-section">
                                     <label><br /></label>
                                     <div class="input-group">
-                                        <a href="#" class="btn btn-label-success" onclick="UpdateProveedor()">Guardar Cambios</a>
+                                        <a href="#" class="btn btn-label-success" onclick="validarTdatosModal()">Guardar Cambios</a>
                                     </div>
                                 </div>
                             </div>
@@ -333,7 +347,7 @@
 </script>
 
 <script type="text/javascript">
-        $(function () {
+    $(function () {
             $('#persona_juridicas').keyup(function () {
                 var _thispj = $('#persona_juridicas');
                 var _pj = $('#persona_juridicas').val();
@@ -432,11 +446,153 @@
         });
     });
 
+
+    $(function () {
+        $('#persona_juridica').keyup(function () {
+            var _thispj = $('#persona_juridica');
+            var _pj = $('#persona_juridica').val();
+            _thispj.attr('style', 'background:white');
+            if (_pj == null || _pj.length == 0 || !/^([a-z ñáéíóú]{2,60})$/i.test(_pj)) {
+                $('#persona_juridica').removeClass('is-valid');
+                $('#persona_juridica').addClass('is-invalid');
+            } else {
+                $('#persona_juridica').removeClass('is-invalid');
+                $('#persona_juridica').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#RUC').keyup(function () {
+            var _thisr = $('#RUC');
+            var _ruc = $('#RUC').val();
+            _thisr.attr('style', 'background:white');
+            if (isNaN(_ruc) || _ruc.length != 13) {
+                $('#RUC').removeClass('is-valid');
+                $('#RUC').addClass('is-invalid');
+            } else {
+                $('#RUC').removeClass('is-invalid');
+                $('#RUC').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#nombre').keyup(function () {
+            var _thisna = $('#nombre');
+            var _name = $('#nombre').val();
+            _thisna.attr('style', 'background:white');
+            if (_name == null || _name.length == 0) {
+                $('#nombre').removeClass('is-valid');
+                $('#nombre').addClass('is-invalid');
+            } else {
+                $('#nombre').removeClass('is-invalid');
+                $('#nombre').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#descripcion').keyup(function () {
+            var _thisDsc = $('#descripcion');
+            var _dsc = $('#descripcion').val();
+            _thisDsc.attr('style', 'background:white');
+            if (_dsc == null || _dsc.length == 0) {
+                $('#descripcion').removeClass('is-valid');
+                $('#descripcion').addClass('is-invalid');
+            } else {
+                $('#descripcion').removeClass('is-invalid');
+                $('#descripcion').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#email').keyup(function () {
+            var _thismail = $('#email');
+            var _mail = $('#email').val();
+            _thismail.attr('style', 'background:white');
+            if (!(/^\w+([\.\+\-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,4})+$/).test(_mail)) {
+                $('#email').removeClass('is-valid');
+                $('#email').addClass('is-invalid');
+            } else {
+                $('#email').removeClass('is-invalid');
+                $('#email').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#direccion').keyup(function () {
+            var _thisDirc = $('#direccion');
+            var _dirc = $('#direccion').val();
+            _thisDirc.attr('style', 'background:white');
+            if (_dirc == null || _dirc.length == 0) {
+                $('#direccion').removeClass('is-valid');
+                $('#direccion').addClass('is-invalid');
+            } else {
+                $('#direccion').removeClass('is-invalid');
+                $('#direccion').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#telefono').keyup(function () {
+            var _thiFono = $('#telefono');
+            var _fono = $('#telefono').val();
+            _thiFono.attr('style', 'background:white');
+            if (isNaN(_fono) || _fono.length != 10) {
+                $('#telefono').removeClass('is-valid');
+                $('#telefono').addClass('is-invalid');
+            } else {
+                $('#telefono').removeClass('is-invalid');
+                $('#telefono').addClass('is-valid');
+            }
+        });
+    });
+
+
 </script>
 
 <script>
 
-        function validarTdatos() {
+    function validarTdatosModal() {
+        per_jur = document.getElementById("persona_juridica").value;
+        ruccc = document.getElementById("RUC").value;
+        namee = document.getElementById("nombre").value;
+        desc = document.getElementById("descripcion").value;
+        mail = document.getElementById("email").value;
+        direcc = document.getElementById("direccion").value;
+        fono = document.getElementById("telefono").value;
+
+        if (per_jur == null || per_jur.length == 0 || !/^([a-z ñáéíóú]{2,60})$/i.test(per_jur)) {
+            $('#persona_juridica').addClass('is-invalid');
+            return true;
+        } else if (isNaN(ruccc) || ruccc.length != 13) {
+            $('#RUC').addClass('is-invalid');
+            return true;
+        } else if (namee == null || namee.length == 0) {
+            $('#nombre').addClass('is-invalid');
+            return true;
+        } else if (desc == null || desc.length == 0) {
+            $('#descripcion').addClass('is-invalid');
+            return true;
+        } else if (!(/^\w+([\.\+\-]?\w+)*@@\w+([\.-]?\w+)*(\.\w{2,4})+$/).test(mail)) {
+            $('#email').addClass('is-invalid');
+            return true;
+        } else if (direcc == null || direcc.length == 0) {
+            $('#direccion').addClass('is-invalid');
+            return true;
+        } if (isNaN(fono) || fono.length != 10) {
+            $('#telefono').addClass('is-invalid');
+            return true;
+        }
+        $('#persona_juridica').removeClass('is-invalid');
+        $('#RUC').removeClass('is-invalid');
+        $('#nombre').removeClass('is-invalid');
+        $('#descripcion').removeClass('is-invalid');
+        $('#email').removeClass('is-invalid');
+        $('#direccion').removeClass('is-invalid');
+        $('#telefono').removeClass('is-invalid');
+        UpdateProveedor();
+    }
+
+    function validarTdatos() {
             per_jur = document.getElementById("persona_juridicas").value;
             ruccc = document.getElementById("rucs").value;
             namee = document.getElementById("nombres").value;
@@ -452,7 +608,6 @@
                 $('#rucs').addClass('is-invalid');
                 return true;
             } else if (namee == null || namee.length == 0) {
-                $('#nombres').removeClass('is-invalid');
                 $('#nombres').addClass('is-invalid');
                 return true;
             } else if (desc == null || desc.length == 0) {
@@ -496,13 +651,11 @@
             data: data,
             success: function (result) {
                 if (result == "Registro actualizado") {
-                    Swal.fire({
-                        position: 'top-end',
-                        type: 'success',
-                        title: 'Registro actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
                     row.find("td").eq(1).html($('#persona_juridica').val());
                     row.find("td").eq(2).html($('#RUC').val());
                     row.find("td").eq(3).html($('#nombre').val());
@@ -511,13 +664,11 @@
                     row.find("td").eq(6).html($('#direccion').val());
                     row.find("td").eq(7).html($('#telefono').val());
                 } else {
-                    Swal.fire({
-                        position: 'top-end',
-                        type: 'error',
-                        title: 'Error al actualizado',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
                 }
                 $("#MyModal").modal("hide");
             }

@@ -212,6 +212,8 @@
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                     @Html.TextBoxFor(m => m.monto_aprobado, new { @id = "monto_aprobados", @class = "form-control", @placeholder = "Monto Aprobado", @name = "monto_aprobado" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico..</div>
                 </div>
             </div>
         </div>

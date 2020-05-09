@@ -39,7 +39,7 @@
                         <label>Descripción:</label>
                             @Html.TextAreaFor(m => m.descripcion, new {@id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                        <div class="invalid-feedback" style="text-align:center">Este campo es obligatorio.</div>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                             @Html.TextBoxFor(m => m.cantidad, new { @id = "cantidads", @class = "form-control", @placeholder = "Cantidad", @name = "cantidad" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                             @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuotas", @class = "form-control", @placeholder = "Número de Cuotas", @name = "numero_cuota" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-credit-card"></i></span></div>
                             @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensuals", @class = "form-control", @placeholder = "Descuento Mensual", @name = "desc_mensual"})
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
                         </div>
                     </div>
                 </div>
@@ -411,7 +411,7 @@
             if (a > 0 || b > 0 ) {
                 Swal.fire({
                     title: 'ERROR! ',
-                    text: 'Revise los formatos de antes de calcular',
+                    text: 'Revise los formatos antes de calcular',
                     type: 'warning',
                     confirmButtonText: 'Ok',
                     cancelButtonText: 'Cancelar'
