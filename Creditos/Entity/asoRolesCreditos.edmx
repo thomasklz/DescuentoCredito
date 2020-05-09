@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="AdministracionAcademicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="AdministracionAcademicaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Asociacion">
           <Key>
             <PropertyRef Name="id_asociacion" />
@@ -971,6 +971,9 @@
         <Function Name="spEmpleadoxProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="proveedor_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="spFiltroPersona" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="keyword" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="spInsertarAsociacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="descripcion" Type="varchar" Mode="In" />
         </Function>
@@ -1382,8 +1385,7 @@
             <End Role="Valor_Utilizado" EntitySet="Valor_Utilizado" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="AdministracionAcademicaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2501,17 +2503,17 @@
           </FunctionImport>
           <FunctionImport Name="spConsultarAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacion_Result)" />
           <FunctionImport Name="spConsultarAsociacionById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionById_Result)">
-            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarAsociacionProveedor" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionProveedor_Result)" />
           <FunctionImport Name="spConsultarCabeceraDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCabeceraDescuento_Result)" />
           <FunctionImport Name="spConsultarConveniosxAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarConveniosxAsociacion_Result)">
-            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarCredito" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCredito_Result)" />
           <FunctionImport Name="spConsultarCreditosActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditosActivos_Result)" />
           <FunctionImport Name="spConsultarCreditosEmpleado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditosEmpleado_Result)">
-            <Parameter Name="idpersona" Mode="In" Type="Int32" />
+          <Parameter Name="idpersona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarCreditosNoAprobados" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditosNoAprobados_Result)" />
           <FunctionImport Name="spConsultarCreditoxCedulaActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditoxCedulaActivos_Result)">
@@ -2524,7 +2526,7 @@
           </FunctionImport>
           <FunctionImport Name="spConsultarDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuento_Result)" />
           <FunctionImport Name="spConsultarDescuentoxEmpleado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuentoxEmpleado_Result)">
-            <Parameter Name="idPersona" Mode="In" Type="Int32" />
+          <Parameter Name="idPersona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarDescuentoxMes" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuentoxMes_Result)" />
           <FunctionImport Name="spConsultarEgreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEgreso_Result)" />
@@ -2535,14 +2537,14 @@
           <FunctionImport Name="spConsultarEmpleadoAsociacion" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoAsociacion_Result)" />
           <FunctionImport Name="spConsultarEmpleadosSinAso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadosSinAso_Result)" />
           <FunctionImport Name="spConsultarEmpleadosxCreditosActivos" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadosxCreditosActivos_Result)">
-            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarEmpleadoxCreditoInactivo" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoxCreditoInactivo_Result)">
-            <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
+          <Parameter Name="asociacion_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarIngreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarIngreso_Result)" />
           <FunctionImport Name="spConsultarIngresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarIngresoById_Result)">
-            <Parameter Name="idingreso" Mode="In" Type="Int32" />
+          <Parameter Name="idingreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarIngresosxMes" ReturnType="Collection(Double)">
             <Parameter Name="id_mes" Mode="In" Type="Int32" />
@@ -2551,80 +2553,80 @@
           <FunctionImport Name="spConsultarMes" ReturnType="Collection(AdministracionAcademicaModel.spConsultarMes_Result)" />
           <FunctionImport Name="spConsultarPersona" ReturnType="Collection(AdministracionAcademicaModel.spConsultarPersona_Result)" />
           <FunctionImport Name="spConsultarPersonaById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarPersonaById_Result)">
-            <Parameter Name="idpersona" Mode="In" Type="Int32" />
+          <Parameter Name="idpersona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarProveedor" ReturnType="Collection(AdministracionAcademicaModel.spConsultarProveedor_Result)" />
           <FunctionImport Name="spConsultarSobrante" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSobrante_Result)" />
           <FunctionImport Name="spConsultarSubDescuento" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSubDescuento_Result)" />
           <FunctionImport Name="spConsultarTipoEgreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarTipoEgreso_Result)" />
           <FunctionImport Name="spConsultarTipoEgresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarTipoEgresoById_Result)">
-            <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarTipoIngreso" ReturnType="Collection(AdministracionAcademicaModel.spConsultarTipoIngreso_Result)" />
           <FunctionImport Name="spConsultarTipoIngresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarTipoIngresoById_Result)">
-            <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarValorAsignado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorAsignado_Result)" />
           <FunctionImport Name="spConsultarValorUsadoxEmpleado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorUsadoxEmpleado_Result)">
-            <Parameter Name="idPersona" Mode="In" Type="Int32" />
+          <Parameter Name="idPersona" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarValorUtilizado" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorUtilizado_Result)" />
           <FunctionImport Name="spConultarValorUsadoxProv" ReturnType="Collection(AdministracionAcademicaModel.spConultarValorUsadoxProv_Result)">
-            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+          <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarAsociacion">
-            <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
+          <Parameter Name="id_asociacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarAsociacionProveedor">
-            <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
+          <Parameter Name="id_asoc_prov" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarCabeceraDescuento">
-            <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
+          <Parameter Name="id_cabecera_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarCredito">
-            <Parameter Name="id_credito" Mode="In" Type="Int32" />
+          <Parameter Name="id_credito" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarDescuento">
-            <Parameter Name="id_descuento" Mode="In" Type="Int32" />
+          <Parameter Name="id_descuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarEgreso">
-            <Parameter Name="id_egresos" Mode="In" Type="Int32" />
+          <Parameter Name="id_egresos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarEmpleadoAsociacion">
-            <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
+          <Parameter Name="id_empl_aso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarIngreso">
-            <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
+          <Parameter Name="id_ingresos" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarMes">
-            <Parameter Name="id_mes" Mode="In" Type="Int32" />
+          <Parameter Name="id_mes" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarProveedor">
-            <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
+          <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarSobrante">
-            <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
+          <Parameter Name="id_sobrante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarSubDescuento">
-            <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
+          <Parameter Name="id_subdescuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarTipoEgreso">
-            <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_egreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarTipoIngreso">
-            <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
+          <Parameter Name="id_tipo_ingreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarValorAsignado">
-            <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
+          <Parameter Name="id_valor_asig" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEliminarValorUtilizado">
-            <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
+          <Parameter Name="id_valor_usad" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spEmpleadoxProveedor" ReturnType="Collection(AdministracionAcademicaModel.spEmpleadoxProveedor_Result)">
-            <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
+          <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacion">
-            <Parameter Name="descripcion" Mode="In" Type="String" />
+          <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarAsociacionProveedor">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
@@ -2668,7 +2670,7 @@
             <Parameter Name="mes_id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spInsertarMes">
-            <Parameter Name="descripcion" Mode="In" Type="String" />
+          <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarProveedor">
             <Parameter Name="persona_juridica" Mode="In" Type="String" />
@@ -2685,13 +2687,13 @@
             <Parameter Name="estado" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="spInsertarSubDescuento">
-            <Parameter Name="descripcion" Mode="In" Type="String" />
+          <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoEgreso">
-            <Parameter Name="descripcion" Mode="In" Type="String" />
+          <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarTipoIngreso">
-            <Parameter Name="descripcion" Mode="In" Type="String" />
+          <Parameter Name="descripcion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="spInsertarValorAsignado">
             <Parameter Name="proveedor_id" Mode="In" Type="Int32" />
@@ -2794,37 +2796,37 @@
             <Parameter Name="fecha_aprobacion" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="spConsultarAsociacionProveedorById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionProveedorById_Result)">
-            <Parameter Name="idasoprov" Mode="In" Type="Int32" />
+          <Parameter Name="idasoprov" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarCabeceraDescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCabeceraDescuentoById_Result)">
-            <Parameter Name="idcabeceradesc" Mode="In" Type="Int32" />
+          <Parameter Name="idcabeceradesc" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarCreditoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarCreditoById_Result)">
-            <Parameter Name="idcredito" Mode="In" Type="Int32" />
+          <Parameter Name="idcredito" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarDescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarDescuentoById_Result)">
-            <Parameter Name="iddescuento" Mode="In" Type="Int32" />
+          <Parameter Name="iddescuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarEgresoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEgresoById_Result)">
-            <Parameter Name="idegreso" Mode="In" Type="Int32" />
+          <Parameter Name="idegreso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarEmpleadoAsociacionById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarEmpleadoAsociacionById_Result)">
-            <Parameter Name="idemplaso" Mode="In" Type="Int32" />
+          <Parameter Name="idemplaso" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarProveedorById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarProveedorById_Result)">
-            <Parameter Name="idproveedor" Mode="In" Type="Int32" />
+          <Parameter Name="idproveedor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarSobranteById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSobranteById_Result)">
-            <Parameter Name="idsobrante" Mode="In" Type="Int32" />
+          <Parameter Name="idsobrante" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarSubdescuentoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarSubdescuentoById_Result)">
-            <Parameter Name="idsubdescuento" Mode="In" Type="Int32" />
+          <Parameter Name="idsubdescuento" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarValorAsignadoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorAsignadoById_Result)">
-            <Parameter Name="idvalorasignado" Mode="In" Type="Int32" />
+          <Parameter Name="idvalorasignado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spConsultarValorUtilizadoById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarValorUtilizadoById_Result)">
-            <Parameter Name="idvalorusado" Mode="In" Type="Int32" />
+          <Parameter Name="idvalorusado" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spModificarDescuento">
             <Parameter Name="id_descuento" Mode="In" Type="Int32" />
@@ -2840,6 +2842,9 @@
             <Parameter Name="aso_id" Mode="In" Type="Int32" />
             <Parameter Name="persona_id" Mode="In" Type="Int32" />
             <Parameter Name="monto_aprobado" Mode="In" Type="Double" />
+          </FunctionImport>
+          <FunctionImport Name="spFiltroPersona" ReturnType="Collection(AdministracionAcademicaModel.spFiltroPersona_Result1)">
+            <Parameter Name="keyword" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spConsultarAsociacion_Result">
@@ -3358,6 +3363,22 @@
           <Property Type="Double" Name="cantidad_usada" Nullable="true" />
           <Property Type="Int32" Name="id_mes" Nullable="false" />
           <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="spFiltroPersona_Result">
+          <Property Type="String" Name="persona" Nullable="true" MaxLength="204" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SegundoNombre" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
+        </ComplexType>
+        <ComplexType Name="spFiltroPersona_Result1">
+          <Property Type="String" Name="persona" Nullable="true" MaxLength="204" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Cedula" Nullable="false" MaxLength="15" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -4527,6 +4548,17 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spModificarDescuento" FunctionName="AdministracionAcademicaModel.Store.spModificarDescuento" />
           <FunctionImportMapping FunctionImportName="spModificarValorAsignado" FunctionName="AdministracionAcademicaModel.Store.spModificarValorAsignado" />
+          <FunctionImportMapping FunctionImportName="spFiltroPersona" FunctionName="AdministracionAcademicaModel.Store.spFiltroPersona">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spFiltroPersona_Result1">
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Cedula" ColumnName="Cedula" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

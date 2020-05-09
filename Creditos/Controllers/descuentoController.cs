@@ -88,5 +88,18 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult SearchPerson(string lastName)
+        {
+            // clsPersona persona = new clsPersona();
+            var output = db.spFiltroPersona(lastName).ToList();
+           // return Json(output);
+
+          
+            return Json(output, JsonRequestBehavior.AllowGet);
+
+        }
+
     }
 }
