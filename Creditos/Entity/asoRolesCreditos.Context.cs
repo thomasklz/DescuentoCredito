@@ -1233,5 +1233,14 @@ namespace Creditos.Entity
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
         }
+    
+        public virtual ObjectResult<spFiltroPersona_Result1> spFiltroPersona(string keyword)
+        {
+            var keywordParameter = keyword != null ?
+                new ObjectParameter("keyword", keyword) :
+                new ObjectParameter("keyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spFiltroPersona_Result1>("spFiltroPersona", keywordParameter);
+        }
     }
 }

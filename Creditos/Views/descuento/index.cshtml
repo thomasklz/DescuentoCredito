@@ -6,8 +6,12 @@
     List<Creditos.Models.mDescuento> listDescuentos = ViewBag.descuentos;
     List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
 }
+@* LIBRERIAS PARA EL FILTRADO *@
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
 
-<!-- begin:: Encabezado VENTANA PRINCIPAL -->
+
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
@@ -41,7 +45,7 @@
             <div class="row align-items-center">
                 <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                     <div class="kt-input-icon kt-input-icon--left">
-                        <input type="text" id="idLocalNames" class="form-control" onfocus="this.label = '';" placeholder="Buscar empleado...">
+                        <input type="text" id="search" class="form-control input-group-prepend" placeholder="Buscar empleado..." style="width:900px">
                         <span class="kt-input-icon__icon kt-input-icon__icon--left">
                             <span><i class="la la-search"></i></span>
                         </span>
@@ -52,14 +56,15 @@
     </div>
     <br />
     <div>
-    @*<p>
-        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Empleados ESPAM-MFL</a>
-    </p>*@</div>
+        @*<p>
+                <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Empleados ESPAM-MFL</a>
+            </p>*@
+    </div>
     <div class="row">
         <div class="col">
             <div class="collapse multi-collapse" id="multiCollapseExample1">
                 <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    
+
                 </div>
                 <table class="table table-hover" style="text-align:center; display:none;" id="tablaSA">
                     <thead>
@@ -84,10 +89,14 @@
                                 <td>@item.Direccion</td>
                                 <td>@item.Numero</td>
                                 <td>@item.aso</td>
-                                @if (item.gastos != 0){
-                                   <td>@item.gastos</td>
-                                }else{<td>No registra gastos</td> }
-                                
+                                @if (item.gastos != 0)
+                                {
+                                    <td>@item.gastos</td>
+                                }
+                                else
+                                {
+                                    <td>No registra gastos</td>}
+
                                 <td>
                                     <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
                                 </td>
@@ -171,7 +180,7 @@
             <input type="submit" value="Confirmar" class="btn btn-primary" />
         </div>
     </div>
-    <br/> 
+    <br />
 }
 
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
@@ -189,7 +198,7 @@
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
-                
+
                 <table class="table table-hover" style="text-align:center" id="example">
                     <thead>
                         <tr>
@@ -235,7 +244,7 @@
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        
+
                         <p>
                             <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample" role="button" id="accors" aria-expanded="false" aria-controls="multiCollapseExample">Empleados ESPAM-MFL</a>
                         </p>
@@ -319,7 +328,7 @@
                                     <label>Tipo de Descuento:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                       @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione Descuento--", new { @id = "cab_desc_id", @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione Descuento--", new { @id = "cab_desc_id", @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
@@ -362,8 +371,44 @@
 
 <script>
     $(document).ready(function () {
-        $('#example').dataTable();
+       // FUNCIÓN PARA REALIZAR EL FILTRADO
+        $("#search").autocomplete({
+                source: function (request, response) {
+                    var param = { lastName: $('#search').val() };
+                    $.ajax({
+                        url: "/descuento/SearchPerson",
+                        data: JSON.stringify(param),
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        dataFilter: function (data) { return data; },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                               //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                                return {
+                                    value: item.persona,
+                                    dataNombres: item.Nombres,
+                                    dataApellidos: item.Apellidos,
+                                    dataCI: item.Cedula,
+                                    dataID: item.Id_Persona
+                                }
+                            }))
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    //MOSTRAR VALORES EN LOS INPUT
+                    $("#Cedulas").val(ui.item.dataCI);
+                    $("#Nombress").val(ui.item.dataNombres);
+                    $("#SegundoNombres").val(ui.item.dataApellidos);
+                }
+            });
     });
+    // FIN DE LA FUNCIÓN DEL FILTRADO
 
     $(document).on('focus', '#idLocalNames', function () {
         $(this).autocomplete({
@@ -375,6 +420,7 @@
 
 
     $(document).ready(function () {
+
         (function ($) {
             $('.filtrar').keyup(function () {
                 var rex = new RegExp($(this).val(), 'i');
@@ -385,6 +431,7 @@
             });
         }(jQuery));
     });
+
     $(document).ready(function () {
         $('.add').click(function () {
             Swal.fire({
@@ -399,7 +446,8 @@
             $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
             $("#accor").trigger("click")
         })
-    })
+     })
+
     $(document).ready(function () {
         $('.adds').click(function () {
             Swal.fire({
