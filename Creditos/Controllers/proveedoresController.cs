@@ -13,13 +13,22 @@ namespace Creditos.Controllers{
         // GET: proveedores
         BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         clsProveedores clsProvee = new clsProveedores();
+        clsPersona clsPers = new clsPersona();
         List<mProveedores> list_provee = new List<mProveedores>();
-        public ActionResult Index(){
+        public ActionResult index(){
             ViewBag.proveedor = clsProvee.mostrar();
             return View();
         }
-        public ActionResult Indexp(){
+        public ActionResult indexp(){
             ViewBag.proveedor = clsProvee.mostrarProveedor(2);
+            return View();
+        }
+        public ActionResult indexlp(){
+            ViewBag.proveedor = clsProvee.mostrarxaso(1);
+            return View();
+        }
+        public ActionResult indexld(){
+            ViewBag.personas = clsPers.mostrarvalpen(2);
             return View();
         }
         public ActionResult Store(mProveedores model){

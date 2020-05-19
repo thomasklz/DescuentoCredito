@@ -8,7 +8,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Tipo de Ingresos</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -34,7 +34,7 @@
     <div>
         <div class="row">
             <div class="col-lg-4">
-                <label>Descripción:</label>
+                <label>Descripci&oacute;n:</label>
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                     @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", onkeyup = "validar()", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
@@ -81,19 +81,23 @@
                             <th>ITEM</th>
                             <th>DESCRIPCI&Oacute;N</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listTipoIngreso)
                         {
                             <tr class='row_@item.id_tipo_ingreso'>
-                                <td>@item.id_tipo_ingreso</td>
+                                <td>@a</td>
                                 <td>@item.descripcion</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteTipoIngresos(@item.id_tipo_ingreso)'><span class='flaticon2-rubbish-bin'></span></a>
                                     <button class='btn btn-outline-info edit' value="@item.id_tipo_ingreso" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_tipo_ingreso</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -116,7 +120,7 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Descripción:</label>
+                                    <label>Descripci&oacute;n:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                                         @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })

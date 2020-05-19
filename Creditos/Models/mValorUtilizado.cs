@@ -11,9 +11,12 @@ namespace Creditos.Models
         public Nullable<int> mes_id { get; set; }
         public double cantidad_usada { get; set; }
         public string persona { get; set; }
+        public int id_persona { get; set; }
+        public int id_prov { get; set; }
         public string proveedor { get; set; }
         public string mes { get; set; }
         public double cantidad_aprobada { get; set; }
+        public DateTime fecha { get; set; }
         public string aso { get; set; }
 
         public mValorUtilizado() { }
@@ -50,6 +53,16 @@ namespace Creditos.Models
             this.persona = persona;
             this.mes_id = mes_id;
             this.cantidad_aprobada = cantidad_aprobada;
+            this.cantidad_usada = cantidad_usada;
+        }
+        public mValorUtilizado(int id_valor_usad, string persona, int id_persona, string proveedor, int id_prov, DateTime fecha, double cantidad_usada)
+        {
+            this.id_valor_usad = id_valor_usad;
+            this.persona = persona;
+            this.id_persona = id_persona;
+            this.proveedor = proveedor;
+            this.id_prov = id_prov;
+            this.fecha = fecha;
             this.cantidad_usada = cantidad_usada;
         }
     }

@@ -343,9 +343,11 @@
                                                         <li class="kt-menu__item " aria-haspopup="true">
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Cantidad Asignada", "index", "valorAsignado")</span></p>
                                                         </li>
-
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reporte Ingresos Mensuales", "indexr", "ingresos")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Ajustar Valores x Empleado", "indexa", "valorUtilizado")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "indexr", "ingresos")</span></p>
                                                         </li>
                  
                                                     </ul>
@@ -355,10 +357,19 @@
                                                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">N&Oacute;MINA</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                                                     <ul class="kt-menu__subnav">
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Gestión de Descuentos", "index", "descuento")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Descuentos - Generales", "index", "descuento")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "index", "#")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Descuentos - Asociaciones", "indexa", "descuento")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Subdescuentos", "index", "subdescuentos")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Genéricos", "index", "cabDescuento")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Reportes", "indexr", "descuento")</span></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -373,7 +384,7 @@
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Editar Información", "indexp", "proveedores")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "index", "valorUtilizado")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Deudores", "indexld", "proveedores")</span></p>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -382,7 +393,10 @@
                                                 <a href="javascript:;" class="kt-menu__link kt-menu__toggle"><span class="kt-menu__link-text">USUARIO</span><i class="kt-menu__ver-arrow la la-angle-right"></i></a><div class="kt-menu__submenu kt-menu__submenu--classic kt-menu__submenu--left">
                                                     <ul class="kt-menu__subnav">
                                                         <li class="kt-menu__item " aria-haspopup="true">
-                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Rol de Pagos detallado", "index", "informeRol")</span></p>
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Rol de Pagos detallado", "indexrol", "descuento")</span></p>
+                                                        </li>
+                                                        <li class="kt-menu__item " aria-haspopup="true">
+                                                            <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Proveedores Disponibles", "indexlp", "proveedores")</span></p>
                                                         </li>
                                                         <li class="kt-menu__item " aria-haspopup="true">
                                                             <p class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">@Html.ActionLink("Consultar Consumos", "indexp", "descuento")</span></p>

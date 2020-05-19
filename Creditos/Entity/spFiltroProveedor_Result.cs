@@ -11,12 +11,12 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spFiltroPersona_Result
+    public partial class spFiltroProveedor_Result
     {
-        public string persona { get; set; }
-        public int Id_Persona { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string Cedula { get; set; }
+        public string prov { get; set; }
+        public int id_proveedor { get; set; }
+        public string RUC { get; set; }
+        public string nombre { get; set; }
+        public string descripcion { get; set; }
     }
 }

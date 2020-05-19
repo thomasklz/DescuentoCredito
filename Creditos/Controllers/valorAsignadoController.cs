@@ -79,5 +79,17 @@ namespace Creditos.Controllers{
             }
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult SearchPerson(string lastName){
+            // clsPersona persona = new clsPersona();
+            var output = db.spFiltroAsoEmpl(lastName).ToList();
+            // return Json(output);
+            return Json(output, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SearchProv(string lastName){
+            // clsPersona persona = new clsPersona();
+            var output = db.spFiltroAsoProv(lastName).ToList();
+            // return Json(output);
+            return Json(output, JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -38,8 +38,6 @@ namespace Creditos.Controllers
         }
         //
 
-
-
         public ActionResult Store(mIngresos model) {
 
             clsingreso.ingresar(model);

@@ -32,5 +32,12 @@ namespace Creditos.Clases{
             }
             return person;
         }
+        
+        public List<mPersona> mostrarvalpen(int id){
+            foreach (var item in db.spConsultarValoresPendientes(id)){
+                person.Add(new mPersona(item.Id_Persona, item.persona, item.Cedula,Convert.ToDouble(item.cantidad_usada), Convert.ToDouble(item.cantidad_descontada), Convert.ToDouble(item.diferencia), Convert.ToInt32(item.mes_id), item.descripcion));
+            }
+            return person;
+        }
     }
 }

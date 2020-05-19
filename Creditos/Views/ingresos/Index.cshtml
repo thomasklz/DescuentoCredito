@@ -8,7 +8,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Ingresos</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -29,7 +29,7 @@
 
 @using (Html.BeginForm("Store", "ingresos", FormMethod.Post))
 {
-    <h2 style="text-align:center;">Ingresar Nuevo Ingreso</h2>
+    <h2 style="text-align:center;">Agregar Nuevo Ingreso</h2>
     <br />    <br />
     <div>
         <div class="kt-portlet__body">
@@ -41,7 +41,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                             @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                            <div class="invalid-feedback" id="inCant" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
                             @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Tipo de Ingreso--", new { @id = "tipo_ingreso_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un tipo de ingreso.</div>
+                            <div class="invalid-feedback" id="inTpIn" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un mes.</div>
+                            <div class="invalid-feedback" id="inMesV" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -101,7 +101,7 @@
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
             <div class="card-body">
-                <table class="table table-hover" id="example" style="text-align:center">
+                <table class="table table-hover" style="text-align:center"  id="example">
                     <thead >
                         <tr style="font-weight:bold;">
                             <th>Item</th>
@@ -109,21 +109,25 @@
                             <th>Tipo Ingreso</th>
                             <th>Mes</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listIngreso)
                         {
                             <tr class='row_@item.id_ingresos'>
-                                <td>@item.id_ingresos</td>
+                                <td>@a</td>
                                 <td>@item.valor</td>
                                 <td>@item.tipoingreso</td>
                                 <td>@item.mes</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteIngreso(@item.id_ingresos)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_ingresos" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_ingresos" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_ingresos</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -152,7 +156,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                                         @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -163,7 +167,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
                                         @Html.DropDownListFor(m => m.tipo_ingreso_id, ViewBag.tipoingresos as SelectList, "--Tipo de Ingreso--", new { @id = "tipo_ingreso_id", @class = "form-control" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un tipo de ingreso.</div>
+                                        <div class="invalid-feedback" id="inTpInm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -176,7 +180,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                                         @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Elija un Mes--", new { @id = "mes_id", @class = "form-control" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un Mes.</div>
+                                        <div class="invalid-feedback" id="inMesVm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -245,6 +249,7 @@
               if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
                   $('#valors').removeClass('is-valid');
                   $('#valors').addClass('is-invalid');
+                  $("#inCant").html("Se requiere un valor numérico.");
               } else {
                   $('#valors').removeClass('is-invalid');
                   $('#valors').addClass('is-valid');
@@ -259,6 +264,7 @@
               if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
                   $('#valor').removeClass('is-valid');
                   $('#valor').addClass('is-invalid');
+                  $("#inCantm").html("Se requiere un valor numérico.");
               } else {
                   $('#valor').removeClass('is-invalid');
                   $('#valor').addClass('is-valid');
@@ -273,14 +279,17 @@
           tpIngr = document.getElementById("tipo_ingreso_id").selectedIndex;
           mes = document.getElementById("mes_id").selectedIndex;
 
-          if (typeof (valor) == "number" || valor == null || valor == 0) {
+          if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
               $('#valor').addClass('is-invalid');
+              $("#inCantm").html("Este campo es obligatorio");
               return true;
           } else if (tpIngr == null || tpIngr == 0) {
               $('#tipo_ingreso_id').addClass('is-invalid');
+              $("#inTpInm").html("No ha seleccionado un tipo de ingreso.");
               return true;
           } else if (mes == null || mes == 0) {
               $('#mes_id').addClass('is-invalid');
+              $("#inMesVm").html("No ha seleccionado un mes.");
               return true;
           }
           $('#valor').removeClass('is-invalid');
@@ -294,14 +303,17 @@
           tpIngr = document.getElementById("tipo_ingreso_ids").selectedIndex;
           mes = document.getElementById("mes_ids").selectedIndex;
 
-          if (typeof (valor) == "number" || valor == null || valor == 0) {
+          if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
               $('#valors').addClass('is-invalid');
+              $("#inCant").html("Este campo es obligatorio");
               return true;
           } else if (tpIngr == null || tpIngr == 0) {
               $('#tipo_ingreso_ids').addClass('is-invalid');
+              $("#inTpIn").html("No ha seleccionado un tipo de ingreso.");
               return true;
           } else if (mes == null || mes == 0) {
               $('#mes_ids').addClass('is-invalid');
+              $("#inMesV").html("No ha seleccionado un mes.");
               return true;
           }ValidarIngreso();
       }
@@ -322,6 +334,7 @@
               });
           }(jQuery));
       });
+
       var row;
       function UpdateIngreso(Ingreso) {
           var data = $("#SubmitForm").serialize();
@@ -336,7 +349,7 @@
                           'Registro Actualizado',
                           'success'
                       )
-                      row.find("td").eq(1).html($('#valor').val());
+                      row.find("td").eq(1).html('$ ' +$('#valor').val());
                       row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
                       row.find("td").eq(2).html($('select[id="tipo_ingreso_id"] option:selected').text());
                   } else {
@@ -367,6 +380,7 @@
               }
           })
       })
+
       function DeleteIngreso(Ingreso) {
           Swal.fire({
               title: 'Estás seguro?',

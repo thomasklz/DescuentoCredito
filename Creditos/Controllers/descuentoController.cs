@@ -21,7 +21,6 @@ namespace Creditos.Controllers{
         public ActionResult index(){
             ViewBag.cabecera = new SelectList(clscabec.mostrar(), "id_cabecera_descuento", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
-            ViewBag.persona = clspersona.mostrarcongastos();
             ViewBag.descuentos = clsdescue.mostrar();
             return View();
         }
@@ -30,10 +29,27 @@ namespace Creditos.Controllers{
             ViewBag.descuentosxE = clsdescue.mostrarxEmpleado(4);
             return View();
         }
+        public ActionResult indexa(){
+            ViewBag.descuentosxE = clsdescue.mostrarValoresAso();
+            return View();
+        }
+        public ActionResult indexr(){
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            return View();
+        }
+        public ActionResult indexrol(){
+            ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
+            return View();
+        }
         public ActionResult Store(mDescuento model){
             
             clsdescue.ingresar(model);
             return RedirectToAction("index");
+        }
+        public ActionResult Storea(mDescuento model){
+
+            clsdescue.ingresarxAjuste(model);
+            return RedirectToAction("indexa");
         }
 
         public JsonResult UpdateDescuentos(mDescuento model){
@@ -50,23 +66,7 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult AutoCompleteExternalDataExample2(string term /*our key word*/){
-            //items is the source data and can be replaced by a request to a DataBase
-            string[] items = {"Test", "Test 1", "Test 2",
-        "Example 1", "Example 2", "Example 3"};
-            //initialize the list of AutoList object
-            List<AutoList> filteredItems = new List<AutoList>();
-            int cp = 0;
-            foreach (var elem in items){
-                if (elem.IndexOf(term, StringComparison.InvariantCultureIgnoreCase) >= 0){
-                    cp++;
-                    //buil our result list
-                    AutoList autoList = new AutoList("" + cp, elem);
-                    filteredItems.Add(autoList);
-                }
-            }
-            return Json(filteredItems, JsonRequestBehavior.AllowGet);
-        }
+
         public JsonResult GetDescuentoById(int DescuentoId){
             List<mDescuento> model = clsdescue.mostrarById(DescuentoId);
             string value = string.Empty;
@@ -88,17 +88,36 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ValidarDescuento(string _fecha, string _idEmpleado, string _idMes, string _cabDesc, string _cant)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                if (string.IsNullOrEmpty(_fecha) || string.IsNullOrEmpty(_idEmpleado) || string.IsNullOrEmpty(_idMes) || string.IsNullOrEmpty(_cabDesc) || string.IsNullOrEmpty(_cant))
+                {
+                    _mensaje = "<div class='alert alert-danger text-center' role='alert'>Ingrese todos los datos</div>";
+                }
+                else
+                {
+                    _mensaje = "";
+                    _validar = true;
+                    return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                }
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
-        public JsonResult SearchPerson(string lastName)
-        {
+        public JsonResult SearchPerson(string lastName){
             // clsPersona persona = new clsPersona();
             var output = db.spFiltroPersona(lastName).ToList();
            // return Json(output);
-
-          
             return Json(output, JsonRequestBehavior.AllowGet);
-
         }
 
     }

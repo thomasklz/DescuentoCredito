@@ -272,6 +272,9 @@
     <Compile Include="Entity\Sobrante.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConsultarAjuste_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spConsultarAsociacionById_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -365,6 +368,9 @@
     <Compile Include="Entity\spConsultarProveedorById_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConsultarProveedorxAso_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spConsultarProveedor_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -398,6 +404,12 @@
     <Compile Include="Entity\spConsultarValorAsignado_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spConsultarValoresAsoc_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarValoresPendientes_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spConsultarValorUsadoxEmpleado_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -413,10 +425,25 @@
     <Compile Include="Entity\spEmpleadoxProveedor_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spFiltroAsoEmpl_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spFiltroAsoProv_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spFiltroEmplxProv_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spFiltroPersonaAso_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spFiltroPersona_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
-    <Compile Include="Entity\spFiltroPersona_Result1.cs">
+    <Compile Include="Entity\spFiltroProveedor_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spListarValoresUsad_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SubDescuento.cs">
@@ -622,6 +649,11 @@
     <Content Include="Views\ingresos\indexr.cshtml" />
     <Content Include="Views\valorUtilizado\indexa.cshtml" />
     <Content Include="Views\descuento\indexp.cshtml" />
+    <Content Include="Views\descuento\indexa.cshtml" />
+    <Content Include="Views\proveedores\indexlp.cshtml" />
+    <Content Include="Views\proveedores\indexld.cshtml" />
+    <Content Include="Views\descuento\indexr.cshtml" />
+    <Content Include="Views\descuento\indexrol.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

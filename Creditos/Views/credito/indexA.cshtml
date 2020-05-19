@@ -11,7 +11,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Aprobación de Créditos</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -43,7 +43,7 @@
                         <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
                         <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
                     </g>
-                </svg> Creditos Pendientes de Aprobación
+                </svg> Cr&eacute;ditos Pendientes de Aprobaci&oacute;n
             </div>
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7" style="">
@@ -52,21 +52,23 @@
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Descripción</th>
+                            <th>Descripci&oacute;n</th>
                             <th>Persona</th>
-                            <th>Asociación</th>
+                            <th>Asociaci&oacute;n</th>
                             <th>Cantidad Solicitada</th>
                             <th>Cuotas</th>
                             <th>Descuento Mensual</th>
                             <th>Fecha de Solicitud</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listNoAp)
                         {
                             <tr id="fila_@item.id_credito" class='row_@item.id_credito'>
-                                <td>@item.id_credito</td>
+                                <td>@a</td>
                                 <td>@item.descripcion</td>
                                 <td>@item.persona</td>
                                 <td>@item.aso</td>
@@ -79,7 +81,9 @@
                                     <button class='btn btn-outline-hover-primary btn-sm btn-icon btn-circle infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
                                     <a href='#' class='btn btn-outline-hover-success btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" title="Aprobar" onclick='AprobarCredito(@item.id_credito)'><span class='la la-check'></span></a>
                                 </td>
+                                <td style="display:none;">@item.id_credito</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -98,7 +102,7 @@
                         <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
                         <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
                     </g>
-                </svg> Todos los Créditos
+                </svg> Todos los Cr&eacute;ditos
             </div>
         </div>
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionCredito" style="">
@@ -107,23 +111,25 @@
                     <thead>
                         <tr>
                             <th>Item</th>
-                            <th>Descripción</th>
+                            <th>Descripci&oacute;n</th>
                             <th>Persona</th>
-                            <th>Asociación</th>
+                            <th>Asociaci&oacute;n</th>
                             <th>Cantidad</th>
                             <th>Cuotas</th>
                             <th>Des. Mensual</th>
                             <th>Fech. Solicitud</th>
-                            <th>Fech. Aprobación</th>
+                            <th>Fech. Aprobaci&oacute;n</th>
                             <th>Aprobación</th>
                             <th>Estado</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int b = 1; }
                         @foreach (var item in listCred){
                             <tr class='row_@item.id_credito'>
-                                <td>@item.id_credito</td>
+                                <td>@b</td>
                                 <td>@item.descripcion</td>
                                 <td>@item.persona</td>
                                 <td>@item.aso</td>
@@ -152,7 +158,9 @@
                                 <td>
                                     <button class='btn btn-outline-info infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_credito</td>
                             </tr>
+                            b++;
                         }
                     </tbody>
                 </table>

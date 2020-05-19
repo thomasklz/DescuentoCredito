@@ -12,8 +12,8 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
-                <small>Nuevos Convenios</small>
+                BIENVENIDO
+                <small>Convenios</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
         </div>
@@ -35,63 +35,24 @@
 {
     <h2 style="text-align:center;">Agregar Nuevo Convenio</h2>
     <br />
-    <p>
-        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Proveedores disponibles</a>
-    </p>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <label>Buscar Proveedor:</label>
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <div class="row align-items-center">
+                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                    <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" id="search" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                            <span><i class="la la-search"></i></span>
+                        </span>
                     </div>
                 </div>
-                <table class="table table-hover" style="text-align:center" id="tablaSA">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>RUC</th>
-                            <th>Representante</th>
-                            <th>Proveedor</th>
-                            <th>Actividad</th>
-                            <th>Dirección</th>
-                            <th>Teléfono</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tdoby class="buscar">
-                        @foreach (var item in listProv)
-                        {
-                            <tr class='row_@item.id_proveedor'>
-                                <td>@item.id_proveedor</td>
-                                <td>@item.RUC</td>
-                                <td>@item.persona_juridica</td>
-                                <td>@item.nombre</td>
-                                <td>@item.descripcion</td>
-                                <td>@item.direccion</td>
-                                <td>@item.telefono</td>
-                                <td>
-                                    <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                </td>
-                            </tr>
-                        }
-                    </tdoby>
-                </table>
             </div>
         </div>
     </div>
+    <br />
+
+
     <div>
         <div class="kt-portlet__body">
             <div class="row">
@@ -99,8 +60,10 @@
                     <div class="kt-section">
                         <label>RUC:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-btc"></i></span></div>
                             @Html.TextBox("ruc", null, new { @class = "form-control", disabled = "disabled", placeholder = "RUC" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                         </div>
                         @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_id", @Value = "" })
                     </div>
@@ -109,8 +72,10 @@
                     <div class="kt-section">
                         <label>Nombre:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
                             @Html.TextBox("nombre", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                         </div>
                     </div>
                 </div>
@@ -118,8 +83,10 @@
                     <div class="kt-section">
                         <label>Servicio:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-sticky-note"></i></span></div>
                             @Html.TextBox("descripcion", null, new { @class = "form-control", disabled = "disabled", placeholder = "Descripción" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                         </div>
                     </div>
                 </div>
@@ -127,26 +94,30 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Fecha de Unión:</label>
+                        <label>Fecha de Uni&oacute;n:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.TextBoxFor(m => m.fecha, new { id="fecha", @class = "form-control", type = "date" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado una fecha.</div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Asociación:</label>
+                        <label>Asociaci&oacute;n:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                             @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Asociación--", new { @id = "asociacion_ids", @class = "form-control" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado una asociaci&oacute;n.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
         <div>
-            <input id="btnIngreso" type="button" onclick="ValidarIngreso(); " value="Confirmar" class="btn btn-primary" />
+            <input id="btnIngreso" type="button" onclick="validarTdatos(); " value="Confirmar" class="btn btn-primary" />
             <input id="btnIngresoss" type="submit" style="display:none;" />  
         </div>
     </div>
@@ -183,21 +154,25 @@
                             <th>Asociación</th>
                             <th>Fecha de Ingreso</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listEmplAso)
                         {
                             <tr class='row_@item.id_asoc_prov'>
-                                <td>@item.id_asoc_prov</td>
+                                <td>@a</td>
                                 <td>@item.proveedor</td>
                                 <td>@item.aso</td>
                                 <td>@item.fecha.ToShortDateString()</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteAsoProv(@item.id_asoc_prov)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_asoc_prov" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_asoc_prov" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_asoc_prov</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -216,62 +191,24 @@
             <div class="modal-body">
                 <form id="form">
                     <fieldset id="SubmitForm">
-                        <p>
-                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapse" role="button" id="accors" aria-expanded="false" aria-controls="multiCollapse">Proveedores Disponibles</a>
-                        </p>
-                        <div class="row">
-                            <div class="col">
-                                <div class="collapse multi-collapse" id="multiCollapse">
-                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                                        <div class="kt-input-icon kt-input-icon--left">
-                                                            <input type="text" class="form-control filtrar" placeholder="Search...">
-                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        
+                        <label>Buscar Proveedor:</label>
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" id="searchm" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>RUC</th>
-                                                <th>Representante</th>
-                                                <th>Proveedor</th>
-                                                <th>Actividad</th>
-                                                <th>Dirección</th>
-                                                <th>Teléfono</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tdoby class="buscar">
-                                            @foreach (var item in listProv)
-                                            {
-                                                <tr class='row_@item.id_proveedor'>
-                                                    <td>@item.id_proveedor</td>
-                                                    <td>@item.RUC</td>
-                                                    <td>@item.persona_juridica</td>
-                                                    <td>@item.nombre</td>
-                                                    <td>@item.descripcion</td>
-                                                    <td>@item.direccion</td>
-                                                    <td>@item.telefono</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-outline-warning adds' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tdoby>
-                                    </table>
                                 </div>
                             </div>
                         </div>
+                        <br />
+
                         @Html.HiddenFor(m => m.id_asoc_prov, new { @id = "id_asoc_provs" })
                         @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_ids", @Value = "" })
                         <div class="row">
@@ -279,7 +216,7 @@
                                 <div class="kt-section">
                                     <label>Nombres:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
                                         @Html.TextBoxFor(m => m.proveedor, new { @id = "nombres", @class = "form-control", disabled = "disabled", @placeholder = "Nuevo Proveedor" })
                                     </div>
                                 </div>
@@ -288,7 +225,7 @@
                                 <div class="kt-section">
                                     <label>Asociaci&oacute;n:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                                         @Html.DropDownListFor(m => m.asociacion_id, ViewBag.asoc as SelectList, "--Elija una Asociacion--", new { @id = "asociacion_id", @class = "form-control" })
                                     </div>
                                 </div>
@@ -297,10 +234,10 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Proveedor Registrado el:</label>
+                                    <label>Fecha de Uni&oacute;n:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
-                                        @Html.TextBoxFor(m => m.fecha, new { @id="fecha_", @class = "form-control", type = "date" })
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.fecha, new { @id = "fecha_u", @class = "form-control", disabled = "disabled", @placeholder = "Nueva persona" })
                                     </div>
                                 </div>
                             </div>
@@ -359,35 +296,69 @@
 </script>
 
 <script>
+      function validarTdatos() {
+          tpIngr = document.getElementById("asociacion_ids").selectedIndex;
+          fecha = document.getElementById("fecha").value;
+          prov = document.getElementById("proveedor_id").value;
+          if (prov == null || prov == 0 ) {
+              $('#ruc').addClass('is-invalid');
+              $('#nombre').addClass('is-invalid');
+              $('#descripcion').addClass('is-invalid');
+              return true;
+          } else if (fecha == null || fecha == 0) {
+              $('#fecha').addClass('is-invalid');
+              return true;
+          } else if (tpIngr == null || tpIngr == 0) {
+              $('#asociacion_ids').addClass('is-invalid');
+              return true;
+          }
+          ValidarIngreso();
+      }
       $(document).ready(function () {
           $('#example').dataTable();
       });
 
-    $(document).ready(function () {
-        $('.add').click(function () {
-        Swal.fire({
-           title: 'Proveedor Añadido',
-           type: 'success',
-           confirmButtonText: 'Ok',
-           cancelButtonText: 'Cancelar'})
-            $('#ruc').val($(this).parents("tr").find("td").eq(1).html());
-            $('#nombre').val($(this).parents("tr").find("td").eq(3).html());
-            $('#descripcion').val($(this).parents("tr").find("td").eq(4).html());
-            $('#proveedor_id').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accor").trigger("click")
-        })
-        $('.adds').click(function () {
-            Swal.fire({
-                title: 'Proveedor Añadido',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#nombres').val($(this).parents("tr").find("td").eq(3).html());
-            $('#proveedor_ids').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accors").trigger("click")
-        })
-    })
+      // FUNCIÓN PARA REALIZAR EL FILTRADO
+      $(document).ready(function () {
+          // FUNCIÓN PARA REALIZAR EL FILTRADO
+          $("#search").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#search').val() };
+                  $.ajax({
+                      url: "/asociacionProveedor/SearchProv",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.prov,
+                                  dataNombres: item.nombre,
+                                  dataDesc: item.descripcion,
+                                  dataCI: item.RUC,
+                                  dataID: item.id_proveedor
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  $("#proveedor_id").val(ui.item.dataID);
+                  $("#ruc").val(ui.item.dataCI);
+                  $("#nombre").val(ui.item.dataNombres);
+                  $("#descripcion").val(ui.item.dataDesc);
+              }
+          });
+      });
+    // FIN DE LA FUNCIÓN DEL FILTRADO
 
     $(document).ready(function () {
         (function ($) {
@@ -399,7 +370,8 @@
                 }).show();
             });
         }(jQuery));
-    });
+      });
+
     var row;
     function UpdateAsoProv(AsoProv) {
         var data = $("#SubmitForm").serialize();
@@ -438,7 +410,12 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 $("#id_asoc_provs").val(obj[0].id_asoc_prov);
-                $("#fecha_").val(obj[0].valor);
+                $("#nombres").val(obj[0].proveedor);
+                var n = new Date(obj[0].fecha);
+                y = n.getFullYear();
+                m = n.getMonth()+1;
+                d = n.getDate();
+                $("#fecha_u").val(d + "/" + m + "/" + y);
                 $("#asociacion_id option[value='" + obj[0].asociacion_id + "']").attr("selected", true);
             }
         })
@@ -481,4 +458,5 @@
             })
 
     }
+
 </script>

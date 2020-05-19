@@ -16,10 +16,21 @@ namespace Creditos.Clases{
             return lista_valor_utili;
         }
         public void ingresar(mValorUtilizado datos){
-            db.spInsertarValorUtilizado(datos.valor_asig_id, datos.mes_id, datos.cantidad_usada);
+            db.spInsertarValorUtilizado(Convert.ToInt32(datos.valor_asig_id), Convert.ToInt32(datos.mes_id), Convert.ToDouble(datos.cantidad_usada));
         }
         public void eliminar(int id){
             db.spEliminarValorUtilizado(id);
+        }
+
+        public Boolean modificarajuste(int id, double valor_a){
+            Boolean result = false;
+            try{
+                db.spAjustarValUsados(id, valor_a);
+                result = true;
+            }catch (Exception){
+                result = false;
+            }
+            return result;
         }
         public Boolean modificar(mValorUtilizado datos){
             Boolean result = false;
@@ -46,6 +57,13 @@ namespace Creditos.Clases{
         public List<mValorUtilizado> mostrarxEmpleado(int id){
             foreach (var item in db.spConsultarValorUsadoxEmpleado(id)){
                 lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.persona, item.nombre, item.mes, Convert.ToDouble(item.monto_aprobado), Convert.ToDouble(item.cantidad_usada)));
+            }
+            return lista_valor_utili;
+        }
+        public List<mValorUtilizado> mostrarValorAjuste(int id_per, int id_mes){
+            foreach (var item in db.spListarValoresUsad(id_per, id_mes))
+            {
+                lista_valor_utili.Add(new mValorUtilizado(item.id_valor_usad, item.persona, Convert.ToInt32(item.Id_Persona), item.prov, Convert.ToInt32(item.proveedor_id), Convert.ToDateTime(item.fecha),Convert.ToDouble(item.cantidad_usada)));
             }
             return lista_valor_utili;
         }

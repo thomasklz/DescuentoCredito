@@ -8,7 +8,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h5>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Proveedores</small>
             </h5>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -49,7 +49,7 @@
                     <div class="kt-section">
                         <label>RUC:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-btc"></i></span></div>
                             @Html.TextBoxFor(m => m.RUC, new { @id = "rucs", @class = "form-control", @placeholder = "RUC", @name = "RUC" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                             <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
@@ -60,7 +60,7 @@
                     <div class="kt-section">
                         <label>Nombre del Proveedor</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
                             @Html.TextBoxFor(m => m.nombre, new { @id = "nombres", @class = "form-control", @placeholder = "Nombre", @name = "nombre" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                             <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
@@ -165,13 +165,15 @@
                             <th>Direción</th>
                             <th>Teléfono</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listProveedor)
                         {
                             <tr class='row_@item.id_proveedor'>
-                                <td>@item.id_proveedor</td>
+                                <td>@a</td>
                                 <td>@item.persona_juridica</td>
                                 <td>@item.RUC</td>
                                 <td>@item.nombre</td>
@@ -181,9 +183,11 @@
                                 <td>@item.telefono</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteProveedor(@item.id_proveedor)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_proveedor" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_proveedor" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_proveedor</td>
                             </tr>
+                            a++;
                         }
 
                 </table>
@@ -219,7 +223,7 @@
                                 <div class="kt-section">
                                     <label>RUC:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-btc"></i></span></div>
                                         @Html.TextBoxFor(m => m.RUC, new { @id = "RUC", @class = "form-control", @placeholder = "Name*" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                                         <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
@@ -232,7 +236,7 @@
                                 <div class="kt-section">
                                     <label>Proveedor:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
                                         @Html.TextBoxFor(m => m.nombre, new { @id = "nombre", @class = "form-control", @placeholder = "Name*" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                                         <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>

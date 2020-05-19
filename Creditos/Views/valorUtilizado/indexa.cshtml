@@ -1,7 +1,397 @@
-﻿
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
+@model Creditos.Models.mDescuento
 @{
-    ViewBag.Title = "indexa";
+    List<Creditos.Models.mDescuento> listVal = ViewBag.descajst;
+    List<Creditos.Models.mValorUtilizado> lstVaAjs = ViewBag.listVals;
 }
 
-<h2>AJUSTE</h2>
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h4>
+                BIENVENIDO
+                <small>Ajuste de Valores</small>
+            </h4>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    Asociaci&oacute;n
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
+    </div>
+</div>
+<!-- end:: Subheader -->
 
+<h2 style="text-align:center;">Ajuste de Valores Asociaci&oacute;n</h2>
+<br />
+
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" id="accors" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Valores Utilizados pendientes de Ajuste
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7" style="">
+            <div class="card-body">
+                <table class="table table-hover example" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Empleados</th>
+                            <th>Valor Inicial Descuento</th>
+                            <th>Valor Descontado</th>
+                            <th style="display:none;"></th>
+                            <th>Valor Sobrante</th>
+                            <th>Detalle</th>
+                            <th style="display:none;"></th>
+                            <th>Mes</th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                            <th style="display:none;"></th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @{int a = 1; }
+                        @foreach (var item in listVal)
+                        {
+                            <tr id="fila_@item.id_descuento" class='row_@item.id_descuento' style="background-color: #FEF388;">
+                                <td>@a</td>
+                                <td>@item.persona</td>
+                                <td>@item.sumatoria</td>
+                                <td>@item.valor</td>
+                                <td style="display:none;">@item.empleado_id</td>
+                                <td>@item.sobrant</td>
+                                <td>@item.cabecera</td>
+                                <td style="display:none;">@item.mes_id</td>
+                                <td>@item.mes</td>
+                                <td>@item.fecha.ToShortDateString()</td>
+                                <td>
+                                    <button class='btn btn-brand btn-elevate btn-pill btn-elevate-air edit' title="Ajuste" value="@item.id_descuento"><span class='la la-cut'></span></button>
+                                </td>
+                                <td style="display:none;">@item.id_descuento</td>
+                            </tr>
+                            a++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalinfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Ajuste por Proveedores</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+
+                        <h3 style="text-align:center;">Valores Importantes:</h3>
+                        <br />
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Cantidad Inicial:</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(m => m.sumatoria, new { @id = "valort", @class = "form-control", disabled = "disabled", @placeholder = "Name*", style = "background-color: #FEF388;" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                    </div>
+                                    @Html.HiddenFor(m => m.id_descuento, new { @id = "id_descss", @Value = "" })
+                                    @Html.Hidden("total", new { @id = "total", @Value = "" })
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Cantidad descontada:</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "ajuste", @class = "form-control", disabled = "disabled", @placeholder = "Name*", style = "background-color: #FEF388;" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Sobrante:</label>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(m => m.sobrant, new { @id = "sobrantess", @class = "form-control", disabled = "disabled",  @placeholder = "Name*", style = "background-color: #FEF388;" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                    </div>
+                                    @Html.HiddenFor(m => m.id_descuento, new { @id = "id_desc", @Value = "" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table table-hover example1" id="tablemodal" style="text-align:center">
+                                    <thead>
+                                        <tr>
+                                            <th>Item</th>
+                                            <th>Empleado</th>
+                                            <th>Proveedor</th>
+                                            <th>Valor Ingresado</th>
+                                            <th>Valor Ajustado</th>
+                                            <th>Guardar</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h4 style="text-align:right;">Valores Ajustados</h4>
+                        <hr>
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                            </div>
+                            <div class="col-lg-2">
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="kt-section">
+                                    <label value='0'>Descuento:</label><br />
+                                    <label id="Costo" style="text-align:right;">
+                                        <input type='text' class='form-control' id="dscntt" disabled='disabled' placeholder="$ 0" value='0' >
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="kt-section">
+                                    <label>Sobrante:</label><br />
+                                    <label id="Costos" style="text-align:right;">
+                                        <input type='text' class='form-control' id="sobrntt" disabled='disabled' placeholder="$ 0" value='0'>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a class="btn btn-label-warning validat">Validar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" data-dismiss="modal">Cancelar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#valor').keyup(function () {
+            var _thisCnt = $('#valor');
+            var _cnt = $('#valor').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#valor').removeClass('is-valid');
+                $('#valor').addClass('is-invalid');
+            } else {
+                $('#valor').removeClass('is-invalid');
+                $('#valor').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#ajuste').keyup(function () {
+            var _thisCnt = $('#ajuste');
+            var _cnt = $('#ajuste').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#ajuste').removeClass('is-valid');
+                $('#ajuste').addClass('is-invalid');
+            } else {
+                $('#ajuste').removeClass('is-invalid');
+                $('#ajuste').addClass('is-valid');
+            }
+        });
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $('body').on('click', '.edit', function () {
+            $('#tablemodal > tr').empty();
+            var id = $(this).val();
+            var _idPersona = $(this).parents("tr").find("td").eq(4).html();
+            var _idMes = $(this).parents("tr").find("td").eq(7).html();
+            row = $(this).parents("tr");
+            $.ajax({
+                url: '@Url.Action("cargarmdl", "valorUtilizado")',
+            type: "post",
+            dataType: 'JSON',
+            data: { _idPersona: _idPersona, _idMes: _idMes },
+            success: function (result) {
+                for (var i = 0; i < result.length; i++) {
+                    var idNV = result[i].id_valor_usad;
+                    var nuevafila = "<tr class='rows_" + idNV + "'><td>" +
+                        result[i].id_valor_usad + "</td><td>" +
+                        result[i].persona + "</td><td>" +
+                        result[i].proveedor + "</td><td>" +
+                        result[i].cantidad_usada + "</td><td><input type='text' class='form-control input-group-prepend monto' onkeyup='multi();' value='0'></td><td> <button class='btn btn-success btn-elevate btn-pill btn-elevate-air addajtss' title='Ajuste'  disabled = 'disabled' value='" + result[i].id_valor_usad +"'><span class='flaticon2-checkmark'></span></button></td></tr>"
+
+                    $("#tablemodal").append(nuevafila)
+                }
+                //$('.example1').dataTable();
+                Swal.fire({
+                    title: 'Se ha cargado la lista de Valores Utilizados',
+                    type: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        })
+        $("#modalinfo").modal();
+        $('#id_descss').val($(this).parents("tr").find("td").eq(11).html());
+        $('#valort').val($(this).parents("tr").find("td").eq(2).html());
+        $('#ajuste').val($(this).parents("tr").find("td").eq(3).html());
+        $('#sobrantess').val($(this).parents("tr").find("td").eq(5).html());
+    })
+
+    $('body').on('click', '.validat', function () {
+        var dsc = document.getElementById("ajuste").value;
+        var sbntt = document.getElementById("sobrantess").value;
+        var dscv = document.getElementById("dscntt").value;
+        var sbnttv = document.getElementById("sobrntt").value;
+
+        if (dscv == 0 || dscv == null || sbnttv == 0 || sbnttv == null ) {
+            Swal.fire({
+                title: 'No se han realizado ajustes',
+                type: 'error',
+                confirmButtonText: 'Ok'
+            })
+        } else if (dsc != dscv) {
+            Swal.fire({
+                title: 'La cantidad DESCONTADA no coincide con el ajuste',
+                type: 'error',
+                confirmButtonText: 'Ok'
+            })
+            $("#dscntt").css("background-color", "#FE8888");
+        } else if (sbntt != sbnttv) {
+            Swal.fire({
+                title: 'El SOBRANTE no coincide con el ajuste',
+                type: 'error',
+                confirmButtonText: 'Ok'
+            })
+            $("#sobrntt").css("background-color", "#FE8888");
+        } else {
+            $("#dscntt").css("background-color", "#B3F9C1");
+            $("#sobrntt").css("background-color", "#B3F9C1");
+            Swal.fire({
+                title: 'Todos los valores son correctos',
+                text: 'Puede proceder con el ingreso de los valores',
+                type: 'success',
+                confirmButtonText: 'Ok'
+            })
+            jQuery(".addajtss").removeAttr("disabled");
+        }
+    })
+
+    var row;
+    $('body').on('click', '.addajtss', function () {
+        var _idVA = $(this).val();
+        row = $(this).parents("tr");
+        var _cant = row.find(".monto").val();
+        var cant_o = $(this).parents("tr").find("td").eq(3).html()
+        if (cant_o < _cant) {
+            Swal.fire({
+                title: 'No puede ingresar un valor mayor',
+                type: 'error',
+                confirmButtonText: 'Ok'
+            })
+        } else {
+            $.ajax({
+                url: '@Url.Action("addValAjs", "valorUtilizado")',
+            type: "post",
+            dataType: 'JSON',
+            data: { _idVA: _idVA, _cant: _cant },
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
+                    $(".rows_" + _idVA).remove();
+                } else {
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
+                }
+            }
+        })
+        }
+        //Validacion apra ver si son menores que el original
+    })
+})
+
+    function multi() {
+        var total = 0;
+        var sobrt = 0;
+        var ajt = document.getElementById("valort").value;
+        $(".monto").each(function () {
+            if (isNaN(parseFloat($(this).val()))) {
+                total += 0;
+            } else {
+                total += parseFloat($(this).val());
+                sobrt = ajt - total;
+            }
+        });
+        document.getElementById('Costo').value = $('#dscntt').val(total);
+        document.getElementById('Costos').value = $('#sobrntt').val(sobrt);
+    }
+
+    $(document).ready(function () {
+        $('.example').dataTable();
+
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+        }(jQuery));
+    });
+
+</script>

@@ -17,14 +17,34 @@ namespace Creditos.Controllers
         clsMes clsmes = new clsMes();
         clsValorAsignado clsvalorasig = new clsValorAsignado();
         clsValorUtilizado clsvalorutil = new clsValorUtilizado();
+        clsDescuento clsdesc = new clsDescuento();
         List<mValorUtilizado> list_valor = new List<mValorUtilizado>();
-        public ActionResult Index(){
+        public ActionResult index(){
             ViewBag.val_asig = clsvalorasig.mostrarEnAso(2);
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
             ViewBag.val_util = clsvalorutil.mostrarxProv(2);
             return View();
         }
-
+        public ActionResult indexa(){
+            ViewBag.descajst = clsdesc.mostrarAjustes(1);
+            return View();
+        }
+        public JsonResult cargarmdl(int _idPersona, int _idMes){
+            return Json(clsvalorutil.mostrarValorAjuste(_idPersona, _idMes), JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult addValAjs(int _idVA, double _cant){
+            string ex = "";
+            try{
+                if (clsvalorutil.modificarajuste(_idVA, _cant) == true){
+                    ex = "Registro actualizado";
+                }else{
+                    ex = "Error al actualizar";
+                }
+            }catch (Exception){
+                ex = "Error al actualizar";
+            }
+            return Json(ex, JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Store(mValorUtilizado model){
             clsvalorutil.ingresar(model);
             return RedirectToAction("index");
@@ -81,6 +101,10 @@ namespace Creditos.Controllers
                 _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
             }
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult SearchPerson(int id, string lastName){
+            var output = db.spFiltroEmplxProv(id, lastName).ToList();
+            return Json(output, JsonRequestBehavior.AllowGet);
         }
     }
 }

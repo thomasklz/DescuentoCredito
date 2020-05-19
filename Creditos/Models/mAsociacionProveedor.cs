@@ -21,6 +21,14 @@ namespace Creditos.Models
             this.asociacion_id = asociacion_id;
             this.fecha = fecha;
         }
+        public mAsociacionProveedor(int id_asoc_prov, int proveedor_id, string proveedor, int asociacion_id, DateTime fecha)
+        {
+            this.id_asoc_prov = id_asoc_prov;
+            this.proveedor_id = proveedor_id;
+            this.proveedor = proveedor;
+            this.asociacion_id = asociacion_id;
+            this.fecha = fecha;
+        }
         public mAsociacionProveedor(int id_asoc_prov, string proveedor, string aso, DateTime fecha)
         {
             this.id_asoc_prov = id_asoc_prov;

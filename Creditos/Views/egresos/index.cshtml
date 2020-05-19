@@ -8,7 +8,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h5>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Egresos</small>
             </h5>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -29,7 +29,7 @@
 
 @using (Html.BeginForm("Store", "egresos", FormMethod.Post))
 {
-    <h2 style="text-align:center;">Ingresar Nuevo Egreso</h2>
+    <h2 style="text-align:center;">Agregar Nuevo Egreso</h2>
     <br />
     <div>
         <div class="kt-portlet__body">
@@ -41,7 +41,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                             @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico..</div>
+                            <div class="invalid-feedback" id="inCant" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-bolt"></i></span></div>
                             @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No ha seleccionado un tipo de egreso.</div>
+                            <div class="invalid-feedback" id="inTpIn" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No ha seleccioando un mes.</div>
+                            <div class="invalid-feedback" id="inMesV" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -110,21 +110,25 @@
                             <th>Tipo Egreso</th>
                             <th>Mes</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listEgreso)
                         {
                             <tr class='row_@item.id_egresos'>
-                                <td>@item.id_egresos</td>
+                                <td>@a</td>
                                 <td>$ @item.valor</td>
                                 <td>@item.tipoegreso</td>
                                 <td>@item.mes</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteEgreso(@item.id_egresos)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_egresos" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_egresos" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_egresos</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -153,7 +157,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                                         @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +168,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-bolt"></i></span></div>
                                         @Html.DropDownListFor(m => m.tipo_egreso_id, ViewBag.tipoegresos as SelectList, "--Tipo de Egreso--", new { @id = "tipo_egreso_id", @class = "form-control" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un tipo de egreso.</div>
+                                        <div class="invalid-feedback" id="inTpInm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -177,7 +181,7 @@
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                                         @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_id", @class = "form-control" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un mes.</div>
+                                        <div class="invalid-feedback" id="inMesVm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -249,6 +253,7 @@
               if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
                   $('#valors').removeClass('is-valid');
                   $('#valors').addClass('is-invalid');
+                  $("#inCant").html("Se requiere un valor numérico.");
               } else {
                   $('#valors').removeClass('is-invalid');
                   $('#valors').addClass('is-valid');
@@ -263,6 +268,7 @@
               if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
                   $('#valor').removeClass('is-valid');
                   $('#valor').addClass('is-invalid');
+                  $("#inCantm").html("Se requiere un valor numérico.");
               } else {
                   $('#valor').removeClass('is-invalid');
                   $('#valor').addClass('is-valid');
@@ -277,14 +283,17 @@
           tpIngr = document.getElementById("tipo_egreso_id").selectedIndex;
           mes = document.getElementById("mes_id").selectedIndex;
 
-          if (typeof (valor) == "number" || valor == null || valor == 0) {
+          if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
               $('#valor').addClass('is-invalid');
+              $("#inCantm").html("Este campo es obligatorio");
               return true;
           } else if (tpIngr == null || tpIngr == 0) {
               $('#tipo_egreso_id').addClass('is-invalid');
+              $("#inTpInm").html("No ha seleccionado un tipo de ingreso.");
               return true;
           } else if (mes == null || mes == 0) {
               $('#mes_id').addClass('is-invalid');
+              $("#inMesVm").html("No ha seleccionado un mes.");
               return true;
           }
           $('#valor').removeClass('is-invalid');
@@ -297,14 +306,17 @@
           tpIngr = document.getElementById("tipo_egreso_ids").selectedIndex;
           mes = document.getElementById("mes_ids").selectedIndex;
 
-          if (typeof (valor) == "number" || valor == null || valor == 0) {
+          if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
               $('#valors').addClass('is-invalid');
+              $("#inCant").html("Este campo es obligatorio");
               return true;
           } else if (tpIngr == null || tpIngr == 0) {
               $('#tipo_egreso_ids').addClass('is-invalid');
+              $("#inTpIn").html("No ha seleccionado un tipo de Egreso.");
               return true;
           } else if (mes == null || mes == 0) {
               $('#mes_ids').addClass('is-invalid');
+              $("#inMesV").html("No ha seleccionado un mes.");
               return true;
           } ValidarIngreso();
       }
@@ -313,63 +325,65 @@
           $('#example').dataTable();
       });
 
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            });
-        }(jQuery));
-    });
-    var row;
-    function UpdateEgreso(Egreso) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/egresos/UpdateEgresos",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire(
-                        'Actualizado!',
-                        'Registro Actualizado',
-                        'success'
-                    )
-                    row.find("td").eq(1).html($('#valor').val());
-                    row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
-                    row.find("td").eq(2).html($('select[id="tipo_egreso_id"] option:selected').text());
-                } else {
-                    Swal.fire(
-                        'Reintentar!',
-                        'ERROR AL ACTUALIZAR',
-                        'error'
-                    )
-                }
-                $("#MyModal").modal("hide");
-            }
-        })
-    }
+      $(document).ready(function () {
+          (function ($) {
+              $('.filtrar').keyup(function () {
+                  var rex = new RegExp($(this).val(), 'i');
+                  $('.buscar tr').hide();
+                  $('.buscar tr').filter(function () {
+                      return rex.test($(this).text());
+                  }).show();
+              });
+          }(jQuery));
+      });
 
-    $('body').on('click', '.edit', function () {
-        var id = $(this).val();
-        row = $(this).parents("tr");
-        $("#MyModal").modal();
-        $.ajax({
-            type: "GET",
-            url: "/egresos/GetEgresoById?EgresoId=" + id,
-            success: function (data) {
-                var obj = JSON.parse(data);
-                $("#id_egresos").val(obj[0].id_egresos);
-                $("#valor").val(obj[0].valor);
-                $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
-                $("#tipo_egreso_id option[value='" + obj[0].tipo_egreso_id + "']").attr("selected", true);
-            }
-        })
-    })
-    function DeleteEgreso(Egreso) {
+      var row;
+      function UpdateEgreso(Egreso) {
+          var data = $("#SubmitForm").serialize();
+          $.ajax({
+              type: "Post",
+              url: "/egresos/UpdateEgresos",
+              data: data,
+              success: function (result) {
+                  if (result == "Registro actualizado") {
+                      Swal.fire(
+                          'Actualizado!',
+                          'Registro Actualizado',
+                          'success'
+                      )
+                      row.find("td").eq(1).html('$ '+$('#valor').val());
+                      row.find("td").eq(3).html($('select[id="mes_id"] option:selected').text());
+                      row.find("td").eq(2).html($('select[id="tipo_egreso_id"] option:selected').text());
+                  } else {
+                      Swal.fire(
+                          'Reintentar!',
+                          'ERROR AL ACTUALIZAR',
+                          'error'
+                      )
+                  }
+                  $("#MyModal").modal("hide");
+              }
+          })
+      }
+
+      $('body').on('click', '.edit', function () {
+          var id = $(this).val();
+          row = $(this).parents("tr");
+          $("#MyModal").modal();
+          $.ajax({
+              type: "GET",
+              url: "/egresos/GetEgresoById?EgresoId=" + id,
+              success: function (data) {
+                  var obj = JSON.parse(data);
+                  $("#id_egresos").val(obj[0].id_egresos);
+                  $("#valor").val(obj[0].valor);
+                  $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                  $("#tipo_egreso_id option[value='" + obj[0].tipo_egreso_id + "']").attr("selected", true);
+              }
+          })
+      })
+
+      function DeleteEgreso(Egreso) {
         Swal.fire({
             title: '¿Está seguro?',
             text: '¿Desea eliminar el registro seleccionado?',
@@ -401,6 +415,7 @@
                 })
             }
         })
-    }
+      }
+
 </script>
 

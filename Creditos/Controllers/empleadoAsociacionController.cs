@@ -90,5 +90,12 @@ namespace Creditos.Controllers
             }
             return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult SearchPersn(string lastName)
+        {
+            // clsPersona persona = new clsPersona();
+            var output = db.spFiltroPersonaAso(lastName).ToList();
+            // return Json(output);
+            return Json(output, JsonRequestBehavior.AllowGet);
+        }
     }
 }

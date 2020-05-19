@@ -8,7 +8,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h5>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Solicitud de Creditos</small>
             </h5>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -36,7 +36,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Descripción:</label>
+                        <label>Descripci&oacute;n:</label>
                             @Html.TextAreaFor(m => m.descripcion, new {@id = "descripcions", @class = "form-control", @placeholder = "Describa Brevemente su Crédito", @name = "descripcion" })
                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                         <div class="invalid-feedback" style="text-align:center">Este campo es obligatorio.</div>
@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Nombre de Cuotas:</label>
+                        <label>N&Uacute;mero de Cuotas:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                             @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuotas", @class = "form-control", @placeholder = "Número de Cuotas", @name = "numero_cuota" })
@@ -114,7 +114,7 @@
                         <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
                         <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
                     </g>
-                </svg> Creditos Personales
+                </svg> Cr&eacute;ditos Personales
             </div>
         </div>
         <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7">
@@ -135,10 +135,11 @@
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listCredxUsu)
                         {
                             <tr class='row_@item.id_credito'>
-                                <td>@item.id_credito</td>
+                                <td>@a</td>
                                 <td>@item.cantidad</td>
                                 <td>@item.numero_cuota</td>
                                 <td>@item.desc_mensual</td>
@@ -169,6 +170,7 @@
                                     <button class='btn btn-outline-info infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
                                 </td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -190,9 +192,9 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="kt-section">
-                                    <label>Descipcion:</label>
+                                    <label>Descipci&oacute;n:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-align-center"></i></span></div>
                                         @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>
@@ -201,16 +203,16 @@
                                 <div class="kt-section">
                                     <label>Solicitado por:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBoxFor(m => m.persona, new { @id = "persona", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="kt-section">
-                                    <label>De la Asociación:</label>
+                                    <label>De la Asociaci&oacute;n:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                                         @Html.TextBoxFor(m => m.aso, new { @id = "aso", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>
@@ -228,9 +230,9 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="kt-section">
-                                    <label>Con número de cuotas:</label>
+                                    <label>Con n&uacute;mero de cuotas:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
                                         @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuota", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>
@@ -239,7 +241,7 @@
                                 <div class="kt-section">
                                     <label>Con un Descuento mensual:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-credit-card"></i></span></div>
                                         @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensual", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>
@@ -250,7 +252,7 @@
                                 <div class="kt-section">
                                     <label>Fue soliciado el:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                                         @Html.TextBoxFor(m => m.fecha_solicitud, new { @id = "fecha_solicitud", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
                                     </div>
                                 </div>

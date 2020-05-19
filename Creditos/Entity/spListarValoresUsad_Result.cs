@@ -10,19 +10,15 @@
 namespace Creditos.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Valor_Utilizado
+    public partial class spListarValoresUsad_Result
     {
         public int id_valor_usad { get; set; }
-        public Nullable<int> valor_asig_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<double> cantidad_usada { get; set; }
+        public string persona { get; set; }
+        public Nullable<int> Id_Persona { get; set; }
+        public string prov { get; set; }
+        public Nullable<int> proveedor_id { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<double> cantidad_descontada { get; set; }
-        public Nullable<bool> est_delete { get; set; }
-    
-        public virtual Mes Mes { get; set; }
-        public virtual Valor_Asignado Valor_Asignado { get; set; }
+        public Nullable<double> cantidad_usada { get; set; }
     }
 }

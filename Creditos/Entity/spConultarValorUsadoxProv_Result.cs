@@ -23,6 +23,8 @@ namespace Creditos.Entity
         public Nullable<int> valor_asig_id { get; set; }
         public Nullable<int> mes_id { get; set; }
         public Nullable<double> cantidad_usada { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<double> cantidad_descontada { get; set; }
         public Nullable<bool> est_delete { get; set; }
     }
 }

@@ -6,17 +6,12 @@
     List<Creditos.Models.mDescuento> listDescuentos = ViewBag.descuentos;
     List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
 }
-@* LIBRERIAS PARA EL FILTRADO *@
-<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
-<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.8.0.js"></script>
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
-
-
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
+                BIENVENIDO 
                 <small>Descuentos</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -37,9 +32,9 @@
 
 @using (Html.BeginForm("Store", "descuento", FormMethod.Post))
 {
-    <h2 style="text-align:center;">Agregar Descuentos</h2>
+    <h2 style="text-align:center;">Nuevo Descuento</h2>
     <br />
-    <label>Agregar personas:</label>
+    <label>Buscar empleado:</label>
     <div class="row align-items-center">
         <div class="col-lg-6">
             <div class="row align-items-center">
@@ -55,67 +50,18 @@
         </div>
     </div>
     <br />
-    <div>
-        @*<p>
-                <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accor" aria-expanded="false" aria-controls="multiCollapseExample1">Empleados ESPAM-MFL</a>
-            </p>*@
-    </div>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-
-                </div>
-                <table class="table table-hover" style="text-align:center; display:none;" id="tablaSA">
-                    <thead>
-                        <tr>
-                            <th><b>Item</b></th>
-                            <th>Cedula</th>
-                            <th>Empleado</th>
-                            <th>Direción</th>
-                            <th>Teléfono</th>
-                            <th>Asociacion</th>
-                            <th>Sumatoria Gastos Asociación</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody class="buscar">
-                        @foreach (var item in listPersona)
-                        {
-                            <tr class='row_@item.Id_Persona'>
-                                <td>@item.Id_Persona</td>
-                                <td>@item.Cedula</td>
-                                <td>@item.Nombres @item.SegundoNombre @item.ApellidoPaterno @item.ApellidoMaterno</td>
-                                <td>@item.Direccion</td>
-                                <td>@item.Numero</td>
-                                <td>@item.aso</td>
-                                @if (item.gastos != 0)
-                                {
-                                    <td>@item.gastos</td>
-                                }
-                                else
-                                {
-                                    <td>No registra gastos</td>}
-
-                                <td>
-                                    <a href='#' class='btn btn-outline-warning add' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+    
     <div>
         <div class="kt-portlet__body">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Cedula:</label>
+                        <label>C&eacute;dula:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-cc"></i></span></div>
                             @Html.TextBox("Cedulas", null, new { @class = "form-control", disabled = "disabled", placeholder = "Cédula" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                         </div>
                         @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_id", @Value = "" })
                     </div>
@@ -126,6 +72,8 @@
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                             @Html.TextBox("Nombress", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombres" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                         </div>
                     </div>
                 </div>
@@ -133,8 +81,10 @@
                     <div class="kt-section">
                         <label>Apellidos:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-users"></i></span></div>
                             @Html.TextBox("SegundoNombres", null, new { @class = "form-control", disabled = "disabled", placeholder = "Apellido" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                         </div>
                     </div>
                 </div>
@@ -142,12 +92,12 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Valor:</label>
+                        <label>Valor Descontado:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
                             @Html.TextBoxFor(m => m.valor, new { @id = "valors", @class = "form-control", @placeholder = "Valor", @name = "valor" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                            <div class="invalid-feedback" id="inVal" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -155,10 +105,10 @@
                     <div class="kt-section">
                         <label>Tipo de Descuento:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                             @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione un Descuento--", new { @id = "cab_desc_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado el descuento.</div>
+                            <div class="invalid-feedback" id="intpDes" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -166,10 +116,10 @@
                     <div class="kt-section">
                         <label>Mes:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                             @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">No se ha seleccionado un mes.</div>
+                            <div class="invalid-feedback" id="inMesV" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -177,7 +127,8 @@
             </div>
         </div>
         <div>
-            <input type="submit" value="Confirmar" class="btn btn-primary" />
+            <input id="btnIngreso" type="button" onclick="validarTdatos()" value="Confirmar" class="btn btn-primary" />
+            <input id="btnIngresoss" type="submit" style="display:none;" />
         </div>
     </div>
     <br />
@@ -201,7 +152,7 @@
 
                 <table class="table table-hover" style="text-align:center" id="example">
                     <thead>
-                        <tr>
+                        <tr style="font-weight:bold;">
                             <th>Item</th>
                             <th>Valor del Descuento</th>
                             <th>Empleado</th>
@@ -209,13 +160,15 @@
                             <th>Mes</th>
                             <th>Fecha</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listDescuentos)
                         {
                             <tr class='row_@item.id_descuento'>
-                                <td>@item.id_descuento</td>
+                                <td>@a</td>
                                 <td>$ @item.valor</td>
                                 <td>@item.persona</td>
                                 <td>@item.cabecera</td>
@@ -223,9 +176,11 @@
                                 <td>@item.fecha.ToShortDateString()</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteDescuento(@item.id_descuento)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_descuento" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_descuento" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_descuento</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -245,60 +200,24 @@
                 <form id="form">
                     <fieldset id="SubmitForm">
 
-                        <p>
-                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample" role="button" id="accors" aria-expanded="false" aria-controls="multiCollapseExample">Empleados ESPAM-MFL</a>
-                        </p>
-                        <div class="row">
-                            <div class="col">
-                                <div class="collapse multi-collapse" id="multiCollapseExample">
-                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                                        <div class="kt-input-icon kt-input-icon--left">
-                                                            <input type="text" class="form-control filtrar" placeholder="Search...">
-                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <br />
+                        <label>Buscar empleados:</label>
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" id="searchm" class="form-control input-group-prepend" placeholder="Buscar empleado..." style="width:900px">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>Cedula</th>
-                                                <th>Nombres</th>
-                                                <th>Apellidos</th>
-                                                <th>Direción</th>
-                                                <th>Teléfono</th>
-                                                <th>Acciones</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="buscar">
-                                            @foreach (var item in listPersona)
-                                            {
-                                                <tr class='row_@item.Id_Persona'>
-                                                    <td>@item.Id_Persona</td>
-                                                    <td>@item.Cedula</td>
-                                                    <td>@item.Nombres @item.SegundoNombre</td>
-                                                    <td>@item.ApellidoPaterno @item.ApellidoMaterno</td>
-                                                    <td>@item.Direccion</td>
-                                                    <td>@item.Numero</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-outline-warning adds' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
+                        <br />
+
                         @Html.HiddenFor(m => m.id_descuento, new { @id = "id_descuentos" })
                         @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_ids", @Value = "" })
                         <div class="row">
@@ -308,7 +227,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBoxFor(m => m.persona, new { @id = "Nombres", @class = "form-control", disabled = "disabled", @placeholder = "Nueva Persona" })
-                                        @*@Html.TextBox("Nombres", null, new { @class = "form-control", disabled = "disabled", placeholder = "Name*" })*@
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                                     </div>
                                 </div>
                             </div>
@@ -318,6 +238,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inValm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -329,6 +251,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.DropDownListFor(m => m.cab_desc_id, ViewBag.cabecera as SelectList, "--Seleccione Descuento--", new { @id = "cab_desc_id", @class = "form-control" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="intpDesm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -349,6 +273,8 @@
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBoxFor(m => m.fecha, new { @id = "fecha_", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inMesVm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -369,9 +295,94 @@
     </div>
 </div>
 
+<script type="text/javascript">
+
+    $(function () {
+        $('#valors').keyup(function () {
+            var _thisCnt = $('#valors');
+            var _cnt = $('#valors').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#valors').removeClass('is-valid');
+                $('#valors').addClass('is-invalid');
+                $("#inCant").html("Se requiere un valor numérico.");
+            } else {
+                $('#valors').removeClass('is-invalid');
+                $('#valors').addClass('is-valid');
+            }
+        });
+    });
+
+    function ValidarIngreso() {
+        var _fecha = $('#fecha').val();
+        var _idEmpleado = $('#empleado_id').val();
+        var _idMes = $('#mes_ids').val();
+        var _cabDesc = $('#cab_desc_ids').val();
+        var _cant = $('#valors').val();
+
+        $.ajax({
+            url: '@Url.Action("ValidarDescuento", "descuento")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _fecha: _fecha, _idEmpleado: _idEmpleado, _idMes: _idMes, _cabDesc: _cabDesc, _cant: _cant},
+            success: function (data) {
+                console.log(data);
+                $("#btnIngreso").attr("submit");
+                if (data.validar == true) {
+                    Swal.fire({
+                        title: 'Confirmar?',
+                        text: "Se almacenará el nuevo dato!",
+                        type: "success",
+                        confirmButtonText: 'OK',
+                        confirmButtonColor: '#3085d6',
+                        showCancelButton: true,
+                        cancelButtonText: 'Editar'
+                    }).then((result) => {
+                        if (result.value) {
+
+                            $("#btnIngresoss").trigger("click");
+                        };
+                        })
+
+                } else {
+                    $("#contenedorIngresos").html(data.mensaje);
+                }
+            },
+        });
+    }
+</script>
+
 <script>
+
+    function validarTdatos() {
+
+          valor = document.getElementById("valors").value;
+          tpIngr = document.getElementById("cab_desc_ids").selectedIndex;
+          mes = document.getElementById("mes_ids").selectedIndex;
+          empl = document.getElementById("empleado_id").value;
+          if (empl == null || empl == 0) {
+              $('#Cedulas').addClass('is-invalid');
+              $('#Nombress').addClass('is-invalid');
+              $('#SegundoNombres').addClass('is-invalid');
+              return true;
+          } else if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
+              $('#valors').addClass('is-invalid');
+              $("#inCant").html("Este campo es obligatorio");
+              return true;
+          } else if (tpIngr == null || tpIngr == 0) {
+              $('#cab_desc_ids').addClass('is-invalid');
+              $("#inTpIn").html("No ha seleccionado un Descuento.");
+              return true;
+          } else if (mes == null || mes == 0) {
+              $('#mes_ids').addClass('is-invalid');
+              $("#inMesV").html("No ha seleccionado un mes.");
+              return true;
+          }  
+          ValidarIngreso();
+    }
+
+    // FUNCIÓN PARA REALIZAR EL FILTRADO
     $(document).ready(function () {
-       // FUNCIÓN PARA REALIZAR EL FILTRADO
         $("#search").autocomplete({
                 source: function (request, response) {
                     var param = { lastName: $('#search').val() };
@@ -402,6 +413,7 @@
                 minLength: 2,
                 select: function (event, ui) {
                     //MOSTRAR VALORES EN LOS INPUT
+                    $("#empleado_id").val(ui.item.dataID);
                     $("#Cedulas").val(ui.item.dataCI);
                     $("#Nombress").val(ui.item.dataNombres);
                     $("#SegundoNombres").val(ui.item.dataApellidos);
@@ -410,17 +422,52 @@
     });
     // FIN DE LA FUNCIÓN DEL FILTRADO
 
-    $(document).on('focus', '#idLocalNames', function () {
-        $(this).autocomplete({
-            //source have a url of a service
-            source: '@Url.Action("AutoCompleteExternalDataExample2")',
-            minLength: 0//min = 2 characters
+    // FUNCIÓN PARA REALIZAR EL FILTRADO MODAL
+    $(document).ready(function () {
+        $("#searchm").autocomplete( {
+            source: function (request, response) {
+                var param = { lastName: $('#searchm').val() };
+                $.ajax({
+                    url: "/descuento/SearchPerson",
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                            return {
+                                value: item.persona,
+                                dataNombres: item.Nombres,
+                                dataApellidos: item.Apellidos,
+                                dataCI: item.Cedula,
+                                dataID: item.Id_Persona
+                            }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                //MOSTRAR VALORES EN LOS INPUT
+                $("#empleado_id").val(ui.item.dataID);
+                $("#Cedulas").val(ui.item.dataCI);
+                $("#Nombress").val(ui.item.dataNombres);
+                $("#SegundoNombres").val(ui.item.dataApellidos);
+            }
         });
     });
-
+    // FIN DE LA FUNCIÓN DEL FILTRADO
 
     $(document).ready(function () {
+        $('#example').dataTable();
+    });
 
+    $(document).ready(function () {
         (function ($) {
             $('.filtrar').keyup(function () {
                 var rex = new RegExp($(this).val(), 'i');
@@ -431,36 +478,6 @@
             });
         }(jQuery));
     });
-
-    $(document).ready(function () {
-        $('.add').click(function () {
-            Swal.fire({
-                title: 'Persona Añadida',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#Cedulas').val($(this).parents("tr").find("td").eq(1).html());
-            $('#Nombress').val($(this).parents("tr").find("td").eq(2).html());
-            $('#SegundoNombres').val($(this).parents("tr").find("td").eq(3).html());
-            $('#empleado_id').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accor").trigger("click")
-        })
-     })
-
-    $(document).ready(function () {
-        $('.adds').click(function () {
-            Swal.fire({
-                title: 'Persona Añadida',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#Nombres').val($(this).parents("tr").find("td").eq(2).html());
-            $('#empleado_ids').val($(this).parents("tr").find("td").eq(0).html());
-            $("#accors").trigger("click")
-        })
-    })
 
     var row;
     function UpdateDescuento(Descuento) {

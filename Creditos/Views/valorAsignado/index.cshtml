@@ -13,7 +13,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Asignar Valores</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -36,55 +36,18 @@
 {
     <h2 style="text-align:center;">Gesti&oacute;n de Valores Asignados</h2>
     <br />
-    <p>
-        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample" role="button" id="accorp" aria-expanded="false" aria-controls="multiCollapseExample">Personas en la Asociaci&oacute;n</a>
-    </p>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <label>Buscar Personas de la Asociaci&oacute;n:</label>
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <div class="row align-items-center">
+                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                    <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" id="search" class="form-control input-group-prepend" placeholder="Buscar personas..." style="width:900px">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                            <span><i class="la la-search"></i></span>
+                        </span>
                     </div>
                 </div>
-                <table class="table table-hover" style="text-align:center" id="tablaSA">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th style="display:none;"></th>
-                            <th>Persona</th>
-                            <th>Asociaci&oacute;n</th>
-                            <th>Fecha de Uni&oacute;n</th>
-                            <th>Agregar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="buscar">
-                        @foreach (var item in listEmplAso)
-                        {
-                            <tr class='row_@item.id_empl_aso'>
-                                <td>@item.id_empl_aso</td>
-                                <td style="display:none;">@item.empleado_id</td>
-                                <td>@item.persona</td>
-                                <td>@item.aso</td>
-                                <td>@item.fecha_ingreso.ToShortDateString()</td>
-                                <td>
-                                    <a href='#' class='btn btn-outline-warning addpe' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
@@ -92,19 +55,23 @@
     <div class="row">
         <div class="col-lg-4">
             <div class="kt-section">
-                <label>Persona:</label>
+                <label>C&eacute;dula:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
-                    @Html.TextBox("nombre", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-cc"></i></span></div>
+                    @Html.TextBox("Cedulas", null, new { @class = "form-control", disabled = "disabled", placeholder = "C.I." })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                 </div>
             </div>
         </div>
         <div class="col-lg-4">
             <div class="kt-section">
-                <label>Asociaci&oacute;n:</label>
+                <label>Persona:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
-                    @Html.TextBox("asop", null, new { @class = "form-control", disabled = "disabled", placeholder = "Asociación" })
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                    @Html.TextBox("Nombress", null, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                 </div>
             </div>
         </div>
@@ -113,73 +80,40 @@
             <div class="kt-section">
                 <label>Fecha de Uni&oacute;n:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                     @Html.TextBox("fechap", null, new { @class = "form-control", disabled = "disabled", placeholder = "Fecha" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado una persona.</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <p>
-        <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample1" role="button" id="accorpr" aria-expanded="false" aria-controls="multiCollapseExample1">Proveedores disponibles</a>
-    </p>
-    <div class="row">
-        <div class="col">
-            <div class="collapse multi-collapse" id="multiCollapseExample1">
-                <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                    <div class="row align-items-center">
-                        <div class="col-xl-8 order-2 order-xl-1">
-                            <div class="row align-items-center">
-                                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                    <div class="kt-input-icon kt-input-icon--left">
-                                        <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
-                                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                            <span><i class="la la-search"></i></span>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <label>Buscar Proveedor:</label>
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <div class="row align-items-center">
+                <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                    <div class="kt-input-icon kt-input-icon--left">
+                        <input type="text" id="searchpr" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
+                        <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                            <span><i class="la la-search"></i></span>
+                        </span>
                     </div>
                 </div>
-                <table class="table table-hover" style="text-align:center" id="tablaSA">
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th style="display:none;"></th>
-                            <th>Proveedor</th>
-                            <th>Asociaci&oacute;n</th>
-                            <th>Fecha de Uni&oacute;n</th>
-                            <th>Agregar</th>
-                        </tr>
-                    </thead>
-                    <tbody class="buscar">
-                        @foreach (var item in listAsoProv)
-                        {
-                            <tr class='row_@item.id_asoc_prov'>
-                                <td>@item.id_asoc_prov</td>
-                                <td style="display:none;">@item.proveedor_id</td>
-                                <td>@item.proveedor</td>
-                                <td>@item.aso</td>
-                                <td>@item.fecha.ToShortDateString()</td>
-                                <td>
-                                    <a href='#' class='btn btn-outline-warning addpr' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
             </div>
         </div>
     </div>
-    
+
     <div class="row">
         <div class="col-lg-4">
             <div class="kt-section">
-                <label>Proveedor:</label>
+                <label>RUC:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
-                    @Html.TextBox("proveedors", null, new { @class = "form-control", disabled = "disabled", placeholder = "Proveedor" })
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-btc"></i></span></div>
+                    @Html.TextBox("nruc", null, new { @class = "form-control", disabled = "disabled", placeholder = "RUC" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                 </div>
             </div>
         </div>
@@ -187,10 +121,12 @@
         @Html.HiddenFor(m => m.aso_id, new { @id = "asociacion_id", @Value = "1" })
         <div class="col-lg-4">
             <div class="kt-section">
-                <label>Asociaci&oacute;n:</label>
+                <label>Proveedor:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
-                    @Html.TextBox("asopr", null, new { @class = "form-control", disabled = "disabled", placeholder = "Asociación" })
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
+                    @Html.TextBox("nombrepro", null, new { @class = "form-control", disabled = "disabled", placeholder = "Asociación" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                 </div>
             </div>
         </div>
@@ -198,8 +134,10 @@
             <div class="kt-section">
                 <label>Fecha de Convenio:</label>
                 <div class="input-group">
-                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                    <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
                     @Html.TextBox("fechapr", null, new { @class = "form-control", disabled = "disabled", placeholder = "Fecha" })
+                    <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                    <div class="invalid-feedback" style="text-align:center">No se ha registrado un proveedor.</div>
                 </div>
             </div>
         </div>
@@ -220,7 +158,7 @@
     </div>
 
     <div>
-        <input id="btnIngreso" type="button" onclick="ValidarIngreso(); " value="Confirmar" class="btn btn-primary" />
+        <input id="btnIngreso" type="button" onclick="validarTdatos(); " value="Confirmar" class="btn btn-primary" />
         <input id="btnIngresoss" type="submit" style="display:none;" />  
     </div>
     <br />
@@ -256,21 +194,25 @@
                             <th>Persona</th>
                             <th>Proveedor</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listValAsig)
                         {
                             <tr class='row_@item.id_valor_asig'>
-                                <td>@item.id_valor_asig</td>
+                                <td>@a</td>
                                 <td>@item.monto_aprobado</td>
                                 <td>@item.empleado</td>
                                 <td>@item.proveedor</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Eliminar" onclick='DeleteValAsignado(@item.id_valor_asig)'><span class='flaticon2-rubbish-bin'></span></a>
-                                    <button class='btn btn-outline-info edit' value="@item.id_valor_asig" title="Modificar"><span class='flaticon2-pen'></span></button>
+                                    <button class='btn btn-outline-info edit' data-toggle="kt-tooltip" value="@item.id_valor_asig" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_valor_asig</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                  </table>
@@ -293,131 +235,58 @@
                         @Html.HiddenFor(m => m.id_valor_asig, new { @id = "id_val_asigssss" })
                         @Html.HiddenFor(m => m.aso_id, new { @id = "aso_id", @Value = "1" })
 
-                        <p>
-                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample3" role="button" id="accorp3" aria-expanded="false" aria-controls="multiCollapseExample3">Personas en la Asociaci&oacute;n</a>
-                        </p>
-                        <div class="row">
-                            <div class="col">
-                                <div class="collapse multi-collapse" id="multiCollapseExample3">
-                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                                        <div class="kt-input-icon kt-input-icon--left">
-                                                            <input type="text" class="form-control filtrar" placeholder="Search..." id="filtrar">
-                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <label>Buscar Personas de la Asociaci&oacute;n:</label>
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" id="search" class="form-control input-group-prepend" placeholder="Buscar personas..." style="width:900px">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th style="display:none;"></th>
-                                                <th>Persona</th>
-                                                <th>Asociaci&oacute;n</th>
-                                                <th>Fecha de Uni&oacute;n</th>
-                                                <th>Agregar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="buscar">
-                                            @foreach (var item in listEmplAso)
-                                            {
-                                                <tr class='row_@item.id_empl_aso'>
-                                                    <td>@item.id_empl_aso</td>
-                                                    <td style="display:none;">@item.empleado_id</td>
-                                                    <td>@item.persona</td>
-                                                    <td>@item.aso</td>
-                                                    <td>@item.fecha_ingreso.ToShortDateString()</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-outline-warning addpemo' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
+
                         @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_idsss", @Value = "" })
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="kt-section">
                                     <label>Persona:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
                                         @Html.TextBox("nombresss", null, new { @class = "form-control", disabled = "disabled", placeholder = "Persona" })
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-
-                        <p>
-                            <a class="btn btn-label-linkedin" data-original-title="Seleccione una persona" data-toggle="collapse" href="#multiCollapseExample4" role="button" id="accorpr4" aria-expanded="false" aria-controls="multiCollapseExample4">Proveedores disponibles</a>
-                        </p>
-                        <div class="row">
-                            <div class="col">
-                                <div class="collapse multi-collapse" id="multiCollapseExample4">
-                                    <div class="kt-form kt-form--label-right kt-margin-t-20 kt-margin-b-10">
-                                        <div class="row align-items-center">
-                                            <div class="col-xl-8 order-2 order-xl-1">
-                                                <div class="row align-items-center">
-                                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
-                                                        <div class="kt-input-icon kt-input-icon--left">
-                                                            <input type="text" class="form-control" placeholder="Search..." id="generalSearch">
-                                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
-                                                                <span><i class="la la-search"></i></span>
-                                                            </span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                        <label>Buscar Proveedor:</label>
+                        <div class="row align-items-center">
+                            <div class="col-lg-6">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
+                                        <div class="kt-input-icon kt-input-icon--left">
+                                            <input type="text" id="searchpr" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
+                                            <span class="kt-input-icon__icon kt-input-icon__icon--left">
+                                                <span><i class="la la-search"></i></span>
+                                            </span>
                                         </div>
                                     </div>
-                                    <table class="table table-hover" style="text-align:center" id="tablaSA">
-                                        <thead>
-                                            <tr>
-                                                <th>Item</th>
-                                                <th style="display:none;"></th>
-                                                <th>Proveedor</th>
-                                                <th>Asociaci&oacute;n</th>
-                                                <th>Fecha de Uni&oacute;n</th>
-                                                <th>Agregar</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody class="buscar">
-                                            @foreach (var item in listAsoProv)
-                                            {
-                                                <tr class='row_@item.id_asoc_prov'>
-                                                    <td>@item.id_asoc_prov</td>
-                                                    <td style="display:none;">@item.proveedor_id</td>
-                                                    <td>@item.proveedor</td>
-                                                    <td>@item.aso</td>
-                                                    <td>@item.fecha.ToShortDateString()</td>
-                                                    <td>
-                                                        <a href='#' class='btn btn-outline-warning addprmo' data-toggle="kt-tooltip" data-original-title="Añadir"><span class='la la-arrow-down'></span></a>
-                                                    </td>
-                                                </tr>
-                                            }
-                                        </tbody>
-                                    </table>
                                 </div>
                             </div>
                         </div>
+
                         @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_idss", @Value = "" })
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="kt-section">
                                     <label>Proveedor:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
                                         @Html.TextBox("proveedorsss", null, new { @class = "form-control", disabled = "disabled", placeholder = "Proveedor" })
                                     </div>
                                 </div>
@@ -451,6 +320,20 @@
 </div>
 
 <script type="text/javascript">
+    $(function () {
+        $('#monto_aprobados').keyup(function () {
+            var _thisCnt = $('#monto_aprobados');
+            var _cnt = $('#monto_aprobados').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#monto_aprobados').removeClass('is-valid');
+                $('#monto_aprobados').addClass('is-invalid');
+            } else {
+                $('#monto_aprobados').removeClass('is-invalid');
+                $('#monto_aprobados').addClass('is-valid');
+            }
+        });
+    });
 
       function ValidarIngreso() {
           var _idProveedor = $('#proveedor_id').val();
@@ -491,152 +374,205 @@
 </script>
 
 <script>
+
+      // FUNCIÓN PARA REALIZAR EL FILTRADO - PERSONA
+      $(document).ready(function () {
+          // FUNCIÓN PARA REALIZAR EL FILTRADO
+          $("#search").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#search').val() };
+                  $.ajax({
+                      url: "/valorAsignado/SearchPerson",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.persona,
+                                  dataNombres: item.nombre,
+                                  dataFecha: item.fecha_ingreso,
+                                  dataCI: item.Cedula,
+                                  dataID: item.Id_Persona,
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  console.log(ui.item)
+                  $("#empleado_idss").val(ui.item.dataID);
+                  $("#Cedulas").val(ui.item.dataCI);
+                  $("#Nombress").val(ui.item.dataNombres);
+                  var n = eval(ui.item.dataFecha.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))
+                  y = n.getFullYear();
+                  m = n.getMonth()+1;
+                  d = n.getDate();
+                  $("#fechap").val(d + "/" + m + "/" + y);
+              }
+          });
+      });
+      // FIN DE LA FUNCIÓN DEL FILTRADO
+
+      // FUNCIÓN PARA REALIZAR EL FILTRADO - PROVEEDOR
+      $(document).ready(function () {
+          $("#searchpr").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#searchpr').val() };
+                  $.ajax({
+                      url: "/valorAsignado/SearchProv",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.prov,
+                                  dataNombres: item.nombre,
+                                  dataFechap: item.fecha,
+                                  dataCI: item.RUC,
+                                  dataID: item.id_proveedor
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  $("#proveedor_id").val(ui.item.dataID);
+                  $("#nruc").val(ui.item.dataCI);
+                  $("#nombrepro").val(ui.item.dataNombres);
+                  var n = eval(ui.item.dataFechap.replace(/\/Date\((\d+)\)\//gi, "new Date($1)"))
+                  y = n.getFullYear();
+                  m = n.getMonth()+1;
+                  d = n.getDate();
+                  $("#fechapr").val(d + "/" + m + "/" + y);
+              }
+          });
+      });
+      // FIN DE LA FUNCIÓN DEL FILTRADO
+
+      function validarTdatos() {
+          valors = document.getElementById("monto_aprobados").value;
+          empl = document.getElementById("empleado_idss").value;
+          prov = document.getElementById("proveedor_id").value;
+          if (empl == null || empl == 0) {
+              $('#Cedulas').addClass('is-invalid');
+              $('#Nombress').addClass('is-invalid');
+              $('#fechap').addClass('is-invalid');
+              return true;
+          } else if (prov == null || prov == 0) {
+              $('#nruc').addClass('is-invalid');
+              $('#nombrepro').addClass('is-invalid');
+              $('#fechapr').addClass('is-invalid');
+              return true;
+              } else if (!/^\d*\,?\d*$/.test(valors) || valors == null || valors == 0) {
+              $('#monto_aprobados').addClass('is-invalid');
+              return true;
+          }
+          ValidarIngreso();
+      }
+
       $(document).ready(function () {
           $('#example').dataTable();
       });
 
-    $(document).ready(function () {
-        (function ($) {
-            $('.filtrar').keyup(function () {
-                var rex = new RegExp($(this).val(), 'i');
-                $('.buscar tr').hide();
-                $('.buscar tr').filter(function () {
-                    return rex.test($(this).text());
-                }).show();
-            });
-        }(jQuery));
+      var row;
+      function UpdateValAsignado(ValAsignado) {
+          var data = $("#SubmitForm").serialize();
+          $.ajax({
+              type: "Post",
+              url: "/valorAsignado/UpdateValAsignado",
+              data: data,
+              success: function (result) {
+                  if (result == "Registro actualizado") {
+                      Swal.fire(
+                          'Actualizado!',
+                          'Registro Actualizado',
+                          'success'
+                      )
+                      row.find("td").eq(1).html($('#monto_aprobadoss').val());
+                      row.find("td").eq(2).html($('#nombresss').val());
+                      row.find("td").eq(3).html($('#proveedorsss').val());
+                  } else {
+                      Swal.fire(
+                          'Reintentar!',
+                          'ERROR AL ACTUALIZAR',
+                          'error'
+                      )
+                  }
+                  $("#MyModal").modal("hide");
+              }
+          })
+      }
 
-        $('.addpe').click(function () {
-            Swal.fire({
-                title: 'Persona Añadida',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#empleado_idss').val($(this).parents("tr").find("td").eq(1).html());
-            $('#nombre').val($(this).parents("tr").find("td").eq(2).html());
-            $('#asop').val($(this).parents("tr").find("td").eq(3).html());
-            $('#fechap').val($(this).parents("tr").find("td").eq(4).html());
-            $("#accorp").trigger("click")
-        })
+      $('body').on('click', '.edit', function () {
+          var id = $(this).val();
+          row = $(this).parents("tr");
+          $("#MyModal").modal();
+          $.ajax({
+              type: "GET",
+              url: "/valorAsignado/GetValAsignadoById?ValAsignadoId=" + id,
+              success: function (data) {
+                  var obj = JSON.parse(data);
+                  $("#id_val_asigssss").val(obj[0].id_valor_asig);
+                  $("#empleado_idsss").val(obj[0].empleado_id);
+                  $("#proveedor_idss").val(obj[0].proveedor_id);
+                  $("#monto_aprobadoss").val(obj[0].monto_aprobado);
+                  $("#nombresss").val(obj[0].empleado);
+                  $("#proveedorsss").val(obj[0].proveedor);
+              }
+          })
+      })
 
-        $('.addpr').click(function () {
-            Swal.fire({
-                title: 'Proveedor Añadido',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#proveedor_id').val($(this).parents("tr").find("td").eq(1).html());
-            $('#proveedors').val($(this).parents("tr").find("td").eq(2).html());
-            $('#asopr').val($(this).parents("tr").find("td").eq(3).html());
-            $('#fechapr').val($(this).parents("tr").find("td").eq(4).html());
-            $("#accorpr").trigger("click")
-        })
+      function DeleteValAsignado(ValAsignado) {
+          Swal.fire({
+              title: 'Estás seguro?',
+              text: 'Deseas eliminar el registro seleccionado!',
+              type: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'Borrar',
+              cancelButtonText: 'Cancelar'
+          }).then((result) => {
+              if (result.value) {
+                  $.ajax({
+                      type: "POST",
+                      url: "/valorAsignado/DeleteValAsignado?ValAsignadoId=" + ValAsignado,
+                      success: function (result) {
+                          if (result == "Eliminado") {
+                              Swal.fire(
+                                  'Borrado!',
+                                  'El registro fue borrado con éxito',
+                                  'success'
+                              )
+                              $(".row_" + ValAsignado).remove();
+                          } else {
+                              Swal.fire(
+                                  'Borrado!',
+                                  'No se pudo eliminar el registro',
+                                  'error'
+                              )
+                          }
+                      }
+                  })
+              }
+          })
+      }
 
-        $('.addpemo').click(function () {
-            Swal.fire({
-                title: 'Persona Añadida',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#empleado_idsss').val($(this).parents("tr").find("td").eq(1).html());
-            $('#nombresss').val($(this).parents("tr").find("td").eq(2).html());
-            $("#accorp3").trigger("click")
-        })
-
-        $('.addprmo').click(function () {
-            Swal.fire({
-                title: 'Proveedor Añadido',
-                type: 'success',
-                confirmButtonText: 'Ok',
-                cancelButtonText: 'Cancelar'
-            })
-            $('#proveedor_idss').val($(this).parents("tr").find("td").eq(1).html());
-            $('#proveedorsss').val($(this).parents("tr").find("td").eq(2).html());
-            $("#accorpr4").trigger("click")
-        })
-    })
-    var row;
-    function UpdateValAsignado(ValAsignado) {
-        var data = $("#SubmitForm").serialize();
-        $.ajax({
-            type: "Post",
-            url: "/valorAsignado/UpdateValAsignado",
-            data: data,
-            success: function (result) {
-                if (result == "Registro actualizado") {
-                    Swal.fire(
-                        'Actualizado!',
-                        'Registro Actualizado',
-                        'success'
-                    )
-                    row.find("td").eq(1).html($('#monto_aprobadoss').val());
-                    row.find("td").eq(2).html($('#nombresss').val());
-                    row.find("td").eq(3).html($('#proveedorsss').val());
-                } else {
-                    Swal.fire(
-                        'Reintentar!',
-                        'ERROR AL ACTUALIZAR',
-                        'error'
-                    )
-                }
-                $("#MyModal").modal("hide");
-            }
-        })
-    }
-    $('body').on('click', '.edit', function () {
-        var id = $(this).val();
-        row = $(this).parents("tr");
-        $("#MyModal").modal();
-        $.ajax({
-            type: "GET",
-            url: "/valorAsignado/GetValAsignadoById?ValAsignadoId=" + id,
-            success: function (data) {
-                var obj = JSON.parse(data);
-                $("#id_val_asigssss").val(obj[0].id_valor_asig);
-                $("#empleado_idsss").val(obj[0].empleado_id);
-                $("#proveedor_idss").val(obj[0].proveedor_id);
-                $("#monto_aprobadoss").val(obj[0].monto_aprobado);
-                $("#nombresss").val(obj[0].empleado);
-                $("#proveedorsss").val(obj[0].proveedor);
-            }
-        })
-    })
-
-    function DeleteValAsignado(ValAsignado) {
-        Swal.fire({
-            title: 'Estás seguro?',
-            text: 'Deseas eliminar el registro seleccionado!',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Borrar',
-            cancelButtonText: 'Cancelar'
-        }).then((result) => {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: "/valorAsignado/DeleteValAsignado?ValAsignadoId=" + ValAsignado,
-                    success: function (result) {
-                        if (result == "Eliminado") {
-                            Swal.fire(
-                                'Borrado!',
-                                'El registro fue borrado con éxito',
-                                'success'
-                            )
-                            $(".row_" + ValAsignado).remove();
-                        } else {
-                            Swal.fire(
-                                'Borrado!',
-                                'No se pudo eliminar el registro',
-                                'error'
-                            )
-                        }
-                    }
-                })
-            }
-        })
-    }
 </script>
 

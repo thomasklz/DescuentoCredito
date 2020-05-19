@@ -10,7 +10,7 @@
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h5>
-                BIENVENIDOS
+                BIENVENIDO
                 <small>Cabecera de Descuentos</small>
             </h5>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -38,23 +38,23 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Descripcion:</label>
+                        <label>Descripci&oacute;n:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                             @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción", @name = "descripcion" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" id="inDes" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="kt-section">
-                        <label>Subdescuento:</label>
+                        <label>Gen&eacute;rico:</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
-                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "Elija un Subdescuento", new { @id = "subdescuento_ids", @class = "form-control" })
+                            @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Elija un Genérico--", new { @id = "subdescuento_ids", @class = "form-control" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                            <div class="invalid-feedback" id="inGen" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -96,20 +96,24 @@
                             <th>Descripci&oacute;n</th>
                             <th>Tipo de Descuento</th>
                             <th>Acciones</th>
+                            <th style="display:none;"></th>
                         </tr>
                     </thead>
                     <tbody class="buscar">
+                        @{int a = 1; }
                         @foreach (var item in listCabDesc)
                         {
                             <tr class='row_@item.id_cabecera_descuento'>
-                                <td>@item.id_cabecera_descuento</td>
+                                <td>@a</td>
                                 <td>@item.descripcion</td>
                                 <td>@item.subdescuento</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" data-original-title="Eliminar" onclick='DeleteCabDesc(@item.id_cabecera_descuento)'><span class='flaticon2-rubbish-bin'></span></a>
                                     <button class='btn btn-outline-info edit' value="@item.id_cabecera_descuento" title="Modificar"><span class='flaticon2-pen'></span></button>
                                 </td>
+                                <td style="display:none;">@item.id_cabecera_descuento</td>
                             </tr>
+                            a++;
                         }
                     </tbody>
                 </table>
@@ -132,21 +136,23 @@
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Cantidad:</label>
+                                    <label>Descripci&oacute;n:</label>
                                     <div class="input-group">
-                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
                                         @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion", @class = "form-control", @placeholder = "Name*" })
                                         <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                                        <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
+                                        <div class="invalid-feedback" id="inDesm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="kt-section">
-                                    <label>Tipo de Ingreso:</label>
+                                    <label>Gen&eacute;rico:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-check"></i></span></div>
-                                        @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Subdescuentos--", new { @id = "subdescuento_id", @class = "form-control" })
+                                        @Html.DropDownListFor(m => m.subdescuento_id, ViewBag.subdescuento as SelectList, "--Elija un Genérico--", new { @id = "subdescuento_id", @class = "form-control" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inGenm" style="text-align:center"></div>
                                     </div>
                                 </div>
                             </div>
@@ -243,9 +249,11 @@
           subd = document.getElementById("subdescuento_ids").selectedIndex;
           if (desc == null || desc.length == 0 || /^\s+$/.test(desc)) {
               $('#descripcions').addClass('is-invalid');
+              $("#inDes").html("Este campo es obligatorio");
               return true;
           } else if (subd == null || subd == 0) {
               $('#subdescuento_ids').addClass('is-invalid');
+              $("#inGen").html("No ha seleccionado un Genérico.");
               return true;
           } else ValidarIngreso();
       }
@@ -300,7 +308,7 @@
             url: "/cabDescuento/GetCab_DescById?Cab_DescId=" + id,
             success: function (data) {
                 var obj = JSON.parse(data);
-                $("#id_cabecera_descuento").val(obj[0].id_cabecera_descuento);
+                $("#id_cabecera_descuentos").val(obj[0].id_cabecera_descuento);
                 $("#descripcion").val(obj[0].descripcion);
                 $("#subdescuento_id option[value='" + obj[0].subdescuento_id + "']").attr("selected", true);
             }

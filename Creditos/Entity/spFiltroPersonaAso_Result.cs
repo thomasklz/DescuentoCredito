@@ -11,10 +11,10 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spFiltroPersona_Result
+    public partial class spFiltroPersonaAso_Result
     {
         public string persona { get; set; }
-        public int Id_Persona { get; set; }
+        public Nullable<int> Id_Persona { get; set; }
         public string Nombres { get; set; }
         public string Apellidos { get; set; }
         public string Cedula { get; set; }

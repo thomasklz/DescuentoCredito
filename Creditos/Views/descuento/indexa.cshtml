@@ -1,0 +1,287 @@
+﻿@Scripts.Render("~/Scripts/paginacion.js")
+
+@model Creditos.Models.mDescuento
+@{
+    List<Creditos.Models.mDescuento> listVal = ViewBag.descuentosxE;
+}
+
+<!-- begin:: Encabezado VENTANA PRINCIPAL -->
+<div class="kt-subheader kt-grid__item" id="kt_subheader">
+    <div class="kt-container ">
+        <div class="kt-subheader__main">
+            <h4>
+                BIENVENIDO
+                <small>Valores Utilizados</small>
+            </h4>
+            <span class="kt-subheader__separator kt-hidden"></span>
+        </div>
+        <!-- Begin -- Tipo de usuario actual -->
+        <div class="kt-subheader__toolbar">
+            <h6> Est&aacutes en: </h6>
+            <div class="kt-subheader__wrapper">
+                <a class="btn kt-subheader__btn-primary">
+                    N&oacute;mina
+                </a>
+            </div>
+        </div>
+        <!-- end -- Tipo de usuario actual -->
+    </div>
+</div>
+<!-- end:: Subheader -->
+
+<h2 style="text-align:center;">Aprobaci&oacute;n de Valores Utilizados</h2>
+<br />
+
+@using (Html.BeginForm("Storea", "descuento", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.val_asig, new { @id = "val_asig", @Value = "" })
+    @Html.HiddenFor(m => m.valor, new { @id = "valors", @Value = "" })
+    @Html.HiddenFor(m => m.sumatoria, new { @id = "smt", @Value = "" })
+    @Html.HiddenFor(m => m.empleado_id, new { @id = "empleado_ids", @Value = "" })
+    @Html.HiddenFor(m => m.cab_desc_id, new { @id = "cab_desc_ids", @Value = "" })
+    @Html.HiddenFor(m => m.mes_id, new { @id = "mes_ids", @Value = "" })
+    @Html.HiddenFor(m => m.fecha, new { @id = "fecha", @Value = @DateTime.Now.ToShortDateString() }) 
+    <div>
+        <input id="btnIngresos" type="submit" style="display:none;" />
+    </div>
+}
+
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+    <div class="card">
+        <div class="card-header" id="headingOne7">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne7" id="accors" aria-expanded="true" aria-controls="collapseOne7">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Valores mensuales pendientes de Aprobaci&oacute;n
+            </div>
+        </div>
+        <div id="collapseOne7" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample7" style="">
+            <div class="card-body">
+                <table class="table table-hover example" style="text-align:center">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Valor del Descuento</th>
+                            <th>Sobrante</th>
+                            <th style="display:none;"></th>
+                            <th>Empleado</th>
+                            <th style="display:none;"></th>
+                            <th>Detalle</th>
+                            <th style="display:none;"></th>
+                            <th>Mes</th>
+                            <th style="display:none;"></th>
+                            <th>Fecha</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="buscar">
+                        @{int a = 1; } 
+                        @foreach (var item in listVal)
+                        {
+                            <tr id="fila_@a" class='row_@a' style="background-color: #B3F9C1;">
+                                <td>@a</td>
+                                <td>@item.sumatoria</td>
+                                <td>0</td>
+                                <td style="display:none;">@item.empleado_id</td>
+                                <td>@item.persona</td>
+                                <td style="display:none;">@item.cab_desc_id</td>
+                                <td>@item.cabecera</td>
+                                <td style="display:none;">@item.mes_id</td>
+                                <td>@item.mes</td>
+                                <td style="display:none;">@item.val_asig</td>
+                                <td>@DateTime.Now.ToShortDateString()</td>
+                                <td>
+                                    <button class='btn btn-success btn-elevate btn-pill btn-elevate-air oks' data-toggle="kt-tooltip" title="Aprobar" onclick="aprobar()"><span class='flaticon2-checkmark'></span></button>
+                                    <button class='btn btn-brand btn-elevate btn-pill btn-elevate-air edit' title="Ajuste" data-toggle="kt-tooltip" value="@a"><span class='la la-cut'></span></button>
+                                </td>
+                            </tr>
+                            a++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalinfo">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Ajuste de Descuentos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Cantidad a descontar:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "valor", @class = "form-control", @placeholder = "Name*" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                    </div>
+                                    @Html.HiddenFor(m => m.id_descuento, new { @id = "id_desc", @Value = "" })
+                                    @Html.Hidden("total", new { @id = "total", @Value = "" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Sobrante:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.sumatoria, new { @id = "ajuste", @class = "form-control", @placeholder = "0", @Value = "0" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="validarTdatos()">Guardar Ajuste</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $('#valor').keyup(function () {
+            var _thisCnt = $('#valor');
+            var _cnt = $('#valor').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#valor').removeClass('is-valid');
+                $('#valor').addClass('is-invalid');
+            } else {
+                $('#valor').removeClass('is-invalid');
+                $('#valor').addClass('is-valid');
+            }
+        });
+    });
+    $(function () {
+        $('#ajuste').keyup(function () {
+            var _thisCnt = $('#ajuste');
+            var _cnt = $('#ajuste').val();
+            _thisCnt.attr('style', 'background:white');
+            if (_cnt == null || !/^\d*\,?\d*$/.test(_cnt) || _cnt == 0) {
+                $('#ajuste').removeClass('is-valid');
+                $('#ajuste').addClass('is-invalid');
+            } else {
+                $('#ajuste').removeClass('is-invalid');
+                $('#ajuste').addClass('is-valid');
+            }
+        });
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+        $('.example').dataTable();
+    });
+
+    $(document).ready(function () {
+        (function ($) {
+            $('.filtrar').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.buscar tr').hide();
+                $('.buscar tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            });
+        }(jQuery));
+    });
+
+    //Llenar un descuento
+    $(document).ready(function () {
+        $('.oks').click(function () {
+        Swal.fire({
+            title: 'Esta Seguro de Guardar este Descuento?',
+            type: 'warning',
+            confirmButtonText: 'Ok',
+            cancelButtonText: 'Cancelar'
+        })
+        
+        $('#val_asig').val($(this).parents("tr").find("td").eq(9).html());
+        $('#valors').val($(this).parents("tr").find("td").eq(1).html());
+        $('#smt').val($(this).parents("tr").find("td").eq(2).html());
+        $('#empleado_ids').val($(this).parents("tr").find("td").eq(3).html());
+        $('#cab_desc_ids').val($(this).parents("tr").find("td").eq(5).html());
+        $('#mes_ids').val($(this).parents("tr").find("td").eq(7).html());
+        $("#btnIngresos").trigger("click")
+        })
+    })
+
+    var row;
+    function Ajuste() {
+        var data = $("#SubmitForm").serialize();
+        cols = document.getElementById("id_desc").value;
+        ajt = document.getElementById("ajuste").value;
+        row.find("td").eq(1).html($('#valor').val());
+        row.find("td").eq(2).html($('#ajuste').val()); 
+        if (ajt == 0 || ajt==null) {
+            $("#modalinfo").modal("hide");
+            $(".row_" + cols).css("background-color", "#B3F9C1");
+        } else {
+            $("#modalinfo").modal("hide");
+            $(".row_" + cols).css("background-color", "#FE8888");
+        }
+    }
+
+    $('body').on('click', '.edit', function () {
+        var id = $(this).val();
+        row = $(this).parents("tr");
+        $("#modalinfo").modal();
+        $('#id_desc').val($(this).parents("tr").find("td").eq(0).html());
+        $('#valor').val($(this).parents("tr").find("td").eq(1).html());
+        $('#total').val($(this).parents("tr").find("td").eq(1).html());
+    })
+
+    function validarTdatos() {
+
+        valor = document.getElementById("valor").value;
+        ajt = document.getElementById("ajuste").value;
+        var s = parseInt(valor) + parseInt(ajt);
+        ttl = document.getElementById("total").value;
+        if (typeof (valor) == "number" || valor == null || valor == 0) {
+            $('#valor').addClass('is-invalid');
+            return true;
+        } else if (typeof (valor) == "number" || valor == null || valor == 0) {
+            $('#ajuste').addClass('is-invalid');
+            return true;
+        }else if (s != ttl) {
+            Swal.fire({
+                title: 'La cantidad inicial no coincide con el ajuste realizado',
+                type: 'warning',
+                confirmButtonText: 'Ok',
+                cancelButtonText: 'Cancelar'
+            })
+            return true;
+        }
+
+        Ajuste();
+    }
+
+
+</script>
