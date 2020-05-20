@@ -97,5 +97,58 @@ namespace Creditos.Controllers
             // return Json(output);
             return Json(output, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ConsultarAsoProvR(){
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                list_aso_prov = cls_aso_pro.mostrarRpt(1);
+                var nuevafila = "";
+                for (int i = 0; i < list_aso_prov.Count; i++)
+                {
+                    var idNV = list_aso_prov[i].id_asoc_prov;
+                    nuevafila += "<tr class='rows_" + idNV + "'><td colspan='1'><center>" +
+                        (i + 1) + "</center></td><td colspan='2'>● " +
+                        list_aso_prov[i].proveedor + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].fecha.ToShortDateString() + "</center></td></tr>";
+                }
+
+                string tbody = "<tbody>" + nuevafila + "</tbody>";
+
+                string _tablaFinal = "<table class='table' width='80%' border='1'cellspacing='0' cellpadding='0' style='margin: 0 auto;'>" +
+             "<thead>" +
+                "<tr>" +
+                 "<th colspan='4'><center><img src='../Content/media/logos/espam.png' width='80%' height='120%'></center></th> " +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='4'><h2><center><br/>LISTADO DE PROVEEDORES ASOCIADOS<br/></center></h2></th>" +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>Fecha Actual<br/></b></center></th>" +
+                  "<td colspan='1'><center><br/>" + DateTime.Now.ToShortDateString() + "<br/></center></td>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>ASOCIACIÓN<br/></b></center></th>" +
+                  "<td colspan='1'><center><br/>AETPAM<br/></center></td>" +
+                 "</tr>" +
+                "<tr>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/> Item <br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><b><br/>◢ RUC - PROVEEEDOR ◣<br/></b></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>FECHA DE UNIÓN<br/></b></center></th>" +
+                "</tr>" +
+              "</thead>" +
+              tbody +
+                "</table>";
+
+                _mensaje = "";
+                _validar = true;
+                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+
+
+        }
     }
 }

@@ -59,7 +59,7 @@
                                 </div>
                                 @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                                 <div>
-                                    <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
+                                    <button type="button" onclick="generarReporteIM(); " class="btn btn-primary">Generar Reporte</button>
                                     <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
                                 </div>
                                 <br />
@@ -72,7 +72,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorIngresos">
+        <div id="contIngresos">
         </div>
     </div>
 </div>
@@ -102,15 +102,15 @@
                                             <label>Mes:</label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                                @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
+                                                @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_idsE", @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                                 <div>
-                                    <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
-                                    <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+                                    <button type="button" onclick="generarReporteEM(); " class="btn btn-primary">Generar Reporte</button>
+                                    <button type="button" id="imprimir" onclick="ImprimirE(); " class="btn btn-primary">Imprimir</button>
                                 </div>
                                 <br />
                             </div>
@@ -122,7 +122,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorEgresos">
+        <div id="contEgresos">
         </div>
     </div>
 </div>
@@ -145,21 +145,10 @@
                 <div class="card-body">
                     <div>
                         <div class="kt-portlet__body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="kt-section">
-                                        <label>Mes:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                             <div>
-                                <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
-                                <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+                                <button type="button" onclick="generarReporteIA(); " class="btn btn-primary">Generar Reporte</button>
+                                <button type="button" id="imprimir" onclick="ImprimirA(); " class="btn btn-primary">Imprimir</button>
                             </div>
                             <br />
                         </div>
@@ -171,7 +160,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorIngresosA">
+        <div id="contIngresosA">
         </div>
     </div>
 </div>
@@ -194,21 +183,10 @@
                 <div class="card-body">
                     <div>
                         <div class="kt-portlet__body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="kt-section">
-                                        <label>Mes:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                             <div>
-                                <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
-                                <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+                                <button type="button" onclick="generarReporteEA(); " class="btn btn-primary">Generar Reporte</button>
+                                <button type="button" id="imprimir" onclick="ImprimirEA(); " class="btn btn-primary">Imprimir</button>
                             </div>
                             <br />
                         </div>
@@ -221,7 +199,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorEgresosA">
+        <div id="contEgresosA">
         </div>
     </div>
 </div>
@@ -244,21 +222,10 @@
                 <div class="card-body">
                     <div>
                         <div class="kt-portlet__body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="kt-section">
-                                        <label>Mes:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                             <div>
-                                <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
-                                <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+                                <button type="button" onclick="generarReporteAsPr(); " class="btn btn-primary">Generar Reporte</button>
+                                <button type="button" id="imprimir" onclick="ImprimirAsPr(); " class="btn btn-primary">Imprimir</button>
                             </div>
                             <br />
                         </div>
@@ -270,7 +237,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorEgresos">
+        <div id="contProvAso">
         </div>
     </div>
 </div>
@@ -293,21 +260,10 @@
                 <div class="card-body">
                     <div>
                         <div class="kt-portlet__body">
-                            <div class="row">
-                                <div class="col-lg-8">
-                                    <div class="kt-section">
-                                        <label>Mes:</label>
-                                        <div class="input-group">
-                                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                            @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Seleccione un Mes--", new { @id = "mes_ids", @class = "form-control" })
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                             @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
                             <div>
-                                <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
-                                <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
+                                <button type="button" onclick="generarReporteEmAs(); " class="btn btn-primary">Generar Reporte</button>
+                                <button type="button" id="imprimir" onclick="ImprimirEmAs(); " class="btn btn-primary">Imprimir</button>
                             </div>
                             <br />
                         </div>
@@ -319,7 +275,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorIngresosA">
+        <div id="contEmpAso">
         </div>
     </div>
 </div>
@@ -427,17 +383,16 @@
     @*Reporte*@
     <script type="text/javascript">
 
-        function generarReporteI() {
+        function generarReporteIM() {
             var _idMes = $('#mes_ids').val();
-            var _idIngreso = $('#_idIngreso').val();
+            //var _idIngreso = $('#_idIngreso').val();
         $.ajax({
             url: '@Url.Action("ConsultarIngreso", "ingresos")',
             type: 'post',
             dataType: 'JSON',
-            data: { _idMes: _idMes },
-            data: { _idIngreso: _idIngreso },
+            data: { _idMes: _idMes /*_idIngreso: _idIngreso*/ },
             beforeSend: function () {
-                $("#contenedorIngresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                $("#contIngresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
 
             },
             uploadProgress: function (event, position, total, percentComplete) {
@@ -445,9 +400,9 @@
             success: function (data) {
                 console.log(data);
                 if (data.validar == true) {
-                    $("#contenedorIngresos").html(data.tabla);
+                    $("#contIngresos").html(data.tabla);
                 } else {
-                    $("#contenedorIngresos").html(data.mensaje);
+                    $("#contIngresos").html(data.mensaje);
                 }
             },
             complete: function () {
@@ -455,30 +410,244 @@
             error: function (xhr, textStatus, errorThrown) {
 
                 if (xhr.status === 0) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                 } else if (xhr.status == 404) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
                 } else if (xhr.status == 500) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
                 } else if (errorThrown === 'parsererror') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
                 } else if (contenedorAsistencia === 'timeout') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
                 } else if (errorThrown === 'abort') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
                 } else {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                    $("#contIngresos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
                 }
             }
         });
-    }
+        }
+
+        function generarReporteEM() {
+            var _idMes = $('#mes_idsE').val();
+            //var _idIngreso = $('#_idIngreso').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarEgreso", "egresos")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _idMes: _idMes /*_idIngreso: _idIngreso*/ },
+            beforeSend: function () {
+                $("#contEgresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contEgresos").html(data.tabla);
+                } else {
+                    $("#contEgresos").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contEgresos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
+
+        function generarReporteIA() {
+            //var _idIngreso = $('#_idIngreso').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarIngresoM", "ingresos")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contIngresosA").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contIngresosA").html(data.tabla);
+                } else {
+                    $("#contIngresosA").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contIngresosA").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
+
+        function generarReporteEA() {
+            //var _idIngreso = $('#_idIngreso').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarEgresosM", "egresos")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contEgresosA").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contEgresosA").html(data.tabla);
+                } else {
+                    $("#contEgresosA").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contEgresosA").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
+        function generarReporteAsPr() {
+            //var _idIngreso = $('#_idIngreso').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarAsoProvR", "asociacionProveedor")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contProvAso").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contProvAso").html(data.tabla);
+                } else {
+                    $("#contProvAso").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contProvAso").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
+        function generarReporteEmAs() {
+            //var _idIngreso = $('#_idIngreso').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarEmpAsoR", "empleadoAsociacion")',
+            type: 'post',
+            dataType: 'JSON',
+            beforeSend: function () {
+                $("#contEmpAso").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contEmpAso").html(data.tabla);
+                } else {
+                    $("#contEmpAso").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contEmpAso").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
     </script>
     @*hasta aqui*@
 
     <script>
         function Imprimir() {
-
-          $("#contenedorIngresos").print({
+            $("#contIngresos").print({
             addGlobalStyles: true,
             stylesheet: null,
             rejectWindow: true,
@@ -487,5 +656,60 @@
             append: null,
             prepend: null
         });
+        }
+        function ImprimirE() {
+            $("#contEgresos").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        }
+        function ImprimirA() {
+            $("#contIngresosA").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        }
+        function ImprimirEA() {
+            $("#contEgresosA").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        }
+        function ImprimirAsPr() {
+            $("#contProvAso").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        }
+        function ImprimirEmAs() {
+            $("#contEmpAso").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
         }
     </script>

@@ -15,6 +15,18 @@ namespace Creditos.Clases{
             }
             return ingr;
         }
+        public List<mIngresos> mostrarRep(int id_mes, int id_aso){
+            foreach (var item in db.spReporteIngreso(id_mes, id_aso)){
+                ingr.Add(new mIngresos(item.id_ingresos, item.valor, item.tipoingreso, item.mes));
+            }
+            return ingr;
+        }
+        public List<mIngresos> mostrarRepM( int id_aso){
+            foreach (var item in db.spReporteIngresosM(id_aso)){
+                ingr.Add(new mIngresos(Convert.ToDouble(item.total), item.id_mes, item.mes));
+            }
+            return ingr;
+        }
         public void ingresar(mIngresos datos){
             db.spInsertarIngreso(Convert.ToDouble(datos.valor), datos.asociacion_id, datos.tipo_ingreso_id, datos.mes_id);
         }

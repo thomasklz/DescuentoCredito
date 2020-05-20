@@ -13,6 +13,7 @@ namespace Creditos.Models
         public Nullable<int> mes_id { get; set; }
         public string mes { get; set; }
         public string tipoegreso { get; set; }
+        public double sum { get; set; }
 
         public mEgresos() { }
         public mEgresos(int id_egresos, double valor, int asociacion_id, int tipo_egreso_id, int mes_id){
@@ -27,6 +28,12 @@ namespace Creditos.Models
             this.id_egresos = id_egresos;
             this.valor = valor;
             this.tipoegreso = tipoegreso;
+            this.mes = mes;
+        }
+        public mEgresos(double sum, int mes_id, string mes)
+        {
+            this.sum = sum;
+            this.mes_id = mes_id;
             this.mes = mes;
         }
         public mEgresos(int id_egresos, double valor, int tipo_egreso_id, int mes_id)

@@ -15,6 +15,13 @@ namespace Creditos.Clases{
             }
             return lista_Aso_rpov;
         }
+        public List<mAsociacionProveedor> mostrarRpt(int aso_id){
+            foreach (var item in db.spReporteAsoProv(aso_id))
+            {
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, Convert.ToDateTime(item.fecha)));
+            }
+            return lista_Aso_rpov;
+        }
         public void ingresar(mAsociacionProveedor datos){
             db.spInsertarAsociacionProveedor(datos.proveedor_id, datos.asociacion_id, datos.fecha);
 
