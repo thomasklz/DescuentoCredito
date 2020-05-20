@@ -43,7 +43,7 @@ namespace Creditos.Controllers
             }catch (Exception){
                 ex = "Error al actualizar";
             }
-            return Json(ex, JsonRequestBehavior.AllowGet);
+            return Json(ex);
         }
         public ActionResult Store(mValorUtilizado model){
             clsvalorutil.ingresar(model);
