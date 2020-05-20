@@ -6,12 +6,19 @@
     List<Creditos.Models.mDescuento> listDescuentos = ViewBag.descuentos;
     List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
 }
+@*PARA RESOLVER EL FILTRADO EN LAS VENTANAS MODALES*@
+<style>
+    .ui-autocomplete {
+        z-index: 2150000000 !important;
+    }
+</style>
+
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
         <div class="kt-subheader__main">
             <h4>
-                BIENVENIDO 
+                BIENVENIDO
                 <small>Descuentos</small>
             </h4>
             <span class="kt-subheader__separator kt-hidden"></span>
@@ -50,7 +57,7 @@
         </div>
     </div>
     <br />
-    
+
     <div>
         <div class="kt-portlet__body">
             <div class="row">
@@ -356,75 +363,75 @@
 
     function validarTdatos() {
 
-          valor = document.getElementById("valors").value;
-          tpIngr = document.getElementById("cab_desc_ids").selectedIndex;
-          mes = document.getElementById("mes_ids").selectedIndex;
-          empl = document.getElementById("empleado_id").value;
-          if (empl == null || empl == 0) {
-              $('#Cedulas').addClass('is-invalid');
-              $('#Nombress').addClass('is-invalid');
-              $('#SegundoNombres').addClass('is-invalid');
-              return true;
-          } else if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
-              $('#valors').addClass('is-invalid');
-              $("#inCant").html("Este campo es obligatorio");
-              return true;
-          } else if (tpIngr == null || tpIngr == 0) {
-              $('#cab_desc_ids').addClass('is-invalid');
-              $("#inTpIn").html("No ha seleccionado un Descuento.");
-              return true;
-          } else if (mes == null || mes == 0) {
-              $('#mes_ids').addClass('is-invalid');
-              $("#inMesV").html("No ha seleccionado un mes.");
-              return true;
-          }  
-          ValidarIngreso();
+        valor = document.getElementById("valors").value;
+        tpIngr = document.getElementById("cab_desc_ids").selectedIndex;
+        mes = document.getElementById("mes_ids").selectedIndex;
+        empl = document.getElementById("empleado_id").value;
+        if (empl == null || empl == 0) {
+            $('#Cedulas').addClass('is-invalid');
+            $('#Nombress').addClass('is-invalid');
+            $('#SegundoNombres').addClass('is-invalid');
+            return true;
+        } else if (!/^\d*\,?\d*$/.test(valor) || valor == null || valor == 0) {
+            $('#valors').addClass('is-invalid');
+            $("#inCant").html("Este campo es obligatorio");
+            return true;
+        } else if (tpIngr == null || tpIngr == 0) {
+            $('#cab_desc_ids').addClass('is-invalid');
+            $("#inTpIn").html("No ha seleccionado un Descuento.");
+            return true;
+        } else if (mes == null || mes == 0) {
+            $('#mes_ids').addClass('is-invalid');
+            $("#inMesV").html("No ha seleccionado un mes.");
+            return true;
+        }
+        ValidarIngreso();
     }
 
     // FUNCIÓN PARA REALIZAR EL FILTRADO
     $(document).ready(function () {
         $("#search").autocomplete({
-                source: function (request, response) {
-                    var param = { lastName: $('#search').val() };
-                    $.ajax({
-                        url: "/descuento/SearchPerson",
-                        data: JSON.stringify(param),
-                        dataType: "json",
-                        type: "POST",
-                        contentType: "application/json; charset=utf-8",
-                        dataFilter: function (data) { return data; },
-                        success: function (data) {
-                            response($.map(data, function (item) {
-                               //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
-                                return {
-                                    value: item.persona,
-                                    dataNombres: item.Nombres,
-                                    dataApellidos: item.Apellidos,
-                                    dataCI: item.Cedula,
-                                    dataID: item.Id_Persona
-                                }
-                            }))
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            source: function (request, response) {
+                var param = { lastName: $('#search').val() };
+                $.ajax({
+                    url: "/descuento/SearchPerson",
+                    data: JSON.stringify(param),
+                    dataType: "json",
+                    type: "POST",
+                    contentType: "application/json; charset=utf-8",
+                    dataFilter: function (data) { return data; },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                            return {
+                                value: item.persona,
+                                dataNombres: item.Nombres,
+                                dataApellidos: item.Apellidos,
+                                dataCI: item.Cedula,
+                                dataID: item.Id_Persona
+                            }
+                        }))
+                    },
+                    error: function (XMLHttpRequest, textStatus, errorThrown) {
 
-                        }
-                    });
-                },
-                minLength: 2,
-                select: function (event, ui) {
-                    //MOSTRAR VALORES EN LOS INPUT
-                    $("#empleado_id").val(ui.item.dataID);
-                    $("#Cedulas").val(ui.item.dataCI);
-                    $("#Nombress").val(ui.item.dataNombres);
-                    $("#SegundoNombres").val(ui.item.dataApellidos);
-                }
-            });
+                    }
+                });
+            },
+            minLength: 2,
+            select: function (event, ui) {
+                //MOSTRAR VALORES EN LOS INPUT
+                $("#empleado_id").val(ui.item.dataID);
+                $("#Cedulas").val(ui.item.dataCI);
+                $("#Nombress").val(ui.item.dataNombres);
+                $("#SegundoNombres").val(ui.item.dataApellidos);
+            }
+        });
     });
     // FIN DE LA FUNCIÓN DEL FILTRADO
 
     // FUNCIÓN PARA REALIZAR EL FILTRADO MODAL
     $(document).ready(function () {
-        $("#searchm").autocomplete( {
+        $("#searchm").autocomplete({
             source: function (request, response) {
                 var param = { lastName: $('#searchm').val() };
                 $.ajax({
