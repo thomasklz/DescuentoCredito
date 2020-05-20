@@ -10,20 +10,14 @@
 namespace Creditos.Entity
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Ingresos
+    public partial class spReporteIngreso_Result
     {
         public int id_ingresos { get; set; }
         public double valor { get; set; }
-        public Nullable<int> asociacion_id { get; set; }
-        public Nullable<int> tipo_ingreso_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<bool> est_delete { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-    
-        public virtual Asociacion Asociacion { get; set; }
-        public virtual Mes Mes { get; set; }
-        public virtual Tipo_ingreso Tipo_ingreso { get; set; }
+        public string tipoingreso { get; set; }
+        public string mes { get; set; }
+        public int id_tipo_ingreso { get; set; }
+        public int id_mes { get; set; }
     }
 }

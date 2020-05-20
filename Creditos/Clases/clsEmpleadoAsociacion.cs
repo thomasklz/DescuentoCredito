@@ -16,6 +16,12 @@ namespace Creditos.Clases{
             }
             return lista_empl_Aso;
         }
+        public List<mEmpleadoAsociacion> mostrarRpt(int aso_id){
+            foreach (var item in db.spReporteEmpAso(aso_id)){
+                lista_empl_Aso.Add(new mEmpleadoAsociacion(item.id_empl_aso, item.persona, Convert.ToDateTime(item.fecha_ingreso)));
+            }
+            return lista_empl_Aso;
+        }
         public void ingresar(mEmpleadoAsociacion datos){
             db.spInsertarEmpleadoAsociacion(datos.empleado_id, datos.asociacion_id, datos.fecha_ingreso);
 

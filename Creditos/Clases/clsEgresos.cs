@@ -17,6 +17,18 @@ namespace Creditos.Clases{
             }
             return egr;
         }
+        public List<mEgresos> mostrarRep(int id_mes, int id_aso){
+            foreach (var item in db.spReporteEgresos(id_mes, id_aso)){
+                egr.Add(new mEgresos(item.id_egresos,Convert.ToDouble(item.valor), item.tipoegreso, item.mes));
+            }
+            return egr;
+        }
+        public List<mEgresos> mostrarRepM(int id_aso){
+            foreach (var item in db.spReporteEgresosM(id_aso)){
+                egr.Add(new mEgresos(Convert.ToDouble(item.total), item.id_mes, item.mes));
+            }
+            return egr;
+        }
         public void ingresar(mEgresos datos){
             db.spInsertarEgreso(datos.valor, datos.asociacion_id, datos.tipo_egreso_id, datos.mes_id);
         }
