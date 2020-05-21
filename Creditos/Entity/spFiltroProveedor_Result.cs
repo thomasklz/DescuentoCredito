@@ -14,7 +14,7 @@ namespace Creditos.Entity
     public partial class spFiltroProveedor_Result
     {
         public string prov { get; set; }
-        public int id_proveedor { get; set; }
+        public Nullable<int> id_proveedor { get; set; }
         public string RUC { get; set; }
         public string nombre { get; set; }
         public string descripcion { get; set; }

@@ -117,5 +117,68 @@ namespace Creditos.Controllers{
             }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult ConsultarCreditoR(){
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                list_credito = clscred.mostrarRpt(1);
+                var nuevafila = "";
+                for (int i = 0; i < list_credito.Count; i++)
+                {
+                    var idNV = list_credito[i].id_credito;
+                    nuevafila += "<tr class='rows_" + idNV + "'><td colspan='1'><center>" +
+                        (i + 1) + "</center></td><td colspan='2'>● " +
+                        list_credito[i].persona + "</td><td colspan='1'><center> " +
+                        list_credito[i].cantidad + "</center></td><td colspan='1'><center>" +
+                        list_credito[i].numero_cuota + "</center></td><td colspan='1'><center>" +
+                        list_credito[i].desc_mensual + "</center></td><td colspan='1'><center>" +
+                        list_credito[i].estado_activacion + "</center></td><td colspan='1'><center>" +
+                        list_credito[i].fecha_solicitud.ToShortDateString() + "</center></td><td colspan='1'><center>" +
+                        list_credito[i].fecha_aprobacion.ToShortDateString() + "</center></td></tr>";
+                }
+
+                string tbody = "<tbody>" + nuevafila + "</tbody>";
+
+                string _tablaFinal = "<table class='table' width='80%' border='1'cellspacing='0' cellpadding='0' style='margin: 0 auto;'>" +
+             "<thead>" +
+                "<tr>" +
+                 "<th colspan='9'><center><img src='../Content/media/logos/espam.png' width='80%' height='120%'></center></th> " +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='9'><h2><center><br/>LISTADO DE PROVEEDORES ASOCIADOS<br/></center></h2></th>" +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='3' style='background-color:#f7f5f5'><center><b><br/>Fecha Actual<br/></b></center></th>" +
+                  "<td colspan='2'><center><br/>" + DateTime.Now.ToShortDateString() + "<br/></center></td>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>ASOCIACIÓN<br/></b></center></th>" +
+                  "<td colspan='2'><center><br/>AETPAM<br/></center></td>" +
+                 "</tr>" +
+                "<tr>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/> Item <br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><b><br/>◢ EMPLEADO ◣<br/></b></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>CANTIDAD<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>PLAZO<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>Desc/Mens<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>ESTADO<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>F. SOLICITUD<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>F. REVISIÓN<br/></b></center></th>" +
+                "</tr>" +
+              "</thead>" +
+              tbody +
+                "</table>";
+
+                _mensaje = "";
+                _validar = true;
+                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+
+
+        }
     }
 }

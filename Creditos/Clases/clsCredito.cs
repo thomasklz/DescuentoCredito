@@ -10,11 +10,15 @@ namespace Creditos.Clases {
         BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mCredito> lista_creditos = new List<mCredito>();
         List<mCredito> lista_creditos1 = new List<mCredito>();
-        public List<mCredito> mostrar()
-        {
-            foreach (var item in db.spConsultarCredito())
-            {
+        public List<mCredito> mostrar(){
+            foreach (var item in db.spConsultarCredito()){
                 lista_creditos.Add(new mCredito(item.id_credito, item.descripcion, Convert.ToDouble(item.cantidad), Convert.ToDateTime(item.fecha_solicitud), Convert.ToDateTime(item.fecha_aprobacion), Convert.ToDouble(item.desc_mensual), item.persona, item.aso, Convert.ToInt32(item.numero_cuota), Convert.ToBoolean(item.estado_activacion), Convert.ToBoolean(item.estado_aprobacion), Convert.ToBoolean(item.estado_rechazo)));
+            }
+            return lista_creditos;
+        }
+        public List<mCredito> mostrarRpt(int aso_id){
+            foreach (var item in db.spReporteCredito(aso_id)){
+                lista_creditos.Add(new mCredito(item.id_credito, item.persona, Convert.ToDouble(item.cantidad), Convert.ToDateTime(item.fecha_solicitud), Convert.ToDateTime(item.fecha_aprobacion), Convert.ToDouble(item.desc_mensual), Convert.ToInt32(item.numero_cuota), Convert.ToBoolean(item.estado_activacion), Convert.ToBoolean(item.estado_aprobacion), Convert.ToBoolean(item.estado_rechazo)));
             }
             return lista_creditos;
         }

@@ -19,8 +19,8 @@ namespace Creditos.Entity
         public Nullable<int> asociacion_id { get; set; }
         public Nullable<int> tipo_ingreso_id { get; set; }
         public Nullable<int> mes_id { get; set; }
-        public Nullable<bool> est_delete { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
+        public Nullable<bool> est_delete { get; set; }
     
         public virtual Asociacion Asociacion { get; set; }
         public virtual Mes Mes { get; set; }

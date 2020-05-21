@@ -1194,6 +1194,9 @@
         <Function Name="spReporteAsoProv" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="aso_id" Type="int" Mode="In" />
         </Function>
+        <Function Name="spReporteCredito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="aso_id" Type="int" Mode="In" />
+        </Function>
         <Function Name="spReporteEgresos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="idmes" Type="int" Mode="In" />
           <Parameter Name="idaso" Type="int" Mode="In" />
@@ -1535,11 +1538,11 @@
           <Property Name="asociacion_id" Type="Int32" />
           <Property Name="tipo_egreso_id" Type="Int32" />
           <Property Name="mes_id" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
           <Property Name="est_delete" Type="Boolean" />
           <NavigationProperty Name="Asociacion" Relationship="Self.FK_Egresos_Asociacion" FromRole="Egresos" ToRole="Asociacion" />
           <NavigationProperty Name="Mes" Relationship="Self.FK_Egresos_Mes" FromRole="Egresos" ToRole="Mes" />
           <NavigationProperty Name="Tipo_egreso" Relationship="Self.FK_Egresos_Tipo_egreso" FromRole="Egresos" ToRole="Tipo_egreso" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="empleado_asociacion">
           <Key>
@@ -1563,11 +1566,11 @@
           <Property Name="asociacion_id" Type="Int32" />
           <Property Name="tipo_ingreso_id" Type="Int32" />
           <Property Name="mes_id" Type="Int32" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
           <Property Name="est_delete" Type="Boolean" />
           <NavigationProperty Name="Asociacion" Relationship="Self.FK_Ingresos_Asociacion" FromRole="Ingresos" ToRole="Asociacion" />
           <NavigationProperty Name="Mes" Relationship="Self.FK_Ingresos_Mes" FromRole="Ingresos" ToRole="Mes" />
           <NavigationProperty Name="Tipo_ingreso" Relationship="Self.FK_Ingresos_Tipo_ingreso" FromRole="Ingresos" ToRole="Tipo_ingreso" />
-          <Property Name="fecha" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Mes">
           <Key>
@@ -2912,6 +2915,26 @@
             <Parameter Name="idcredito" Mode="In" Type="Int32" />
             <Parameter Name="fecha_aprobacion" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="spReporteAsoProv" ReturnType="Collection(AdministracionAcademicaModel.spReporteAsoProv_Result)">
+          <Parameter Name="aso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReporteEgresos" ReturnType="Collection(AdministracionAcademicaModel.spReporteEgresos_Result)">
+            <Parameter Name="idmes" Mode="In" Type="Int32" />
+            <Parameter Name="idaso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReporteEgresosM" ReturnType="Collection(AdministracionAcademicaModel.spReporteEgresosM_Result)">
+          <Parameter Name="aso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReporteEmpAso" ReturnType="Collection(AdministracionAcademicaModel.spReporteEmpAso_Result)">
+          <Parameter Name="aso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReporteIngreso" ReturnType="Collection(AdministracionAcademicaModel.spReporteIngreso_Result)">
+            <Parameter Name="idmes" Mode="In" Type="Int32" />
+            <Parameter Name="idaso" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spReporteIngresosM" ReturnType="Collection(AdministracionAcademicaModel.spReporteIngresosM_Result)">
+          <Parameter Name="aso_id" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="spConsultarAsociacionProveedorById" ReturnType="Collection(AdministracionAcademicaModel.spConsultarAsociacionProveedorById_Result)">
           <Parameter Name="idasoprov" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -2960,24 +2983,7 @@
             <Parameter Name="persona_id" Mode="In" Type="Int32" />
             <Parameter Name="monto_aprobado" Mode="In" Type="Double" />
           </FunctionImport>
-          <FunctionImport Name="spReporteIngreso" ReturnType="Collection(AdministracionAcademicaModel.spReporteIngreso_Result)">
-            <Parameter Name="idmes" Mode="In" Type="Int32" />
-            <Parameter Name="idaso" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spReporteEgresos" ReturnType="Collection(AdministracionAcademicaModel.spReporteEgresos_Result)">
-            <Parameter Name="idmes" Mode="In" Type="Int32" />
-            <Parameter Name="idaso" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spReporteIngresosM" ReturnType="Collection(AdministracionAcademicaModel.spReporteIngresosM_Result)">
-          <Parameter Name="aso_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spReporteEgresosM" ReturnType="Collection(AdministracionAcademicaModel.spReporteEgresosM_Result)">
-          <Parameter Name="aso_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spReporteEmpAso" ReturnType="Collection(AdministracionAcademicaModel.spReporteEmpAso_Result)">
-          <Parameter Name="aso_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="spReporteAsoProv" ReturnType="Collection(AdministracionAcademicaModel.spReporteAsoProv_Result)">
+          <FunctionImport Name="spReporteCredito" ReturnType="Collection(AdministracionAcademicaModel.spReporteCredito_Result)">
             <Parameter Name="aso_id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -3484,7 +3490,7 @@
         </ComplexType>
         <ComplexType Name="spFiltroProveedor_Result">
           <Property Type="String" Name="prov" Nullable="true" MaxLength="36" />
-          <Property Type="Int32" Name="id_proveedor" Nullable="false" />
+          <Property Type="Int32" Name="id_proveedor" Nullable="true" />
           <Property Type="String" Name="RUC" Nullable="true" MaxLength="13" />
           <Property Type="String" Name="nombre" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="descripcion" Nullable="true" MaxLength="20" />
@@ -3497,6 +3503,43 @@
           <Property Type="Int32" Name="proveedor_id" Nullable="true" />
           <Property Type="DateTime" Name="fecha" Nullable="true" />
           <Property Type="Double" Name="cantidad_usada" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spReporteAsoProv_Result">
+          <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
+          <Property Type="DateTime" Name="fecha" Nullable="true" />
+          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="36" />
+        </ComplexType>
+        <ComplexType Name="spReporteEgresos_Result">
+          <Property Type="Int32" Name="id_egresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="true" />
+          <Property Type="String" Name="tipoegreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_egreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spReporteEgresosM_Result">
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spReporteEmpAso_Result">
+          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
+          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" />
+          <Property Type="String" Name="persona" Nullable="true" MaxLength="221" />
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spReporteIngreso_Result">
+          <Property Type="Int32" Name="id_ingresos" Nullable="false" />
+          <Property Type="Double" Name="valor" Nullable="false" />
+          <Property Type="String" Name="tipoingreso" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spReporteIngresosM_Result">
+          <Property Type="Double" Name="total" Nullable="true" />
+          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
+          <Property Type="Int32" Name="id_mes" Nullable="false" />
         </ComplexType>
         <ComplexType Name="spConsultarAsociacionProveedorById_Result">
           <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
@@ -3599,42 +3642,17 @@
           <Property Type="Int32" Name="id_mes" Nullable="false" />
           <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
         </ComplexType>
-        <ComplexType Name="spReporteIngreso_Result">
-          <Property Type="Int32" Name="id_ingresos" Nullable="false" />
-          <Property Type="Double" Name="valor" Nullable="false" />
-          <Property Type="String" Name="tipoingreso" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
-          <Property Type="Int32" Name="id_tipo_ingreso" Nullable="false" />
-          <Property Type="Int32" Name="id_mes" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="spReporteEgresos_Result">
-          <Property Type="Int32" Name="id_egresos" Nullable="false" />
-          <Property Type="Double" Name="valor" Nullable="true" />
-          <Property Type="String" Name="tipoegreso" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
-          <Property Type="Int32" Name="id_tipo_egreso" Nullable="false" />
-          <Property Type="Int32" Name="id_mes" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="spReporteIngresosM_Result">
-          <Property Type="Double" Name="total" Nullable="true" />
-          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
-          <Property Type="Int32" Name="id_mes" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="spReporteEgresosM_Result">
-          <Property Type="Double" Name="total" Nullable="true" />
-          <Property Type="String" Name="mes" Nullable="true" MaxLength="15" />
-          <Property Type="Int32" Name="id_mes" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="spReporteEmpAso_Result">
-          <Property Type="Int32" Name="id_empl_aso" Nullable="false" />
-          <Property Type="DateTime" Name="fecha_ingreso" Nullable="true" />
-          <Property Type="String" Name="persona" Nullable="true" MaxLength="203" />
-          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="spReporteAsoProv_Result">
-          <Property Type="Int32" Name="id_asoc_prov" Nullable="false" />
-          <Property Type="DateTime" Name="fecha" Nullable="true" />
-          <Property Type="String" Name="proveedor" Nullable="true" MaxLength="36" />
+        <ComplexType Name="spReporteCredito_Result">
+          <Property Type="Int32" Name="id_credito" Nullable="false" />
+          <Property Type="String" Name="persona" Nullable="false" MaxLength="101" />
+          <Property Type="DateTime" Name="fecha_solicitud" Nullable="true" />
+          <Property Type="DateTime" Name="fecha_aprobacion" Nullable="true" />
+          <Property Type="Double" Name="cantidad" Nullable="true" />
+          <Property Type="Int32" Name="numero_cuota" Nullable="true" />
+          <Property Type="Double" Name="desc_mensual" Nullable="true" />
+          <Property Type="Boolean" Name="estado_activacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_aprobacion" Nullable="true" />
+          <Property Type="Boolean" Name="estado_rechazo" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -3706,12 +3724,12 @@
           <EntitySetMapping Name="Egresos">
             <EntityTypeMapping TypeName="AdministracionAcademicaModel.Egresos">
               <MappingFragment StoreEntitySet="Egresos">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
                 <ScalarProperty Name="tipo_egreso_id" ColumnName="tipo_egreso_id" />
                 <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="est_delete" ColumnName="est_delete" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -3730,12 +3748,12 @@
           <EntitySetMapping Name="Ingresos">
             <EntityTypeMapping TypeName="AdministracionAcademicaModel.Ingresos">
               <MappingFragment StoreEntitySet="Ingresos">
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
                 <ScalarProperty Name="valor" ColumnName="valor" />
                 <ScalarProperty Name="asociacion_id" ColumnName="asociacion_id" />
                 <ScalarProperty Name="tipo_ingreso_id" ColumnName="tipo_ingreso_id" />
                 <ScalarProperty Name="mes_id" ColumnName="mes_id" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
                 <ScalarProperty Name="est_delete" ColumnName="est_delete" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -4808,6 +4826,67 @@
           <FunctionImportMapping FunctionImportName="spModificarTipoIngreso" FunctionName="AdministracionAcademicaModel.Store.spModificarTipoIngreso" />
           <FunctionImportMapping FunctionImportName="spModificarValorUtilizado" FunctionName="AdministracionAcademicaModel.Store.spModificarValorUtilizado" />
           <FunctionImportMapping FunctionImportName="spRechazarCredito" FunctionName="AdministracionAcademicaModel.Store.spRechazarCredito" />
+          <FunctionImportMapping FunctionImportName="spReporteAsoProv" FunctionName="AdministracionAcademicaModel.Store.spReporteAsoProv">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteAsoProv_Result">
+                <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReporteEgresos" FunctionName="AdministracionAcademicaModel.Store.spReporteEgresos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEgresos_Result">
+                <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tipoegreso" ColumnName="tipoegreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReporteEgresosM" FunctionName="AdministracionAcademicaModel.Store.spReporteEgresosM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEgresosM_Result">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReporteEmpAso" FunctionName="AdministracionAcademicaModel.Store.spReporteEmpAso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEmpAso_Result">
+                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
+                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+                <ScalarProperty Name="persona" ColumnName="persona" />
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReporteIngreso" FunctionName="AdministracionAcademicaModel.Store.spReporteIngreso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteIngreso_Result">
+                <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="tipoingreso" ColumnName="tipoingreso" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spReporteIngresosM" FunctionName="AdministracionAcademicaModel.Store.spReporteIngresosM">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteIngresosM_Result">
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="mes" ColumnName="mes" />
+                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spConsultarAsociacionProveedorById" FunctionName="AdministracionAcademicaModel.Store.spConsultarAsociacionProveedorById">
             <ResultMapping>
               <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spConsultarAsociacionProveedorById_Result">
@@ -4955,64 +5034,19 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spModificarDescuento" FunctionName="AdministracionAcademicaModel.Store.spModificarDescuento" />
           <FunctionImportMapping FunctionImportName="spModificarValorAsignado" FunctionName="AdministracionAcademicaModel.Store.spModificarValorAsignado" />
-          <FunctionImportMapping FunctionImportName="spReporteIngreso" FunctionName="AdministracionAcademicaModel.Store.spReporteIngreso">
+          <FunctionImportMapping FunctionImportName="spReporteCredito" FunctionName="AdministracionAcademicaModel.Store.spReporteCredito">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteIngreso_Result">
-                <ScalarProperty Name="id_ingresos" ColumnName="id_ingresos" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="tipoingreso" ColumnName="tipoingreso" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="id_tipo_ingreso" ColumnName="id_tipo_ingreso" />
-                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spReporteEgresos" FunctionName="AdministracionAcademicaModel.Store.spReporteEgresos">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEgresos_Result">
-                <ScalarProperty Name="id_egresos" ColumnName="id_egresos" />
-                <ScalarProperty Name="valor" ColumnName="valor" />
-                <ScalarProperty Name="tipoegreso" ColumnName="tipoegreso" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="id_tipo_egreso" ColumnName="id_tipo_egreso" />
-                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spReporteIngresosM" FunctionName="AdministracionAcademicaModel.Store.spReporteIngresosM">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteIngresosM_Result">
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spReporteEgresosM" FunctionName="AdministracionAcademicaModel.Store.spReporteEgresosM">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEgresosM_Result">
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="mes" ColumnName="mes" />
-                <ScalarProperty Name="id_mes" ColumnName="id_mes" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spReporteEmpAso" FunctionName="AdministracionAcademicaModel.Store.spReporteEmpAso">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteEmpAso_Result">
-                <ScalarProperty Name="id_empl_aso" ColumnName="id_empl_aso" />
-                <ScalarProperty Name="fecha_ingreso" ColumnName="fecha_ingreso" />
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteCredito_Result">
+                <ScalarProperty Name="id_credito" ColumnName="id_credito" />
                 <ScalarProperty Name="persona" ColumnName="persona" />
-                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="spReporteAsoProv" FunctionName="AdministracionAcademicaModel.Store.spReporteAsoProv">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spReporteAsoProv_Result">
-                <ScalarProperty Name="id_asoc_prov" ColumnName="id_asoc_prov" />
-                <ScalarProperty Name="fecha" ColumnName="fecha" />
-                <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+                <ScalarProperty Name="fecha_solicitud" ColumnName="fecha_solicitud" />
+                <ScalarProperty Name="fecha_aprobacion" ColumnName="fecha_aprobacion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="numero_cuota" ColumnName="numero_cuota" />
+                <ScalarProperty Name="desc_mensual" ColumnName="desc_mensual" />
+                <ScalarProperty Name="estado_activacion" ColumnName="estado_activacion" />
+                <ScalarProperty Name="estado_aprobacion" ColumnName="estado_aprobacion" />
+                <ScalarProperty Name="estado_rechazo" ColumnName="estado_rechazo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

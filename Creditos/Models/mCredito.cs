@@ -48,6 +48,17 @@ namespace Creditos.Models{
             this.estado_aprobacion = estado_aprobacion;
             this.estado_rechazo = estado_rechazo;
         }
-
+        public mCredito(int id_credito, String persona, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo){
+            this.id_credito = id_credito;
+            this.persona = persona;
+            this.cantidad = cantidad;
+            this.fecha_solicitud = fecha_solicitud;
+            this.fecha_aprobacion = fecha_aprobacion;
+            this.desc_mensual = desc_mensual;
+            this.numero_cuota = numero_cuota;
+            this.estado_activacion = estado_activacion;
+            this.estado_aprobacion = estado_aprobacion;
+            this.estado_rechazo = estado_rechazo;
+        }
     }
 }

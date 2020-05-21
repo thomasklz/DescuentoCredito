@@ -1230,6 +1230,68 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spRechazarCredito", idcreditoParameter, fecha_aprobacionParameter);
         }
     
+        public virtual ObjectResult<spReporteAsoProv_Result> spReporteAsoProv(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteAsoProv_Result>("spReporteAsoProv", aso_idParameter);
+        }
+    
+        public virtual ObjectResult<spReporteEgresos_Result> spReporteEgresos(Nullable<int> idmes, Nullable<int> idaso)
+        {
+            var idmesParameter = idmes.HasValue ?
+                new ObjectParameter("idmes", idmes) :
+                new ObjectParameter("idmes", typeof(int));
+    
+            var idasoParameter = idaso.HasValue ?
+                new ObjectParameter("idaso", idaso) :
+                new ObjectParameter("idaso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEgresos_Result>("spReporteEgresos", idmesParameter, idasoParameter);
+        }
+    
+        public virtual ObjectResult<spReporteEgresosM_Result> spReporteEgresosM(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEgresosM_Result>("spReporteEgresosM", aso_idParameter);
+        }
+    
+        public virtual ObjectResult<spReporteEmpAso_Result> spReporteEmpAso(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEmpAso_Result>("spReporteEmpAso", aso_idParameter);
+        }
+    
+        public virtual ObjectResult<spReporteIngreso_Result> spReporteIngreso(Nullable<int> idmes, Nullable<int> idaso)
+        {
+            var idmesParameter = idmes.HasValue ?
+                new ObjectParameter("idmes", idmes) :
+                new ObjectParameter("idmes", typeof(int));
+    
+            var idasoParameter = idaso.HasValue ?
+                new ObjectParameter("idaso", idaso) :
+                new ObjectParameter("idaso", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteIngreso_Result>("spReporteIngreso", idmesParameter, idasoParameter);
+        }
+    
+        public virtual ObjectResult<spReporteIngresosM_Result> spReporteIngresosM(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteIngresosM_Result>("spReporteIngresosM", aso_idParameter);
+        }
+    
         public virtual ObjectResult<spConsultarAsociacionProveedorById_Result> spConsultarAsociacionProveedorById(Nullable<int> idasoprov)
         {
             var idasoprovParameter = idasoprov.HasValue ?
@@ -1383,66 +1445,13 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
         }
     
-        public virtual ObjectResult<spReporteIngreso_Result> spReporteIngreso(Nullable<int> idmes, Nullable<int> idaso)
-        {
-            var idmesParameter = idmes.HasValue ?
-                new ObjectParameter("idmes", idmes) :
-                new ObjectParameter("idmes", typeof(int));
-    
-            var idasoParameter = idaso.HasValue ?
-                new ObjectParameter("idaso", idaso) :
-                new ObjectParameter("idaso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteIngreso_Result>("spReporteIngreso", idmesParameter, idasoParameter);
-        }
-    
-        public virtual ObjectResult<spReporteEgresos_Result> spReporteEgresos(Nullable<int> idmes, Nullable<int> idaso)
-        {
-            var idmesParameter = idmes.HasValue ?
-                new ObjectParameter("idmes", idmes) :
-                new ObjectParameter("idmes", typeof(int));
-    
-            var idasoParameter = idaso.HasValue ?
-                new ObjectParameter("idaso", idaso) :
-                new ObjectParameter("idaso", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEgresos_Result>("spReporteEgresos", idmesParameter, idasoParameter);
-        }
-    
-        public virtual ObjectResult<spReporteIngresosM_Result> spReporteIngresosM(Nullable<int> aso_id)
+        public virtual ObjectResult<spReporteCredito_Result> spReporteCredito(Nullable<int> aso_id)
         {
             var aso_idParameter = aso_id.HasValue ?
                 new ObjectParameter("aso_id", aso_id) :
                 new ObjectParameter("aso_id", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteIngresosM_Result>("spReporteIngresosM", aso_idParameter);
-        }
-    
-        public virtual ObjectResult<spReporteEgresosM_Result> spReporteEgresosM(Nullable<int> aso_id)
-        {
-            var aso_idParameter = aso_id.HasValue ?
-                new ObjectParameter("aso_id", aso_id) :
-                new ObjectParameter("aso_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEgresosM_Result>("spReporteEgresosM", aso_idParameter);
-        }
-    
-        public virtual ObjectResult<spReporteEmpAso_Result> spReporteEmpAso(Nullable<int> aso_id)
-        {
-            var aso_idParameter = aso_id.HasValue ?
-                new ObjectParameter("aso_id", aso_id) :
-                new ObjectParameter("aso_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEmpAso_Result>("spReporteEmpAso", aso_idParameter);
-        }
-    
-        public virtual ObjectResult<spReporteAsoProv_Result> spReporteAsoProv(Nullable<int> aso_id)
-        {
-            var aso_idParameter = aso_id.HasValue ?
-                new ObjectParameter("aso_id", aso_id) :
-                new ObjectParameter("aso_id", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteAsoProv_Result>("spReporteAsoProv", aso_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteCredito_Result>("spReporteCredito", aso_idParameter);
         }
     }
 }
