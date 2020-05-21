@@ -325,7 +325,8 @@
     })
 
     var row;
-    $('body').on('click', '.addajtss', function () {
+        $('body').on('click', '.addajtss', function (e) {
+            e.preventDefault();
         var _idVA = $(this).val();
         row = $(this).parents("tr");
         var _cant = row.find(".monto").val();
@@ -349,7 +350,8 @@
                         'Registro Actualizado',
                         'success'
                     )
-                    $(".rows_" + _idVA).remove();
+                    row.fadeOut();
+                    //$(".rows_" + _idVA).remove();
                 } else {
                     Swal.fire(
                         'Reintentar!',
