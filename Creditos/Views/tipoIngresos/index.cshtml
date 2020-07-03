@@ -37,7 +37,7 @@
                 <label>Descripci&oacute;n:</label>
                 <div class="input-group">
                     <div class="input-group-prepend"><span class="input-group-text"><i class="la la-adn"></i></span></div>
-                    @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", onkeyup = "validar()", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
+                    @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcions", @class = "form-control", @placeholder = "Descripción del Ingreso", @name = "descripcion" })
                     <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
                     <div class="invalid-feedback" style="text-align:center">Inserte un dato con el formato correcto.</div>
                 </div>

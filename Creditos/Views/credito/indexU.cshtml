@@ -68,12 +68,12 @@
                 </div>
                 <div class="col-lg-3">
                     <div class="kt-section">
-                        <label>Descuento Mensual:</label>
+                        <label>N&Uacute;mero de Cuotas:</label>
                         <div class="input-group">
-                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-credit-card"></i></span></div>
-                            @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensuals", @class = "form-control", @placeholder = "Descuento Mensual", @name = "desc_mensual"})
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-plus"></i></span></div>
+                            @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensualsss", @class = "form-control", @placeholder = "Número de Cuotas", @name = "numero_cuota" })
                             <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
-                            <div class="invalid-feedback" style="text-align:center">Se requiere un valor num&eacute;rico.</div>
+                            <div class="invalid-feedback" id="indescV" style="text-align:center"></div>
                         </div>
                     </div>
                 </div>
@@ -279,7 +279,7 @@
             var _descr = $('#descripcions').val();
             var _cantidad = $('#cantidads').val();
             var _nCuotas = $('#numero_cuotas').val();
-            var _descMensual = $('#desc_mensuals').val();
+            var _descMensual = $('#desc_mensualsss').val();
             var _fecha = $('#fecha').val();
             var _idEmplAso = $('#asociacion_id').val();
 
@@ -373,6 +373,7 @@
                 if (typeof (_Desc) == "number" || _Desc == null || _Desc == 0) {
                     $('#desc_mensuals').removeClass('is-valid');
                     $('#desc_mensuals').addClass('is-invalid');
+                    $("#indescV").html("Utilize coma para separar los decimales.");
                 } else {
                     $('#desc_mensuals').removeClass('is-invalid');
                     $('#desc_mensuals').addClass('is-valid');
@@ -382,23 +383,26 @@
 </script>
 
 <script>
+        var a = 1;
+        var b = 1;
     function validarTdatos() {
             desc = document.getElementById("descripcions").value;
             cant = document.getElementById("cantidads").value;
             n_cuotas = document.getElementById("numero_cuotas").value;
-            desc_mensual = document.getElementById("desc_mensuals").value;
+            desc_mensual = document.getElementById("desc_mensualsss").value;
 
             if (desc == null || desc.length == 0) {
                 $('#descripcions').addClass('is-invalid');
                 return true;
-            } else if (typeof (cant) == "number" || cant == null || cant == 0) {
+            } else if (!/^\d*\,?\d*$/.test(cant) || cant == null || cant == 0) {
                 $('#cantidads').addClass('is-invalid');
                 return true;
-            } else if (typeof (n_cuotas) == "number" || n_cuotas == null || n_cuotas == 0) {
+            } else if (!/^\d*\,?\d*$/.test(n_cuotas) || n_cuotas == null || n_cuotas == 0) {
                 $('#numero_cuotas').addClass('is-invalid');
                 return true;
-            } else if (typeof (desc_mensual) == "number" || desc_mensual == null || desc_mensual == 0) {
-                $('#desc_mensuals').addClass('is-invalid');
+            } else if (!/^\d*\,?\d*$/.test(desc_mensual) || desc_mensual == null || desc_mensual == 0) {
+                $('#desc_mensualsss').addClass('is-invalid');
+                $("#indescV").html("Utilize coma para separar los decimales.");
                 return true;
             }ValidarIngreso();
         }
@@ -419,13 +423,13 @@
                     cancelButtonText: 'Cancelar'
                 })
             } else {
+                var divs = ($('#cantidads').val() / $('#numero_cuotas').val()).toFixed(2);
                 Swal.fire({
-                    title: 'Descuento Calculado: ',
+                    title: 'Descuento Calculado: ' + divs,
                     type: 'success',
                     confirmButtonText: 'Ok',
                     cancelButtonText: 'Cancelar'
                 })
-                $('#desc_mensuals').val($('#cantidads').val() / $('#numero_cuotas').val())
             }
         })
     })
@@ -485,7 +489,5 @@
             }
         })
     }
-
-    
 
 </script>

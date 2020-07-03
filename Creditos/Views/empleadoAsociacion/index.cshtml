@@ -6,6 +6,12 @@
     List<Creditos.Models.mEmpleadoAsociacion> listEmplAso = ViewBag.empl_aso;
     List<Creditos.Models.mPersona> listPersona = ViewBag.persona;
 }
+<style>
+    .ui-autocomplete {
+        z-index: 2150000000 !important;
+    }
+</style>
+
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
@@ -235,7 +241,7 @@
                                     <label>Fecha de Uni&oacute;n:</label>
                                     <div class="input-group">
                                         <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
-                                        @Html.TextBoxFor(m => m.fecha_ingreso, new { @id = "fecha_u", @class = "form-control", disabled = "disabled", @placeholder = "Nueva persona" })
+                                        @Html.TextBox("fecha_u", null, new { @class = "form-control", disabled = "disabled", placeholder = "Fecha" })
                                     </div>
                                 </div>
                             </div>
@@ -356,8 +362,47 @@
               }
           });
       });
-    // FIN DE LA FUNCIÓN DEL FILTRADO
+      // FIN DE LA FUNCIÓN DEL FILTRADO
 
+      // FUNCIÓN PARA REALIZAR EL FILTRADO MODAL    
+      $(document).ready(function () {
+          // FUNCIÓN PARA REALIZAR EL FILTRADO
+          $("#searchm").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#searchm').val() };
+                  $.ajax({
+                      url: "/empleadoAsociacion/SearchPersn",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.persona,
+                                  dataNombres: item.Nombres,
+                                  dataApellidos: item.Apellidos,
+                                  dataCI: item.Cedula,
+                                  dataID: item.Id_Persona
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  $("#empleado_ids").val(ui.item.dataID);
+                  $("#nombres").val(ui.item.dataNombres);
+              }
+          });
+      });
+    // FIN DE LA FUNCIÓN DEL FILTRADO
       $(document).ready(function () {
           $('#example').dataTable();
       });
@@ -413,6 +458,7 @@
             success: function (data) {
                 var obj = JSON.parse(data);
                 $("#id_empl_asos").val(obj[0].id_empl_aso);
+                $("#empleado_ids").val(obj[0].empleado_id);
                 var n = new Date(obj[0].fecha_ingreso);
                 y = n.getFullYear();
                 m = n.getMonth() + 1;

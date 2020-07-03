@@ -25,9 +25,13 @@ namespace Creditos.Models{
         public string mes { get; set; }
         public int id_mes { get; set; }
         public double cant_usada { get; set; }
+        public double salario { get; set; }
         public double diferencia { get; set; }
         public double cant_descnt { get; set; }
-
+        public string nombre_cargo { get; set; }
+        public string tipo_cont { get; set; }
+        public string n_cuenta { get; set; }
+        public string banco { get; set; }
         public mPersona(){}
         public mPersona(int Id_Persona, string Nombres, string SegundoNombre, string ApellidoPaterno, string ApellidoMaterno, string Cedula, string Direccion, string CalleSecundaria, string Numero,string ReferenciaD,string TelefonoD, string TelefonoC, string ParroquiaNac, DateTime FechaNac, string Email){
             this.Id_Persona = Id_Persona;
@@ -76,6 +80,17 @@ namespace Creditos.Models{
             this.diferencia = diferencia;
             this.id_mes = id_mes;
             this.mes = mes;
+        }
+        public mPersona(string Cedula, string Nombres, string Direccion, string TelefonoC, string nombre_cargo, string tipo_cont, string n_cuenta, string banco, double salario){
+            this.Cedula = Cedula;
+            this.Nombres = Nombres;
+            this.Direccion = Direccion;
+            this.TelefonoC = TelefonoC;
+            this.nombre_cargo = nombre_cargo;
+            this.tipo_cont = tipo_cont;
+            this.n_cuenta = n_cuenta;
+            this.banco = banco;
+            this.salario = salario;
         }
     }
 }

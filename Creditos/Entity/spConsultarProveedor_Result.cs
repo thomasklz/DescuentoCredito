@@ -21,6 +21,9 @@ namespace Creditos.Entity
         public string email { get; set; }
         public string direccion { get; set; }
         public string telefono { get; set; }
+        public string nCuenta { get; set; }
+        public string nCedula { get; set; }
+        public string personaCuenta { get; set; }
         public Nullable<bool> est_delete { get; set; }
     }
 }

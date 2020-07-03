@@ -82,10 +82,17 @@ namespace Creditos.Controllers
                 if (string.IsNullOrEmpty(_descr)){
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>Ingrese todos los datos</div>";
                 }else{
+
+                    var _objMes = tipoin.mostrar().Where(c => c.descripcion == _descr).FirstOrDefault();
+                    if (_objMes != null){
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>El Tipo de Ingreso ya existe</div>";
+                        return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                    }else {
                         _mensaje = "";
                         _validar = true;
                         return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
                     }
+                }
             }
             catch (Exception ex){
                 _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";

@@ -11,7 +11,7 @@ namespace Creditos.Clases{
         List<mAsociacionProveedor> lista_Aso_rpov = new List<mAsociacionProveedor>();
         public List<mAsociacionProveedor> mostrar(){
             foreach (var item in db.spConsultarAsociacionProveedor()){
-                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.id_proveedor, item.aso, Convert.ToDateTime(item.fecha)));
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.id_proveedor, item.aso, Convert.ToDateTime(item.fecha),Convert.ToDouble(item.porcComision)));
             }
             return lista_Aso_rpov;
         }
@@ -23,7 +23,7 @@ namespace Creditos.Clases{
             return lista_Aso_rpov;
         }
         public void ingresar(mAsociacionProveedor datos){
-            db.spInsertarAsociacionProveedor(datos.proveedor_id, datos.asociacion_id, datos.fecha);
+            db.spInsertarAsociacionProveedor(datos.proveedor_id, datos.asociacion_id, datos.fecha, datos.porcCom);
 
         }
         public void eliminar(int id){
@@ -32,7 +32,7 @@ namespace Creditos.Clases{
         public Boolean modificar(mAsociacionProveedor datos){
             Boolean result = false;
             try{
-                db.spModificarAsociacionProveedor(datos.id_asoc_prov, datos.proveedor_id, datos.asociacion_id, datos.fecha);
+                db.spModificarAsociacionProveedor(datos.id_asoc_prov, datos.proveedor_id, datos.asociacion_id, datos.fecha, datos.porcCom);
                 result = true;
             }
             catch (Exception){
@@ -42,7 +42,7 @@ namespace Creditos.Clases{
         }
         public List<mAsociacionProveedor> mostrarById(int id){
             foreach (var item in db.spConsultarAsociacionProveedorById(id)){
-                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.id_proveedor, item.proveedor, item.id_asociacion, Convert.ToDateTime(item.fecha)));
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.id_proveedor, item.proveedor, item.id_asociacion, Convert.ToDateTime(item.fecha), Convert.ToDouble(item.porcComision)));
             }
             return lista_Aso_rpov;
         }

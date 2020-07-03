@@ -6,8 +6,13 @@
     List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
     List<Creditos.Models.mEmpleadoAsociacion> listEmplAso = ViewBag.persona;
     List<Creditos.Models.mAsociacionProveedor> listAsoProv = ViewBag.proveedor;
-
 }
+<style>
+    .ui-autocomplete {
+        z-index: 2150000000 !important;
+    }
+</style>
+
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
@@ -241,7 +246,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                                         <div class="kt-input-icon kt-input-icon--left">
-                                            <input type="text" id="search" class="form-control input-group-prepend" placeholder="Buscar personas..." style="width:900px">
+                                            <input type="text" id="searchm" class="form-control input-group-prepend" placeholder="Buscar personas..." style="width:900px">
                                             <span class="kt-input-icon__icon kt-input-icon__icon--left">
                                                 <span><i class="la la-search"></i></span>
                                             </span>
@@ -270,7 +275,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-md-4 kt-margin-b-20-tablet-and-mobile">
                                         <div class="kt-input-icon kt-input-icon--left">
-                                            <input type="text" id="searchpr" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
+                                            <input type="text" id="searchprm" class="form-control input-group-prepend" placeholder="Buscar proveedor..." style="width:900px">
                                             <span class="kt-input-icon__icon kt-input-icon__icon--left">
                                                 <span><i class="la la-search"></i></span>
                                             </span>
@@ -280,7 +285,7 @@
                             </div>
                         </div>
 
-                        @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_idss", @Value = "" })
+                        @Html.HiddenFor(m => m.proveedor_id, new { @id = "proveedor_idssss", @Value = "" })
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="kt-section">
@@ -419,6 +424,43 @@
                   $("#fechap").val(d + "/" + m + "/" + y);
               }
           });
+          //MODAL
+          $("#searchm").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#searchm').val() };
+                  $.ajax({
+                      url: "/valorAsignado/SearchPerson",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.persona,
+                                  dataNombres: item.nombre,
+                                  dataFecha: item.fecha_ingreso,
+                                  dataCI: item.Cedula,
+                                  dataID: item.Id_Persona,
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  console.log(ui.item)
+                  $("#empleado_idsss").val(ui.item.dataID);
+                  $("#nombresss").val(ui.item.dataNombres);
+              }
+          });
+
       });
       // FIN DE LA FUNCIÓN DEL FILTRADO
 
@@ -443,7 +485,7 @@
                                   dataNombres: item.nombre,
                                   dataFechap: item.fecha,
                                   dataCI: item.RUC,
-                                  dataID: item.id_proveedor
+                                  dataID: item.proveedor_id
                               }
                           }))
                       },
@@ -464,6 +506,42 @@
                   $("#fechapr").val(d + "/" + m + "/" + y);
               }
           });
+          //MODAL
+          $("#searchprm").autocomplete({
+              source: function (request, response) {
+                  var param = { lastName: $('#searchprm').val() };
+                  $.ajax({
+                      url: "/valorAsignado/SearchProv",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.prov,
+                                  dataNombres: item.nombre,
+                                  dataFechap: item.fecha,
+                                  dataCI: item.RUC,
+                                  dataID: item.proveedor_id
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  $("#proveedor_idssss").val(ui.item.dataID);
+                  $("#proveedorsss").val(ui.item.dataNombres);
+              }
+          });
+
       });
       // FIN DE LA FUNCIÓN DEL FILTRADO
 

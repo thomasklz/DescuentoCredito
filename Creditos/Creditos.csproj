@@ -114,6 +114,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+    <Reference Include="WebDriver.Support, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.Support.3.141.0\lib\net45\WebDriver.Support.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
@@ -173,6 +179,7 @@
     <Compile Include="Clases\clsTipoIngresos.cs" />
     <Compile Include="Clases\clsValorAsignado.cs" />
     <Compile Include="Clases\clsValorUtilizado.cs" />
+    <Compile Include="Clases\Moneda.cs" />
     <Compile Include="Controllers\asociacionController.cs" />
     <Compile Include="Controllers\asociacionProveedorController.cs" />
     <Compile Include="Controllers\cabDescuentoController.cs" />
@@ -285,6 +292,9 @@
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarAsociacion_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spConsultarAsoProvbyID_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spConsultarCabeceraDescuentoById_Result.cs">
@@ -465,6 +475,9 @@
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\spReporteIngreso_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\spReporteRol_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\SubDescuento.cs">

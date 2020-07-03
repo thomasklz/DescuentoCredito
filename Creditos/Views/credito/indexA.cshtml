@@ -78,7 +78,7 @@
                                 <td>@item.fecha_solicitud.ToShortDateString()</td>
                                 <td>
                                     <a href='#' class='btn btn-outline-hover-danger btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" title="Rechazar" onclick='RechazarCredito(@item.id_credito)'><span class='la la-close'></span></a>
-                                    <button class='btn btn-outline-hover-primary btn-sm btn-icon btn-circle infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
+                                    <button class='btn btn-outline-hover-primary btn-sm btn-icon btn-circle mods' value="@item.id_credito" title="Detalles"><span class='flaticon2-pen'></span></button>
                                     <a href='#' class='btn btn-outline-hover-success btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" title="Aprobar" onclick='AprobarCredito(@item.id_credito)'><span class='la la-check'></span></a>
                                 </td>
                                 <td style="display:none;">@item.id_credito</td>
@@ -149,14 +149,15 @@
                                         <td>RECHAZADO</td>
                                     }else{ <td>No se ha revisado</td> }}
 
-                                @if (item.estado_activacion == false && item.estado_aprobacion == false){
-                                    <td>NO APROBADO</td>
-                                }else{if (item.estado_activacion == false){
-                                        <td>CADUCADO</td>
+                                @if (item.estado_rechazo == false && item.estado_aprobacion == false){
+                                    <td>No se ha revisado</td>
+                                }else{if ((item.estado_aprobacion == true || item.estado_rechazo == true) && item.estado_activacion == false){
+                                        <td>INACTIVO</td>
                                     }else{<td>ACTIVO</td> }
                                 }
                                 <td>
-                                    <button class='btn btn-outline-info infor' value="@item.id_credito" title="Detalles"><span class='la la-info'></span></button>
+                                    <button class='btn btn-outline-info infor' value="@item.id_credito" data-toggle="kt-tooltip" title="Detalles"><span class='la la-info'></span></button>
+                                    <a href='#' class='btn btn-outline-danger' data-toggle="kt-tooltip" title="Inactivar" onclick='CreditoInactivo(@item.id_credito)'><span class='flaticon-logout'></span></a>
                                 </td>
                                 <td style="display:none;">@item.id_credito</td>
                             </tr>
@@ -164,6 +165,102 @@
                         }
                     </tbody>
                 </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Informaci&oacute;n de Cr&eacute;ditos</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form1">
+                    <fieldset id="SubmitForm1">
+                        @Html.HiddenFor(m => m.id_credito, new { @id = "id_creditss" })
+                        @Html.HiddenFor(m => m.emp_aso_id, new { @id = "id_em_aso" })
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Descipcion:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.descripcion, new { @id = "descripcion1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Solicitado por:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.persona, new { @id = "persona1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>De la Asociación:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.TextBoxFor(m => m.aso, new { @id = "aso1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>La cantidad de:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.cantidad, new { @id = "cantidad1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con número de cuotas:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.numero_cuota, new { @id = "numero_cuota1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Con un Descuento mensual:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.desc_mensual, new { @id = "desc_mensual1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Fue soliciado el:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.fecha_solicitud, new { @id = "fecha_solicitud1", @class = "form-control", disabled = "disabled", @placeholder = "Name*" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="UpdateIngreso()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
             </div>
         </div>
     </div>
@@ -282,6 +379,60 @@
         }(jQuery));
     });
 
+    function UpdateIngreso(Ingreso) {
+        var data = $("#SubmitForm1").serialize();
+        $.ajax({
+            type: "Post",
+            url: "/credito/UpdateCredito",
+            data: data,
+            success: function (result) {
+                if (result == "Registro actualizado") {
+                    Swal.fire(
+                        'Actualizado!',
+                        'Registro Actualizado',
+                        'success'
+                    )
+                    row.find("td").eq(4).html('$ ' + $('#cantidad1').val());
+                    row.find("td").eq(5).html('$ ' + $('#numero_cuota1').val());
+                    row.find("td").eq(6).html('$ ' + $('#desc_mensual1').val());
+                } else {
+                    Swal.fire(
+                        'Reintentar!',
+                        'ERROR AL ACTUALIZAR',
+                        'error'
+                    )
+                }
+                $("#myModal").modal("hide");
+            }
+        })
+    }
+
+    $('body').on('click', '.mods', function () {
+        var id = $(this).val();
+        row = $(this).parents("tr");
+        $("#myModal").modal();
+        $.ajax({
+            type: "GET",
+            url: "/credito/GetCreditoById?CreditoId=" + id,
+            success: function (data) {
+                var obj = JSON.parse(data);
+                console.log(data)
+                $("#id_creditss").val(obj[0].id_credito);
+                $("#id_em_aso").val(obj[0].emp_aso_id);
+                $("#descripcion1").val(obj[0].descripcion);
+                $("#persona1").val(obj[0].persona);
+                $("#aso1").val(obj[0].aso);
+                $("#cantidad1").val(obj[0].cantidad);
+                $('#cantidad1').removeAttr("disabled");
+                $("#numero_cuota1").val(obj[0].numero_cuota);
+                $('#numero_cuota1').removeAttr("disabled");
+                $("#desc_mensual1").val(obj[0].desc_mensual);
+                $('#desc_mensual1').removeAttr("disabled");
+                $("#fecha_solicitud1").val(obj[0].fecha_solicitud);
+            }
+        })
+    })
+
     $('body').on('click', '.infor', function () {
         var id = $(this).val();
         row = $(this).parents("tr");
@@ -377,4 +528,37 @@
         })
     }
 
+    function CreditoInactivo(Credito) {
+        Swal.fire({
+            title: 'Estás seguro?',
+            text: 'Desea Señalar este crédito como Inactivo?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Aceptar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.value) {
+                $.ajax({
+                    type: "POST",
+                    url: "/credito/DeleteCredito?CreditoId=" + Credito,
+                    success: function (result) {
+                        if (result == "Eliminado") {
+                            Swal.fire(
+                                'INHABILITADO!',
+                                'El Crédito ahora está Inactivo',
+                                'success'
+                            )
+                            $(".row_" + Credito).find("td").eq(10).html("INACTIVO");
+                        } else {
+                            Swal.fire(
+                                'Borrado!',
+                                'No se pudo Inactivar el registro',
+                                'error'
+                            )
+                        }
+                    }
+                })
+            }
+        })
+    }
 </script>

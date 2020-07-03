@@ -123,6 +123,44 @@
                 </div>
             </div>
         </div>
+        <div class="kt-portlet__body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>N&uacute;mero de C&eacute;dula:</label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-cc"></i></span></div>
+                            @Html.TextBoxFor(m => m.nCedula, new { @id = "ncedulas", @title = "Insertar teléfono", @class = "form-control", @placeholder = "Cédula", @name = "telefono" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>A nombre de: </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-user"></i></span></div>
+                            @Html.TextBoxFor(m => m.personaCuenta, new { @id = "pCuentas", @title = "Insertar teléfono", @class = "form-control", @placeholder = "Nombre", @name = "telefono" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="kt-section">
+                        <label>N&uacute;mero de Cuenta: </label>
+                        <div class="input-group">
+                            <div class="input-group-prepend"><span class="input-group-text"><i class="la la-cc-diners-club"></i></span></div>
+                            @Html.TextBoxFor(m => m.nCuenta, new { @id = "ncuentas", @title = "Insertar teléfono", @class = "form-control", @placeholder = "N° cuenta", @name = "telefono" })
+                            <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                            <div class="invalid-feedback" style="text-align:center">El formato no coincide.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
     <div>
         <input id="btnIngreso" type="button" onclick="validarTdatos(); " value="Confirmar" class="btn btn-primary" />

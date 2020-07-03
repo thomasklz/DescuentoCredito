@@ -97,13 +97,15 @@ namespace Creditos.Controllers
             // return Json(output);
             return Json(output, JsonRequestBehavior.AllowGet);
         }
-        public ActionResult ConsultarEmpAsoR()
+        public ActionResult ConsultarEmpAsoR(string _idAso)
         {
             string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
             bool _validar = false;
             try
             {
-                list_em_aso = clsempl_aso.mostrarRpt(1);
+                int _idAsoEntero = Convert.ToInt32(_idAso);
+                var _objAso = clsaso.mostrar().Where(c => c.id_asociacion == _idAsoEntero).FirstOrDefault();
+                list_em_aso = clsempl_aso.mostrarRpt(_idAsoEntero);
                 var nuevafila = "";
                 for (int i = 0; i < list_em_aso.Count; i++)
                 {
@@ -119,16 +121,16 @@ namespace Creditos.Controllers
                 string _tablaFinal = "<table class='table' width='80%' border='1'cellspacing='0' cellpadding='0' style='margin: 0 auto;'>" +
              "<thead>" +
                 "<tr>" +
-                 "<th colspan='4'><center><img src='../Content/media/logos/espam.png' width='80%' height='120%'></center></th> " +
+                 "<th colspan='4'><center><img src='../Content/media/logos/espam.jpg' width='50%' height='70%'></center></th> " +
                 "</tr> " +
                 "<tr>" +
                   "<th colspan='4'><h2><center><br/>LISTADO DE EMPLEADOS ASOCIADOS<br/></center></h2></th>" +
                 "</tr> " +
                 "<tr>" +
-                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>Fecha Actual<br/></b></center></th>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>Fecha Actual: <br/></b></center></th>" +
                   "<td colspan='1'><center><br/>" + DateTime.Now.ToShortDateString() + "<br/></center></td>" +
-                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>ASOCIACIÓN<br/></b></center></th>" +
-                  "<td colspan='1'><center><br/>AETPAM<br/></center></td>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/>ASOCIACIÓN: <br/></b></center></th>" +
+                  "<td colspan='1'><center><br/>" + _objAso.descripcion.ToUpper() + "<br/></center></td>" +
                  "</tr>" +
                 "<tr>" +
                   "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/> Item <br/></b></center></th>" +

@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7cd8f211b0a042759d4371c2e0b0f34c" Name="Diagram1">
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion_Proveedor" Width="1.5" PointX="6" PointY="1.25" IsExpanded="true" />
+      <Diagram DiagramId="a24c2c5ae5a0472d830ba8d67f452558" Name="Diagram1">
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion" Width="1.5" PointX="0.75" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Asociacion_Proveedor" Width="1.5" PointX="6" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Cabecera_Descuento" Width="1.5" PointX="0.75" PointY="18.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Credito" Width="1.5" PointX="8.25" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Descuento" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Egresos" Width="1.5" PointX="8.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Egresos" Width="1.5" PointX="8.25" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.empleado_asociacion" Width="1.5" PointX="6" PointY="12.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Ingresos" Width="1.5" PointX="11.25" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Ingresos" Width="1.5" PointX="11.25" PointY="5.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Mes" Width="1.5" PointX="6" PointY="4.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Proveedor" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Proveedor" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Sobrante" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.SubDescuento" Width="1.5" PointX="1.5" PointY="21.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_egreso" Width="1.5" PointX="6" PointY="23" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_ingreso" Width="1.5" PointX="9" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_egreso" Width="1.5" PointX="6" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Tipo_ingreso" Width="1.5" PointX="9" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Valor_Asignado" Width="1.5" PointX="3" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="AdministracionAcademicaModel.Valor_Utilizado" Width="1.5" PointX="8.25" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="AdministracionAcademicaModel.Valor_Utilizado" Width="1.5" PointX="8.25" PointY="8.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Cargo" Width="1.5" PointX="1.5" PointY="47.25" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.CategoriaCargo" Width="1.5" PointX="1.5" PointY="50.375" IsExpanded="true" />
         <EntityTypeShape EntityType="AdministracionAcademicaModel.Contrato" Width="1.5" PointX="3" PointY="16.375" IsExpanded="true" />

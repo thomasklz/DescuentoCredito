@@ -11,14 +11,16 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarAsociacionProveedorById_Result
+    public partial class spReporteRol_Result
     {
-        public int id_asoc_prov { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public string proveedor { get; set; }
-        public string aso { get; set; }
-        public int id_proveedor { get; set; }
-        public int id_asociacion { get; set; }
-        public Nullable<double> porcComision { get; set; }
+        public string Cedula { get; set; }
+        public string persona { get; set; }
+        public string Direccion { get; set; }
+        public string TelefonoC { get; set; }
+        public string nombre_cargo { get; set; }
+        public string Descripcion { get; set; }
+        public string NroCuenta { get; set; }
+        public string banco { get; set; }
+        public Nullable<decimal> SueldoNumero { get; set; }
     }
 }

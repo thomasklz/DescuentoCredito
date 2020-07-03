@@ -26,6 +26,7 @@ namespace Creditos.Entity
         public Nullable<bool> est_delete { get; set; }
         public Nullable<bool> estado_rechazo { get; set; }
         public string persona { get; set; }
+        public string Cedula { get; set; }
         public string aso { get; set; }
         public int id_empl_aso { get; set; }
     }

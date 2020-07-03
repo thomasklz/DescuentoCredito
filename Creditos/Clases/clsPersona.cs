@@ -8,11 +8,18 @@ namespace Creditos.Clases{
     public class clsPersona{
         BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
         List<mPersona> person = new List<mPersona>();
+        mPersona objPer = new mPersona();
         public List<mPersona> mostrar(){
             foreach (var item in db.spConsultarPersona()){
                 person.Add(new mPersona(item.Id_Persona, item.Nombres, item.SegundoNombre, item.ApellidoPaterno, item.ApellidoMaterno, item.Cedula, item.Direccion, item.CalleSecundaria, item.Numero, item.ReferenciaD, item.TelefonoD, item.TelefonoC, item.ParroquiaNac, item.FechaNac, item.Email));
             }
             return person;
+        }
+        public mPersona mostrarRpt(int emp_id){
+            foreach (var item in db.spReporteRol(emp_id)){
+                objPer =new mPersona(item.Cedula, item.persona, item.Direccion, item.TelefonoC, item.nombre_cargo, item.Descripcion, item.NroCuenta, item.banco, Convert.ToDouble(item.SueldoNumero));
+            }
+            return objPer;
         }
         public List<mPersona> mostrarById(int id){
             foreach (var item in db.spConsultarPersonaById(id)){

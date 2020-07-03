@@ -6,6 +6,12 @@
     List<Creditos.Models.mValorUtilizado> listValUtil = ViewBag.val_util;
     List<Creditos.Models.mValorAsignado> listValAsig = ViewBag.val_asig;
 }
+<style>
+    .ui-autocomplete {
+        z-index: 2150000000 !important;
+    }
+</style>
+
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
     <div class="kt-container ">
@@ -371,6 +377,42 @@
                   $("#cedula").val(ui.item.dataCI);
                   $("#persona").val(ui.item.dataNombres);
                   $("#valorAsignado").val(ui.item.dataCant);
+              }
+          });
+          //MODAL
+          $("#searchm").autocomplete({
+              source: function (request, response) {
+                  var param = { id: 2, lastName: $('#searchm').val() };
+                  $.ajax({
+                      url: "/valorUtilizado/SearchPerson",
+                      data: JSON.stringify(param),
+                      dataType: "json",
+                      type: "POST",
+                      contentType: "application/json; charset=utf-8",
+                      dataFilter: function (data) { return data; },
+                      success: function (data) {
+                          response($.map(data, function (item) {
+                              //ALMACENAR VALORES PARA MOSTRAR ENE LOS INPUT
+                              return {
+                                  value: item.persona,
+                                  dataNombres: item.Nombres,
+                                  dataCant: item.monto_aprobado,
+                                  dataCI: item.Cedula,
+                                  dataID: item.id_valor_asig,
+                              }
+                          }))
+                      },
+                      error: function (XMLHttpRequest, textStatus, errorThrown) {
+
+                      }
+                  });
+              },
+              minLength: 2,
+              select: function (event, ui) {
+                  //MOSTRAR VALORES EN LOS INPUT
+                  $("#valor_asig_ids").val(ui.item.dataID);
+                  $("#personasss").val(ui.item.dataNombres);
+                  $("#valorAsignados").val(ui.item.dataCant);
               }
           });
       });

@@ -11,7 +11,7 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarConveniosxAsociacion_Result
+    public partial class spConsultarAsoProvbyID_Result
     {
         public int id_proveedor { get; set; }
         public string persona_juridica { get; set; }
@@ -25,5 +25,10 @@ namespace Creditos.Entity
         public string nCedula { get; set; }
         public string personaCuenta { get; set; }
         public Nullable<bool> est_delete { get; set; }
+        public string aso { get; set; }
+        public Nullable<System.DateTime> fecha { get; set; }
+        public int id_asoc_prov { get; set; }
+        public Nullable<int> asociacion_id { get; set; }
+        public Nullable<double> porcComision { get; set; }
     }
 }

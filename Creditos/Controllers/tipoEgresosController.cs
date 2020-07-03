@@ -85,11 +85,16 @@ namespace Creditos.Controllers
                 {
                     _mensaje = "<div class='alert alert-danger text-center' role='alert'>Ingrese todos los datos</div>";
                 }
-                else
-                {
-                    _mensaje = "";
-                    _validar = true;
-                    return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                else{
+                    var _objMes = tipoeg.mostrar().Where(c => c.descripcion == _descr).FirstOrDefault();
+                    if (_objMes != null){
+                        _mensaje = "<div class='alert alert-danger text-center' role='alert'>El Tipo de Egreso ya existe</div>";
+                        return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                    }else{
+                        _mensaje = "";
+                        _validar = true;
+                        return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+                    }
                 }
             }
             catch (Exception ex)

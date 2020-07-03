@@ -25,6 +25,7 @@ namespace Creditos.Entity
         public Nullable<double> cantidad_usada { get; set; }
         public Nullable<System.DateTime> fecha { get; set; }
         public Nullable<double> cantidad_descontada { get; set; }
+        public Nullable<bool> est_pagado { get; set; }
         public Nullable<bool> est_delete { get; set; }
     }
 }

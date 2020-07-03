@@ -18,6 +18,7 @@ namespace Creditos.Models{
         public Boolean estado_rechazo { get; set; }
         public string persona { get; set; }
         public string aso { get; set; }
+        public string cedula { get; set; }
 
         public mCredito() { }
         public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo){
@@ -33,7 +34,25 @@ namespace Creditos.Models{
             this.estado_aprobacion = estado_aprobacion;
             this.estado_rechazo = estado_rechazo;
         }
-        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, string persona, string aso, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo)
+
+        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, string persona, string cedula, string aso, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo)
+        {
+            this.id_credito = id_credito;
+            this.descripcion = descripcion;
+            this.cantidad = cantidad;
+            this.fecha_solicitud = fecha_solicitud;
+            this.fecha_aprobacion = fecha_aprobacion;
+            this.desc_mensual = desc_mensual;
+            this.persona = persona;
+            this.cedula = cedula;
+            this.aso = aso;
+            this.emp_aso_id = emp_aso_id;
+            this.numero_cuota = numero_cuota;
+            this.estado_activacion = estado_activacion;
+            this.estado_aprobacion = estado_aprobacion;
+            this.estado_rechazo = estado_rechazo;
+        }
+        public mCredito(int id_credito, String descripcion, double cantidad, DateTime fecha_solicitud, DateTime fecha_aprobacion, double desc_mensual, string persona, string aso, int emp_aso_id, int numero_cuota, Boolean estado_activacion, Boolean estado_aprobacion, Boolean estado_rechazo)
         {
             this.id_credito = id_credito;
             this.descripcion = descripcion;
@@ -43,6 +62,7 @@ namespace Creditos.Models{
             this.desc_mensual = desc_mensual;
             this.persona = persona;
             this.aso = aso;
+            this.emp_aso_id = emp_aso_id;
             this.numero_cuota = numero_cuota;
             this.estado_activacion = estado_activacion;
             this.estado_aprobacion = estado_aprobacion;

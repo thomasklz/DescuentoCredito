@@ -19,5 +19,6 @@ namespace Creditos.Entity
         public string aso { get; set; }
         public int id_proveedor { get; set; }
         public int id_asociacion { get; set; }
+        public Nullable<double> porcComision { get; set; }
     }
 }

@@ -606,7 +606,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacion", descripcionParameter);
         }
     
-        public virtual int spInsertarAsociacionProveedor(Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha)
+        public virtual int spInsertarAsociacionProveedor(Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha, Nullable<double> porcCom)
         {
             var proveedor_idParameter = proveedor_id.HasValue ?
                 new ObjectParameter("proveedor_id", proveedor_id) :
@@ -620,7 +620,11 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha", fecha) :
                 new ObjectParameter("fecha", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacionProveedor", proveedor_idParameter, asociacion_idParameter, fechaParameter);
+            var porcComParameter = porcCom.HasValue ?
+                new ObjectParameter("porcCom", porcCom) :
+                new ObjectParameter("porcCom", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarAsociacionProveedor", proveedor_idParameter, asociacion_idParameter, fechaParameter, porcComParameter);
         }
     
         public virtual int spInsertarCabeceraDescuento(string descripcion, Nullable<int> subdescuento_id)
@@ -791,7 +795,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarMes", descripcionParameter);
         }
     
-        public virtual int spInsertarProveedor(string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono)
+        public virtual int spInsertarProveedor(string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono, string n_cuenta, string n_cedula, string persona_c)
         {
             var persona_juridicaParameter = persona_juridica != null ?
                 new ObjectParameter("persona_juridica", persona_juridica) :
@@ -821,7 +825,19 @@ namespace Creditos.Entity
                 new ObjectParameter("telefono", telefono) :
                 new ObjectParameter("telefono", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarProveedor", persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter);
+            var n_cuentaParameter = n_cuenta != null ?
+                new ObjectParameter("n_cuenta", n_cuenta) :
+                new ObjectParameter("n_cuenta", typeof(string));
+    
+            var n_cedulaParameter = n_cedula != null ?
+                new ObjectParameter("n_cedula", n_cedula) :
+                new ObjectParameter("n_cedula", typeof(string));
+    
+            var persona_cParameter = persona_c != null ?
+                new ObjectParameter("persona_c", persona_c) :
+                new ObjectParameter("persona_c", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spInsertarProveedor", persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter, n_cuentaParameter, n_cedulaParameter, persona_cParameter);
         }
     
         public virtual int spInsertarSobrante(Nullable<int> descuento_id, Nullable<double> valor, Nullable<bool> estado)
@@ -932,7 +948,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarAsociacion", id_asociacionParameter, descripcionParameter);
         }
     
-        public virtual int spModificarAsociacionProveedor(Nullable<int> id_asoc_prov, Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha)
+        public virtual int spModificarAsociacionProveedor(Nullable<int> id_asoc_prov, Nullable<int> proveedor_id, Nullable<int> asociacion_id, Nullable<System.DateTime> fecha, Nullable<double> porcCom)
         {
             var id_asoc_provParameter = id_asoc_prov.HasValue ?
                 new ObjectParameter("id_asoc_prov", id_asoc_prov) :
@@ -950,7 +966,11 @@ namespace Creditos.Entity
                 new ObjectParameter("fecha", fecha) :
                 new ObjectParameter("fecha", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarAsociacionProveedor", id_asoc_provParameter, proveedor_idParameter, asociacion_idParameter, fechaParameter);
+            var porcComParameter = porcCom.HasValue ?
+                new ObjectParameter("porcCom", porcCom) :
+                new ObjectParameter("porcCom", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarAsociacionProveedor", id_asoc_provParameter, proveedor_idParameter, asociacion_idParameter, fechaParameter, porcComParameter);
         }
     
         public virtual int spModificarCabeceraDescuento(Nullable<int> id_cabecera_descuento, string descripcion, Nullable<int> subdescuento_id)
@@ -1099,7 +1119,7 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarMes", id_mesParameter, descripcionParameter);
         }
     
-        public virtual int spModificarProveedor(Nullable<int> id_proveedor, string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono)
+        public virtual int spModificarProveedor(Nullable<int> id_proveedor, string persona_juridica, string rUC, string nombre, string descripcion, string email, string direccion, string telefono, string n_cuenta, string n_cedula, string persona_c)
         {
             var id_proveedorParameter = id_proveedor.HasValue ?
                 new ObjectParameter("id_proveedor", id_proveedor) :
@@ -1133,7 +1153,19 @@ namespace Creditos.Entity
                 new ObjectParameter("telefono", telefono) :
                 new ObjectParameter("telefono", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarProveedor", id_proveedorParameter, persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter);
+            var n_cuentaParameter = n_cuenta != null ?
+                new ObjectParameter("n_cuenta", n_cuenta) :
+                new ObjectParameter("n_cuenta", typeof(string));
+    
+            var n_cedulaParameter = n_cedula != null ?
+                new ObjectParameter("n_cedula", n_cedula) :
+                new ObjectParameter("n_cedula", typeof(string));
+    
+            var persona_cParameter = persona_c != null ?
+                new ObjectParameter("persona_c", persona_c) :
+                new ObjectParameter("persona_c", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarProveedor", id_proveedorParameter, persona_juridicaParameter, rUCParameter, nombreParameter, descripcionParameter, emailParameter, direccionParameter, telefonoParameter, n_cuentaParameter, n_cedulaParameter, persona_cParameter);
         }
     
         public virtual int spModificarSobrante(Nullable<int> id_sobrante, Nullable<int> descuento_id, Nullable<double> valor, Nullable<bool> estado)
@@ -1239,6 +1271,15 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteAsoProv_Result>("spReporteAsoProv", aso_idParameter);
         }
     
+        public virtual ObjectResult<spReporteCredito_Result> spReporteCredito(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteCredito_Result>("spReporteCredito", aso_idParameter);
+        }
+    
         public virtual ObjectResult<spReporteEgresos_Result> spReporteEgresos(Nullable<int> idmes, Nullable<int> idaso)
         {
             var idmesParameter = idmes.HasValue ?
@@ -1290,6 +1331,15 @@ namespace Creditos.Entity
                 new ObjectParameter("aso_id", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteIngresosM_Result>("spReporteIngresosM", aso_idParameter);
+        }
+    
+        public virtual ObjectResult<spReporteRol_Result> spReporteRol(Nullable<int> id_emp)
+        {
+            var id_empParameter = id_emp.HasValue ?
+                new ObjectParameter("id_emp", id_emp) :
+                new ObjectParameter("id_emp", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteRol_Result>("spReporteRol", id_empParameter);
         }
     
         public virtual ObjectResult<spConsultarAsociacionProveedorById_Result> spConsultarAsociacionProveedorById(Nullable<int> idasoprov)
@@ -1445,13 +1495,13 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
         }
     
-        public virtual ObjectResult<spReporteCredito_Result> spReporteCredito(Nullable<int> aso_id)
+        public virtual ObjectResult<spConsultarAsoProvbyID_Result> spConsultarAsoProvbyID(Nullable<int> idasoprov)
         {
-            var aso_idParameter = aso_id.HasValue ?
-                new ObjectParameter("aso_id", aso_id) :
-                new ObjectParameter("aso_id", typeof(int));
+            var idasoprovParameter = idasoprov.HasValue ?
+                new ObjectParameter("idasoprov", idasoprov) :
+                new ObjectParameter("idasoprov", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteCredito_Result>("spReporteCredito", aso_idParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsoProvbyID_Result>("spConsultarAsoProvbyID", idasoprovParameter);
         }
     }
 }

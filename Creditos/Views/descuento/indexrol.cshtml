@@ -56,7 +56,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @Html.HiddenFor(m => m.asociacion_id, new { @id = "asociacion_id", @Value = "1" })
+                            @Html.HiddenFor(m => m.asociacion_id, new { @id = "empl_id", @Value = "4" })
                             <div>
                                 <button type="button" onclick="generarReporteI(); " class="btn btn-primary">Generar Reporte</button>
                                 <button type="button" id="imprimir" onclick="Imprimir(); " class="btn btn-primary">Imprimir</button>
@@ -71,7 +71,7 @@
 }
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
-        <div id="contenedorIngresos">
+        <div id="contRol">
         </div>
     </div>
 </div>
@@ -81,15 +81,14 @@
 
         function generarReporteI() {
             var _idMes = $('#mes_ids').val();
-            var _idIngreso = $('#_idIngreso').val();
+            var _idEmpl = $('#empl_id').val();
         $.ajax({
-            url: '@Url.Action("ConsultarIngreso", "ingresos")',
+            url: '@Url.Action("ConsultarRol", "descuento")',
             type: 'post',
             dataType: 'JSON',
-            data: { _idMes: _idMes },
-            data: { _idIngreso: _idIngreso },
+            data: { _idMes: _idMes, _idEmpl: _idEmpl },
             beforeSend: function () {
-                $("#contenedorIngresos").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/img/cargando.gif")"></div>');
+                $("#contRol").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
 
             },
             uploadProgress: function (event, position, total, percentComplete) {
@@ -97,9 +96,9 @@
             success: function (data) {
                 console.log(data);
                 if (data.validar == true) {
-                    $("#contenedorIngresos").html(data.tabla);
+                    $("#contRol").html(data.tabla);
                 } else {
-                    $("#contenedorIngresos").html(data.mensaje);
+                    $("#contRol").html(data.mensaje);
                 }
             },
             complete: function () {
@@ -107,19 +106,19 @@
             error: function (xhr, textStatus, errorThrown) {
 
                 if (xhr.status === 0) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
                 } else if (xhr.status == 404) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
                 } else if (xhr.status == 500) {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
                 } else if (errorThrown === 'parsererror') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
                 } else if (contenedorAsistencia === 'timeout') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
                 } else if (errorThrown === 'abort') {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
                 } else {
-                    $("#contenedorIngresos").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                    $("#contRol").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
                 }
             }
         });
@@ -129,8 +128,7 @@
 
 <script>
         function Imprimir() {
-
-          $("#contenedorIngresos").print({
+            $("#contRol").print({
             addGlobalStyles: true,
             stylesheet: null,
             rejectWindow: true,
