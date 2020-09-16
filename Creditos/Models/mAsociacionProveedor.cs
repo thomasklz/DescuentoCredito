@@ -13,6 +13,12 @@ namespace Creditos.Models
         public string proveedor { get; set; }
         public double porcCom { get; set; }
         public DateTime fecha { get; set; }
+        public string institucion { get; set; }
+        public string tipo_cta { get; set; }
+        public string nCedula { get; set; }
+        public string personaCuenta { get; set; }
+        public string ncuenta { get; set; }
+        public double valo_pago { get; set; }
 
         public mAsociacionProveedor() { }
         public mAsociacionProveedor(int id_asoc_prov, int proveedor_id, int asociacion_id, DateTime fecha, double porcCom)
@@ -54,6 +60,17 @@ namespace Creditos.Models
             this.aso = aso;
             this.fecha = fecha;
             this.porcCom = porcCom;
+        }
+        public mAsociacionProveedor(int id_asoc_prov, string proveedor, string institucion, string tipo_cta, string nCedula, string personaCuenta, string ncuenta, double valo_pago)
+        {
+            this.id_asoc_prov = id_asoc_prov;
+            this.proveedor = proveedor;
+            this.institucion = institucion;
+            this.tipo_cta = tipo_cta;
+            this.nCedula = nCedula;
+            this.personaCuenta = personaCuenta;
+            this.ncuenta = ncuenta;
+            this.valo_pago = valo_pago;
         }
     }
 }

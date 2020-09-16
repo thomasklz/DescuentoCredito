@@ -55,6 +55,7 @@ namespace Creditos.Entity
         public virtual DbSet<TipoContrato> TipoContrato { get; set; }
         public virtual DbSet<tipoContratoCargo> tipoContratoCargo { get; set; }
         public virtual DbSet<TipoRegimen> TipoRegimen { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Banco> Banco { get; set; }
         public virtual DbSet<CuentaBancaria> CuentaBancaria { get; set; }
         public virtual DbSet<Persona> Persona { get; set; }
@@ -115,6 +116,15 @@ namespace Creditos.Entity
         public virtual ObjectResult<spConsultarAsociacionProveedor_Result> spConsultarAsociacionProveedor()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsociacionProveedor_Result>("spConsultarAsociacionProveedor");
+        }
+    
+        public virtual ObjectResult<spConsultarAsoProvbyID_Result> spConsultarAsoProvbyID(Nullable<int> idasoprov)
+        {
+            var idasoprovParameter = idasoprov.HasValue ?
+                new ObjectParameter("idasoprov", idasoprov) :
+                new ObjectParameter("idasoprov", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsoProvbyID_Result>("spConsultarAsoProvbyID", idasoprovParameter);
         }
     
         public virtual ObjectResult<spConsultarCabeceraDescuento_Result> spConsultarCabeceraDescuento()
@@ -1311,6 +1321,15 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteEmpAso_Result>("spReporteEmpAso", aso_idParameter);
         }
     
+        public virtual ObjectResult<spReporteInfoProvdrs_Result> spReporteInfoProvdrs(Nullable<int> aso_id)
+        {
+            var aso_idParameter = aso_id.HasValue ?
+                new ObjectParameter("aso_id", aso_id) :
+                new ObjectParameter("aso_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteInfoProvdrs_Result>("spReporteInfoProvdrs", aso_idParameter);
+        }
+    
         public virtual ObjectResult<spReporteIngreso_Result> spReporteIngreso(Nullable<int> idmes, Nullable<int> idaso)
         {
             var idmesParameter = idmes.HasValue ?
@@ -1340,6 +1359,109 @@ namespace Creditos.Entity
                 new ObjectParameter("id_emp", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteRol_Result>("spReporteRol", id_empParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
     
         public virtual ObjectResult<spConsultarAsociacionProveedorById_Result> spConsultarAsociacionProveedorById(Nullable<int> idasoprov)
@@ -1493,15 +1615,6 @@ namespace Creditos.Entity
                 new ObjectParameter("monto_aprobado", typeof(double));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("spModificarValorAsignado", id_valor_asigParameter, proveedor_idParameter, aso_idParameter, persona_idParameter, monto_aprobadoParameter);
-        }
-    
-        public virtual ObjectResult<spConsultarAsoProvbyID_Result> spConsultarAsoProvbyID(Nullable<int> idasoprov)
-        {
-            var idasoprovParameter = idasoprov.HasValue ?
-                new ObjectParameter("idasoprov", idasoprov) :
-                new ObjectParameter("idasoprov", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spConsultarAsoProvbyID_Result>("spConsultarAsoProvbyID", idasoprovParameter);
         }
     }
 }

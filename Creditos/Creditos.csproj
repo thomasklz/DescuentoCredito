@@ -471,6 +471,9 @@
     <Compile Include="Entity\spReporteEmpAso_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spReporteInfoProvdrs_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\spReporteIngresosM_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -480,10 +483,19 @@
     <Compile Include="Entity\spReporteRol_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sp_helpdiagrams_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\SubDescuento.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Sueldo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sysdiagrams.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo.cs">
@@ -688,6 +700,10 @@
     <Content Include="Views\proveedores\indexld.cshtml" />
     <Content Include="Views\descuento\indexr.cshtml" />
     <Content Include="Views\descuento\indexrol.cshtml" />
+    <Content Include="Views\Shared\Layout_Aso.cshtml" />
+    <Content Include="Views\Shared\Layout_Nomina.cshtml" />
+    <Content Include="Views\Shared\Layout_Prov.cshtml" />
+    <Content Include="Views\Shared\Layout_User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -747,8 +763,10 @@
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
     <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.83.0.0\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.83.0.0\build\Selenium.Chrome.WebDriver.targets'))" />
   </Target>
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Selenium.Chrome.WebDriver.83.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.83.0.0\build\Selenium.Chrome.WebDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

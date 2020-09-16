@@ -388,6 +388,111 @@
     </div>
 }
 
+@using (Html.BeginForm("Store", "egresos", FormMethod.Post))
+{
+    <div class="accordion accordion-light  accordion-svg-icon" id="accordion15">
+        <div class="card">
+            <div class="card-header" id="heading15">
+                <div class="card-title" data-toggle="collapse" data-target="#collapse15" aria-expanded="true" aria-controls="collapse15">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                            <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                            <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                        </g>
+                    </svg> N° de Cuenta Proveedores
+                </div>
+            </div>
+            <div id="collapse15" class="collapse" aria-labelledby="heading15" data-parent="#accordion15">
+                <div class="card-body">
+                    <div>
+                        <div class="kt-portlet__body">
+                            <div>
+                                <button type="button" onclick="generarReporteInfoProv(); " class="btn btn-primary">Generar Reporte</button>
+                                <button type="button" id="imprimir" onclick="ImprimirInPr(); " class="btn btn-primary">Imprimir</button>
+                            </div>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+                        <div class="card">
+                            <div id="contInfoPro">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@using (Html.BeginForm("Store", "egresos", FormMethod.Post))
+{
+    <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample11">
+        <div class="card">
+            <div class="card-header" id="headingOne7">
+                <div class="card-title" data-toggle="collapse" data-target="#collapseOne11" aria-expanded="true" aria-controls="collapseOne7">
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                            <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                            <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                        </g>
+                    </svg> Detalle de Pagos Proveedores
+                </div>
+            </div>
+            <div id="collapseOne11" class="collapse" aria-labelledby="headingOne7" data-parent="#accordionExample11">
+                <div class="card-body">
+                    <table class="table table-hover example" style="text-align:center">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Descripci&oacute;n</th>
+                                <th>Persona</th>
+                                <th>Asociaci&oacute;n</th>
+                                <th>Cantidad Solicitada</th>
+                                <th>Cuotas</th>
+                                <th>Descuento Mensual</th>
+                                <th>Fecha de Solicitud</th>
+                                <th>Acciones</th>
+                                <th style="display:none;"></th>
+                            </tr>
+                        </thead>
+                        <tbody class="buscar">
+                            @{int a = 1; }
+                            @foreach (var item in listCredts)
+                            {
+                                <tr id="fila_@item.id_credito" class='row_@item.id_credito'>
+                                    <td>@a</td>
+                                    <td>@item.descripcion</td>
+                                    <td>@item.persona</td>
+                                    <td>@item.aso</td>
+                                    <td>$ @item.cantidad</td>
+                                    <td>@item.numero_cuota</td>
+                                    <td>$ @item.desc_mensual</td>
+                                    <td>@item.fecha_solicitud.ToShortDateString()</td>
+                                    <td>
+                                        <a href='#' class='btn btn-outline-hover-success btn-sm btn-icon btn-circle' data-toggle="kt-tooltip" title="Generar" onclick='generarRecibo(@item.id_credito)'><span class='la la-file-pdf-o'></span></a>
+                                    </td>
+                                    <td style="display:none;">@item.id_credito</td>
+                                </tr>
+                                a++;
+                            }
+                        </tbody>
+                    </table>
+                    <button type="button" id="imprimir" onclick="ImprimirRecib(); " class="btn btn-primary">Imprimir</button>
+                </div>
+                <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
+                    <div class="card">
+                        <div id="contRecibo">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
     @*  Reportes  *@
     <script type="text/javascript">
 
@@ -744,6 +849,51 @@
             }
         });
         }
+
+        function generarReporteInfoProv() {
+            var _idAso = $('#asociacion_id').val();
+        $.ajax({
+            url: '@Url.Action("ConsultarinfoPagoR", "asociacionProveedor")',
+            type: 'post',
+            dataType: 'JSON',
+            data: { _idAso: _idAso },
+            beforeSend: function () {
+                $("#contInfoPro").html('<div class="text-center"><img style="margin:0 auto 0 auto; text-aling:center; height: 150px;" src="@Url.Content("~/Content/media/logos/cargando.gif")"></div>');
+
+            },
+            uploadProgress: function (event, position, total, percentComplete) {
+            },
+            success: function (data) {
+                console.log(data);
+                if (data.validar == true) {
+                    $("#contInfoPro").html(data.tabla);
+                } else {
+                    $("#contInfoPro").html(data.mensaje);
+                }
+            },
+            complete: function () {
+            },
+            error: function (xhr, textStatus, errorThrown) {
+
+                if (xhr.status === 0) {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">NO HAY CONEXIÓN A INTERNET. VERIFICA LA RED</div>');
+                } else if (xhr.status == 404) {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">ERROR [404]. PÁGINA NO ENCONTRADA</div>');
+                } else if (xhr.status == 500) {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">ERROR DEL SERVIDOR [500]</div>');
+                } else if (errorThrown === 'parsererror') {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN JSON HA FALLADO </div>');
+                } else if (contenedorAsistencia === 'timeout') {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">TIEMPO DE ESPERA TERMINADO</div>');
+                } else if (errorThrown === 'abort') {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">LA PETICIÓN AJAX FUE ABORTADA</div>');
+                } else {
+                    $("#contInfoPro").html('<div class="alert alert-danger text-center" role="alert">OCURRIÓ UN ERROR INESPERADO</div>');
+                }
+            }
+        });
+        }
+
     </script>
     @*hasta aqui*@
 
@@ -770,6 +920,7 @@
                 prepend: null
             });
         }
+
         function ImprimirA() {
             $("#contIngresosA").print({
                 addGlobalStyles: true,
@@ -827,6 +978,17 @@
         }
         function ImprimirRecib() {
             $("#contRecibo").print({
+                addGlobalStyles: true,
+                stylesheet: null,
+                rejectWindow: true,
+                noPrintSelector: "",
+                iframe: true,
+                append: null,
+                prepend: null
+            });
+        }
+        function ImprimirInPr() {
+            $("#contInfoPro").print({
                 addGlobalStyles: true,
                 stylesheet: null,
                 rejectWindow: true,

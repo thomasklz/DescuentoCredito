@@ -153,6 +153,75 @@ namespace Creditos.Controllers
 
 
         }
+        public ActionResult ConsultarinfoPagoR(string _idAso)
+        {
+            string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";
+            bool _validar = false;
+            try
+            {
+                int _idAsoEntero = Convert.ToInt32(_idAso);
+                var _objAso = clsaso.mostrar().Where(c => c.id_asociacion == _idAsoEntero).FirstOrDefault();
+                list_aso_prov = cls_aso_pro.mostrarInPg(_idAsoEntero);
+                var nuevafila = "";
+                for (int i = 0; i < list_aso_prov.Count; i++)
+                {
+                    var idNV = list_aso_prov[i].id_asoc_prov;
+                    nuevafila += "<tr class='rows_" + idNV + "'><td colspan='1'><center>" +
+                        (i + 1) + "</center></td><td colspan='2'>● " +
+                        list_aso_prov[i].proveedor + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].institucion + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].tipo_cta + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].nCedula + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].personaCuenta + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].ncuenta + "</td><td colspan='2'><center> " +
+                        list_aso_prov[i].valo_pago + "</center></td></tr>";
+                }
+
+                string tbody = "<tbody>" + nuevafila + "</tbody>";
+
+                string _tablaFinal = "<table class='table' width='80%' border='1'cellspacing='0' cellpadding='0' style='margin: 0 auto;'>" +
+             "<thead>" +
+                "<tr>" +
+                 "<th colspan='14'><center><img src='../Content/media/logos/espam.jpg' width='50%' height='70%'></center></th> " +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='14'><h2><center><br/>LISTADO DE CUENTA PROVEEDORES<br/></center></h2>" +
+                  "<h4><center><br/>Pago de Proveedores a través de Transferencias<br/></center></h4></th>" +
+                "</tr> " +
+                "<tr>" +
+                  "<th colspan='3' style='background-color:#f7f5f5'><center><b><br/>Fecha Actual: <br/></b></center></th>" +
+                  "<td colspan='4'><center><br/>" + DateTime.Now.ToShortDateString() + "<br/></center></td>" +
+                  "<th colspan='3' style='background-color:#f7f5f5'><center><b><br/>ASOCIACIÓN: <br/></b></center></th>" +
+                  "<td colspan='4'><center><br/>" + _objAso.descripcion.ToUpper() + "<br/></center></td>" +
+                 "</tr>" +
+                "<tr>" +
+                  "<th colspan='1' style='background-color:#f7f5f5'><center><b><br/> Item <br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><b><br/>PROVEEEDOR <br/></b></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>Institución<br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>Tipo de cueta<br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>Cédula<br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>Nombres y Apellidos<br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>N° Cuenta<br/></b></center></th>" +
+                  "<th colspan='2' style='background-color:#f7f5f5'><center><b><br/>Valor a Pagar<br/></b></center></th>" +
+
+                "</tr>" +
+              "</thead>" +
+              tbody +
+                "</table>";
+
+                _mensaje = "";
+                _validar = true;
+                return Json(new { mensaje = _mensaje, validar = _validar, tabla = _tablaFinal }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                _mensaje = "<div class='alert alert-danger text-center' role='alert'>ERROR INTERNO DEL SISTEMA: " + ex.Message + "</div>";
+            }
+            return Json(new { mensaje = _mensaje, validar = _validar }, JsonRequestBehavior.AllowGet);
+
+
+        }
+
         public ActionResult ConsultarConvenioR(string _idAsoProv)
         {
             string _mensaje = "<div class='alert alert-danger text-center' role='alert'>OCURRIÓ UN ERROR INESPERADO</div>";

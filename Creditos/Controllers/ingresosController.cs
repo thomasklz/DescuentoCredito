@@ -21,11 +21,13 @@ namespace Creditos.Controllers
         clsIngresos clsingreso = new clsIngresos();
         clsTipoIngreso clstipoingresos = new clsTipoIngreso();
         List<mIngresos> list_ingreso = new List<mIngresos>();
+        clsEmpleadoAsociacion empl_aso = new clsEmpleadoAsociacion();
 
         public ActionResult Index() {
             ViewBag.tipoingresos = new SelectList(clstipoingresos.mostrar(), "id_tipo_ingreso", "descripcion");
             ViewBag.mes = new SelectList(clsmes.mostrarMeses(), "id_mes", "descripcion");
             ViewBag.ingresos = clsingreso.mostrar();
+            ViewBag.emp_asos = empl_aso.mostrarRpt(1);
             return View();
         }
 

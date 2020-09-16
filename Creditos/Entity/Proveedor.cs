@@ -32,6 +32,8 @@ namespace Creditos.Entity
         public string nCuenta { get; set; }
         public string nCedula { get; set; }
         public string personaCuenta { get; set; }
+        public string institucion_bncria { get; set; }
+        public string tipo_cuenta_bncria { get; set; }
         public Nullable<bool> est_delete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

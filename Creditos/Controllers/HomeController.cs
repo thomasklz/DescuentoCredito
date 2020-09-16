@@ -11,6 +11,26 @@ namespace Creditos.Controllers
         public ActionResult index()
         {
             return View();
+            //Leer la variable de sesion de la aplicacion principal
+            //Comprobar que no == null
+            //funcion if () para determinar la sesion activa
+            //comparar los roles.
+
+            //Si la variable es "empleado,docente" redirect --> Layout_User
+            //agregar variables de sesion para la app
+            //id_asociacion, ---
+
+            //Si la variable es "proveedor" redirect --> Layout_Prov
+            //agregar variables de sesion para la app
+
+            //Si la variable es "Nomina" redirect --> Layout_Nomina
+            //agregar variables de sesion para la app
+
+            //Si la variable es "Asoc" redirect --> Layout_Aso
+            //agregar variables de sesion para la app
+
+
+
         }
 
         public ActionResult about()

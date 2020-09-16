@@ -11,21 +11,15 @@ namespace Creditos.Entity
 {
     using System;
     
-    public partial class spConsultarConveniosxAsociacion_Result
+    public partial class spReporteInfoProvdrs_Result
     {
-        public int id_proveedor { get; set; }
-        public string persona_juridica { get; set; }
-        public string RUC { get; set; }
-        public string nombre { get; set; }
-        public string descripcion { get; set; }
-        public string email { get; set; }
-        public string direccion { get; set; }
-        public string telefono { get; set; }
-        public string nCuenta { get; set; }
-        public string nCedula { get; set; }
-        public string personaCuenta { get; set; }
+        public int id_asoc_prov { get; set; }
+        public string proveedor { get; set; }
         public string institucion_bncria { get; set; }
         public string tipo_cuenta_bncria { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string nCedula { get; set; }
+        public string personaCuenta { get; set; }
+        public string nCuenta { get; set; }
+        public Nullable<double> valor_a_pagar { get; set; }
     }
 }

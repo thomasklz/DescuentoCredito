@@ -2,6 +2,7 @@
 
 @model Creditos .Models.mIngresos
 @{List<Creditos.Models.mIngresos> listIngreso = ViewBag.ingresos;
+  List<Creditos.Models.mEmpleadoAsociacion> list_emp_aso = ViewBag.emp_asos;
     }
 <!-- begin:: Encabezado VENTANA PRINCIPAL -->
 <div class="kt-subheader kt-grid__item" id="kt_subheader">
@@ -82,6 +83,252 @@
 <div class="accordion accordion-light  accordion-svg-icon" id="accordionExample7">
     <div class="card">
         <div id="contenedorIngresos">
+        </div>
+    </div>
+</div>
+
+<div class="accordion accordion-light  accordion-svg-icon" id="accordionExample9">
+    <div class="card">
+        <div class="card-header" id="headingOne9">
+            <div class="card-title" data-toggle="collapse" data-target="#collapseOne9" aria-expanded="true" aria-controls="collapseOne9">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
+                    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <polygon points="0 0 24 0 24 24 0 24"></polygon>
+                        <path d="M12.2928955,6.70710318 C11.9023712,6.31657888 11.9023712,5.68341391 12.2928955,5.29288961 C12.6834198,4.90236532 13.3165848,4.90236532 13.7071091,5.29288961 L19.7071091,11.2928896 C20.085688,11.6714686 20.0989336,12.281055 19.7371564,12.675721 L14.2371564,18.675721 C13.863964,19.08284 13.2313966,19.1103429 12.8242777,18.7371505 C12.4171587,18.3639581 12.3896557,17.7313908 12.7628481,17.3242718 L17.6158645,12.0300721 L12.2928955,6.70710318 Z" fill="#000000" fill-rule="nonzero"></path>
+                        <path d="M3.70710678,15.7071068 C3.31658249,16.0976311 2.68341751,16.0976311 2.29289322,15.7071068 C1.90236893,15.3165825 1.90236893,14.6834175 2.29289322,14.2928932 L8.29289322,8.29289322 C8.67147216,7.91431428 9.28105859,7.90106866 9.67572463,8.26284586 L15.6757246,13.7628459 C16.0828436,14.1360383 16.1103465,14.7686056 15.7371541,15.1757246 C15.3639617,15.5828436 14.7313944,15.6103465 14.3242754,15.2371541 L9.03007575,10.3841378 L3.70710678,15.7071068 Z" fill="#000000" fill-rule="nonzero" opacity="0.3" transform="translate(9.000003, 11.999999) rotate(-270.000000) translate(-9.000003, -11.999999) "></path>
+                    </g>
+                </svg> Valores seguros mensuales
+            </div>
+        </div>
+        <div id="collapseOne9" class="collapse" aria-labelledby="headingOne9" data-parent="#accordionExample9">
+            <div class="card-body">
+                <div>
+                    <div class="col-lg-pull-2">
+                        <input type="button" value="Aporte mensual - Seguro" class="btn btn-default ing_fjs" />
+                    </div>
+                    <br />
+                </div>
+                <div>
+                    <div class="col-lg-pull-2">
+                        <input type="button" value="Comisiones x Proveedores" class="btn btn-default cms_prov" />
+                    </div>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FijoModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Ingresos Fijos Mensuales</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+
+
+                                <div class="kt-portlet__body">
+                                    <!--begin::Accordion-->
+                                    <div class="accordion" id="accordion12">
+                                        <div class="card">
+                                            <div class="card-header" id="heading12">
+                                                <div class="card-title collapsed" data-toggle="collapse" data-target="#collapse12" aria-expanded="false" aria-controls="collapse12">
+                                                    Listado actual de Asociados 
+                                                </div>
+                                            </div>
+                                            <div id="collapse12" class="collapse" aria-labelledby="heading12" data-parent="#accordion12" style="">
+                                                <div class="card-body">
+                                                    <table class="table table-hover" style="text-align:center" id="example">
+                                                        <thead>
+                                                            <tr style="font-weight:bold;">
+                                                                <th>Item</th>
+                                                                <th>Asociado</th>
+                                                                <th>Fecha de ingreso</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody class="buscar">
+                                                            @{int b = 1; }
+                                                            @foreach (var item in list_emp_aso)
+                                                            {
+                                                                <tr class='row_@item.id_empl_aso'>
+                                                                    <td>@b</td>
+                                                                    <td>@item.persona</td>
+                                                                    <td>@item.fecha_ingreso.ToShortDateString()</td>
+                                                                </tr>
+                                                                b++;
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <!--end::Accordion-->
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="kt-section">
+                                    <br/><h4>Actualmente hay @(b-1) personas en la Asociaci&oacute;n</h4>     
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="kt-section">
+                                    <label>Aporte Mensual:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "aport_p", @class = "form-control", @Value = "20" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="kt-section">
+                                    <label>x @(b - 1)</label>
+                                    <div>
+                                        <label id="txt_price"> = Precio </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="kt-section">
+                                    <label>Seguro:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "seg_p", @class = "form-control", @Value = "2.5" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="kt-section">
+                                    <label>x @(b - 1)</label>
+                                    <div>
+                                        <label id="txt_price2"> = PRECIO </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Mes:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-calendar"></i></span></div>
+                                        @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Elija un Mes--", new { @id = "mes_id", @class = "form-control" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inMesVm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="validarTdatosModal()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalCom">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="ModalTitle" style="text-align:center">Ingresos x COMISIONES</h4>
+                <a href="#" data-dismiss="modal">&times;</a>
+            </div>
+            <div class="modal-body">
+                <form id="form">
+                    <fieldset id="SubmitForm">
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="kt-section">
+                                    <br /><h4>Ingreso por Comisiones de Proveedores</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Proveedor:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-building"></i></span></div>
+                                        @Html.DropDownListFor(m => m.mes_id, ViewBag.mes as SelectList, "--Elija un Proveedor--", new { @id = "mes_id", @class = "form-control" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inMesVm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label>Valor Total:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "seg_p", @class = "form-control", @Value = "2.5" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-arrow-circle-o-right"></i></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="kt-section">
+                                    <label>Comisi&oacute;n:</label>
+                                    <div class="input-group">
+                                        <div class="input-group-prepend"><span class="input-group-text"><i class="la la-money"></i></span></div>
+                                        @Html.TextBoxFor(m => m.valor, new { @id = "seg_p", @class = "form-control", @placeholder = "*Name" })
+                                        <div class="valid-feedback" style="text-align:center">El formato Coincide.</div>
+                                        <div class="invalid-feedback" id="inCantm" style="text-align:center"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="kt-section">
+                                    <label><br /></label>
+                                    <div class="input-group">
+                                        <a href="#" class="btn btn-label-success" onclick="validarTdatosModal()">Guardar Cambios</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -274,6 +521,9 @@
 </script>
 
 <script>
+      document.getElementById('txt_price').innerHTML = document.getElementById("aport_p").value * @(b-1);
+      document.getElementById('txt_price2').innerHTML = document.getElementById("seg_p").value * @(b-1);
+
       function validarTdatosModal() {
           valor = document.getElementById("valor").value;
           tpIngr = document.getElementById("tipo_ingreso_id").selectedIndex;
@@ -317,7 +567,7 @@
               return true;
           }ValidarIngreso();
       }
-      
+
       $(document).ready(function () {
           $('#example').dataTable();
       });
@@ -380,6 +630,38 @@
               }
           })
       })
+
+    //FIJOS MENSUALES
+      $('body').on('click', '.ing_fjs', function () {
+          $("#FijoModal").modal();
+          $.ajax({
+              type: "GET",
+              url: "/ingresos/GetIngresoById?IngresoId=" + id,
+              success: function (data) {
+                  var obj = JSON.parse(data);
+                  $("#id_ingresos").val(obj[0].id_ingresos);
+                  $("#valor").val(obj[0].valor);
+                  $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                  $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+              }
+          })
+      })
+
+      $('body').on('click', '.cms_prov', function () {
+          $("#modalCom").modal();
+          $.ajax({
+              type: "GET",
+              url: "/ingresos/GetIngresoById?IngresoId=" + id,
+              success: function (data) {
+                  var obj = JSON.parse(data);
+                  $("#id_ingresos").val(obj[0].id_ingresos);
+                  $("#valor").val(obj[0].valor);
+                  $("#mes_id option[value='" + obj[0].mes_id + "']").attr("selected", true);
+                  $("#tipo_ingreso_id option[value='" + obj[0].tipo_ingreso_id + "']").attr("selected", true);
+              }
+          })
+      })
+
 
       function DeleteIngreso(Ingreso) {
           Swal.fire({

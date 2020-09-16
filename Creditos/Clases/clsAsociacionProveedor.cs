@@ -22,6 +22,12 @@ namespace Creditos.Clases{
             }
             return lista_Aso_rpov;
         }
+        public List<mAsociacionProveedor> mostrarInPg(int aso_id){
+            foreach (var item in db.spReporteInfoProvdrs(aso_id)){
+                lista_Aso_rpov.Add(new mAsociacionProveedor(item.id_asoc_prov, item.proveedor, item.institucion_bncria, item.tipo_cuenta_bncria, item.nCedula, item.personaCuenta, item.nCuenta, Convert.ToDouble(item.valor_a_pagar)));
+            }
+            return lista_Aso_rpov;
+        }
         public void ingresar(mAsociacionProveedor datos){
             db.spInsertarAsociacionProveedor(datos.proveedor_id, datos.asociacion_id, datos.fecha, datos.porcCom);
 
