@@ -46,5 +46,12 @@ namespace Creditos.Clases{
             }
             return person;
         }
+        public mPersona usuarioVald(string usuario, string clave){
+            foreach (var item in db.spvalidarAcceso(usuario, clave))
+            {
+                objPer = new mPersona(item.Id_Usuario, item.Id_Persona, item.Nombres, item.ApellidoPaterno, item.ApellidoMaterno, item.idTipo, item.Roll);
+            }
+            return objPer;
+        }
     }
 }

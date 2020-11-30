@@ -3,48 +3,89 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Creditos.Clases;
+using Creditos.Models;
+using Creditos.Entity;
+using Newtonsoft.Json;
 
 namespace Creditos.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult index()
-        {
-            return View();
-            //Leer la variable de sesion de la aplicacion principal
-            //Comprobar que no == null
-            //funcion if () para determinar la sesion activa
-            //comparar los roles.
+        BD_Roles_Creditos_Entities db = new BD_Roles_Creditos_Entities();
+        clsPersona clsPers = new clsPersona();
 
-            //Si la variable es "empleado,docente" redirect --> Layout_User
-            //agregar variables de sesion para la app
-            //id_asociacion, ---
+        public ActionResult index(){
 
-            //Si la variable es "proveedor" redirect --> Layout_Prov
-            //agregar variables de sesion para la app
+                if (Request.Cookies["espam"] != null){
+                    string usuario = Server.HtmlEncode(Request.Cookies["espam"]["kus"]);
+                    string contraseña = Server.HtmlEncode(Request.Cookies["espam"]["kpa"]);
 
-            //Si la variable es "Nomina" redirect --> Layout_Nomina
-            //agregar variables de sesion para la app
+                    Catalogo_Seguridad _objSeguridad = new Catalogo_Seguridad();
+                    string userx = _objSeguridad.DesEncriptar(usuario);
 
-            //Si la variable es "Asoc" redirect --> Layout_Aso
-            //agregar variables de sesion para la app
-
-
-
-        }
-
-        public ActionResult about()
-        {
-            ViewBag.Message = "Your application description page.";
-
+                    try{ validar(userx, contraseña); }
+                    catch
+                    { }
+                }else{
+                ViewBag.showSuccessAlert = false;
+                //ClientScript.RegisterStartupScript(GetType(), "actualizar", "javascript:nocredenciales();", true);
+            }
             return View();
         }
 
-        public ActionResult contact()
-        {
-            ViewBag.Message = "Your contact page.";
+        protected void validar(string _usuario, string _clave){
+            mPersona _dato = null;
+            try{
+                _dato = clsPers.usuarioVald(_usuario, _clave);
 
-            return View();
+                if (_dato != null){
+
+                    Session.Add("usuarioId", _dato.idUser);
+                    Session.Add("personaId", _dato.Id_Persona);
+                    Session.Add("nombres", _dato.Nombres);
+                    Session.Add("apellido", _dato.ApellidoPaterno);
+                    Session.Add("apellido2", _dato.ApellidoMaterno);
+                    //Session.Add("rolId", _dato.idRol);
+                    //Session.Add("rol", _dato.rol);
+
+                    if (Request.Cookies["espam"] != null){
+                        string rolGalleta = Server.HtmlEncode(Request.Cookies["espam"]["kro"]);
+                        Catalogo_Seguridad _objSeguridad = new Catalogo_Seguridad();
+                        string RolAsignado = _objSeguridad.DesEncriptar(rolGalleta);
+
+                        switch (RolAsignado){
+                            case "Encargado de Asociacion":
+                                Session.Add("encargado", _dato.idUser);
+                                RedirectToAction("Layout_Aso", "AsoLayoutController");
+                                break;
+                            case "Empleado":
+                                Session.Add("empleado", _dato.idUser);
+                                RedirectToAction("Layout_User", "UsuarioLayoutController");
+                                break;
+                            case "Proveedor":
+                                Session.Add("proveedor", _dato.idUser);
+                                RedirectToAction("Layout_Nom", "NomLayoutController");
+                                break;
+                            case "Nómina":
+                                Session.Add("nomina", _dato.idUser);
+                                RedirectToAction("Layout_Prov", "ProvLayoutController");
+                                break;
+
+                            default:
+                                Response.Redirect("~/404.html", false);
+                                break;
+                        }
+                    }
+                }else{
+                    Server.Transfer("~/logIn.aspx");
+                }
+            }catch (Exception ex){
+                ViewBag.showSuccessAlert = false;
+                //ClientScript.RegisterStartupScript(GetType(), "actualizar", "javascript:nocredenciales();", true);
+                //ClientScript.RegisterStartupScript(GetType(), "swal", "javascript:swal('Usuario o contraseña incorrecto ', 'Verifique que esta ingresando los datos correctamente.','error');", true);
+            }
         }
+
     }
 }

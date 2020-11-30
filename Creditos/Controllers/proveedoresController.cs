@@ -15,6 +15,15 @@ namespace Creditos.Controllers{
         clsProveedores clsProvee = new clsProveedores();
         clsPersona clsPers = new clsPersona();
         List<mProveedores> list_provee = new List<mProveedores>();
+
+        public ActionResult ValidarSesion(){
+                if (Session["proveedor"] != null){
+                    
+                }else{
+                    Response.Redirect("~/login.aspx");
+                }
+            return View();
+        }
         public ActionResult index(){
             ViewBag.proveedor = clsProvee.mostrar();
             return View();

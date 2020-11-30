@@ -1248,6 +1248,10 @@
         <Function Name="spReporteRol" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
           <Parameter Name="id_emp" Type="int" Mode="In" />
         </Function>
+        <Function Name="spvalidarAcceso" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="aso">
+          <Parameter Name="user" Type="varchar" Mode="In" />
+          <Parameter Name="passw" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
@@ -3040,6 +3044,10 @@
           <FunctionImport Name="spReporteRol" ReturnType="Collection(AdministracionAcademicaModel.spReporteRol_Result)">
             <Parameter Name="id_emp" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="spvalidarAcceso" ReturnType="Collection(AdministracionAcademicaModel.spvalidarAcceso_Result)">
+            <Parameter Name="user" Mode="In" Type="String" />
+            <Parameter Name="passw" Mode="In" Type="String" />
+          </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -3747,6 +3755,15 @@
           <Property Type="String" Name="NroCuenta" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="banco" Nullable="true" MaxLength="250" />
           <Property Type="Decimal" Name="SueldoNumero" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="spvalidarAcceso_Result">
+          <Property Type="Int32" Name="Id_Persona" Nullable="false" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoPaterno" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ApellidoMaterno" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="Int32" Name="idTipo" Nullable="false" />
+          <Property Type="String" Name="Roll" Nullable="true" MaxLength="250" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -5206,6 +5223,19 @@
                 <ScalarProperty Name="NroCuenta" ColumnName="NroCuenta" />
                 <ScalarProperty Name="banco" ColumnName="banco" />
                 <ScalarProperty Name="SueldoNumero" ColumnName="SueldoNumero" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spvalidarAcceso" FunctionName="AdministracionAcademicaModel.Store.spvalidarAcceso">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AdministracionAcademicaModel.spvalidarAcceso_Result">
+                <ScalarProperty Name="Id_Persona" ColumnName="Id_Persona" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="ApellidoPaterno" ColumnName="ApellidoPaterno" />
+                <ScalarProperty Name="ApellidoMaterno" ColumnName="ApellidoMaterno" />
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="idTipo" ColumnName="idTipo" />
+                <ScalarProperty Name="Roll" ColumnName="Roll" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

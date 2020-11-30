@@ -1361,6 +1361,19 @@ namespace Creditos.Entity
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spReporteRol_Result>("spReporteRol", id_empParameter);
         }
     
+        public virtual ObjectResult<spvalidarAcceso_Result> spvalidarAcceso(string user, string passw)
+        {
+            var userParameter = user != null ?
+                new ObjectParameter("user", user) :
+                new ObjectParameter("user", typeof(string));
+    
+            var passwParameter = passw != null ?
+                new ObjectParameter("passw", passw) :
+                new ObjectParameter("passw", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<spvalidarAcceso_Result>("spvalidarAcceso", userParameter, passwParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?

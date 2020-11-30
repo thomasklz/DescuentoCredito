@@ -32,6 +32,11 @@ namespace Creditos.Models{
         public string tipo_cont { get; set; }
         public string n_cuenta { get; set; }
         public string banco { get; set; }
+        public string password { get; set; }
+        public string user { get; set; }
+        public int idUser { get; set; }
+        public string rol { get; set; }
+        public int idRol { get; set; }
         public mPersona(){}
         public mPersona(int Id_Persona, string Nombres, string SegundoNombre, string ApellidoPaterno, string ApellidoMaterno, string Cedula, string Direccion, string CalleSecundaria, string Numero,string ReferenciaD,string TelefonoD, string TelefonoC, string ParroquiaNac, DateTime FechaNac, string Email){
             this.Id_Persona = Id_Persona;
@@ -91,6 +96,15 @@ namespace Creditos.Models{
             this.n_cuenta = n_cuenta;
             this.banco = banco;
             this.salario = salario;
+        }
+        public mPersona(int idUser, int idPersona, string nombre, string apellido1, string apellido2, int rolid, string rol){
+            this.idUser = idUser;
+            this.Id_Persona = idPersona;
+            this.Nombres = nombre;
+            this.ApellidoPaterno = apellido1;
+            this.ApellidoMaterno = apellido2;
+            this.idRol = idRol;
+            this.rol = rol;
         }
     }
 }

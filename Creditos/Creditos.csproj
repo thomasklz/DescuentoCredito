@@ -160,6 +160,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Clases\AutoList.cs" />
+    <Compile Include="Clases\Catalogo_Seguridad.cs" />
     <Compile Include="Clases\clsAsociacion.cs" />
     <Compile Include="Clases\clsAsociacionProveedor.cs" />
     <Compile Include="Clases\clsCabDescuento.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="Clases\Moneda.cs" />
     <Compile Include="Controllers\asociacionController.cs" />
     <Compile Include="Controllers\asociacionProveedorController.cs" />
+    <Compile Include="Controllers\AsoLayoutController.cs" />
     <Compile Include="Controllers\cabDescuentoController.cs" />
     <Compile Include="Controllers\creditoController.cs" />
     <Compile Include="Controllers\descuentoController.cs" />
@@ -190,12 +192,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ingresosController.cs" />
     <Compile Include="Controllers\mesController.cs" />
+    <Compile Include="Controllers\NomLayoutController.cs" />
     <Compile Include="Controllers\proveedoresController.cs" />
+    <Compile Include="Controllers\ProvLayoutController.cs" />
     <Compile Include="Controllers\sobranteController.cs" />
     <Compile Include="Controllers\subdescuentosController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\tipoEgresosController.cs" />
     <Compile Include="Controllers\tipoIngresosController.cs" />
+    <Compile Include="Controllers\UsuarioLayoutController.cs" />
     <Compile Include="Controllers\valorAsignadoController.cs" />
     <Compile Include="Controllers\valorUtilizadoController.cs" />
     <Compile Include="Entity\Asociacion.cs">
@@ -483,6 +488,9 @@
     <Compile Include="Entity\spReporteRol_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\spvalidarAcceso_Result.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\sp_helpdiagramdefinition_Result.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
@@ -700,10 +708,15 @@
     <Content Include="Views\proveedores\indexld.cshtml" />
     <Content Include="Views\descuento\indexr.cshtml" />
     <Content Include="Views\descuento\indexrol.cshtml" />
-    <Content Include="Views\Shared\Layout_Aso.cshtml" />
     <Content Include="Views\Shared\Layout_Nomina.cshtml" />
     <Content Include="Views\Shared\Layout_Prov.cshtml" />
     <Content Include="Views\Shared\Layout_User.cshtml" />
+    <Content Include="Views\AsoLayout\Layout_Aso.cshtml" />
+    <Content Include="Views\NomLayout\Layout_Nom.cshtml" />
+    <Content Include="Views\ProvLayout\Layout_Prov.cshtml" />
+    <Content Include="Views\UsuarioLayout\Layout_User.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
