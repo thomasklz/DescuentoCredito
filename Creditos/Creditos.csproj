@@ -224,10 +224,34 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>asoRolesCreditos.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Banco.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Cabecera_Descuento.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Cargo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CategoriaCargo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Contrato.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\ContratoSubunidad.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Credito.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\CuentaBancaria.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Denominacion.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\DenominacionRegimen.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Descuento.cs">
@@ -239,10 +263,19 @@
     <Compile Include="Entity\empleado_asociacion.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\EscalaOcupacional.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Ingresos.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Mes.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\NivelOcupacional.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Persona.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Proveedor.cs">
@@ -467,10 +500,37 @@
     <Compile Include="Entity\SubDescuento.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entity\Sueldo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\sysdiagrams.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Tipo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TipoContrato.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\tipoContratoCargo.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TipoCuentaBancaria.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\TipoRegimen.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
     <Compile Include="Entity\Tipo_egreso.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Tipo_ingreso.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\Usuarios.cs">
+      <DependentUpon>asoRolesCreditos.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entity\usuarioTipo.cs">
       <DependentUpon>asoRolesCreditos.tt</DependentUpon>
     </Compile>
     <Compile Include="Entity\Valor_Asignado.cs">

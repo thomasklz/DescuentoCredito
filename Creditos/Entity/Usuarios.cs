@@ -12,26 +12,24 @@ namespace Creditos.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Descuento
+    public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Descuento()
+        public Usuarios()
         {
-            this.Sobrante = new HashSet<Sobrante>();
+            this.usuarioTipo = new HashSet<usuarioTipo>();
         }
     
-        public int id_descuento { get; set; }
-        public Nullable<double> valor { get; set; }
+        public int Id_Usuario { get; set; }
+        public string Usuario { get; set; }
+        public string Clave { get; set; }
         public Nullable<int> Id_Persona { get; set; }
-        public Nullable<int> cab_desc_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public string Foto { get; set; }
+        public Nullable<int> Click { get; set; }
+        public Nullable<bool> Eliminado { get; set; }
     
-        public virtual Cabecera_Descuento Cabecera_Descuento { get; set; }
-        public virtual Mes Mes { get; set; }
         public virtual Persona Persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sobrante> Sobrante { get; set; }
+        public virtual ICollection<usuarioTipo> usuarioTipo { get; set; }
     }
 }

@@ -12,26 +12,21 @@ namespace Creditos.Entity
     using System;
     using System.Collections.Generic;
     
-    public partial class Descuento
+    public partial class Cargo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Descuento()
+        public Cargo()
         {
-            this.Sobrante = new HashSet<Sobrante>();
+            this.tipoContratoCargo = new HashSet<tipoContratoCargo>();
         }
     
-        public int id_descuento { get; set; }
-        public Nullable<double> valor { get; set; }
-        public Nullable<int> Id_Persona { get; set; }
-        public Nullable<int> cab_desc_id { get; set; }
-        public Nullable<int> mes_id { get; set; }
-        public Nullable<System.DateTime> fecha { get; set; }
-        public Nullable<bool> est_delete { get; set; }
+        public int id_cargo { get; set; }
+        public string nombre_cargo { get; set; }
+        public Nullable<int> idcategoriacargo { get; set; }
+        public Nullable<bool> Eliminado { get; set; }
     
-        public virtual Cabecera_Descuento Cabecera_Descuento { get; set; }
-        public virtual Mes Mes { get; set; }
-        public virtual Persona Persona { get; set; }
+        public virtual CategoriaCargo CategoriaCargo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Sobrante> Sobrante { get; set; }
+        public virtual ICollection<tipoContratoCargo> tipoContratoCargo { get; set; }
     }
 }

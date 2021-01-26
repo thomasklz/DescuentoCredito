@@ -43,7 +43,26 @@ namespace Creditos.Entity
         public virtual DbSet<Tipo_ingreso> Tipo_ingreso { get; set; }
         public virtual DbSet<Valor_Asignado> Valor_Asignado { get; set; }
         public virtual DbSet<Valor_Utilizado> Valor_Utilizado { get; set; }
-        
+        public virtual DbSet<Cargo> Cargo { get; set; }
+        public virtual DbSet<CategoriaCargo> CategoriaCargo { get; set; }
+        public virtual DbSet<Contrato> Contrato { get; set; }
+        public virtual DbSet<ContratoSubunidad> ContratoSubunidad { get; set; }
+        public virtual DbSet<Denominacion> Denominacion { get; set; }
+        public virtual DbSet<DenominacionRegimen> DenominacionRegimen { get; set; }
+        public virtual DbSet<EscalaOcupacional> EscalaOcupacional { get; set; }
+        public virtual DbSet<NivelOcupacional> NivelOcupacional { get; set; }
+        public virtual DbSet<Sueldo> Sueldo { get; set; }
+        public virtual DbSet<TipoContrato> TipoContrato { get; set; }
+        public virtual DbSet<tipoContratoCargo> tipoContratoCargo { get; set; }
+        public virtual DbSet<TipoRegimen> TipoRegimen { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Banco> Banco { get; set; }
+        public virtual DbSet<CuentaBancaria> CuentaBancaria { get; set; }
+        public virtual DbSet<Persona> Persona { get; set; }
+        public virtual DbSet<TipoCuentaBancaria> TipoCuentaBancaria { get; set; }
+        public virtual DbSet<Tipo> Tipo { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<usuarioTipo> usuarioTipo { get; set; }
     
         public virtual int spAjustarValUsados(Nullable<int> id_val_usad, Nullable<double> total_desc)
         {
