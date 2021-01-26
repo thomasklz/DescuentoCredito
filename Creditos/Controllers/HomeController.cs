@@ -73,7 +73,7 @@ namespace Creditos.Controllers
                                 break;
 
                             default:
-                                Response.Redirect("~/404.html", false);
+                                Response.Redirect("~/Views/Shared/error.cshtml", false);
                                 break;
                         }
                     }

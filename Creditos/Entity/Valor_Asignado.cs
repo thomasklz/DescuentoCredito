@@ -29,7 +29,6 @@ namespace Creditos.Entity
     
         public virtual Asociacion Asociacion { get; set; }
         public virtual Proveedor Proveedor { get; set; }
-        public virtual Persona Persona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Valor_Utilizado> Valor_Utilizado { get; set; }
     }

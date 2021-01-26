@@ -29,6 +29,5 @@ namespace Creditos.Entity
         public virtual Asociacion Asociacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Credito> Credito { get; set; }
-        public virtual Persona Persona { get; set; }
     }
 }
